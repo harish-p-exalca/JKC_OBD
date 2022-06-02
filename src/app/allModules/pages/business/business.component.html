@@ -1,0 +1,164 @@
+<div id="dashboard" class="page-layout carded" fusePerfectScrollbar>
+  <div class="center" fxLayout="column" fxLayoutGap="10px">
+
+    <mat-card class=" p-8 pt-4 pb-0 m-0">
+      <div fxLayout>
+        <div fxFlex fxLayoutAlign="start center" class="h2">
+          <b>Dashboard</b>
+        </div>
+      </div>
+    </mat-card>
+    <div fxLayout="row" fxFlex="100">
+      <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px" fxFlex="20">
+        <div class="personal">Business </div>
+        <div class="information">Information</div>
+        <img class="image" src="../../assets/images/Bi_img.svg">
+        <div class="mins">30 secs</div>
+        <div class="avg">Average Time to Complete</div>
+        <mat-progress-bar mode="determinate" value="80" class="progress"></mat-progress-bar>
+        <div class="percent">98%</div>
+        <img class="jkc" src="../../assets/images/jkc_logo.svg">
+      </div>
+      <div fxFlex="10"> </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="70">
+        <form [formGroup]="BIform">
+          <div fxLayout="column">
+            <div fxLayout="row" fxLayoutGap="70px">
+              <span class="label1">Total Turn Over of 3 years</span>
+              <div fxLayout="column" fxLayoutAlign="start center">
+                <mat-form-field appearance="outline" class="forminput">
+                  <input matInput placeholder=" Enter value" formControlName="NoOfYears" style="margin-top:0px ;">
+                  <mat-error class="errorn"
+                    *ngIf=" BIform?.get('NoOfYears')?.touched && BIform?.get('NoOfYears')?.hasError('required')">
+                    NoOfYears
+                    is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <span class="label1">Total Storage Capacity</span>
+              <div fxLayout="column" fxLayoutAlign="start center">
+                <mat-form-field appearance="outline" class="forminput">
+                  <input matInput placeholder=" Enter" formControlName="storagecapacity" style="margin-top:0px ;">
+                  <mat-error class="errorn"
+                    *ngIf=" BIform?.get('storagecapacity')?.touched && BIform?.get('storagecapacity')?.hasError('required')">
+                    storage capacity
+                    is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="70px">
+              <span class="desc"> (In INR Cr.)</span>
+              <div fxLayout="column" fxLayoutAlign="start center">
+                <mat-form-field appearance="outline" class="forminput1">
+                  <input matInput placeholder=" Enter value" formControlName="NoOfYears1" style="margin-top:0px ;">
+                  <mat-error class="errorn"
+                    *ngIf=" BIform?.get('NoOfYears1')?.touched && BIform?.get('NoOfYears1')?.hasError('required')">
+                    NoOfYears
+                    is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <span class="desc"> (in bags)</span>
+            </div>
+            <div fxLayout="row" fxLayoutGap="37px">
+              <div fxLayout="column">
+                <span class="label2"> Working Capital to be invested</span>
+                <span class="label2">in our Business(In Rs)</span>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start center">
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder=" Enter" formControlName="capitalinvest" style="margin-top:0px ;">
+                  <mat-error class="errorn"
+                    *ngIf=" BIform?.get('capitalinvest')?.touched && BIform?.get('capitalinvest')?.hasError('required')">
+                    invested
+                    is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <span class="label3">% Sales in Retail</span>
+              <div fxLayout="column" fxLayoutAlign="start center">
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder=" Enter" formControlName="retail" style="margin-top:0px ;">
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="8px">
+              <div fxLayout="column">
+                <span class="label4">No of Vehicle Owned with Capacity</span>
+                <span class="desc1">(Eg 2 vehicles - 5MT)</span>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start center">
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder=" Enter" formControlName="vehicle" style="margin-top:0px ;">
+                  <mat-error class="errorn"
+                    *ngIf=" BIform?.get('vehicle')?.touched && BIform?.get('vehicle')?.hasError('required')">
+                    Vehicle owned with capacity
+                    is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <span class="label5">% Sales in Wholesale</span>
+              <div fxLayout="column" fxLayoutAlign="start center">
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder=" Enter" formControlName="Wholesale" style="margin-top:0px ;">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <mat-card class="form1">
+              <div fxLayout="row">
+                <table mat-table [dataSource]="dataSource">
+                  <ng-container matColumnDef="sale">
+                    <th mat-header-cell *matHeaderCellDef> Sale Target & Commitment (In MT) </th>
+                    <td mat-cell *matCellDef="let element"  style="font-family: Arial, Helvetica, sans-serif;">
+                      {{element.sale}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="apr">
+                    <th mat-header-cell *matHeaderCellDef> Apr-21 </th>
+                    <td mat-cell *matCellDef="let element" class="cell" contenteditable="true"> {{element.apr}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="may">
+                    <th mat-header-cell *matHeaderCellDef>May-21</th>
+                    <td mat-cell *matCellDef="let element" class="cell" contenteditable="true"> {{element.may}} </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <button mat-flat-button class="addrow">+</button>
+              </div>
+            </mat-card>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="100">
+      <div fxFlex="35"></div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
+        <button mat-flat-button class="previous" (click)="previousbtn()">
+          <img class="previousimg" src="../../assets/images/previous.svg">
+          Previous</button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
+        <button mat-flat-button class="next" (click)="nextbtn()">Next
+          <img class="nextimg" src="../../assets/images/next.svg">
+        </button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
+        <button mat-flat-button class="clear" (click)="ClearAll()"> Clear
+          <img class="clearimg" src="../../assets/images/clear.svg">
+        </button>
+      </div>
+      <button mat-raised-button class="savebtn" (click)="RegistrationClicked()">Save & Next</button>
+    </div>
+    <br>
+  </div>
+  <mat-progress-spinner *ngIf=" isProgressBarVisibile" class="progressBarPostion" color="accent" mode="indeterminate">
+  </mat-progress-spinner>
+  <div id="overlay" *ngIf="isProgressBarVisibile"></div>
+</div>

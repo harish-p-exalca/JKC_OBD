@@ -1,0 +1,42 @@
+<div id="dashboard" class="page-layout carded" fusePerfectScrollbar>
+  <div class="center" fxLayout="column" fxLayoutGap="10px">
+
+    <mat-card class=" p-8 pt-4 pb-0 m-0">
+      <div fxLayout>
+        <div fxFlex fxLayoutAlign="start center" class="h2">
+          <b>Dashboard</b>
+        </div>
+      </div>
+    </mat-card>
+    <div fxLayout="row" fxFelx="100" fxLayoutAlign="start start">
+      <div fxFlex="25"></div>
+      <mat-card fxFlex="75" class="tab1">
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+          <mat-button-toggle-group>
+            <mat-button-toggle mat-raised-button class="bankdetailsbtn">Bank details 1</mat-button-toggle>
+            <mat-button-toggle mat-raised-button class="bankdetailsbtn1">Bank details 2</mat-button-toggle>
+          </mat-button-toggle-group>
+          <!-- <button mat-raised-button fxFlex="11" class="bankdetailsbtn">Bank details 1</button>
+          <button mat-flat-button fxFlex="11" class="bankdetailsbtn1">Bank details 1</button> -->
+          <div fxFlex="50"></div>
+          <button mat-raised-button fxFlex="12" class="addbanksbtn">+ Add Bank</button>
+        </div>
+      </mat-card>
+    </div>
+    <!-- <div fxLayout="row" fxFlex="100">
+      <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px" fxFlex="20">
+        <div class="market">Market </div>
+        <div class="information">Information</div>
+        <img class="image" src="../../assets/images/mi_img.svg">
+        <div class="mins">2 mins</div>
+        <div class="avg">Average Time to Complete</div>
+        <mat-progress-bar mode="determinate" value="80" class="progress"></mat-progress-bar>
+        <div class="percent">96%</div>
+        <img class="jkc" src="../../assets/images/jkc_logo.svg">
+      </div>
+    </div> -->
+  </div>
+  <mat-progress-spinner *ngIf=" isProgressBarVisibile" class="progressBarPostion" color="accent" mode="indeterminate">
+  </mat-progress-spinner>
+  <div id="overlay" *ngIf="isProgressBarVisibile"></div>
+</div>

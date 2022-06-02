@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
+<div class="background">
+  <div fxLayout="row" FxLayout="center center">
+    <div fxLayout="column" fxFlex="49">
+      <div fxFlex="20"></div>
+      <div class="picture">
+        <img src="../../assets/images/Login_img.svg" style="width:40%">
+        <div fxLayout="row" FxLayout="center center" fxLayoutGap="10px" class="bp">
+          <img src="../../assets/images/BP_cloud.svg" style="width: 10%;">
+          <div>Customer Portal</div>
+        </div>
+        <div class=" content1">
+          Thank you for choosing Exalca.We're excited to get you on board.</div>
+        <div class=" content1"> Discover the future of customer engagement.</div>
+        <div class="exalcaimg">
+          <img src="../../assets/images/poweredby_exalca.svg" style="width:25% ;">
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" FxLayout="center center" fxFlex="50">
+      <div fxFlex="30"></div>
+      <div class="login">
+        <form [formGroup]="InviteForm">
+          <div fxLayout="column" FxLayout="center center">
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="25px" fxFlex="100" class="welcome">
+              <span>Welcome to</span>
+              <img src="../../assets/images/jkc_logo.svg" style="width: 40%;">
+            </div>
+
+            <div class="signin">Sign In by OTP</div>
+            <label class="user">User Name</label>
+            <mat-form-field appearance="outline" class="name" >
+              <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="32px">
+                <img src="../../assets/images/user_id.svg" class="userid">
+                <input matInput placeholder="Enter User name" formControlName="userName" class="nameinput">
+              </div>
+              <mat-error
+                *ngIf=" signinForm?.get('userName')?.touched && signinForm?.get('userName')?.hasError('required')">
+                User name is required
+              </mat-error>
+            </mat-form-field>
+            <div class="otp"><span>Please enter the 6 digit OTP to continue</span></div>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+              <div>
+                  <input class="card1" type="text" placeholder="_" formControlName="OTP">
+              </div>
+              <div>
+                  <!-- <input class="card1" type="text" placeholder="_" formControlName="OTP">
+                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
+              signinForm.get('OTP')?.hasError('required')" style="font-size:14px">
+                  </mat-error>
+                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
+              signinForm.get('OTP')?.hasError('pattern')" style="font-size:14px">
+                  </mat-error> -->
+              </div>
+              <div>
+                  <input class="card1" type="text" placeholder="_" formControlName="OTP">
+                  <!-- <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
+              signinForm.get('OTP')?.hasError('required')" style="font-size:14px">
+                  </mat-error>
+                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
+              signinForm.get('OTP')?.hasError('pattern')" style="font-size:14px">
+                  </mat-error> -->
+              </div>
+              <div>
+                  <input class="card1" type="text" placeholder="_" formControlName="OTP">
+                  <!-- <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
+              signinForm.get('OTP')?.hasError('required')" style="font-size:14px">
+                  </mat-error>
+                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
+              signinForm.get('OTP')?.hasError('pattern')" style="font-size:14px">
+                  </mat-error> -->
+              </div>
+              <div>
+                  <input class="card1" type="text" placeholder="_" formControlName="OTP">
+                  <!-- <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
+              signinForm.get('OTP')?.hasError('required')" style="font-size:14px">
+                  </mat-error>
+                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
+              signinForm.get('OTP')?.hasError('pattern')" style="font-size:14px">
+                  </mat-error> -->
+              </div>
+              <div>
+                  <input class="card1" type="text" placeholder="_" formControlName="OTP">
+                  <!-- <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
+              signinForm.get('OTP')?.hasError('required')" style="font-size:14px">
+                  </mat-error>
+                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
+              signinForm.get('OTP')?.hasError('pattern')" style="font-size:14px">
+                  </mat-error> -->
+              </div>
+          </div>
+          <div class="expires"><span>OTP will expires in</span></div>
+          <div class="request">Request for OTP</div>
+            <button mat-raised-button class="btn" (click)="LoginClicked()">Submit</button><br>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

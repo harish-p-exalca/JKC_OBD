@@ -1,0 +1,301 @@
+<div id="dashboard" class="page-layout carded" fusePerfectScrollbar>
+  <div class="center" fxLayout="column" fxLayoutGap="10px">
+
+    <mat-card class=" p-8 pt-4 pb-0 m-0">
+      <div fxLayout>
+        <div fxFlex fxLayoutAlign="start center" class="h2">
+          <b>Dashboard</b>
+        </div>
+      </div>
+    </mat-card>
+    <div fxLayout="row" fxFlex="100">
+      <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px" fxFlex="20">
+        <div class="personal">Personal </div>
+        <div class="information">Information</div>
+        <img class="image" src="../../assets/images/pi_img.svg">
+        <div class="mins">4 mins</div>
+        <div class="avg">Average Time to Complete</div>
+        <mat-progress-bar mode="determinate" value="70" class="progress"></mat-progress-bar>
+        <div class="percent">80%</div>
+        <img class="jkc" src="../../assets/images/jkc_logo.svg">
+      </div>
+      <div class="text" fxFlex="80">
+        <form [formGroup]="PIform">
+          <div fxLayout="column" fxLayoutAlign="space-around center">
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" class="category" fxFlex="100">
+              <div fxFlex="20"></div>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
+                <span class="sp ">Type of Category</span>
+                <div class="one"> (Option to select only one)</div>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" style="height: 50px;">
+                <mat-form-field appearance="outline" style="width: 80%;margin-top: 10px;" >
+                  <mat-select placeholder="Select the type of Category" formControlName="category">
+                    <mat-option *ngFor="let category of categorylist" [value]="category">{{category}}</mat-option>
+                  </mat-select>
+                  <mat-error class="errorn"
+                    *ngIf="PIform?.get('category')?.touched && PIform?.get('category')?.hasError('required')">Category
+                    is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-evenly start" class="product" fxFlex="100">
+              <div fxFlex="20"></div>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
+                <span class="sp ">Type of Product</span>
+                <div class="multiple">(Option to select multiple)</div>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" style="height: 50px;">
+                <mat-form-field appearance="outline" style="width: 80%;">
+                  <mat-select placeholder="Select the type of Product" formControlName="product" multiple>
+                    <mat-option *ngFor="let product of productlist" [value]="product">{{product}}</mat-option>
+                  </mat-select>
+                  <mat-error class="errorn"
+                    *ngIf="PIform?.get('product')?.touched && PIform?.get('product')?.hasError('required')">Product
+                    is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-evenly start" class="Name" fxFlex="100">
+              <div fxFlex="20"></div>
+              <span fxFlex="30" class="sp1" >Name of the Firm</span>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" style="height: 50px;">
+                <mat-form-field appearance="outline" style="width: 80%">
+                  <input matInput placeholder=" Enter Firm Name" formControlName="Name" style="margin-top:0px ;">
+                  <mat-error class="errorn"
+                    *ngIf=" PIform?.get('Name')?.touched && PIform?.get('Name')?.hasError('required')">Name is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly start" class="address" fxFlex="100">
+              <div fxFlex="20"></div>
+              <span fxFlex="30" class="sp1">Address (Shop/Road No.Etc)*</span>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" style="height: 50px;">
+                <mat-form-field appearance="outline"  style="width:80%;">
+                  <input matInput placeholder="Enter Address" formControlName="Address" style="margin-top:0px ;">
+                  <mat-error class="errorn"
+                    *ngIf=" PIform?.get('Address')?.touched && PIform?.get('Address')?.hasError('required')">Address is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100" class="district">
+              <div fxFlex="20"></div>
+              <span fxFlex="30" class="sp1">City/Taluka/Tehsil/District*</span>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" style="height: 50px;">
+                <mat-form-field appearance="outline"  style="width:80%;">
+                  <input matInput placeholder="Enter City" formControlName="District" style="margin-top:0px ;">
+                  <mat-error class="errorn"
+                    *ngIf=" PIform?.get('District')?.touched && PIform?.get('District')?.hasError('required')">District
+                    is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100" class="state">
+              <div fxFlex="20"></div>
+              <span fxFlex="30" class="sp1">State*</span>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" style="height: 50px;">
+                <mat-form-field appearance="outline"  style="width:80%;">
+                  <input placeholder="Enter State" matInput [matAutocomplete]="auto1" formControlName="State"
+                    required clearInput style="margin-top:0px ;">
+                  <mat-autocomplete #auto1="matAutocomplete">
+                    <mat-option *ngFor="let SOption of filteropt | async" [value]="SOption">
+                      {{SOption}}
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error class="errorn"
+                    *ngIf=" PIform?.get('State')?.touched && PIform?.get('State')?.hasError('required')">State is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100" class="pincode">
+              <div fxFlex="20"></div>
+              <span fxFlex="30" class="sp1">Pincode*</span>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" style="height: 50px;">
+                <mat-form-field appearance="outline"  style="width:80%;">
+                  <input matInput placeholder="Enter Pincode" formControlName="Pincode" ngModel clearInput
+                    style="margin-top:0px ;">
+                  <mat-error class="errorn"
+                    *ngIf=" PIform?.get('Pincode')?.touched && PIform?.get('Pincode')?.hasError('required')">Pincode is
+                    required
+                  </mat-error>
+                  <mat-error class="errorn" *ngIf="PIform?.get('Pincode')?.hasError('pattern')">
+                    Please enter a valid pincode
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100" class="status">
+              <div fxFlex="20"></div>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
+                <span class="sp1">Status of the Firm*</span>
+                
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" style="height: 50px;">
+                <mat-form-field appearance="outline" style="width:80% !important; ">
+                  <mat-select placeholder="Select one Firm" formControlName="Status" multiple>
+                    <mat-option>None</mat-option>
+                  <mat-option value="option1">Proprietor</mat-option>
+                  <mat-option value="option2">Partnership</mat-option>
+                  <mat-option value="option3">Huf</mat-option>
+                  <mat-option value="option3">Pvt Ltd</mat-option>
+                  <mat-option value="option3">Limited</mat-option>
+                    <!-- <mat-option *ngFor="let product of productlist" [value]="product">{{product}}</mat-option> -->
+                  </mat-select>
+                  <mat-error class="errorn"
+                    *ngIf="PIform?.get('Status')?.touched && PIform?.get('Status')?.hasError('required')">Status
+                    is
+                    required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <mat-card class="form">
+            <div fxLayout="column" fxLayoutAlign=" space-around center">
+              <div fxLayout="row" fxLayoutAlign="space-evenly center" class="identity" fxFlex="100">
+                <div fxFlex="11"></div>
+                <span fxFlex="36" class="sp1">Identity Person</span>
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="53" style="height: 50px;">
+                  <mat-form-field appearance="outline" style="width:90% !important;">
+                    <mat-select placeholder="Select the Identity" formControlName="identity">
+                      <mat-option *ngFor="let identity of identitylist" [value]="identity">{{identity}}</mat-option>
+                    </mat-select>
+                    <mat-error class="errorc"
+                      *ngIf="PIform?.get('identity')?.touched && PIform?.get('identity')?.hasError('required')">Identity
+                      is
+                      required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100" class="name1">
+                <div fxFlex="11"></div>
+                <span fxFlex="36" class="sp1">Name</span>
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="53" style="height: 50px;">
+                  <mat-form-field appearance="outline"  style="width:90%;">
+                    <input matInput placeholder="Enter the Name" formControlName="Name1" style="margin-top:0px ;">
+                    <mat-error class="errorn"
+                      *ngIf=" PIform?.get('Name1')?.touched && PIform?.get('Name1')?.hasError('required')">Name is
+                      required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100" class="dob">
+                <div fxFlex="9"></div>
+                <strong fxFlex="35" class="sp1">DOB</strong>
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="52" style="height: 50px;">
+                  <mat-form-field appearance="outline"  style="width:90%;">
+                    <div fxLayout="row" fxLayoutAlign="start end" style="
+                    height: 24px;">
+                      <input matInput [matDatepicker]="picker" placeholder="Enter or select DOB" formControlName="DOB"
+                        style="margin-top:0px ;">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #picker></mat-datepicker>
+                    </div>
+                    <mat-error class="errorn"
+                      *ngIf=" PIform?.get('DOB')?.touched && PIform?.get('DOB')?.hasError('required')">Date of birth is
+                      required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100" class="mobile">
+                <div fxFlex="11"></div>
+                <span fxFlex="36" class="sp1">Contact Number</span>
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="53" style="height: 50px;">
+                  <mat-form-field appearance="outline"  style="width:90%;">
+                    <input matInput placeholder="Enter Contact No" formControlName="Mobile1" style="margin-top:0px ;">
+                    <mat-error class="errorn"
+                      *ngIf=" PIform?.get('Mobile1')?.touched && PIform?.get('Mobile1')?.hasError('required')">Contact
+                      Number is required
+                    </mat-error>
+                    <mat-error class="errorn" *ngIf=" PIform?.get('Mobile1')?.hasError('pattern')">Enter a valid Contact
+                      number
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100" class="mobile">
+                <div fxFlex="11"></div>
+                <span fxFlex="36" class="sp1">Personal Number</span>
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="53" style="height: 50px;">
+                  <mat-form-field appearance="outline"  style="width:90%;">
+                    <input matInput placeholder="Enter Personal No" formControlName="Mobile2" style="margin-top:0px ;">
+                    <mat-error class="errorn" *ngIf=" PIform?.get('Mobile2')?.hasError('pattern')">Enter a valid Personal
+                      number
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100" class="mail">
+                <div fxFlex="11"></div>
+                <span fxFlex="36" class="sp1">Official ID</span>
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="53" style="height: 50px;">
+                  <mat-form-field appearance="outline"  style="width:90%;">
+                    <input matInput placeholder="example@gmail.com" formControlName="email1" style="margin-top:0px ;">
+                    <mat-error class="errorn"
+                      *ngIf=" PIform?.get('email1')?.touched && PIform?.get('email1')?.hasError('required')"> Mail Id is
+                      required
+                    </mat-error>
+                    <mat-error class="errorn" *ngIf=" PIform?.get('email1')?.hasError('pattern')">Enter a valid MailId
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="100" class="mail">
+                <div fxFlex="11"></div>
+                <span fxFlex="36" class="sp1">Group ID</span>
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="53" style="height: 50px;">
+                  <mat-form-field appearance="outline"  style="width:90%;">
+                    <input matInput placeholder="example@gmail.com" formControlName="email2" style="margin-top:0px ;">
+                    <mat-error class="errorn" *ngIf=" PIform?.get('email2')?.hasError('pattern')">Enter a valid MailId
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </form>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="100">
+      <div fxFlex="40"></div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="3px">
+        <button mat-flat-button class="previous" (click)="previousbtn()">
+          <img class="previousimg" src="../../assets/images/previous.svg">
+          Previous</button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="3px">
+        <button mat-flat-button class="next" (click)="nextbtn()">Next
+          <img class="nextimg" src="../../assets/images/next.svg">
+        </button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="3px">
+        <button mat-flat-button class="clear" (click)="ClearAll()">Clear
+          <img class="clearimg" src="../../assets/images/clear.svg">
+        </button>
+      </div>
+      <button mat-raised-button class="savebtn" (click)="RegistrationClicked()">Save & Next</button>
+    </div>
+  </div>
+  <mat-progress-spinner *ngIf="isProgressBarVisibile" class="progressBarPostion" color="accent" mode="indeterminate">
+  </mat-progress-spinner>
+  <div id="overlay" *ngIf="isProgressBarVisibile"></div>
+</div>
