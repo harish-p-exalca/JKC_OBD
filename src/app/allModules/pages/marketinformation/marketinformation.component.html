@@ -1,13 +1,13 @@
 <div id="dashboard" class="page-layout carded" fusePerfectScrollbar>
   <div class="center" fxLayout="column" fxLayoutGap="10px">
 
-    <mat-card class=" p-8 pt-4 pb-0 m-0">
+    <!-- <mat-card class=" p-8 pt-4 pb-0 m-0">
       <div fxLayout>
         <div fxFlex fxLayoutAlign="start center" class="h2">
           <b>Dashboard</b>
         </div>
       </div>
-    </mat-card>
+    </mat-card> -->
     <div fxLayout="row" fxFlex="100">
       <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px" fxFlex="20">
         <div class="market">Market </div>
@@ -16,7 +16,7 @@
         <div class="mins">2 mins</div>
         <div class="avg">Average Time to Complete</div>
         <mat-progress-bar mode="determinate" value="80" class="progress"></mat-progress-bar>
-        <div class="percent">96%</div>
+        <div class="percent">96%     Almost done!</div>
         <img class="jkc" src="../../assets/images/jkc_logo.svg">
       </div>
       <div fxFlex="10"> </div>
@@ -26,159 +26,164 @@
             <div fxLayout="row" fxLayoutAlign="space-evenly center" class="marketinfo" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Name of Market</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Name of  Market" formControlName="market" style="margin-top:0px ;">
-                </mat-form-field>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput placeholder="Name of Market" formControlName="market" class="inputform "
+                        placeholder="Enter Username" required>
+               
               </div>
+            
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Population of Market</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Population of  Market" formControlName="Population"
-                    style="margin-top:0px ;">
-                </mat-form-field>
-              </div>
+              
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                  <input autocomplete="off" matInput placeholder="Population of  Market" formControlName="Population" class="inputform "
+                           required>
+                 
+                </div>
+              
+            
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Market Potential of the area (in MT)</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Market Potential of the area (in MT)" formControlName="Potential"
-                    style="margin-top:0px ;">
-                  <mat-error class="errorn"
-                    *ngIf=" MIform?.get('Potential')?.touched && MIform?.get('Potential')?.hasError('required')">Market
-                    Potential is
-                    required
-                  </mat-error>
-                </mat-form-field>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput placeholder="Market Potential of the area (in MT)" formControlName="Potential" class="inputform "
+                         required>
+                         <mat-error class="errorn"
+                         *ngIf=" MIform?.get('Potential')?.touched && MIform?.get('Potential')?.hasError('required')">Market
+                         Potential is
+                         required
+                       </mat-error>
               </div>
+            
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">No of Existing Stockist in the market</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="No of Existing Stockist in the market" formControlName="Stockist"
-                    style="margin-top:0px ;">
-                </mat-form-field>
+              <span fxFlex="30" class="marketsp">No of Existing Stockist in the Market</span>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput placeholder="No of Existing Stockist in the Market" formControlName="Stockist" class="inputform "
+                         required>
+             
               </div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Distance of Nearest JK Stockist</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Distance of Nearest JK Stockist" formControlName="Distance"
-                    style="margin-top:0px ;">
-                </mat-form-field>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput placeholder="Distance of Nearest JK Stockist" formControlName="Distance" class="inputform "
+                         required>
+             
               </div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Name of Nearest JK Stockist</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Name of Nearest JK Stockist" formControlName="NameOfNearest"
-                    style="margin-top:0px ;">
-                </mat-form-field>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput placeholder="Name of Nearest JK Stockist" formControlName="NameOfNearest" class="inputform "
+                         required>
+             
               </div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Year of Establishment</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Year of Establishment" formControlName="YearOfEstablished"
-                    style="margin-top:0px ;">
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput  placeholder="Year of Establishment" formControlName="YearOfEstablished"  class="inputform "
+                         required>
+             
                   <mat-error class="errorn"
                     *ngIf=" MIform?.get('YearOfEstablished')?.touched && MIform?.get('YearOfEstablished')?.hasError('required')">
                     Year of Establishment is
                     required
                   </mat-error>
-                </mat-form-field>
+               
               </div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Areas that Stockist will serve</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Areas that Stockist will serve" formControlName="AreasStockist"
-                    style="margin-top:0px ;">
-                </mat-form-field>
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput placeholder="Areas that Stockist will serve" formControlName="AreasStockist" class="inputform "
+                         required>
+             
+             
+             
               </div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Total Potential of the Party (In MT)</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Total Potential of the Party (In MT)" formControlName="TotalPotential"
-                    style="margin-top:0px ;">
+             
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput placeholder="Total Potential of the Party (In MT)" formControlName="TotalPotential" class="inputform "
+                         required>
+             
+             
                   <mat-error class="errorn"
                     *ngIf=" MIform?.get('TotalPotential')?.touched && MIform?.get('TotalPotential')?.hasError('required')">
                     Total Potential of the Party (In MT) is
                     required
                   </mat-error>
-                </mat-form-field>
+               
               </div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Expected JK Avg.Monthly Sale (In MT)</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Expected JK Avg.Monthly Sale (In MT)" formControlName="JKAvg"
-                    style="margin-top:0px ;">
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput placeholder="Expected JK Avg.Monthly Sale (In MT)" formControlName="JKAvg" class="inputform "
+                         required>
+             
                   <mat-error class="errorn"
                     *ngIf=" MIform?.get('JKAvg')?.touched && MIform?.get('JKAvg')?.hasError('required')">Expected JK
                     Avg.Monthly Sale (In MT) is
                     required
                   </mat-error>
-                </mat-form-field>
+                
               </div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Pan No.of Business</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Pan No.of Business" formControlName="Pan" style="margin-top:0px ;">
-                  <mat-error class="errorn"
-                    *ngIf=" MIform?.get('Pan')?.touched && MIform?.get('Pan')?.hasError('required')">Pan No.of Business
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput placeholder="Pan No.of Business" formControlName="Pan" class="inputform "
+                         required>
+
+            <mat-error class="errorn"
+                    *ngIf=" MIform?.get('Pan')?.touched && MIform?.get('Pan')?.hasError('pattern')">Pan No.of Business
                     is
                     required
                   </mat-error>
-                </mat-form-field>
+             
               </div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-evenly start" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Gst No.of Business</span>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%">
-                  <input matInput placeholder="Gst No.of Business" formControlName="Gst" style="margin-top:0px ;">
-                  <mat-error class="errorn"
-                    *ngIf=" MIform?.get('Gst')?.touched && MIform?.get('Gst')?.hasError('required')">Gst No.of Business
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
+                <input autocomplete="off" matInput placeholder="Gst No.of Business" formControlName="Gst" class="inputform "
+                         required>
+
+            
+               <mat-error class="errorn"
+                    *ngIf=" MIform?.get('Gst')?.touched && MIform?.get('Gst')?.hasError('pattern')">Gst No.of Business
                     is
                     required
                   </mat-error>
-                </mat-form-field>
+               
               </div>
             </div>
 
@@ -186,11 +191,14 @@
               <div fxFlex="10"></div>
               <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
                 <span class="marketsp">Party Background</span>
-                <div class="one"> (Option to select one)</div>
+                <!-- <div class="one"> (Option to select one)</div> -->
               </div>
-              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" style="height: 50px;">
-                <mat-form-field appearance="outline" style="width: 80%;margin-top: 10px;">
-                  <mat-select placeholder="Select the Party Background" formControlName="PartyBackground">
+            
+             
+
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60"  class="inputdivision">
+                <!-- <mat-form-field appearance="outline" style="width: 80%;margin-top: 10px;"> -->
+                  <mat-select placeholder="Select the Party Background" formControlName="PartyBackground" style="height: 40px;" class="inputform ">
                     <mat-option *ngFor="let party of partylist" [value]="party">{{party}}</mat-option>
                   </mat-select>
                   <mat-error class="errorn"
@@ -199,7 +207,7 @@
                     is
                     required
                   </mat-error>
-                </mat-form-field>
+                <!-- </mat-form-field> -->
               </div>
             </div>
             <div fxLayout="column" fxLayoutAlign="center center">
@@ -209,39 +217,39 @@
                 </span>
                 <div fxLayout="row" fxLayoutAlign="start start">
                   <table mat-table [dataSource]="dataSource">
-                    <ng-container matColumnDef="cement">
-                      <th mat-header-cell *matHeaderCellDef> If Selling White Cement/Wall Putty </th>
-                      <td mat-cell *matCellDef="let element">
+                    <ng-container matColumnDef="cement" >
+                      <th mat-header-cell *matHeaderCellDef class="header"> If Selling White Cement/Wall Putty </th>
+                      <td mat-cell *matCellDef="let element" class="header">
                         {{element.cement}} </td>
                     </ng-container>
                     <ng-container matColumnDef="wp">
-                      <th mat-header-cell *matHeaderCellDef> WP Avg/Month Sales (In Mt) </th>
+                      <th mat-header-cell *matHeaderCellDef class="header"> WP Avg/Month Sales (In Mt) </th>
                       <td mat-cell *matCellDef="let element" class="cell" contenteditable="true"> {{element.wp}} </td>
                     </ng-container>
                     <ng-container matColumnDef="wc">
-                      <th mat-header-cell *matHeaderCellDef>WC Avg/Month sales (In MT)</th>
+                      <th mat-header-cell *matHeaderCellDef class="header">WC Avg/Month sales (In MT)</th>
                       <td mat-cell *matCellDef="let element" class="cell" contenteditable="true"> {{element.wc}} </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table>
-                  <button mat-flat-button class="add1">+</button>
+                  <!-- <button mat-flat-button class="add1">+</button> -->
                 </div>
-                  <button mat-flat-button class="add2">+</button>
+                  <!-- <button mat-flat-button class="add2">+</button> -->
               </mat-card>
             </div>
           </div>
         </form>
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="100">
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="100" style="margin-top: 23px">
       <div fxFlex="40"></div>
-      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px">
         <button mat-flat-button class="previous" (click)="previousbtn()">
           <img class="previousimg" src="../../assets/images/previous.svg">
           Previous</button>
       </div>
-      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px">
         <button mat-flat-button class="next" (click)="nextbtn()">Next
           <img class="nextimg" src="../../assets/images/next.svg">
         </button>
@@ -251,11 +259,11 @@
           <img class="clearimg" src="../../assets/images/clear.svg">
         </button>
       </div>
-      <button mat-raised-button class="savebtn">Save & Next</button>
+      <button mat-raised-button class="savebtn" (click)="saveInfo()">Save & Next</button>
     </div>
     <br>
   </div>
-  <mat-progress-spinner *ngIf=" isProgressBarVisibile" class="progressBarPostion" color="accent" mode="indeterminate">
+  <mat-progress-spinner *ngIf=" isProgressBarVisibile" class="progressBarPostion"   mode="determinate" value="40">
   </mat-progress-spinner>
   <div id="overlay" *ngIf="isProgressBarVisibile"></div>
 </div>

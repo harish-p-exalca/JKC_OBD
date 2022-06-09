@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DashboardService } from 'app/services/dashboard.service';
 export interface Monthlysales {
   sale: string;
   apr: string;
@@ -25,7 +26,7 @@ export class BusinessComponent implements OnInit {
   BIform !: FormGroup
   displayedColumns: string[] = ['sale', 'apr', 'may'];
   dataSource = ELEMENT_DATA;
-  constructor(private fb: FormBuilder, private _router: Router) { }
+  constructor(private fb: FormBuilder, private _router: Router, private _dashboardService: DashboardService) { }
 
   ngOnInit() {
     this.BIform = this.fb.group({
@@ -38,6 +39,28 @@ export class BusinessComponent implements OnInit {
       Wholesale: [''],
     
     })
+  }
+  saveBusinessInfo(): void {
+    const personalinformation: BusinessInformation = new BusinessInformation();
+    personalinformation.Turnover = this.BIform.get('NoOfYears').value;
+    personalinformation.Retail = this.BIform.get('retail').value;
+    personalinformation.WorkingCaptial = this.BIform.get('capitalinvest').value;
+    personalinformation.Retailers = this.BIform.get('NoOfYears1').value;
+    personalinformation.NoVechicle = this.BIform.get('vehicle').value;
+    personalinformation.TotalStorage = this.BIform.get('storagecapacity').value;
+    personalinformation.Wholesale = this.BIform.get('Wholesale').value;
+    
+    
+    this._dashboardService.AddBusinessInfo(personalinformation).subscribe(
+        (data) => {
+            console.log(data);
+        },
+        (err) => {
+
+            console.error(err);
+        },
+    );
+    this._router.navigate(['pages/nextlogin']);
   }
   RegistrationClicked(): void {
     this._router.navigate(['pages/marketinformation'])
@@ -52,3 +75,16 @@ export class BusinessComponent implements OnInit {
     this.BIform.reset();
   }
 }
+export class BusinessInformation {
+  ID !: string;
+  Turnover !: string;
+  WorkingCaptial!: string;
+  Retail!: number;
+  NoVechicle!: number;
+  TotalStorage!: string;
+  Wholesale!:number;
+  Retailers!: number;
+  
+ 
+}
+
