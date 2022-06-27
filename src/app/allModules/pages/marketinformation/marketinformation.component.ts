@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
 import { SnackBarStatus } from 'app/notifications/snackbar-status-enum';
+import { CommonService } from 'app/services/common.service';
 import { DashboardService } from 'app/services/dashboard.service';
 export interface Monthlysales{
   cement:string;
@@ -39,7 +40,7 @@ export class MarketinformationComponent implements OnInit {
   displayedColumns: string[] = ['cement', 'wp', 'wc'];
   dataSource = ELEMENT_DATA;
   constructor(private fb: FormBuilder, private _router: Router, public snackBar: MatSnackBar,
-    private _dashboardService: DashboardService) {
+    private _dashboardService: DashboardService,private _commonService: CommonService) {
       this.notificationSnackBarComponent = new NotificationSnackBarComponent(
 
         this.snackBar
@@ -73,7 +74,7 @@ export class MarketinformationComponent implements OnInit {
   }
 
   previousbtn(): void {
-    this._router.navigate(['pages/dashboard']);
+    this._router.navigate(['pages/businessinformation']);
   }
   nextbtn(): void {
     this._router.navigate(['pages/businessinformation']);
@@ -103,7 +104,7 @@ export class MarketinformationComponent implements OnInit {
     }
   }
   saveInfo(): void {
-    if(this.MIform.value){
+    if (this.MIform.valid) {
     const personalinformation: MarketInformation = new MarketInformation();
         personalinformation.MarketName = this.MIform.get('market').value;
         personalinformation.Population = this.MIform.get('Population').value;
@@ -123,7 +124,7 @@ export class MarketinformationComponent implements OnInit {
             (data) => {
                 console.log(data);
                 this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
-                this._router.navigate(['pages/businessinformation']);
+                this._router.navigate(['pages/bankinformation']);
               },
             (err) => {
 
@@ -136,7 +137,7 @@ export class MarketinformationComponent implements OnInit {
         
         }
         else{
-          this.notificationSnackBarComponent.openSnackBar('Please enter Required Fields', SnackBarStatus.danger);
+          this._commonService.ShowValidationErrors(this.MIform);
 
         }
        

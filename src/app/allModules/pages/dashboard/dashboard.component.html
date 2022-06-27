@@ -320,7 +320,8 @@
       </button>
     </div>
     <!-- [disabled]="MIform.required.invalid" -->
-    <button mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Submit</button>
+    <button *ngIf="SubmitValue != true" mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Submit</button>
+    <button *ngIf="SubmitValue == true" mat-raised-button class="savebtn" (click)="NextButtonClick()">Next</button>
   </div>
   <br>
 </div>
