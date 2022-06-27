@@ -7,6 +7,8 @@ import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
 import { PersonalInformation } from 'app/allModules/pages/dashboard/dashboard.component';
 import { SendMail } from 'app/models/master';
+import { MarketInformation } from 'app/allModules/pages/marketinformation/marketinformation.component';
+import { BusinessInformation } from 'app/allModules/pages/business/business.component';
 
 @Injectable({
     providedIn: 'root'
@@ -65,6 +67,22 @@ export class DashboardService {
 
     SendMailResponse( SendMail : SendMail): Observable<any> {
         return this._httpClient.post<any>('http://localhost:6540/api/Master/SendMailResponse', SendMail, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        })
+            .pipe(catchError(this.errorHandler));
+    }
+    AddMArketInfo(marketInfo: MarketInformation): Observable<MarketInformation | string> {
+        return this._httpClient.post<MarketInformation>('http://localhost:49396/api/MarketInfo/CreateMarketInfo', marketInfo, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        })
+            .pipe(catchError(this.errorHandler));
+    }
+    AddBusinessInfo(businessInfo: BusinessInformation): Observable<BusinessInformation | string> {
+        return this._httpClient.post<BusinessInformation>('http://localhost:49396/api/BusinessInfo/CreateBusinessInfo', businessInfo, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
