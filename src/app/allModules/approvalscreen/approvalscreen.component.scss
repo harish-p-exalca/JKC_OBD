@@ -1,0 +1,387 @@
+
+@import "src/@fuse/scss/fuse";
+
+#dashboard {
+  .progressBarPostion {
+    position: absolute !important;
+    top: 350px;
+    z-index: 1;
+    left: 55%;
+  }
+.DashBoard_Box{
+    width: 89%;
+  height: 159px;
+  margin-right: 43px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px 0 rgba(31, 0, 158, 0.16);
+
+  background-color: #ffffff;
+}
+.Card_1{
+  height: 120px;
+  margin-left: 10px;
+  margin-top: 8px;
+  margin-right: 19px;
+    // padding: 13px 21px 10px 14px;
+    // opacity: 0.1;
+    border-radius: 4px;
+    background-color: #e9eef3;
+}
+.Card_2{
+    width: 100%;
+    height: 120px;
+    margin: 8px 0px;
+    // padding: 13px 23px 10px 14px;
+    // opacity: 0.1;
+    border-radius: 4px;
+    background-color: #eadeeb;
+}
+.Card_3{
+    width: 100%;
+    height: 120px;
+    margin: 8px 22px;
+    // padding: 13px 27px 23px 14px;
+    // opacity: 0.1;
+    border-radius: 4px;
+    background-color: #eaf5d5;
+}
+.Card_4{
+  width: 100%;
+  height: 120px;
+  margin: 8px 15px;
+  // padding: 13px 27px 23px 14px;
+  // opacity: 0.1;
+  border-radius: 4px;
+  background-color: #f5dbdb;
+}
+.sign_label{
+    width: 50px;
+    height: 59px;
+    // margin: 3px 0 42px 7px;
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.65;
+    letter-spacing: normal;
+    text-align: center;
+    color: #0e82fb;
+}
+.sign_label1{
+    width: 66px;
+    height: 48px;
+    // margin: 76px 7px 0 2px;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+    text-align: center;
+    color: #394256;
+}
+.sign_label3{
+    width: 50px;
+    height: 59px;
+    // margin: 3px 0 42px 7px;
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.65;
+    letter-spacing: normal;
+    text-align: center;
+    color: #00de34;
+}
+.sign_label2{
+    width: 50px;
+    height: 59px;
+    // margin: 3px 0 42px 7px;
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.65;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ff4646;
+}
+.inputform{
+  color: #00061C;
+    font-size: 16px;
+    width: 149%;
+    height: 29px;
+    margin-left: 49%;
+    margin-top: 10px;
+    // padding-left: 23px;
+    line-height: 3.5;
+    border: none;
+    text-align: left;
+    background: #f1f1f5 !important;
+}
+.DashBoard_Box1{
+    width: 100%;
+  height: 160px;
+  margin-bottom: 20px;
+//   margin: 15px 1.8px 42px 38px;
+  border-radius: 4px;
+//   box-shadow: 0 2px 6px 0 rgba(31, 0, 158, 0.16);
+border: solid 2px #f4f4f4;
+  background-color: #ffffff;
+}
+.headerbackgrnd{
+    background-image: url('^/assets/images/header_img.png') !important;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    margin-bottom: 0px;
+    height: 0px;
+    position: fixed;
+      z-index: 100;
+      width: 100%;
+  }
+  #chart-container {
+    display: flex;
+    flex: 1 1 auto;
+    height: 300px;
+    width: 340px !important;
+    border: 1px solid rgba(0,0,0,0.38);
+  }
+  
+  #chart {
+    display: flex;
+    width: 100%;
+    height: 340px !important;
+  }
+  .image{
+    width: 81%;
+  margin-left: -18%; 
+    margin-top: 37%;
+  }
+  table {
+    width: 100%;
+  }
+  .example-form {
+    min-width: 250px;
+    max-width: 900px;
+    width: 100%;
+    margin:3rem 1rem
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .my-input {
+    border-radius: 4px;
+    border: 1px solid #9c9c9c;
+    background-color: #f7f7f7;
+    width: 72%;
+    margin-left: 190px;
+    height: 30px
+  }
+  .search-icon {
+    position: relative;
+    right: 32px;
+    top:8px;
+    width: 24px;
+    height:24px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .link{
+    min-width:15px;
+    margin-left:10px;
+    // margin-right: -102px;
+}
+}
+
+
+
+
+
+
+// <div fxLayout="row"  fxLayoutGap="20px" class="body" style="padding: 0px 25px;">
+
+          
+           
+               
+
+// <nav mat-tab-nav-bar fxFlex="50">
+//     <!-- <a mat-tab-link *ngFor="let link of links" (click)="ActiveLink(activeLink=link) "
+//         [ngClass]="link === 'Create'?'Mar_cls':'none'" [active]="activeLink == link">
+//         {{link}} </a> -->
+//     <a mat-tab-link>All</a>
+//     <a mat-tab-link>Open</a>
+//     <a mat-tab-link>Draft</a>
+//     <a mat-tab-link>Approved</a>
+    
+
+// </nav>
+// <!-- //table -->
+// <!-- <div class="tablescroll">
+
+//     <table mat-table [dataSource]="employeesDataSource">
+
+//         <ng-container matColumnDef="No">
+//             <th mat-header-cell *matHeaderCellDef><span class="thtitle"> S.No </span></th>
+//             <td mat-cell *matCellDef="let element"> {{element.No}} </td>
+//         </ng-container>
+
+//         <ng-container matColumnDef="Name">
+//             <th mat-header-cell *matHeaderCellDef> <span class="thauthor"> Name </span></th>
+//             <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
+//         </ng-container>
+
+//         <ng-container matColumnDef="Gmail">
+//             <th mat-header-cell *matHeaderCellDef><span class="thdate">Gmail ID</span> </th>
+//             <td mat-cell *matCellDef="let element"> {{element.EmailId1}} </td>
+//         </ng-container>
+
+//         <ng-container matColumnDef="Country">
+//             <th mat-header-cell *matHeaderCellDef><span class="thdate">Country</span> </th>
+//             <td mat-cell *matCellDef="let element"> {{element.State}} </td>
+//         </ng-container>
+//         <ng-container matColumnDef="Type">
+//             <th mat-header-cell *matHeaderCellDef><span class="thdate">Mobile Number</span> </th>
+//             <td mat-cell *matCellDef="let element"> {{element.Type}} </td>
+//         </ng-container>
+//         <ng-container matColumnDef="MobileNo">
+//             <th mat-header-cell *matHeaderCellDef><span class="thdate">Mobile Number</span> </th>
+//             <td mat-cell *matCellDef="let element"> {{element.Mobile1}} </td>
+//         </ng-container>
+//         <ng-container matColumnDef="Status">
+//             <th mat-header-cell *matHeaderCellDef><span class="thdate">Mobile Number</span> </th>
+//             <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
+//         </ng-container>
+      
+      
+//         <tr mat-header-row *matHeaderRowDef="employeesDisplayColumns; sticky: true"
+//             style="background-color: #f7f9fd;"></tr>
+//         <tr mat-row *matRowDef="let row; columns: employeesDisplayColumns;"></tr>
+//     </table>
+
+// </div>
+// -->
+
+
+
+// <!-- <div class="tablescroll">
+
+// <table mat-table [dataSource]="employeesDataSource">
+
+//     <ng-container matColumnDef="title">
+//         <th mat-header-cell *matHeaderCellDef><span class="thtitle"> Title </span></th>
+//         <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+//     </ng-container>
+
+//     <ng-container matColumnDef="author">
+//         <th mat-header-cell *matHeaderCellDef> <span class="thauthor"> Author </span></th>
+//         <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+//     </ng-container>
+
+//     <ng-container matColumnDef="date">
+//         <th mat-header-cell *matHeaderCellDef><span class="thdate">Date</span> </th>
+//         <td mat-cell *matCellDef="let element"> {{element.createdOn | date}} </td>
+//     </ng-container>
+
+//     <ng-container matColumnDef="fulfilment">
+//         <th mat-header-cell *matHeaderCellDef> <span class="thful">Fulfilment</span> </th>
+//         <td mat-cell *matCellDef="let element">
+//             <ng-container *ngIf="(element.fulfilment == 'Created')||(element.fulfilment == 'Draft')">
+
+//                 <mat-progress-bar class="progressone" mode="determinate" value="25">
+//                 </mat-progress-bar>
+//                 <span class="hider">
+//                     <span class="span1">gananathanks</span>
+//                     &nbsp;&nbsp;
+//                     {{element.fulfilment?'Created':'Draft'}}</span>
+//             </ng-container>
+//             <ng-container *ngIf="element.fulfilment == 'Released'">
+//                 <mat-progress-bar class="progresstwo" mode="determinate" value="50">
+//                 </mat-progress-bar>
+//                 <span class="hider">
+//                     <span class="span2">gananathanks</span>
+//                     &nbsp;&nbsp;
+//                     {{element.fulfilment}}</span>
+//             </ng-container>
+//             <ng-container *ngIf="element.fulfilment == 'In Signing'">
+//                 <mat-progress-bar class="progressthree" mode="determinate" value="75">
+//                 </mat-progress-bar>
+//                 <span class="hider">
+//                     <span class="span3">gananathanks</span>
+//                     &nbsp;&nbsp;
+//                     {{element.fulfilment}}</span>
+//             </ng-container>
+           
+//             <ng-container *ngIf="element.fulfilment == 'Completed'">
+//                 <mat-progress-bar class="progressfour" mode="determinate" value="100">
+//                 </mat-progress-bar>
+//                 <span class="hider">
+//                     <span class="span4">gananathanks</span>
+//                     &nbsp;&nbsp;
+//                     {{element.fulfilment}}</span>
+//             </ng-container>
+
+
+//         </td>
+//     </ng-container>
+//     <ng-container matColumnDef="signed">
+//         <th mat-header-cell *matHeaderCellDef> <span class="thsign"> Signed </span></th>
+//         <td mat-cell *matCellDef="let element">{{element.scount}} / {{element.tscount}} </td>
+//     </ng-container>
+//     <ng-container matColumnDef="completeby">
+//         <th mat-header-cell *matHeaderCellDef style="padding-left: 10px;"><span
+//                 class="thcomplete">Completed By</span> </th>
+//         <td mat-cell *matCellDef="let element">{{element.completeby | date}} </td>
+//     </ng-container>
+//     <ng-container matColumnDef="action">
+//         <th mat-header-cell *matHeaderCellDef><span class="thaction">Action</span> </th>
+//         <td mat-cell *matCellDef="let element" style="padding-left: 20px;">
+//             <div fxLayout="row" fxLayoutAlign="space-evenly center">
+//                 <div fxLayout="row" fxFlex="90" fxLayoutAlign="center" fxLayoutGap="10px">
+//                     <img matTooltip="Send Remainder" matTooltipPosition='above' class="notify"
+//                         (click)="sendRemainder(element.docId)" src="assets/images/Notify.svg">
+//                     <img matTooltip="Foreclose" matTooltipPosition='above' class="close"
+//                         src="assets/images/close.svg">
+//                 </div>
+//                 <div fxFlex="10">
+//                     <mat-icon class="more" [matMenuTriggerFor]="moremenu">more_vert</mat-icon>
+//                     <mat-menu #moremenu="matMenu" xPosition="before">
+//                         <button mat-menu-item
+//                             (click)="sign(element.client,element.company,element.docId,element.fulfilment,element.author,element.createdOn,element.completeby)"
+//                             *ngIf="boolNxtsign(element)">
+//                             Sign Doc.
+//                         </button>
+//                         <button mat-menu-item
+//                             (click)="sign(element.client,element.company,element.docId,element.fulfilment,element.author,element.createdOn,element.completeby)"
+//                             *ngIf="((element.signStatus=='nxtsign')&&element.fulfilment!='Completed')?true:false">
+//                             Sign Doc.
+//                         </button>
+//                         <button mat-menu-item
+//                             (click)="view(element.client,element.company,element.docId,element.fulfilment)"
+//                             *ngIf="(element.client==curruser.ClientID)&&(element.fulfilment=='Draft'||element.fulfilment=='Released')?true:false">
+//                             View Doc.
+//                         </button>
+//                         <button mat-menu-item
+//                             (click)="viewDoc(element.client,element.company,element.docId,element.fulfilment,element.author,element.createdOn,element.completeby)"
+//                             *ngIf="(element.signStatus=='signed' || (element.client==curruser.ClientID))&&(element.fulfilment=='In Signing' || element.fulfilment=='Completed')?true:false">
+//                             View Doc.
+//                         </button>
+//                     </mat-menu>
+//                 </div>
+//             </div>
+//         </td>
+//     </ng-container>
+//     <tr mat-header-row *matHeaderRowDef="employeesDisplayColumns; sticky: true"
+//         style="background-color: #f7f9fd;"></tr>
+//     <tr mat-row *matRowDef="let row; columns: employeesDisplayColumns;"></tr>
+// </table>
+
+// </div> -->
+
+// </div>
