@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
+import { SnackBarStatus } from 'app/notifications/snackbar-status-enum';
 import { DashboardService } from 'app/services/dashboard.service';
 export interface Monthlysales {
   sale: string;
-  apr: string;
-  may: string;
+
+
 }
 const ELEMENT_DATA: Monthlysales[] = [
-  { sale: "WallmaxX", apr: "Enter", may: "Enter" },
-  { sale: "WhitemaxX", apr: "Enter", may: "Enter" },
-  { sale: "GypsomaxX", apr: "Enter", may: "Enter" },
-  { sale: "ShieldmaxX", apr: "Enter", may: "Enter" },
-  { sale: "SmoothMaxX", apr: "Enter", may: "Enter" },
-  { sale: "RepairmaxX", apr: "Enter", may: "Enter" },
-  { sale: "TilemaxX", apr: "Enter", may: "Enter" },
-  { sale: "Woodamore", apr: "Enter", may: "Enter" },
+  { sale: "WallmaxX" },
+  { sale: "WhitemaxX" },
+  { sale: "GypsomaxX" },
+  { sale: "ShieldmaxX" },
+  { sale: "SmoothMaxX" },
+  { sale: "RepairmaxX" },
+  { sale: "TilemaxX" },
+  { sale: "Woodamore" },
 ];
 @Component({
   selector: 'app-business',
@@ -24,9 +27,23 @@ const ELEMENT_DATA: Monthlysales[] = [
 })
 export class BusinessComponent implements OnInit {
   BIform !: FormGroup
-  displayedColumns: string[] = ['sale', 'apr', 'may'];
+  BrandForm!: FormGroup
+  private listData: any;
+  notificationSnackBarComponent: NotificationSnackBarComponent;
+  displayedColumns: string[] = ["sale"]
+  displayColumns: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  //displayColumns:string[]=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  brandName: string[] = ['WallmaxX', 'WhitemaxX', 'GypsomaxX', 'ShieldmaxX', 'SmoothMaxX', 'RepairmaxX', 'TilemaxX', 'Woodamore'];
+  columnsToDisplay: string[] = this.displayColumns.slice();
   dataSource = ELEMENT_DATA;
-  constructor(private fb: FormBuilder, private _router: Router, private _dashboardService: DashboardService) { }
+  constructor(private fb: FormBuilder, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar,) {
+    this.listData = [];
+    this.notificationSnackBarComponent = new NotificationSnackBarComponent(
+
+      this.snackBar
+
+    );
+  }
 
   ngOnInit() {
     this.BIform = this.fb.group({
@@ -34,12 +51,46 @@ export class BusinessComponent implements OnInit {
       NoOfYears1: ['', Validators.required],
       capitalinvest: ['', Validators.required],
       storagecapacity: ['', Validators.required],
-      retail: [''],
+      retail: ['', Validators.pattern(/^[0-9]$/)],
       vehicle: ['', Validators.required],
-      Wholesale: [''],
-    
+      Wholesale: ['', Validators.pattern(/^[a-zA-Z0-9]+$/)],
+
+
+
     })
+    this.BrandForm = this.fb.group({
+      sales: ['', Validators.required],
+      date1: [''],
+      date2: [''],
+    })
+    this.BIform.get('Wholesale')
+      .valueChanges
+      .subscribe(value => {
+        if (value != "") {
+          this.BIform
+            .get('retail')
+            .setValue(isNaN(value) ? 0 : 100 - value)
+        }
+        else {
+          this.BIform
+            .get('retail')
+            .setValue(isNaN(value) ? "" : "")
+        }
+      }
+      );
+
   }
+  keyPressNumbers(event) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   saveBusinessInfo(): void {
     const personalinformation: BusinessInformation = new BusinessInformation();
     personalinformation.Turnover = this.BIform.get('NoOfYears').value;
@@ -49,31 +100,61 @@ export class BusinessComponent implements OnInit {
     personalinformation.NoVechicle = this.BIform.get('vehicle').value;
     personalinformation.TotalStorage = this.BIform.get('storagecapacity').value;
     personalinformation.Wholesale = this.BIform.get('Wholesale').value;
-    
-    
-    this._dashboardService.AddBusinessInfo(personalinformation).subscribe(
-        (data) => {
-            console.log(data);
-        },
-        (err) => {
 
-            console.error(err);
-        },
+
+    this._dashboardService.AddBusinessInfo(personalinformation).subscribe(
+      (data) => {
+        console.log(data);
+        this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
+        this._router.navigate(['pages/bankinformation']);
+      },
+      (err) => {
+
+        console.error(err);
+      },
     );
-    this._router.navigate(['pages/nextlogin']);
+    // this._router.navigate(['pages/nextlogin']);
+  }
+  public count = -1;
+  public a: string = "";
+  public data = [];
+  add(): void {
+    var d = new Date();
+    d.setDate(1); //REM: To prevent month skipping.
+    this.data.push(this.displayColumns[d.getMonth()])
+    for (var i = 0; i < 11; i++) {
+      d.setMonth(d.getMonth() + 1);
+      this.data.push(this.displayColumns[d.getMonth()])
+      console.log(this.displayColumns[d.getMonth()], d.getFullYear())
+    };
+
+    if (this.count < 12) {
+      this.count++;
+    }
+    this.a += " " + this.data[this.count]
+    console.log(this.a)
+    this.displayedColumns.push(this.data[this.count]);
+    console.log(this.displayColumns)
+
+  }
+  onAdd(): void {
+    this.listData.push(this.BrandForm.value);
+    this.BrandForm.reset();
+
   }
   RegistrationClicked(): void {
     this._router.navigate(['pages/marketinformation'])
   }
   previousbtn(): void {
-    this._router.navigate(['pages/personalinformation']);
+    this._router.navigate(['pages/marketinformation']);
   }
-  nextbtn():void{
-    this._router.navigate(['pages/marketinformation'])
+  nextbtn(): void {
+    this._router.navigate(['pages/bankinformation'])
   }
   ClearAll(): void {
     this.BIform.reset();
   }
+
 }
 export class BusinessInformation {
   ID !: string;
@@ -82,9 +163,9 @@ export class BusinessInformation {
   Retail!: number;
   NoVechicle!: number;
   TotalStorage!: string;
-  Wholesale!:number;
-  Retailers!: number;
-  
- 
+  Wholesale!: number;
+  Retailers!: string;
+
+
 }
 

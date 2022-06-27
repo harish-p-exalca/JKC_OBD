@@ -98,7 +98,7 @@ export class RoleMainContentComponent implements OnInit, OnChanges {
               this.ShowProgressBarEvent.emit('show');
               this.role.RoleName = this.roleMainFormGroup.get('roleName').value;
               this.role.AppIDList = <number[]>this.roleMainFormGroup.get('appIDList').value;
-              this.role.ModifiedBy = this.authenticationDetails.userID.toString();
+              this.role.ModifiedBy = this.authenticationDetails.UserID.toString();
 
               this._masterService.UpdateRole(this.role).subscribe(
                 (data) => {
@@ -132,7 +132,7 @@ export class RoleMainContentComponent implements OnInit, OnChanges {
               this.ShowProgressBarEvent.emit('show');
               this.role.RoleName = this.roleMainFormGroup.get('roleName').value;
               this.role.AppIDList = this.roleMainFormGroup.get('appIDList').value;
-              this.role.CreatedBy = this.authenticationDetails.userID.toString();
+              this.role.CreatedBy = this.authenticationDetails.UserID.toString();
               this._masterService.CreateRole(this.role).subscribe(
                 (data) => {
                   // console.log(data);
@@ -176,7 +176,7 @@ export class RoleMainContentComponent implements OnInit, OnChanges {
               this.ShowProgressBarEvent.emit('show');
               this.role.RoleName = this.roleMainFormGroup.get('roleName').value;
               this.role.AppIDList = <number[]>this.roleMainFormGroup.get('appIDList').value;
-              this.role.ModifiedBy = this.authenticationDetails.userID.toString();
+              this.role.ModifiedBy = this.authenticationDetails.UserID.toString();
 
               this._masterService.DeleteRole(this.role).subscribe(
                 (data) => {

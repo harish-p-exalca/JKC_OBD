@@ -1,285 +1,208 @@
 <div id="dashboard" class="page-layout carded" fusePerfectScrollbar>
-  <div class="center" fxLayout="column" fxLayoutGap="10px">
-
-    <!-- <mat-card class=" p-8 pt-4 pb-0 m-0">
-      <div fxLayout>
-        <div fxFlex fxLayoutAlign="start center" class="h2">
-          <b>Dashboard</b>
-        </div>
+  <mat-card class="headerbackgrnd">
+    <div fxLayout>
+      <div fxFlex fxLayoutAlign="start center" style="height: 2px">
+        <img src="../../assets/images/exalca_white_logo.png" style="width: 5%;height:15px;">
+        <p class="title">Customer Portal</p>
       </div>
-    </mat-card> -->
+    </div>
+  </mat-card>
     <div fxLayout="row" fxFlex="100">
-      <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px" fxFlex="20">
-        <div class="personal">Business </div>
+      <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px" fxFlex="20" style="margin-top:45px">
+        <div class="market">Business </div>
         <div class="information">Information</div>
-        <img class="image" src="../../assets/images/Bi_img.svg">
-        <div class="mins">30 secs</div>
-        <div class="avg">Average Time to Complete</div>
-        <mat-progress-bar mode="determinate" value="80" class="progress"></mat-progress-bar>
-        <div class="percent">98%</div>
+        <img class="image" src="../../assets/images/Businessplan.svg">
+        <!-- <div class="mins">30 secs</div>
+        <div class="avg">Average Time to Complete</div> -->
+        <!-- <mat-progress-bar mode="determinate" value="80" class="progress"></mat-progress-bar>
+        <div class="percent">98% Almost Done!</div> -->
         <img class="jkc" src="../../assets/images/jkc_logo.svg">
       </div>
-      <div fxFlex="10"> </div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="70">
-        <form [formGroup]="BIform">
-          <div fxLayout="row" fxLayoutGap="40px">
-            <div fxLayout="column" fxFlex="50">
-              <span fxFlex="50" class="turn">Total Turn Over of 3 years</span>
-              <span style="margin-bottom: 45%; ">(In INR Cr.)</span>
-            </div>
-            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
-              <input autocomplete="off" placeholder=" Enter value" formControlName="NoOfYears" class="inputform "
-                placeholder="Enter Username" required>
+      <div fxFlex="7"> </div>
+    
+      <div fxFlex="73" style="background:white;">
+        <form [formGroup]="BIform" style="margin-top: 34px;">
+          <div fxLayout="column" fxLayoutAlign="">
+            <div fxLayout="row" fxLayoutAlign=""  class="marketinfo" fxFlex="100">
+              <div fxFlex="10"></div>
+              <span fxFlex="30" class="marketsp">Total Turn Over of 3 years*</span>
 
-            </div>
-            <div fxLayout="column" fxFlex="50" >
-              <span fxFlex="50" class="turn">Total Storage Capacity</span>
-              <span style="margin-bottom: 45%; ">(in bags)</span>
-            </div>
+              <div fxLayout="row" fxLayoutAlign="start start" fxFlex="40" fxLayoutGap="10px" class="">
+              <div fxLayout="column" fxFlex="38">
+                <input autocomplete="off" placeholder="FY 21-22"  formControlName="NoOfYears" class="inputform1 "
+                 required>
+                 <mat-error class="errorn"
+                 *ngIf="BIform?.get('NoOfYears')?.touched && BIform?.get('NoOfYears')?.hasError('required')">
+                 Turn over
+                 is
+                 required
+               </mat-error>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="" fxFlex="38">
+                <input autocomplete="off" placeholder="FY 20-21" formControlName="Retailers" class="inputform1 "
+                 required>
+                 <mat-error class="errorn"
+                 *ngIf="BIform?.get('Retailers')?.touched && BIform?.get('Retailers')?.hasError('required')">
+                 Turn over
+                 is
+                 required
+               </mat-error>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="" fxFlex="38">
+                <input autocomplete="off" placeholder="FY 19-20" formControlName="NoOfYears" class="inputform1 "
+                 required>
+                 <mat-error class="errorn"
+                 *ngIf="BIform?.get('NoOfYears')?.touched && BIform?.get('NoOfYears')?.hasError('required')">
+                 Turn over
+                 is
+                 required
+               </mat-error>
+              </div>
+               </div>
 
-            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
-              <input autocomplete="off" placeholder=" Enter value" formControlName="storagecapacity" class="inputform "
-                placeholder="Enter Username" required>
-
-            </div>
-          </div>
-          <div fxLayout="row" style="margin-top: -10%">
-            <div fxLayout="column" style="margin-left: 25%;" class="inputdivision" >
-              <input autocomplete="off" placeholder=" Enter value" formControlName="NoOfYears1" class="inputform "
-                placeholder="Enter Username" required>
-
-            </div>
             
-          </div>
-          <div fxLayout="row" style="margin-top:4%;" fxLayoutGap="40px"> 
-                        <div fxLayout="column" fxFlex="50">
-              <span fxFlex="50" class="turn">Working Capital to be Invested</span>
-              <span style="margin-bottom: 45%; ">in our Business(in Rs)</span>
-            </div>
-            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
-              <input autocomplete="off" placeholder=" Enter value" formControlName="capitalinvest" class="inputform "
-                placeholder="Enter Username" required>
-
-            </div>
-            <div fxLayout="column" fxFlex="50">
-              <span fxFlex="50" class="turn">% Sales in Retail</span>
-              <!-- <span style="margin-bottom: 45%; ">in our Business(in Rs)</span> -->
             </div>
 
-            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
-              <input autocomplete="off" placeholder=" Enter value" formControlName="retail" class="inputform "
-                placeholder="Enter Username" required>
-
-            </div>
-          </div> 
-          <div fxLayout="row" style="margin-top:-10%;" fxLayoutGap="40px">
-            <div fxLayout="column" fxFlex="60">
-              <span fxFlex="80" class="turn">No of Vehicle Owned with Capacity</span>
-              <span style="margin-bottom: 45%; ">(Eg 2 Vehicles-5MT)</span>
-            </div>
-            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
-              <input autocomplete="off" placeholder=" Enter value" formControlName="vehicle" class="inputform "
-                placeholder="Enter Username" required>
-
-            </div>
-            <div fxLayout="column" fxFlex="50">
-              <span fxFlex="50" class="turn">% Sales in Wholesale</span>
-              <!-- <span style="margin-bottom: 45%; ">(In INR Cr.)</span> -->
-            </div>
-
-            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" class="inputdivision">
-              <input autocomplete="off" placeholder=" Enter value" formControlName="Wholesale" class="inputform "
-                placeholder="Enter Username" required>
-
-            </div>
-          </div> 
-          <div fxLayout="row">
-            <mat-card fxFlex="100">
-              <table mat-table [dataSource]="dataSource">
-                <ng-container matColumnDef="sale">
-                  <th mat-header-cell *matHeaderCellDef> Sale Target & Commitment (In MT) </th>
-                  <td mat-cell *matCellDef="let element"  style="font-family: Arial, Helvetica, sans-serif;">
-                    {{element.sale}} </td>
-                </ng-container>
-                <ng-container matColumnDef="apr">
-                  <th mat-header-cell *matHeaderCellDef> Apr-21 </th>
-                  <td mat-cell *matCellDef="let element" class="cell" contenteditable="true"> {{element.apr}} </td>
-                </ng-container>
-                <ng-container matColumnDef="may">
-                  <th mat-header-cell *matHeaderCellDef>May-21</th>
-                  <td mat-cell *matCellDef="let element" class="cell" contenteditable="true"> {{element.may}} </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-              </mat-card>
-          </div>
-          <div fxLayout="row">
-            
-            <div fxLayout="column" style="margin-left:2%;">
-              <button mat-flat-button class="previous" (click)="previousbtn()">
-                <img class="previousimg" src="../../assets/images/previous.svg">
-                Previous</button>
-            </div>
-            <div fxLayout="column" style="margin-left: -4%;">
-              <button mat-flat-button class="next" (click)="nextbtn()">Next
-                <img class="nextimg" src="../../assets/images/next.svg">
-              </button>
-            </div>
-            <div fxLayout="column">
-              <button mat-flat-button class="clear" (click)="ClearAll()"> Clear
-                <img class="clearimg" src="../../assets/images/clear.svg">
-              </button>
-            </div>
-            <button mat-raised-button style="margin-left:5%;" class="savebtn" (click)="saveBusinessInfo()">Save & Next</button>
-          </div> 
-          
-
-        </form>
-      </div>
-
-
-      <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="70">
-        <form [formGroup]="BIform">
-          <div fxLayout="column">
-            <div fxLayout="row">
-              <span class="label1">Total Turn Over of 3 years</span>
-              <div fxLayout="column" class="inputdivision">
-                <input autocomplete="off" placeholder=" Enter value" formControlName="NoOfYears" class="inputform "
-                         required>
-             
-                <mat-error class="errorn"
-                    *ngIf=" BIform?.get('NoOfYears')?.touched && BIform?.get('NoOfYears')?.hasError('required')">
-                    NoOfYears
-                    is
-                    required
-                  </mat-error>
-                
-              </div>
-              <span class="labell1">Total Storage Capacity</span>
-              <div fxLayout="column" class="inputdivision">
-                <input autocomplete="off" placeholder=" Enter" formControlName="storagecapacity" class="inputform "
-                         required>
-               <mat-error class="errorn"
-                    *ngIf=" BIform?.get('storagecapacity')?.touched && BIform?.get('storagecapacity')?.hasError('required')">
-                    storage capacity
-                    is
-                    required
-                  </mat-error>
-               
-              </div>
-            </div>
-            <div fxLayout="row" >
-              <span class="desc"> (In INR Cr.)</span>
-              <div fxLayout="column" class="inputdivision">
-                <input autocomplete="off" placeholder=" Enter value" formControlName="NoOfYears1" class="inputform "
-                         required>
-             
-             <mat-error class="errorn"
-                    *ngIf=" BIform?.get('NoOfYears1')?.touched && BIform?.get('NoOfYears1')?.hasError('required')">
-                    NoOfYears
-                    is
-                    required
-                  </mat-error>
-               
-              </div>
-              <span class="descc"> (in bags)</span>
-            </div>
-            <div fxLayout="row" >
-              <div fxLayout="column">
-                <span class="label2"> Working Capital to be invested</span>
-                <span class="label2">in our Business(In Rs)</span>
-              </div>
-              <div fxLayout="column" class="inputdivision">
-                <input autocomplete="off" matInput placeholder=" Enter" formControlName="capitalinvest" class="inputform "
-                         required>
-             <mat-error class="errorn"
-                    *ngIf=" BIform?.get('capitalinvest')?.touched && BIform?.get('capitalinvest')?.hasError('required')">
-                    invested
-                    is
-                    required
-                  </mat-error>
-               
-              </div>
-              <span class="label3">% Sales in Retail</span>
-              <div fxLayout="column" fxLayoutAlign="start center">
-                <mat-form-field appearance="outline">
-                  <input matInput placeholder=" Enter" formControlName="retail" style="margin-top:0px ;">
-                </mat-form-field>
-              </div>
-            </div>
-            <div fxLayout="row" fxLayoutGap="8px">
-              <div fxLayout="column">
-                <span class="label4">No of Vehicle Owned with Capacity</span>
-                <span class="desc1">(Eg 2 vehicles - 5MT)</span>
-              </div>
-              <div fxLayout="column" fxLayoutAlign="start center">
-                <mat-form-field appearance="outline">
-                  <input matInput placeholder=" Enter" formControlName="vehicle" style="margin-top:0px ;">
+            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+              <div fxFlex="10"></div>
+              <span fxFlex="30" class="marketsp">Total Storage Capacity*</span>
+              
+                <div fxLayout="column" fxLayoutAlign="" fxFlex="48" class="">
+                  <input autocomplete="off" placeholder=" Enter the capacity" formControlName="storagecapacity"
+                  class="inputform"  required>
                   <mat-error class="errorn"
-                    *ngIf=" BIform?.get('vehicle')?.touched && BIform?.get('vehicle')?.hasError('required')">
-                    Vehicle owned with capacity
-                    is
-                    required
-                  </mat-error>
-                </mat-form-field>
+                  *ngIf="BIform?.get('storagecapacity')?.touched && BIform?.get('storagecapacity')?.hasError('required')">
+                 Capacity
+                  is
+                  required
+                </mat-error>
+                </div>
+              
+            
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+              <div fxFlex="10"></div>
+              <span fxFlex="30" class="marketsp">Working Capital to be Invested*</span>
+              <div fxLayout="column" fxLayoutAlign="" fxFlex="48" class="">
+                <input autocomplete="off" placeholder=" Enter the working captial" formControlName="capitalinvest"
+                class="inputform " required>
+                <mat-error class="errorn"
+                *ngIf="BIform?.get('capitalinvest')?.touched && BIform?.get('capitalinvest')?.hasError('required')">
+                Working Capital
+                is
+                required
+              </mat-error>
               </div>
-              <span class="label5">% Sales in Wholesale</span>
-              <div fxLayout="column" fxLayoutAlign="start center">
-                <mat-form-field appearance="outline">
-                  <input matInput placeholder=" Enter" formControlName="Wholesale" style="margin-top:0px ;">
-                </mat-form-field>
+            
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+              <div fxFlex="10"></div>
+              <span fxFlex="30" class="marketsp">No of Vehicle Owned with Capacity*</span>
+              <div fxLayout="column" fxLayoutAlign="" fxFlex="48" class="">
+                <input autocomplete="off" style="margin-left: 4px !important;" placeholder=" Enter No.of.Vehicle owned"
+                formControlName="vehicle" class="inputform " required>
+                <mat-error class="errorn"
+                *ngIf="BIform?.get('vehicle')?.touched && BIform?.get('vehicle')?.hasError('required')">
+                No of Vehicle Owned
+                is
+                required
+              </mat-error>
               </div>
             </div>
 
-            <mat-card class="form1">
-              <div fxLayout="row">
-                <table mat-table [dataSource]="dataSource">
-                  <ng-container matColumnDef="sale">
-                    <th mat-header-cell *matHeaderCellDef> Sale Target & Commitment (In MT) </th>
-                    <td mat-cell *matCellDef="let element"  style="font-family: Arial, Helvetica, sans-serif;">
-                      {{element.sale}} </td>
-                  </ng-container>
-                  <ng-container matColumnDef="apr">
-                    <th mat-header-cell *matHeaderCellDef> Apr-21 </th>
-                    <td mat-cell *matCellDef="let element" class="cell" contenteditable="true"> {{element.apr}} </td>
-                  </ng-container>
-                  <ng-container matColumnDef="may">
-                    <th mat-header-cell *matHeaderCellDef>May-21</th>
-                    <td mat-cell *matCellDef="let element" class="cell" contenteditable="true"> {{element.may}} </td>
-                  </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                <button mat-flat-button class="addrow">+</button>
+            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+              <div fxFlex="10"></div>
+              <span fxFlex="30" class="marketsp">% Sales in Wholesale</span>
+              <div fxLayout="column" fxLayoutAlign="" fxFlex="48" class="">
+                <input autocomplete="off" (keypress)="keyPressNumbers($event)"  placeholder=" Enter sales in wholesale" formControlName="Wholesale"
+                class="inputform " required>
+
               </div>
-            </mat-card>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+              <div fxFlex="10"></div>
+              <span fxFlex="30" class="marketsp">% Sales in Retail</span>
+              <div fxLayout="column" fxLayoutAlign="" fxFlex="48" class="">
+                <input autocomplete="off" placeholder=" Enter sales in retail" formControlName="retail" class="inputform "
+                 required>
+
+              </div>
+            </div>
+
+            
           </div>
         </form>
-      </div> -->
-      <!-- </div> -->
-      <!-- <div fxLayout="row" fxLayoutAlign="start start" fxFlex="100">
-      <div fxFlex="35"></div>
-      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
-        <button mat-flat-button class="previous" (click)="previousbtn()">
-          <img class="previousimg" src="../../assets/images/previous.svg">
-          Previous</button>
+       <!-- <form [formGroup]="BrandForm"> -->
+            <div fxLayout="column" style="width:60%;margin-left: 10%;">
+              <mat-card class="cement" >
+               
+                 <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" >
+                  <div fxLayout="column">
+                  
+                   
+                </div>
+                
+                </div>
+              
+                <div fxLayout="row">
+
+                  <table mat-table [dataSource]="dataSource">
+                   
+                  
+                    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+                      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                      <td mat-cell *matCellDef="let element" contenteditable="true"> {{element[column]}} </td>
+                    </ng-container>
+                   
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  
+                  </table>
+                  <button mat-flat-button class="addrow" (click)="add()">+</button>
+
+                 
+                </div>
+
+              
+              </mat-card>
+            </div>
+         
+        <!-- </form> -->
       </div>
-      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
-        <button mat-flat-button class="next" (click)="nextbtn()">Next
-          <img class="nextimg" src="../../assets/images/next.svg">
-        </button>
       </div>
-      <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
-        <button mat-flat-button class="clear" (click)="ClearAll()"> Clear
-          <img class="clearimg" src="../../assets/images/clear.svg">
-        </button>
+      <div fxLayout="row" fxLayoutAlign="" fxFlex="100" fxLayoutGap="4px" style="margin-top: 23px;background: white;">
+        <div fxFlex="33"></div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px">
+          <button mat-flat-button class="previous" (click)="previousbtn()">
+            <img class="previousimg" src="../../assets/images/previous.svg">
+            Previous</button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px" style="margin-left:-20px">
+          <button mat-flat-button class="next" (click)="nextbtn()">Next
+            <img class="nextimg" src="../../assets/images/next.svg">
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
+          <button mat-flat-button class="clear" (click)="ClearAll()"> Clear
+            <img class="clearimg" src="../../assets/images/clear.svg">
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px" style="margin-left:-38px">
+          <button mat-flat-button class="draft" (click)="ClearAll()"> Save as Draft
+            <img class="draftimg" src="../../assets/images/bi.png">
+          </button>
+        </div>
+        <!-- [disabled]="MIform.required.invalid" -->
+        <button mat-raised-button class="savebtn" (click)="saveBusinessInfo()" >Save & Next</button>
       </div>
-      <button mat-raised-button class="savebtn" (click)="RegistrationClicked()">Save & Next</button>
-    </div>
-    <br>
+      <br>
+    
+    <!-- <mat-progress-spinner *ngIf=" isProgressBarVisibile" class="progressBarPostion"   mode="determinate" value="40">
+    </mat-progress-spinner>
+    <div id="overlay" *ngIf="isProgressBarVisibile"></div> -->
   </div>
-  <mat-progress-spinner *ngIf=" isProgressBarVisibile" class="progressBarPostion" color="accent" mode="indeterminate">
-  </mat-progress-spinner>
-  <div id="overlay" *ngIf="isProgressBarVisibile"></div>
-</div> -->
+
+    

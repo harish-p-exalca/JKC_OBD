@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 import { MatButtonModule, MatIconModule, MatSnackBar, MatSnackBarModule, MatDialogModule, MatToolbarModule, MAT_DATE_LOCALE } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import 'hammerjs';
@@ -23,10 +25,13 @@ import { WINDOW_PROVIDERS } from './window.providers';
 // import { AuthenticationModule } from './allModules/authentication/authentication.module';
 // import { PagesModule } from './allModules/pages/pages.module';
 import { ForgetPasswordLinkDialogComponent } from './allModules/authentication/forget-password-link-dialog/forget-password-link-dialog.component';
+// import { NgApexchartsModule } from "ng-apexcharts";
+// import { ApprovalscreenComponent } from './approvalscreen/approvalscreen.component';
 // import { InvitepageComponent } from './allModules/pages/invitepage/invitepage.component';
 
 
 
+// import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 
 const appRoutes: Routes = [
@@ -49,7 +54,7 @@ const appRoutes: Routes = [
     },
     {
         path: '**',
-        redirectTo: 'auth/login'
+        redirectTo: 'pages/nextlogin'
     }
 ];
 
@@ -58,6 +63,9 @@ const appRoutes: Routes = [
         AppComponent,
         NotificationSnackBarComponent,
         NotificationDialogComponent,
+       
+        // ApprovalscreenComponent,
+        // NgbdDatepickerBasic,
         // InvitepageComponent,
         
     ],
@@ -78,6 +86,8 @@ const appRoutes: Routes = [
         MatSnackBarModule,
         MatDialogModule,
         MatToolbarModule,
+        MatDatepickerModule,
+        // NgApexchartsModule,
 
         // Fuse modules
         FuseModule.forRoot(fuseConfig),
@@ -90,12 +100,14 @@ const appRoutes: Routes = [
         LayoutModule,
     ],
     providers: [
+        
         DatePipe,
         WINDOW_PROVIDERS,
         {provide: MAT_DATE_LOCALE, useValue: 'en-IN'}
     ],
     bootstrap: [
-        AppComponent
+        AppComponent,
+        // NgbdDatepickerBasic
     ],
     entryComponents: [
         NotificationDialogComponent

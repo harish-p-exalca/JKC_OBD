@@ -27,10 +27,10 @@ const authRoutes: Routes = [
         path: 'linkForgotPassword',
         component: LinkForForgetPasswordComponent
     },
-    {
-        path: '**',
-        redirectTo: 'login'
-    }
+    // {
+    //     path: '**',
+    //     redirectTo: 'login'
+    // }
 ];
 
 @NgModule({

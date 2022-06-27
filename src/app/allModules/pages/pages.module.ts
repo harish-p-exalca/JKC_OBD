@@ -54,10 +54,13 @@ import { DecimalPipe } from '@angular/common';
 import { dialogComponent } from './dashboard/dialog.component';
 import { NextloginComponent } from './nextlogin/nextlogin.component';
 import { InvitepageComponent } from './invitepage/invitepage.component';
-import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { BusinessComponent } from './business/business.component';
 import { MarketinformationComponent } from './marketinformation/marketinformation.component';
 import { BankinformationComponent } from './bankinformation/bankinformation.component';
+import { ApprovalscreenComponent } from '../approvalscreen/approvalscreen.component';
+import { ChartsModule } from 'ng2-charts';
+ import { NgApexchartsModule } from "ng-apexcharts";
+import { BankdialogComponent } from './bankdialog/bankdialog.component';
 
 
 
@@ -75,10 +78,6 @@ const routes = [
         component: InvitepageComponent
     },
     {
-        path: 'personalinformation',
-        component: PersonalInformationComponent
-    },
-    {
         path: 'businessinformation',
         component: BusinessComponent
     },
@@ -91,8 +90,16 @@ const routes = [
         component: BankinformationComponent
     },
     {
+        path: 'approvalinformation',
+        component: ApprovalscreenComponent
+    },
+    // {
+    //     path: 'usermanagement',
+    //     loadChildren: './usermanagement.module#UserManagementModule'
+    // },
+    {
         path: '**',
-        redirectTo: '/auth/login'
+        redirectTo: 'pages/nextlogin'
     },
 ];
 
@@ -144,17 +151,20 @@ const routes = [
         FuseHighlightModule,
         FuseMaterialColorPickerModule,
         FuseWidgetModule,
-        FormsModule
+        FormsModule,
+       ChartsModule,
+       NgApexchartsModule,
     ],
     declarations: [
         DashboardComponent,
         dialogComponent,
         NextloginComponent,
         InvitepageComponent,
-        PersonalInformationComponent,
         BusinessComponent,
         MarketinformationComponent,
         BankinformationComponent,
+        ApprovalscreenComponent,
+        BankdialogComponent
 
     ],
     providers: [
@@ -162,6 +172,7 @@ const routes = [
     ],
     entryComponents: [
         dialogComponent,
+        BankdialogComponent
     ]
 })
 export class PagesModule { }

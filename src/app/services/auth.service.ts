@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Guid } from 'guid-typescript';
-import { ChangePassword, ForgotPassword, EMailModel } from 'app/models/master';
+import { ChangePassword, ForgotPassword, EMailModel, LoginModel } from 'app/models/master';
 import { environment } from 'environments/environment';
 
 
@@ -13,6 +13,11 @@ import { environment } from 'environments/environment';
 export class AuthService {
   baseAddress: string;
   clientId: string;
+  private emitChangeSource = new Subject<any>();
+  changeEmitted$ = this.emitChangeSource.asObservable();
+  isLoggedin(change: boolean) {
+    this.emitChangeSource.next(change);
+}
   constructor(private _httpClient: HttpClient) {
     this.baseAddress = environment.baseAddress;
     this.clientId = environment.clientId;
@@ -27,16 +32,35 @@ export class AuthService {
   errorHandler1(error: HttpErrorResponse): Observable<string> {
     return throwError(error.error || error.message || 'Server Error');
   }
-
   login(userName: string, password: string): Observable<any> {
     // tslint:disable-next-line:prefer-const
-    let data = `grant_type=password&username=${userName}&password=${password}&client_id=${this.clientId}`;
-    return this._httpClient.post<any>(`${this.baseAddress}token`, data, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }).pipe(catchError(this.errorHandler));
-  }
+    // let data = `grant_type=password&username=${userName}&password=${password}&client_id=${this.clientId}`;
+    const loginModel: LoginModel = {
+        UserName: userName,
+        Password: password,
+        clientId: this.clientId,
+    };
+    return this._httpClient
+        .post<any>(
+            `${this.baseAddress}api/Auth/token`,
+            loginModel
+            // {
+            //   headers: new HttpHeaders({
+            //     'Content-Type': 'application/json'
+            //   })
+            // }
+        )
+        .pipe(catchError(this.errorHandler));
+}
+  // login(userName: string, password: string): Observable<any> {
+  //   // tslint:disable-next-line:prefer-const
+  //   let data = `grant_type=password&username=${userName}&password=${password}&client_id=${this.clientId}`;
+  //   return this._httpClient.post<any>(`${this.baseAddress}token`, data, {
+  //     headers: {
+  //       'Content-Type': 'application/x-www-form-urlencoded'
+  //     }
+  //   }).pipe(catchError(this.errorHandler));
+  // }
 
   GetIPAddress():  Observable<any> {
     return this._httpClient

@@ -147,10 +147,10 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
         const retrievedObject = localStorage.getItem('authorizationData');
         if (retrievedObject) {
             this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
-            this.CurrentLoggedInUser = this.authenticationDetails.displayName;
-            this.CurrentLoggedInUserEmailAddress = this.authenticationDetails.emailAddress;
-            // if (this.authenticationDetails.profile && this.authenticationDetails.profile !== 'Empty') {
-            //     this.CurrentLoggedInUserProfile = this.authenticationDetails.profile;
+            this.CurrentLoggedInUser = this.authenticationDetails.DisplayName;
+            this.CurrentLoggedInUserEmailAddress = this.authenticationDetails.EmailAddress;
+            // if (this.authenticationDetails.Profile && this.authenticationDetails.Profile !== 'Empty') {
+            //     this.CurrentLoggedInUserProfile = this.authenticationDetails.Profile;
             // }
         }
         this._fuseSidebarService.getSidebar('navbar').toggleFold();
@@ -195,19 +195,29 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
     }
 
     logOutClick(): void {
-        this._authService.SignOut(this.authenticationDetails.userID).subscribe(
-            (data) => {
-                localStorage.removeAll();
-                this._compiler.clearCache();
-                this._router.navigate(['auth/login']);
-                this.notificationSnackBarComponent.openSnackBar('Signed out successfully', SnackBarStatus.success);
-            },
-            (err) => {
-                console.error(err);
-                this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-            }
-        );
-         this._router.navigate(['auth/login']);
+        if(this.authenticationDetails){
+            this._authService.SignOut(this.authenticationDetails.UserID).subscribe(
+                (data) => {
+                    localStorage.clear();
+                    this._compiler.clearCache();
+                    this._router.navigate(['pages/nextlogin']);
+                    this.notificationSnackBarComponent.openSnackBar('Signed out successfully', SnackBarStatus.success);
+                },
+                (err) => {
+                    console.error(err);
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+                }
+            );
+        }
+        else{
+            localStorage.clear();
+            this._compiler.clearCache();
+            this._router.navigate(['pages/nextlogin']);
+        }
+        // localStorage.clear();
+        // this._compiler.clearCache();
+        // this._router.navigate(['pages/nextlogin']);
+        // this.notificationSnackBarComponent.openSnackBar('Signed out successfully', SnackBarStatus.success);
         // this.notificationSnackBarComponent.openSnackBar('Signed out successfully', SnackBarStatus.success);
     }
     ChangePasswordClick(): void {
@@ -221,8 +231,8 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
             result => {
                 if (result) {
                     const changePassword = result as ChangePassword;
-                    changePassword.UserID = this.authenticationDetails.userID;
-                    changePassword.UserName = this.authenticationDetails.userName;
+                    changePassword.UserID = this.authenticationDetails.UserID;
+                    changePassword.UserName = this.authenticationDetails.UserName;
                     this._authService.ChangePassword(changePassword).subscribe(
                         (res) => {
                             // console.log(res);

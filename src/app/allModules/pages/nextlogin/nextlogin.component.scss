@@ -1,24 +1,26 @@
 .background{
-    background-image: url('^/assets/images/login_bg.svg');
+    background-image: url('^/assets/images/login_bg.png');
     background-repeat: no-repeat;
     height: 100vh;
     width: 100%;
     overflow: hidden;
     background-size: contain;
     background-position: right;
+    background-color: white;
 }
 .picture{
     padding-left: 18%;
 }
 .bp{
     padding-top: 3%;
-    font-size: 55px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 42px;
+    //font-family: Arial, Helvetica, sans-serif;
 }
 .content1{
-    font-family: Arial, Helvetica, sans-serif;
-    opacity: 0.6;
-    font-size: 14px;
+    //font-family: Arial, Helvetica, sans-serif;
+    color: #ACACAC;
+    opacity: 1;
+    font-size: 10px;
     letter-spacing: 0.3px;
     // padding-top: 1%;
 }
@@ -27,7 +29,7 @@
 }
 .login{
     background-color: white;
-    box-shadow: 0px 0px 2px 0 grey;
+    box-shadow: 0px 0px 1px  0 grey;
     height: 578px;
     width: 66%;
     margin-top: 0px;
@@ -49,29 +51,32 @@
     color: #1055A0;
     padding-left: 43%;
 }
-
+.titleCP{
+    font-size: 45px;
+    opacity: 1;
+}
 .welcome{
- font-family: Arial, Helvetica, sans-serif;
+ //font-family: Arial, Helvetica, sans-serif;
    padding-top:25px ;
-   font-size: 21px;
+   font-size: 16px;
 }
 .signin{
- font-family: Arial, Helvetica, sans-serif;
- font-size: 20px;
+ //font-family: Arial, Helvetica, sans-serif;
+ font-size: 16px;
  padding-top: 3%;
  padding-left: 12%;
  opacity: 0.67;
  letter-spacing: 0.5px;
 }
 .user{
- font-family: Arial, Helvetica, sans-serif;
- font-size: 15px;
+ //font-family: Arial, Helvetica, sans-serif;
+ font-size: 13px;
  padding-top: 3%;
  padding-left: 12%;
 }
 .name{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
+    //font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
     padding-top: 2%;
     padding-left: 12%;
     padding-right: 12%;
@@ -96,28 +101,28 @@
     border: none !important;
 }
 .pass{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
+    //font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
     padding-left: 12%;
 }
 .password{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
+    //font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
     padding-top: 2%;
     padding-left: 12%;
     padding-right: 12%;
     // height: 111px;
 }
 .forgot{
- font-family: Arial, Helvetica, sans-serif;
+ //font-family: Arial, Helvetica, sans-serif;
  font-size: 14px;
  color: #1a1a83;
  padding-right: 16%;
  cursor: pointer;
 }
 .btn{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
+    //font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
     width: 76%;
     align-self: center;
     background-color: #1055A0 !important;
@@ -125,7 +130,7 @@
 }
 .or{
     opacity: 0.6;
-    font-family: Arial, Helvetica, sans-serif;
+    //font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     padding-top: 5px;
     padding-left: 22%;
@@ -137,21 +142,21 @@
     padding-bottom: 4%;
 }
 .google{
- font-family: Arial, Helvetica, sans-serif;
+ //font-family: Arial, Helvetica, sans-serif;
  font-size: 16px;
  padding-top: 2px;
  font-weight: 600;
 }
 .account{
     opacity: 0.6;
-    font-family: Arial, Helvetica, sans-serif;
+    //font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     padding-top: 6%;
     padding-left: 22%;
     // padding-bottom: 5%;
 }
 .signup{
- font-family: Arial, Helvetica, sans-serif;
+ //font-family: Arial, Helvetica, sans-serif;
  font-size: 14px;
  color: #1a1a83;
  padding-top: 6%;
@@ -159,4 +164,7 @@
 }
 .mat-form-field{
     border: none;
+}
+input.mat-input-element {
+    margin-top: 0px !important;
 }

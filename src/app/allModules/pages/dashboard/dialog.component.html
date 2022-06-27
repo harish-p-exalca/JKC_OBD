@@ -1,14 +1,11 @@
 <div fxLayout="row" fxLayoutAlign="start start" fxFlex="100" fxLayoutGap="3px">
     <img class="sucessimg" src="../../assets/images/succes_img.svg" fxFlex="40">
     <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50">
-        <h1 mat-dialog-title class="msg">Successfully saved !</h1>
-        <div class="name">Name of the Firm</div>
-        <!-- <div class="link">Invite link generated successfully</div> -->
+        <h1 mat-dialog-title class="msg">Invite link generated successfully</h1>
+        <div class="name">Name of the Firm  {{data.Firmname}} </div>
         <div fxLayout="row">
-            <button mat-stroked-button mat-dialog-close class="cancelbtn">Cancel</button>
-            <button mat-flat-button class="invitebtn" (click)="Invite()">Send Invite
-                <img class="mailimg" src="../../assets/images/mail.svg">
-            </button>
+            <button mat-raised-button mat-dialog-close   class="cancelbtn" (click)="cancel()">Cancel</button>
+            <button  mat-raised-button mat-dialog-close class="cancelbtn1"  (click)="Okbtn()">Ok</button>
         </div>
     </div>
     <img class="closebtn" src="../../assets/images/close.svg" fxFlex="2" (click)="closebtn()">

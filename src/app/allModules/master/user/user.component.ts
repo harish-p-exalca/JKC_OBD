@@ -33,11 +33,11 @@ export class UserComponent implements OnInit {
     const retrievedObject = localStorage.getItem('authorizationData');
     if (retrievedObject) {
       this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
-      this.MenuItems = this.authenticationDetails.menuItemNames.split(',');
-      if (this.MenuItems.indexOf('User') < 0) {
-        this.notificationSnackBarComponent.openSnackBar('You do not have permission to visit this page', SnackBarStatus.danger);
-        this._router.navigate(['/auth/login']);
-      }
+      this.MenuItems = this.authenticationDetails.MenuItemNames.split(',');
+      // if (this.MenuItems.indexOf('User') < 0) {
+      //   this.notificationSnackBarComponent.openSnackBar('You do not have permission to visit this page', SnackBarStatus.danger);
+      //   this._router.navigate(['/auth/login']);
+      // }
       this.GetAllUsers();
     } else {
       this._router.navigate(['/auth/login']);
