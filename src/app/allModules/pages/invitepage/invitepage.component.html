@@ -4,10 +4,10 @@
     <div fxLayout="column" fxFlex="49">
       <div fxFlex="20"></div>
       <div class="picture">
-        <img src="../../assets/images/Login_img.svg" style="width:40%">
+        <img src="../../assets/images/Business deal-cuate.svg" style="width:40%">
         <div fxLayout="row" FxLayout="center center" fxLayoutGap="10px" class="bp">
           <img src="../../assets/images/BP_cloud.svg" style="width: 10%;">
-          <div>Customer Portal</div>
+          <div class="titleCP">Customer Portal</div>
         </div>
         <div class=" content1">
           Thank you for choosing Exalca.We're excited to get you on board.</div>
@@ -29,70 +29,47 @@
 
             <div class="signin">Sign In by OTP</div>
             <label class="user">User Name</label>
-            <mat-form-field appearance="outline" class="name" >
+            <mat-form-field appearance="outline" class="name">
               <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="32px">
                 <img src="../../assets/images/user_id.svg" class="userid">
                 <input matInput placeholder="Enter User name" formControlName="userName" class="nameinput">
               </div>
               <mat-error
-                *ngIf=" signinForm?.get('userName')?.touched && signinForm?.get('userName')?.hasError('required')">
+                *ngIf=" InviteForm?.get('userName')?.touched && InviteForm?.get('userName')?.hasError('required')">
                 User name is required
               </mat-error>
             </mat-form-field>
             <div class="otp"><span>Please enter the 6 digit OTP to continue</span></div>
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
               <div>
-                  <input class="card1" type="text" placeholder="_" formControlName="OTP">
+                <input #otp1 (keyup)="ShiftFocus('otp2')" class="card1" type="text" placeholder="_" formControlName="OTP1" maxlength="1">
               </div>
               <div>
-                  <!-- <input class="card1" type="text" placeholder="_" formControlName="OTP">
-                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
-              signinForm.get('OTP')?.hasError('required')" style="font-size:14px">
-                  </mat-error>
-                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
-              signinForm.get('OTP')?.hasError('pattern')" style="font-size:14px">
-                  </mat-error> -->
+
               </div>
               <div>
-                  <input class="card1" type="text" placeholder="_" formControlName="OTP">
-                  <!-- <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
-              signinForm.get('OTP')?.hasError('required')" style="font-size:14px">
-                  </mat-error>
-                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
-              signinForm.get('OTP')?.hasError('pattern')" style="font-size:14px">
-                  </mat-error> -->
+                <input #otp2 (keyup)="ShiftFocus('otp3')" class="card1" type="text" placeholder="_" formControlName="OTP2" maxlength="1">
+
               </div>
               <div>
-                  <input class="card1" type="text" placeholder="_" formControlName="OTP">
-                  <!-- <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
-              signinForm.get('OTP')?.hasError('required')" style="font-size:14px">
-                  </mat-error>
-                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
-              signinForm.get('OTP')?.hasError('pattern')" style="font-size:14px">
-                  </mat-error> -->
+                <input #otp3 (keyup)="ShiftFocus('otp4')" class="card1" type="text" placeholder="_" formControlName="OTP3" maxlength="1">
+
               </div>
               <div>
-                  <input class="card1" type="text" placeholder="_" formControlName="OTP">
-                  <!-- <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
-              signinForm.get('OTP')?.hasError('required')" style="font-size:14px">
-                  </mat-error>
-                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
-              signinForm.get('OTP')?.hasError('pattern')" style="font-size:14px">
-                  </mat-error> -->
+                <input #otp4 (keyup)="ShiftFocus('otp5')" class="card1" type="text" placeholder="_" formControlName="OTP4" maxlength="1">
+
               </div>
               <div>
-                  <input class="card1" type="text" placeholder="_" formControlName="OTP">
-                  <!-- <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
-              signinForm.get('OTP')?.hasError('required')" style="font-size:14px">
-                  </mat-error>
-                  <mat-error fxFlex="50" *ngIf="signinForm.get('OTP')?.touched && 
-              signinForm.get('OTP')?.hasError('pattern')" style="font-size:14px">
-                  </mat-error> -->
+                <input #otp5 (keyup)="ShiftFocus('otp6')" (kedown.backspace)="ShiftFocus('otp5')" class="card1" type="text" placeholder="_" formControlName="OTP5" maxlength="1">
+
               </div>
-          </div>
-          <div class="expires"><span>OTP will expires in</span></div>
-          <div class="request">Request for OTP</div>
-            <button mat-raised-button class="btn" (click)="LoginClicked()">Submit</button><br>
+              <div>
+                <input #otp6 class="card1" type="text" placeholder="_" formControlName="OTP6" maxlength="1">
+              </div>
+            </div>
+            <div class="expires"><span>OTP will expires in</span></div>
+            <div class="request" (click)="CreateOTP()">Request for OTP</div>
+            <button mat-raised-button type="submit" class="btn" (click)="LoginClicked()">Submit</button><br>
           </div>
         </form>
       </div>

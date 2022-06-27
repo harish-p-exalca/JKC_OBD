@@ -1,10 +1,17 @@
 import { Guid } from 'guid-typescript';
 
+export class CommonClass {
+    IsActive: boolean;
+    CreatedOn: Date | string;
+    CreatedBy: string;
+    ModifiedOn: Date | string | null;
+    ModifiedBy: string;
+}
 export class UserWithRole {
     UserID: Guid;
     RoleID: Guid;
     UserName: string;
-    Plant:string;
+    Plant: string;
     Email: string;
     Password: string;
     ContactNumber: string;
@@ -44,17 +51,17 @@ export class Reason {
 }
 export class AuthenticationDetails {
     isAuth: boolean;
-    userID: Guid;
-    userName: string;
-    displayName: string;
-    emailAddress: string;
-    userRole: string;
-    menuItemNames: string;
-    profile: string;
-    refreahToken: string;
-    expires: string;
-    issued: string;
-    expiresin: string;
+    UserID: Guid;
+    UserName: string;
+    DisplayName: string;
+    EmailAddress: string;
+    UserRole: string;
+    MenuItemNames: string;
+    Profile: string;
+    RefreahToken: string;
+    Expires: string;
+    Issued: string;
+    Expiresin: string;
 }
 export class ChangePassword {
     UserID: Guid;
@@ -80,8 +87,80 @@ export class UserNotification {
     CreatedOn: Date;
     ModifiedOn?: Date;
 }
-export class SendMail{
-    Username : string;
+export class SendMail {
+    Username: string;
     toEmail: string;
     otp: string;
+}
+
+export class LoginModel {
+    UserName: string;
+    Password: string;
+    clientId: string;
+}
+export class OTPLogin {
+    OTPNo: number;
+    UserName: string;
+}
+export class PersonalInfo {
+    FirmStatus: string;
+    Name: string[];
+    constructor() {
+        this.Name = [];
+    }
+}
+export class PersonIdentity {
+    FirmName: string;
+    Name: string;
+    MobileNo: string;
+    EmailId: string;
+    TransID: number;
+}
+
+export class CustomerOnboarding extends CommonClass {
+    TranID: number;
+    Status: string;
+}
+export class CustomerOnboardingView {
+    Transaction: CustomerOnboarding;
+    PersonalInfo: PersonalInformationView;
+}
+export class PersonalInformationView {
+    PersonalInformation: PersonalInformation;
+    Identities: PersonIdentity[];
+}
+export class PersonalInformation {
+    ID: string;
+    category: string;
+    Name: string;
+    Address: string;
+    District: string;
+    product: string;
+    City: string;
+    Taluk: string;
+    Tehsil: string;
+    State: string;
+    Pincode: number;
+    Status: string;
+    TransID: number;
+    Latitude:string;
+    Logitude:string;
+}
+export class States {
+    ID: number;
+    StateName: string;
+}
+export class Cities {
+    ID: number;
+    City: string;
+    State_id: number;
+}
+export class ProductDetails {
+    ProductID: number;
+    ProductName1: string;
+    ProductName2: string;
+    ProductName3: string;
+    ProductName4: string;
+    ProductName5: string;
+    ID: number;
 }

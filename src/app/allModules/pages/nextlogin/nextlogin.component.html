@@ -4,10 +4,10 @@
     <div fxLayout="column" fxFlex="49">
       <div fxFlex="20"></div>
       <div class="picture">
-        <img src="../../assets/images/Login_img.svg" style="width:40%">
+        <img src="../../assets/images/Business deal-cuate.svg" style="width:40%">
         <div fxLayout="row" FxLayout="center center" fxLayoutGap="10px" class="bp">
           <img src="../../assets/images/BP_cloud.svg" style="width: 10%;">
-          <div>Customer Portal</div>
+          <div class="titleCP">Customer Portal</div>
         </div>
         <div class=" content1">
           Thank you for choosing Exalca.We're excited to get you on board.</div>
@@ -29,8 +29,8 @@
             <div class="signin">Sign In </div>
             <label class="user">User Name</label>
             <mat-form-field appearance="outline" class="name">
-              <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="32px">
-                <img src="../../assets/images/user_id.svg" class="userid">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" style="margin-top: 4px;">
+                <img src="../../assets/images/user_id.svg" width="12px" style="margin: 2px 0 0 8px;">
                 <input matInput placeholder="Enter User name" formControlName="userName" class="nameinput">
               </div>
               <mat-error
@@ -40,10 +40,9 @@
             </mat-form-field>
             <label class="pass">Password</label>
             <mat-form-field appearance="outline" class="password">
-              <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="32px">
-                <img src="../../assets/images/password.svg" class="userid">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" style="margin-top: 4px;">
+                <img src="../../assets/images/password.svg" width="12px" style="margin: 2px 0 0 8px;">
                 <input type="password" matInput placeholder="Enter Password" formControlName="password">
-                <!-- <img src="../../assets/images/eye.svg" class="userid"> -->
               </div>
               <mat-error
                 *ngIf=" signinForm?.get('password')?.touched && signinForm?.get('password')?.hasError('required')">
@@ -64,7 +63,7 @@
             <img src="../../assets/images/google.svg" class="googleimg">
             <label class="google"> Google</label> -->
           </div>
-          <mat-divider></mat-divider>
+          <!-- <mat-divider></mat-divider> -->
           <div fxLayout="row" FxLayout="center center" fxLayoutGap="5px">
             <!-- <label class="account">Already have an account,Please</label> -->
             <!-- <label class="signup">Sign Up</label> -->

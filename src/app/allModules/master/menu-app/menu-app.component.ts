@@ -32,7 +32,7 @@ export class MenuAppComponent implements OnInit {
     const retrievedObject = localStorage.getItem('authorizationData');
     if (retrievedObject) {
       this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
-      this.MenuItems = this.authenticationDetails.menuItemNames.split(',');
+      this.MenuItems = this.authenticationDetails.MenuItemNames.split(',');
       if (this.MenuItems.indexOf('App') < 0) {
         this.notificationSnackBarComponent.openSnackBar('You do not have permission to visit this page', SnackBarStatus.danger);
         this._router.navigate(['/auth/login']);

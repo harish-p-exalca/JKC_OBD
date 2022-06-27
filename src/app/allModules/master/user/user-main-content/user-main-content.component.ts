@@ -46,7 +46,7 @@ export class UserMainContentComponent implements OnInit, OnChanges {
       email: ['', [Validators.required, Validators.email]],
       contactNumber: ['', [Validators.required, Validators.pattern]],
       plant: ['', Validators.required],
-      profile: ['']
+      Profile: ['']
     });
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar);
     this.user = new UserWithRole();
@@ -110,7 +110,7 @@ export class UserMainContentComponent implements OnInit, OnChanges {
               this.user.Email = this.userMainFormGroup.get('email').value;
               this.user.ContactNumber = this.userMainFormGroup.get('contactNumber').value;
               // this.user.Password = this.userMainFormGroup.get('password').value;
-              this.user.ModifiedBy = this.authenticationDetails.userID.toString();
+              this.user.ModifiedBy = this.authenticationDetails.UserID.toString();
               this._masterService.UpdateUser(this.user).subscribe(
                 (data) => {
                   // console.log(data);
@@ -149,7 +149,7 @@ export class UserMainContentComponent implements OnInit, OnChanges {
               this.user.Email = this.userMainFormGroup.get('email').value;
               this.user.ContactNumber = this.userMainFormGroup.get('contactNumber').value;
               // this.user.Password = this.userMainFormGroup.get('password').value;
-              this.user.CreatedBy = this.authenticationDetails.userID.toString();
+              this.user.CreatedBy = this.authenticationDetails.UserID.toString();
               // this.user.Profile = this.slectedProfile;
               this._masterService.CreateUser(this.user).subscribe(
                 (data) => {
@@ -197,7 +197,7 @@ export class UserMainContentComponent implements OnInit, OnChanges {
               this.user.Email = this.userMainFormGroup.get('email').value;
               this.user.ContactNumber = this.userMainFormGroup.get('contactNumber').value;
               // this.user.Password = this.userMainFormGroup.get('password').value;
-              this.user.ModifiedBy = this.authenticationDetails.userID.toString();
+              this.user.ModifiedBy = this.authenticationDetails.UserID.toString();
               this._masterService.DeleteUser(this.user).subscribe(
                 (data) => {
                   // console.log(data);

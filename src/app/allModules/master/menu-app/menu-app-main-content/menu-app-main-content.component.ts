@@ -76,7 +76,7 @@ export class MenuAppMainContentComponent implements OnInit, OnChanges {
             if (result) {
               this.ShowProgressBarEvent.emit('show');
               this.menuApp.AppName = this.menuAppMainFormGroup.get('appName').value;
-              this.menuApp.ModifiedBy = this.authenticationDetails.userID.toString();
+              this.menuApp.ModifiedBy = this.authenticationDetails.UserID.toString();
               this._masterService.UpdateMenuApp(this.menuApp).subscribe(
                 (data) => {
                   // console.log(data);
@@ -109,7 +109,7 @@ export class MenuAppMainContentComponent implements OnInit, OnChanges {
               this.ShowProgressBarEvent.emit('show');
               this.menuApp = new MenuApp();
               this.menuApp.AppName = this.menuAppMainFormGroup.get('appName').value;
-              this.menuApp.CreatedBy = this.authenticationDetails.userID.toString();
+              this.menuApp.CreatedBy = this.authenticationDetails.UserID.toString();
               this._masterService.CreateMenuApp(this.menuApp).subscribe(
                 (data) => {
                   // console.log(data);
@@ -151,7 +151,7 @@ export class MenuAppMainContentComponent implements OnInit, OnChanges {
             if (result) {
               this.ShowProgressBarEvent.emit('show');
               this.menuApp.AppName = this.menuAppMainFormGroup.get('appName').value;
-              this.menuApp.ModifiedBy = this.authenticationDetails.userID.toString();
+              this.menuApp.ModifiedBy = this.authenticationDetails.UserID.toString();
               this._masterService.DeleteMenuApp(this.menuApp).subscribe(
                 (data) => {
                   // console.log(data);

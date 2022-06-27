@@ -1,42 +1,617 @@
-<div id="dashboard" class="page-layout carded" fusePerfectScrollbar>
-  <div class="center" fxLayout="column" fxLayoutGap="10px">
+<div id="dashboard" class="page-layout carded">
 
-    <mat-card class=" p-8 pt-4 pb-0 m-0">
-      <div fxLayout>
-        <div fxFlex fxLayoutAlign="start center" class="h2">
-          <b>Dashboard</b>
-        </div>
+  <mat-card class="headerbackgrnd">
+    <div fxLayout>
+      <div fxFlex fxLayoutAlign="start center" style="height: 2px">
+        <img src="../../assets/images/exalca_white_logo.png" style="width: 5%;height:15px;">
+        <p class="title">Customer Portal</p>
       </div>
-    </mat-card>
-    <div fxLayout="row" fxFelx="100" fxLayoutAlign="start start">
-      <div fxFlex="25"></div>
-      <mat-card fxFlex="75" class="tab1">
-        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
-          <mat-button-toggle-group>
-            <mat-button-toggle mat-raised-button class="bankdetailsbtn">Bank details 1</mat-button-toggle>
-            <mat-button-toggle mat-raised-button class="bankdetailsbtn1">Bank details 2</mat-button-toggle>
-          </mat-button-toggle-group>
-          <!-- <button mat-raised-button fxFlex="11" class="bankdetailsbtn">Bank details 1</button>
-          <button mat-flat-button fxFlex="11" class="bankdetailsbtn1">Bank details 1</button> -->
-          <div fxFlex="50"></div>
-          <button mat-raised-button fxFlex="12" class="addbanksbtn">+ Add Bank</button>
-        </div>
-      </mat-card>
     </div>
-    <!-- <div fxLayout="row" fxFlex="100">
-      <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px" fxFlex="20">
-        <div class="market">Market </div>
-        <div class="information">Information</div>
-        <img class="image" src="../../assets/images/mi_img.svg">
-        <div class="mins">2 mins</div>
-        <div class="avg">Average Time to Complete</div>
-        <mat-progress-bar mode="determinate" value="80" class="progress"></mat-progress-bar>
-        <div class="percent">96%</div>
-        <img class="jkc" src="../../assets/images/jkc_logo.svg">
-      </div>
-    </div> -->
+  </mat-card>
+  <div fxLayout="row" fxFlex="100" style="background: white !important;">
+    <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px" fxFlex="20" style="margin-top:45px">
+      <div class="market">Bank </div>
+      <div class="information">Information</div>
+      <img class="image" src="../../assets/images/mi_img.svg">
+
+      <!-- <mat-progress-bar mode="determinate" value="80" class="progress"></mat-progress-bar>
+      <div class="percent">96% Almost done!</div> -->
+      <img class="jkc" src="../../assets/images/jkc_logo.svg">
+    </div>
+    <div fxFlex="10"> </div>
+    <div fxFlex="70">
+      <mat-vertical-stepper style="margin-top:5%"  #stepper>
+        <mat-step [stepControl]="BIform" class="temp">
+          <form [formGroup]="BIform">
+            <ng-template matStepLabel>Details of security deposit</ng-template>
+
+            <div fxLayout="column">
+              <div fxLayout="row" class="marketinfo" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Select Deposit Type*</span>
+
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="">
+                  <!-- <mat-form-field appearance="outline" style="width: 80%;margin-top: 10px;"> -->
+                  <mat-select placeholder="Select Deposit Type" formControlName="leaf" class="inputform1">
+                    <mat-option *ngFor="let leaf of leaflist" [value]="leaf">{{leaf}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error class="errorn"
+                    *ngIf="BIform?.get('leaf')?.touched && BIform?.get('leaf')?.hasError('required')">
+                    Select leaf
+                    is
+                    required
+                  </mat-error>
+                  <!-- </mat-form-field> -->
+                </div>
+
+
+
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Number*</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <input autocomplete="off" placeholder=" Enter Number" formControlName="Leafno" class="inputform "
+                    required>
+                  <mat-error class="errorn"
+                    *ngIf="BIform?.get('Leafno')?.touched && BIform?.get('Leafno')?.hasError('required')">
+                    Number
+                    is
+                    required
+                  </mat-error>
+                </div>
+
+
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Date*</span>
+                <div fxLayout="column" fxFlex="50" class="">
+                  <input autocomplete="off" placeholder=" Enter the Date" formControlName="Date" class="inputform "
+                    required>
+                  <mat-error class="errorn"
+                    *ngIf="BIform?.get('Date')?.touched && BIform?.get('Date')?.hasError('required')">
+                    Date
+                    is
+                    required
+                  </mat-error>
+                </div>
+
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Amount(In lakhs)*</span>
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="inputdivision">
+                  <input autocomplete="off" style="margin-left: 4px !important;" placeholder=" Enter the Amount"
+                    formControlName="Amount" class="inputform " required>
+                  <mat-error class="errorn"
+                    *ngIf="BIform?.get('Amount')?.touched && BIform?.get('Amount')?.hasError('required')">
+                    Amount
+                    is
+                    required
+                  </mat-error>
+                </div>
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Enter Name of Bank</span>
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="inputdivision">
+                  <input autocomplete="off" style="margin-left: 4px !important;" placeholder=" Enter Name of Bank"
+                    formControlName="nameofbank" class="inputform " required>
+                  <mat-error class="errorn"
+                    *ngIf="BIform?.get('nameofbank')?.touched && BIform?.get('nameofbank')?.hasError('required')">
+                    Amount
+                    is
+                    required
+                  </mat-error>
+                </div>
+              </div>
+
+
+              <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" class="checkbox">
+                <div>
+                  <mat-checkbox class="example-margin" [checked]="isd2rs"></mat-checkbox>
+                </div>
+                <div>Advance Billing Party</div>
+              </div>
+
+            </div>
+
+
+
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="BIform">
+          <form [formGroup]="BIform">
+            <ng-template matStepLabel>Bank Details of Firm/Party</ng-template>
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                <span class="leafspan">Bank Name*</span>
+
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+                  <mat-form-field appearance="" class="formleaf" style="margin-top:25px;">
+                    <input matInput placeholder="Enter Bank Name" formControlName="bankname" style="width: 100%;"
+                      class="inputformm ">
+                    <mat-error class="errorn"
+                      *ngIf="BIform?.get('bankname')?.touched && BIform?.get('bankname')?.hasError('required')">
+                      Bank Name
+                      is
+                      required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                <span class="leafnospan">Bank Address*</span>
+
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+                  <mat-form-field appearance="" class="formleaf">
+                    <input matInput placeholder="Enter Bank Address" class="inputformm " formControlName="bankaddress"
+                      style="width: 100%;">
+                    <mat-error class="errorn"
+                      *ngIf="BIform?.get('bankaddress')?.touched && BIform?.get('bankaddress')?.hasError('required')">
+                      Bank Address
+                      is
+                      required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                <span class="leafnospan">IFSC Code*</span>
+
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+                  <mat-form-field appearance="" class="formleaf">
+                    <input matInput placeholder=" Enter IFSC Code" formControlName="ifsccode" style="width: 100%;"
+                      class="inputformm">
+                    <mat-error class="errorn"
+                      *ngIf="BIform?.get('ifsccode')?.touched && BIform?.get('ifsccode')?.hasError('required')">
+                      IFSC Code
+                      is
+                      required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                <span class="leafnospan">Bank A/c Number*</span>
+
+
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+                  <mat-form-field appearance="" class="formleaf">
+                    <input matInput placeholder="Enter Bank A/c Numberter" formControlName="bankacno"
+                      style="width: 100%;" class="inputformm ">
+                    <mat-error class="errorn"
+                      *ngIf="BIform?.get('bankacno')?.touched && BIform?.get('bankacno')?.hasError('required')">
+                      Bank A/c Number
+                      is
+                      required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                <button mat-flat-button class="add1" (click)="onAdd()">+</button>
+              </div>
+
+
+            </div>
+            <div fxLayout="row">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Bank Detail No. </th>
+                    <th>Bank Name</th>
+                    <th>Bank Address</th>
+                    <th>IFSC Code</th>
+                    <th>Bank A/c Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of listData">
+                    <td><span>{{item?.bankno}}</span></td>
+                    <td><span>{{item?.bankname}}</span></td>
+                    <td><span>{{item?.bankaddress}}</span></td>
+                    <td><span>{{item?.ifsccode}}</span></td>
+                    <td><span>{{item?.bankacno}}</span></td>
+                    <!-- <td><button type="button" (click)="remove">Remove</button></td>
+                    <td><button type="button" (click)="additem()">Edit</button></td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </mat-step>
+        <!-- <mat-step [stepControl]="BIform">
+                    <form [formGroup]="BIform">
+                  <ng-template matStepLabel> Connection (if any) with any       (Mention Name-Relation-MobileNo)</ng-template>
+          
+                       <div fxLayout="column" fxLayoutAlign="">
+                        <div fxLayout="row" fxLayoutAlign="" class="marketinfo" fxFlex="100">
+                          <div fxFlex="4"></div>
+                          <span fxFlex="36" class="marketsp">Jk Directories/Employees/Existing Stockists*</span>
+            
+                          <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50"  class="inputdivision">
+                                <mat-select  [(value)]="selected" formControlName="jkc1" placeholder="Please Select the field"  class="inputform1">
+                                    <mat-option value="1">Yes</mat-option>
+                                    <mat-option value="2">No</mat-option>
+                                  </mat-select>
+                              <mat-error class="errorn"
+                                *ngIf="BIform?.get('leaf')?.touched && BIform?.get('leaf')?.hasError('required')">
+                               Selection Field
+                                is
+                                required
+                              </mat-error>
+                           
+                          </div>
+                         
+            
+                        
+                        </div>
+                      
+                    <div fxLayout="row"   class="marketinfo" fxFlex="100"  *ngIf="selected==1">
+                        <div fxFlex="4"></div>
+                     
+                        <div fxLayout="row" fxFlex="96"  fxLayoutGap="10px" class="">
+                       <div class="Connection">Name</div>
+                        <div fxLayout="column" fxFlex="22">
+                          <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" class="inputform1 "
+                           required>
+                          
+                        </div>
+                        <div class="Connection">Mobile</div>
+                        <div fxLayout="column" fxLayoutAlign="" fxFlex="22">
+                          <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" c class="inputform1 "
+                           required>
+                           
+                        </div>
+                        <div class="Connection">Relation</div>
+                        <div fxLayout="column" fxLayoutAlign="" fxFlex="22">
+                          <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" c class="inputform1 "
+                           required>
+                          
+                        </div>
+                         </div>
+          
+                      
+                      </div>
+          
+                        <div fxLayout="row" class="populationclass" fxFlex="100">
+                          <div fxFlex="4"></div>
+                          <span fxFlex="36" class="marketsp">Political Party</span>
+                          
+                            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="">
+                                <mat-select  [(value)]="selected" formControlName="politicalParty"  class="inputform1" placeholder="Please Select the field">
+                                    <mat-option value="3">Yes</mat-option>
+                                    <mat-option value="4">No</mat-option>
+                                  </mat-select>
+                             
+                            </div>
+                           
+                          
+                        
+                        </div>
+                        <div fxLayout="row"   class="marketinfo" fxFlex="100"  *ngIf="selected==3">
+                            <div fxFlex="4"></div>
+                         
+                            <div fxLayout="row" fxFlex="96"  fxLayoutGap="10px" class="">
+                           <div class="Connection">Name</div>
+                            <div fxLayout="column" fxFlex="22">
+                              <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" class="inputform1 "
+                               required>
+                              
+                            </div>
+                            <div class="Connection">Mobile</div>
+                            <div fxLayout="column" fxLayoutAlign="" fxFlex="22">
+                              <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" c class="inputform1 "
+                               required>
+                               
+                            </div>
+                            <div class="Connection">Relation</div>
+                            <div fxLayout="column" fxLayoutAlign="" fxFlex="22">
+                              <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" c class="inputform1 "
+                               required>
+                              
+                            </div>
+                             </div>
+              
+                          
+                          </div>
+                        <div fxLayout="row"  class="populationclass" fxFlex="100">
+                          <div fxFlex="4"></div>
+                          <span fxFlex="36" class="marketsp">Police</span>
+                          <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="">
+                            <mat-select  [(value)]="selected" formControlName="police"  class="inputform1" placeholder="Please Select the field">
+                                <mat-option value="5">Yes</mat-option>
+                                <mat-option value="6">No</mat-option>
+                              </mat-select>
+                           
+                          </div>
+                        
+                        </div>
+                        <div fxLayout="row"   class="marketinfo" fxFlex="100"  *ngIf="selected==5">
+                            <div fxFlex="4"></div>
+                         
+                            <div fxLayout="row" fxFlex="96"  fxLayoutGap="10px" class="">
+                           <div class="Connection">Name</div>
+                            <div fxLayout="column" fxFlex="22">
+                              <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" class="inputform1 "
+                               required>
+                              
+                            </div>
+                            <div class="Connection">Mobile</div>
+                            <div fxLayout="column" fxLayoutAlign="" fxFlex="22">
+                              <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" c class="inputform1 "
+                               required>
+                               
+                            </div>
+                            <div class="Connection">Relation</div>
+                            <div fxLayout="column" fxLayoutAlign="" fxFlex="22">
+                              <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" c class="inputform1 "
+                               required>
+                              
+                            </div>
+                             </div>
+              
+                          
+                          </div>
+            
+                        <div fxLayout="row"  class="populationclass" fxFlex="100">
+                          <div fxFlex="4"></div>
+                          <span fxFlex="36" class="marketsp">Administrative Authority</span>
+                          <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="">
+                            <mat-select  [(value)]="selected" formControlName="admin"  class="inputform1" placeholder="Please Select the field">
+                                <mat-option value="7">Yes</mat-option>
+                                <mat-option value="8">No</mat-option>
+                              </mat-select>
+                           
+                          </div>
+                        </div>
+                        <div fxLayout="row"   class="marketinfo" fxFlex="100"  *ngIf="selected==7">
+                            <div fxFlex="4"></div>
+                         
+                            <div fxLayout="row" fxFlex="96"  fxLayoutGap="10px" class="">
+                           <div class="Connection">Name</div>
+                            <div fxLayout="column" fxFlex="22">
+                              <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" class="inputform1 "
+                               required>
+                              
+                            </div>
+                            <div class="Connection">Mobile</div>
+                            <div fxLayout="column" fxLayoutAlign="" fxFlex="22">
+                              <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" c class="inputform1 "
+                               required>
+                               
+                            </div>
+                            <div class="Connection">Relation</div>
+                            <div fxLayout="column" fxLayoutAlign="" fxFlex="22">
+                              <input autocomplete="off" matInput placeholder="Enter" formControlName="jkc1Name" c class="inputform1 "
+                               required>
+                              
+                            </div>
+                             </div>
+              
+                          
+                          </div>
+                        <div fxLayout="row" class="populationclass" fxFlex="100">
+                          <div fxFlex="4"></div>
+                          <span fxFlex="36" class="marketsp">Sales Officer Name*</span>
+                          <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="">
+                            <input autocomplete="off" style="margin-left: 4px !important;" placeholder=" Enter the sales Officer Name"
+                            formControlName="sales" class="inputform " required>
+                         
+                          </div>
+                        </div>
+                      
+                        <div fxLayout="row"  class="populationclass" fxFlex="100">
+                            <div fxFlex="4"></div>
+                            <span fxFlex="36" class="marketsp">ASM Name*</span>
+                            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="">
+                                <input autocomplete="off" style="margin-left: 4px !important;" placeholder=" Enter the ASM Name"
+                                formControlName="asmname" class="inputform " required>
+                          
+                            </div>
+                          </div>
+                        
+                          <div fxLayout="row" class="populationclass" fxFlex="100">
+                            <div fxFlex="4"></div>
+                            <span fxFlex="36" class="marketsp">State Head Name*</span>
+                            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="">
+                                <input autocomplete="off" style="margin-left: 4px !important;" placeholder=" Enter the ASM Name"
+                                formControlName="headname" class="inputform " required>
+                           
+                            </div>
+                          </div>
+                         
+                        
+                      </div>
+          
+          
+                 
+                </form>
+                </mat-step> -->
+        <mat-step [stepControl]="BIform">
+          <form [formGroup]="BIform">
+            <ng-template matStepLabel>Documents Required (Attachments)</ng-template>
+            <div *ngIf="!selectedPersonalInfo?.FirmStatus" fxLayout="column" fxLayoutAlign="space-evenly center">
+
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Copy of Pan Card*</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Copy of Gst Certificate</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+
+              <mat-checkbox formControlName="declare" style="
+                            margin-top: 4%;">
+                <div fxLayout="column">
+                  <p style="margin-left: 13px;">I / We declare that above information is true and correct to the best of
+                    my/our knowledge & belief</p>
+
+                </div>
+
+              </mat-checkbox>
+            </div>
+
+            <div *ngIf="selectedPersonalInfo?.FirmStatus" fxLayout="column" fxLayoutAlign="space-evenly center">
+              <!-- <mat-form-field>
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="Type" required>
+                  <mat-option value="Domestic supply"> Domestic supply</mat-option>
+                  <mat-option value="Domestic servic">Domestic service</mat-option>
+                  <mat-option value="Import">Import</mat-option>
+                </mat-select>
+              </mat-form-field> -->
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">{{name}}:</span>
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Copy of Pan Card</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Copy of Adhar card</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+              <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxFlex="10"></div>
+                <span fxFlex="30" class="marketsp">Copy of your photo</span>
+
+                <div fxLayout="column" fxFlex="50" class="">
+                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                </div>
+
+
+              </div>
+            </div>
+
+          </form>
+        </mat-step>
+      </mat-vertical-stepper>
+    </div>
   </div>
-  <mat-progress-spinner *ngIf=" isProgressBarVisibile" class="progressBarPostion" color="accent" mode="indeterminate">
-  </mat-progress-spinner>
-  <div id="overlay" *ngIf="isProgressBarVisibile"></div>
+  <div fxLayout="row" fxLayoutAlign="" fxFlex="100" fxLayoutGap="4px" style="margin-top: 23px;background: white;">
+    <div fxFlex="33"></div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px">
+      <button mat-flat-button class="previous" (click)="previousbtn()">
+        <img class="previousimg" src="../../assets/images/previous.svg">
+        Previous</button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px" style="margin-left:-20px">
+      <button mat-flat-button class="next" (click)="nextbtn()">Next
+        <img class="nextimg" src="../../assets/images/next.svg">
+      </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
+      <button mat-flat-button class="clear" (click)="ClearAll()"> Clear
+        <img class="clearimg" src="../../assets/images/clear.svg">
+      </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px" style="margin-left:-38px">
+      <button mat-flat-button class="draft" (click)="ClearAll()"> Save as Draft
+        <img class="draftimg" src="../../assets/images/bi.png">
+      </button>
+    </div>
+    <!-- [disabled]="MIform.required.invalid" -->
+    <button mat-raised-button class="savebtn" (click)="saveInfo()">Save & Next</button>
+  </div>
+  <br>
 </div>

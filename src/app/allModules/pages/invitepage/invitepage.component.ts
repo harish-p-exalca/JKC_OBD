@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { DashboardService } from 'app/services/dashboard.service';
+import { Component, OnInit, ViewEncapsulation, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { Observable, Subject } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 // import { LoginService } from 'app/services/login.service';
 // import { UserDetails } from 'app/models/user-details';
@@ -13,9 +14,11 @@ import { SnackBarStatus } from 'app/notifications/notification-snack-bar/notific
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { FuseNavigation } from '@fuse/types';
 import { MenuUpdataionService } from 'app/services/menu-update.service';
-import { AuthenticationDetails, ChangePassword, EMailModel } from 'app/models/master';
+import { AuthenticationDetails, ChangePassword, EMailModel, PersonIdentity } from 'app/models/master';
 import { ChangePasswordDialogComponent } from 'app/allModules/authentication/change-password-dialog/change-password-dialog.component';
 import { ForgetPasswordLinkDialogComponent } from 'app/allModules/authentication/forget-password-link-dialog/forget-password-link-dialog.component';
+import { Console } from 'console';
+import { stat } from 'fs';
 
 @Component({
   selector: 'app-invitepage',
@@ -31,23 +34,34 @@ export class InvitepageComponent implements OnInit {
   MenuItems: string[];
   children: FuseNavigation[] = [];
   subChildren: FuseNavigation[] = [];
+  OTP: any[] = [];
   private _unsubscribeAll: Subject<any>;
   message = 'Snack Bar opened.';
   actionButtonLabel = 'Retry';
   action = true;
   setAutoHide = true;
   autoHide = 2000;
-
+  arr: any;
   addExtraClass: false;
   notificationSnackBarComponent: NotificationSnackBarComponent;
   IsProgressBarVisibile: boolean;
+  TransID: number;
+  Identity: PersonIdentity;
+  @ViewChild('otp1') otpEl1: ElementRef;
+  @ViewChild('otp2') otpEl2: ElementRef;
+  @ViewChild('otp3') otpEl3: ElementRef;
+  @ViewChild('otp4') otpEl4: ElementRef;
+  @ViewChild('otp5') otpEl5: ElementRef;
+  @ViewChild('otp6') otpEl6: ElementRef;
   constructor(
     private _fuseNavigationService: FuseNavigationService,
     private _fuseConfigService: FuseConfigService,
     private _formBuilder: FormBuilder,
     private _router: Router,
+    private _dashboardService: DashboardService,
     private _authService: AuthService,
     private _menuUpdationService: MenuUpdataionService,
+    private route: ActivatedRoute,
     // private _loginService: LoginService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
@@ -74,225 +88,177 @@ export class InvitepageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.TransID = params['id'];
+      if (this.TransID) {
+        this.GetIdentity(this.TransID);
+      }
+    });
+
     this.InviteForm = this._formBuilder.group({
       userName: [''],
-      OTP: ['']
+      OTP1: [''],
+      OTP2: [''],
+      OTP3: [''],
+      OTP4: [''],
+      OTP5: [''],
+      OTP6: ['']
+    });
+  }
+  ShiftFocus(el: string) {
+    if (el == "otp2") {
+      this.otpEl2.nativeElement.focus();
+    }
+    else if (el == "otp3") {
+      this.otpEl3.nativeElement.focus();
+    }
+    else if (el == "otp4") {
+      this.otpEl4.nativeElement.focus();
+    }
+    else if (el == "otp5") {
+      this.otpEl5.nativeElement.focus();
+    }
+    else if (el == "otp6") {
+      this.otpEl6.nativeElement.focus();
+    }
+  }
+  
+  GetIdentity(transID: number) {
+    this._dashboardService.GetIdentityByTransID(transID).subscribe(res => {
+      console.log("identity", res);
+      this.Identity = res;
+      this.InviteForm.get('userName').setValue(res.Name);
+      this.InviteForm.get('userName').disable();
+    },
+      err => {
+        this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
     });
   }
   LoginClicked(): void {
     if (this.InviteForm.valid) {
       this.IsProgressBarVisibile = true;
-      this._authService.login(this.InviteForm.get('userName').value, this.InviteForm.get('OTP').value).subscribe(
-        (data) => {
+      this.OTP[0] = (this.InviteForm.get('OTP1').value);
+      this.OTP[1] = (this.InviteForm.get('OTP2').value);
+      this.OTP[2] = (this.InviteForm.get('OTP3').value);
+      this.OTP[3] = (this.InviteForm.get('OTP4').value);
+      this.OTP[4] = (this.InviteForm.get('OTP5').value);
+      this.OTP[5] = (this.InviteForm.get('OTP6').value);
+      var OTPNo = this.OTP.join();
+      var status = OTPNo.replace(/,/g, '').toString();
+      console.log("otp",parseInt(status));
+      this._dashboardService.AuthenticateCustomerWithOTP(parseInt(status), this.TransID).subscribe(
+        (res) => {
           this.IsProgressBarVisibile = false;
-          const dat = data as AuthenticationDetails;
-          // if (data.isChangePasswordRequired === 'Yes') {
-          //   this.OpenChangePasswordDialog(dat);
-          // } else {
-          //   this.saveUserDetails(dat);
-          // }
+          console.log(res);
+          if (res.Status == 1) {
+            this.notificationSnackBarComponent.openSnackBar('Logged In Successfully', SnackBarStatus.success);
+            this.UpdateMenu();
+            localStorage.setItem("currentTransaction",this.TransID.toString());
+            this._router.navigate(['pages/dashboard']);
+          }
+          else {
+            this.notificationSnackBarComponent.openSnackBar(res.Error, SnackBarStatus.danger);
+          }
         },
         (err) => {
           this.IsProgressBarVisibile = false;
           console.error(err);
-          // console.log(err instanceof Object);
           this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
         }
       );
-      // this._router.navigate(['dashboard']);
-      // this.notificationSnackBarComponent.openSnackBar('Logged in successfully', SnackBarStatus.success);
     } else {
       Object.keys(this.InviteForm.controls).forEach(key => {
         const abstractControl = this.InviteForm.get(key);
         abstractControl.markAsDirty();
       });
     }
-
   }
-  saveUserDetails(data: AuthenticationDetails): void {
-    localStorage.setItem('authorizationData', JSON.stringify(data));
-    this.notificationSnackBarComponent.openSnackBar('Logged in successfully', SnackBarStatus.success);
-    // if (data.userRole === 'Administrator') {
-    //   this._router.navigate(['master/user']);
-    // } else {
-    //   this._router.navigate(['pages/dashboard']);
-    // }
-    this._router.navigate(['pages/personalinformation']);
-  }
-  OpenChangePasswordDialog(data: AuthenticationDetails): void {
-    const dialogConfig: MatDialogConfig = {
-      data: null,
-      panelClass: 'change-password-dialog'
-    };
-    const dialogRef = this.dialog.open(ChangePasswordDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      result => {
-        if (result) {
-          const changePassword = result as ChangePassword;
-          changePassword.UserID = data.userID;
-          changePassword.UserName = data.userName;
-          this._authService.ChangePassword(changePassword).subscribe(
-            (res) => {
-              // console.log(res);
-              // this.notificationSnackBarComponent.openSnackBar('Password updated successfully', SnackBarStatus.success);
-              this.notificationSnackBarComponent.openSnackBar('Password updated successfully, please log with new password', SnackBarStatus.success);
-              this._router.navigate(['/auth/login']);
-            }, (err) => {
-              this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-              this._router.navigate(['/auth/login']);
-              console.error(err);
-            }
-          );
+  CreateOTP(): void {
+    console.log("otp requested");
+    this._dashboardService.GenerateOTPForCustomer(this.TransID).subscribe(
+      (res) => {
+        this.IsProgressBarVisibile = false;
+        console.log(res);
+        if (res.Status == 1) {
+          this.notificationSnackBarComponent.openSnackBar('OTP Generated Successfully', SnackBarStatus.success);
         }
-      });
+        else {
+          this.notificationSnackBarComponent.openSnackBar(res.Error, SnackBarStatus.success);
+        }
+      },
+      (err) => {
+        this.IsProgressBarVisibile = false;
+        // this.notificationSnackBarComponent.openSnackBar('OTP Generated Successfully', SnackBarStatus.success);
+        console.error(err);
+        this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+      }
+    );
   }
-  // OpenForgetPasswordLinkDialog(): void {
-  //   const dialogConfig: MatDialogConfig = {
-  //     data: null,
-  //     panelClass: 'forget-password-link-dialog'
-  //   };
-  //   const dialogRef = this.dialog.open(ForgetPasswordLinkDialogComponent, dialogConfig);
-  //   dialogRef.afterClosed().subscribe(
-  //     result => {
-  //       if (result) {
-  //         const emailModel = result as EMailModel;
-  //         this.IsProgressBarVisibile = true;
-  //         this._authService.SendResetLinkToMail(emailModel).subscribe(
-  //           (data) => {
-  //             const res = data as string;
-  //             this.notificationSnackBarComponent.openSnackBar(res, SnackBarStatus.success);
-  //             // this.notificationSnackBarComponent.openSnackBar(`Reset password link sent successfully to ${emailModel.EmailAddress}`, SnackBarStatus.success);
-  //             // this.ResetControl();
-  //             this.IsProgressBarVisibile = false;
-  //             // this._router.navigate(['auth/login']);
-  //           },
-  //           (err) => {
-  //             console.error(err);
-  //             this.IsProgressBarVisibile = false;
-  //             this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger); console.error(err);
-  //           }
-  //         );
-  //       }
-  //     });
-  // }
-  // UpdateMenu(): void {
-  //   const retrievedObject = localStorage.getItem('authorizationData');
-  //   if (retrievedObject) {
-  //     this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
-  //     this.MenuItems = this.authenticationDetails.menuItemNames.split(',');
-  //     // console.log(this.MenuItems);
-  //   } else {
-  //   }
-  //   if (this.MenuItems.indexOf('Dashboard') >= 0) {
-  //     this.children.push(
-  //       {
-  //         id: 'dashboard',
-  //         title: 'Dashboard',
-  //         translate: 'NAV.SAMPLE.TITLE',
-  //         type: 'item',
-  //         icon: 'dashboardIcon',
-  //         isSvgIcon: true,
-  //         // icon: 'dashboard',
-  //         url: '/pages/dashboard',
-  //       }
-  //     );
-  //   }
-  //   // if (this.MenuItems.indexOf('InvoiceDetails') >= 0) {
-  //   //   this.children.push(
-  //   //     {
-  //   //       id: 'invoiceDetails',
-  //   //       title: 'Invoices',
-  //   //       translate: 'NAV.SAMPLE.TITLE',
-  //   //       type: 'item',
-  //   //       icon: 'receiptIcon',
-  //   //       isSvgIcon: true,
-  //   //       // icon: 'receipt',
-  //   //       url: '/pages/invoices',
-  //   //     }
-  //   //   );
-  //   // }
-  //   if (this.MenuItems.indexOf('Reports') >= 0) {
-  //     this.children.push(
-  //       {
-  //         id: 'reports',
-  //         title: 'Report',
-  //         translate: 'NAV.SAMPLE.TITLE',
-  //         type: 'item',
-  //         icon: 'reportIcon',
-  //         isSvgIcon: true,
-  //         // icon: 'assignment',
-  //         url: '/reports',
-  //       }
-  //     );
-  //   }
-  //   // if (this.MenuItems.indexOf('InvoiceItem') >= 0) {
-  //   //   this.children.push(
-  //   //     {
-  //   //       id: 'invItem',
-  //   //       title: 'Invoice Item',
-  //   //       translate: 'NAV.SAMPLE.TITLE',
-  //   //       type: 'item',
-  //   //       icon: 'dashboard',
-  //   //       url: '/pages/courses',
-  //   //     }
-  //   //   );
-  //   // }
-  //   if (this.MenuItems.indexOf('App') >= 0) {
-  //     this.subChildren.push(
-  //       {
-  //         id: 'menuapp',
-  //         title: 'App',
-  //         type: 'item',
-  //         url: '/master/menuApp'
-  //       },
-  //     );
-  //   }
-  //   if (this.MenuItems.indexOf('Role') >= 0) {
-  //     this.subChildren.push(
-  //       {
-  //         id: 'role',
-  //         title: 'Role',
-  //         type: 'item',
-  //         url: '/master/role'
-  //       },
-  //     );
-  //   }
-  //   if (this.MenuItems.indexOf('User') >= 0) {
-  //     this.subChildren.push(
-  //       {
-  //         id: 'user',
-  //         title: 'User',
-  //         type: 'item',
-  //         url: '/master/user'
-  //       }
-  //     );
-  //   }
-
-  //   if (this.MenuItems.indexOf('App') >= 0 || this.MenuItems.indexOf('Role') >= 0 ||
-  //     this.MenuItems.indexOf('User') >= 0) {
-  //     this.children.push({
-  //       id: 'master',
-  //       title: 'Master',
-  //       // translate: 'NAV.DASHBOARDS',
-  //       type: 'collapsable',
-  //       icon: 'menuwithdotsIcon',
-  //       isSvgIcon: true,
-  //       // icon: 'view_list',
-  //       children: this.subChildren
-  //     }
-  //     );
-  //   }
-  //   this.navigation.push({
-  //     id: 'applications',
-  //     title: '',
-  //     translate: 'NAV.APPLICATIONS',
-  //     type: 'group',
-  //     children: this.children
-  //   });
-  //   // Saving local Storage
-  //   localStorage.setItem('menuItemsData', JSON.stringify(this.navigation));
-  //   // Update the service in order to update menu
-  //   this._menuUpdationService.PushNewMenus(this.navigation);
-  // }
+  UpdateMenu(): void {
+    this.MenuItems = ["Dashboard", "MarketInformation", "BusinessInformation", "BankInformation"]
+    if (this.MenuItems.indexOf('Dashboard') >= 0) {
+      this.children.push(
+        {
+          id: 'dashboard',
+          title: 'Personal',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'dashboardIcon',
+          isSvgIcon: true,
+          url: '/pages/dashboard',
+        }
+      );
+    }
+    if (this.MenuItems.indexOf('BusinessInformation') >= 0) {
+      this.children.push(
+        {
+          id: 'business',
+          title: 'Business',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'reportIcon',
+          isSvgIcon: true,
+          url: '/pages/businessinformation',
+        }
+      );
+    }
+    if (this.MenuItems.indexOf('MarketInformation') >= 0) {
+      this.children.push(
+        {
+          id: 'market',
+          title: 'Market',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'reportIcon',
+          isSvgIcon: true,
+          url: '/pages/marketinformation',
+        }
+      );
+    }
+    if (this.MenuItems.indexOf('BankInformation') >= 0) {
+      this.children.push(
+        {
+          id: 'bank',
+          title: 'Bank',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'reportIcon',
+          isSvgIcon: true,
+          url: '/pages/bankinformation',
+        }
+      );
+    }
+    this.navigation.push({
+      id: 'applications',
+      title: '',
+      translate: 'NAV.APPLICATIONS',
+      type: 'group',
+      children: this.children
+    });
+    // Saving local Storage
+    localStorage.setItem('menuItemsData', JSON.stringify(this.navigation));
+    // Update the service in order to update menu
+    this._menuUpdationService.PushNewMenus(this.navigation);
+  }
 
 }

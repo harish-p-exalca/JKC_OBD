@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('authorizationData', JSON.stringify(data));
     this.UpdateMenu();
     this.notificationSnackBarComponent.openSnackBar('Logged in successfully', SnackBarStatus.success);
-    // if (data.userRole === 'Administrator') {
+    // if (data.UserRole === 'Administrator') {
     //   this._router.navigate(['master/user']);
     // } else {
     //   this._router.navigate(['pages/dashboard']);
@@ -134,8 +134,8 @@ export class LoginComponent implements OnInit {
       result => {
         if (result) {
           const changePassword = result as ChangePassword;
-          changePassword.UserID = data.userID;
-          changePassword.UserName = data.userName;
+          changePassword.UserID = data.UserID;
+          changePassword.UserName = data.UserName;
           this._authService.ChangePassword(changePassword).subscribe(
             (res) => {
               // console.log(res);
@@ -186,7 +186,7 @@ export class LoginComponent implements OnInit {
     const retrievedObject = localStorage.getItem('authorizationData');
     if (retrievedObject) {
       this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
-      this.MenuItems = this.authenticationDetails.menuItemNames.split(',');
+      this.MenuItems = this.authenticationDetails.MenuItemNames.split(',');
       // console.log(this.MenuItems);
     } else {
     }
@@ -275,7 +275,7 @@ export class LoginComponent implements OnInit {
       );
     }
 
-    if (this.MenuItems.indexOf('App') >= 0 || this.MenuItems.indexOf('Role') >= 0 ||
+    if (true||this.MenuItems.indexOf('App') >= 0 || this.MenuItems.indexOf('Role') >= 0 ||
       this.MenuItems.indexOf('User') >= 0) {
       this.children.push({
         id: 'master',

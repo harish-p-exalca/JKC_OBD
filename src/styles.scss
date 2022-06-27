@@ -4,6 +4,7 @@
 // Import app.theme.scss
 @import "app/app.theme";
 
+
 .success {
   background-color: #26b329 !important;
 }
@@ -50,16 +51,6 @@
 }
 .body{
   overflow-x: hidden;
-}
-.mat-select-value {
-  display: table-cell;
-  max-width: 152% !important;
-  padding: 1% !important;
- 
-  // background-color: rgb(196, 196, 196);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .mat-form-field-flex > .mat-form-field-infix {
 
