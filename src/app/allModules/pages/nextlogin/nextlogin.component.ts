@@ -115,19 +115,12 @@ export class NextloginComponent implements OnInit {
     localStorage.setItem('authorizationData', JSON.stringify(data));
     this.UpdateMenu();
     this.notificationSnackBarComponent.openSnackBar('Logged in successfully', SnackBarStatus.success);
-    // if (data.UserName === 'Admin') {
-    //   this._router.navigate(['master/user']);
-    // } 
-    // else {
-    //   this._router.navigate(['pages/dashboard']);
-    // }
-    if(data.UserRole=="Admin"){
+    if (data.UserRole === 'Admin') {
+      this._router.navigate(['master/user']);
+    } 
+    else {
       this._router.navigate(['pages/dashboard']);
     }
-    else if(data.UserRole=="Approver"){
-      this._router.navigate(['pages/approvalinformation']);
-    }
-    
   }
   OpenChangePasswordDialog(data: AuthenticationDetails): void {
     const dialogConfig: MatDialogConfig = {
@@ -200,8 +193,8 @@ export class NextloginComponent implements OnInit {
           title: 'Personal',
           translate: 'NAV.SAMPLE.TITLE',
           type: 'item',
-          icon: 'dashboardIcon',
-          isSvgIcon: true,
+          icon: 'person',
+          isSvgIcon: false,
           // icon: 'dashboard',
           url: '/pages/dashboard',
         }
@@ -247,51 +240,51 @@ export class NextloginComponent implements OnInit {
     //     }
     //   );
     // }
-    // if (true || this.MenuItems.indexOf('App') >= 0) {
-    //   this.subChildren.push(
-    //     {
-    //       id: 'menuapp',
-    //       title: 'App',
-    //       type: 'item',
-    //       url: '/master/menuApp'
-    //     },
-    //   );
-    // }
-    // if (true || this.MenuItems.indexOf('Role') >= 0) {
-    //   this.subChildren.push(
-    //     {
-    //       id: 'role',
-    //       title: 'Role',
-    //       type: 'item',
-    //       url: '/master/role'
-    //     },
-    //   );
-    // }
-    // if (true ||this.MenuItems.indexOf('User') >= 0) {
-    //   this.subChildren.push(
-    //     {
-    //       id: 'user',
-    //       title: 'User',
-    //       type: 'item',
-    //       url: '/master/user'
-    //     }
-    //   );
-    // }
+    if (this.MenuItems.indexOf('App') >= 0) {
+      this.subChildren.push(
+        {
+          id: 'menuapp',
+          title: 'App',
+          type: 'item',
+          url: '/master/menuApp'
+        },
+      );
+    }
+    if (this.MenuItems.indexOf('Role') >= 0) {
+      this.subChildren.push(
+        {
+          id: 'role',
+          title: 'Role',
+          type: 'item',
+          url: '/master/role'
+        },
+      );
+    }
+    if (this.MenuItems.indexOf('User') >= 0) {
+      this.subChildren.push(
+        {
+          id: 'user',
+          title: 'User',
+          type: 'item',
+          url: '/master/user'
+        }
+      );
+    }
 
-    // if (true || this.MenuItems.indexOf('AdminPanel') >= 0 || this.MenuItems.indexOf('Role') >= 0 ||
-    //   this.MenuItems.indexOf('User') >= 0) {
-    //   this.children.push({
-    //     id: 'master',
-    //     title: 'Master',
-    //     // translate: 'NAV.DASHBOARDS',
-    //     type: 'collapsable',
-    //     icon: 'menuwithdotsIcon',
-    //     isSvgIcon: true,
-    //     // icon: 'view_list',
-    //     children: this.subChildren
-    //   }
-    //   );
-    // }
+    if (this.MenuItems.indexOf('App') >= 0 || this.MenuItems.indexOf('Role') >= 0 ||
+      this.MenuItems.indexOf('User') >= 0) {
+      this.children.push({
+        id: 'master',
+        title: 'Master',
+        // translate: 'NAV.DASHBOARDS',
+        type: 'collapsable',
+        icon: 'menuwithdotsIcon',
+        isSvgIcon: true,
+        // icon: 'view_list',
+        children: this.subChildren
+      }
+      );
+    }
     this.navigation.push({
       id: 'applications',
       title: '',

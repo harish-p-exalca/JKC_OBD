@@ -45,7 +45,7 @@ export class UserMainContentComponent implements OnInit, OnChanges {
       roleID: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       contactNumber: ['', [Validators.required, Validators.pattern]],
-      plant: ['', Validators.required],
+      plant: [''],
       Profile: ['']
     });
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar);
