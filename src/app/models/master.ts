@@ -164,3 +164,27 @@ export class ProductDetails {
     ProductName5: string;
     ID: number;
 }
+
+export class BusinessInformation {
+    ID: number;
+    TransID: number;
+    Turnover1: string;
+    Turnover2: string;
+    Turnover3: string;
+    WorkingCaptial: string;
+    NoVechicle: number;
+    TotalStorage: string;
+    Retail: number;
+    Wholesale: number;
+    Retailers: string;
+}
+export interface SalesAndTarget {
+    ID: number;
+    TransID: number;
+    Month: string;
+    Value: number;
+}
+export class BusinessInfoView{
+    Business:BusinessInformation;
+    Sales:SalesAndTarget[];
+}

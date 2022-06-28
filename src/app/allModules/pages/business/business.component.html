@@ -39,28 +39,26 @@
                </mat-error>
               </div>
               <div fxLayout="column" fxLayoutAlign="" fxFlex="38">
-                <input autocomplete="off" placeholder="FY 20-21" formControlName="Retailers" class="inputform1 "
+                <input autocomplete="off" placeholder="FY 20-21" formControlName="retail" class="inputform1 "
                  required>
                  <mat-error class="errorn"
-                 *ngIf="BIform?.get('Retailers')?.touched && BIform?.get('Retailers')?.hasError('required')">
+                 *ngIf="BIform?.get('retail')?.touched && BIform?.get('retail')?.hasError('required')">
                  Turn over
                  is
                  required
                </mat-error>
               </div>
               <div fxLayout="column" fxLayoutAlign="" fxFlex="38">
-                <input autocomplete="off" placeholder="FY 19-20" formControlName="NoOfYears" class="inputform1 "
+                <input autocomplete="off" placeholder="FY 19-20" formControlName="NoOfYears1" class="inputform1 "
                  required>
                  <mat-error class="errorn"
-                 *ngIf="BIform?.get('NoOfYears')?.touched && BIform?.get('NoOfYears')?.hasError('required')">
+                 *ngIf="BIform?.get('NoOfYears1')?.touched && BIform?.get('NoOfYears1')?.hasError('required')">
                  Turn over
                  is
                  required
                </mat-error>
               </div>
                </div>
-
-            
             </div>
 
             <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
@@ -148,25 +146,22 @@
                 </div>
               
                 <div fxLayout="row">
-
-                  <table mat-table [dataSource]="dataSource">
-                   
-                  
-                    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-                      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-                      <td mat-cell *matCellDef="let element" contenteditable="true"> {{element[column]}} </td>
-                    </ng-container>
-                   
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                  
-                  </table>
+                  <div fxLayout="column" fxLayoutAlign="start center" style="width: 100%;" fxLayoutGap="20px">
+                    <table mat-table [dataSource]="dataSource" class="table_ext">
+                      <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+                        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                        <td mat-cell *matCellDef="let element" contenteditable="true" class="tble_data"> {{element[column]}} </td>
+                      </ng-container>
+                    
+                      
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <button mat-flat-button class="addrow-II" (click)="add()">+</button>
+                  </div>
                   <button mat-flat-button class="addrow" (click)="add()">+</button>
-
-                 
                 </div>
 
-              
               </mat-card>
             </div>
          
