@@ -61,6 +61,7 @@ import { ApprovalscreenComponent } from '../approvalscreen/approvalscreen.compon
 import { ChartsModule } from 'ng2-charts';
  import { NgApexchartsModule } from "ng-apexcharts";
 import { BankdialogComponent } from './bankdialog/bankdialog.component';
+import { InitiatorDashboardComponent } from './initiator-dashboard/initiator-dashboard.component';
 import { ReportsviewComponent } from './reportsview/reportsview.component';
 
 
@@ -93,7 +94,11 @@ const routes = [
     {
         path: 'approvalinformation',
         component: ApprovalscreenComponent
-    }, 
+    },
+    {
+        path: 'initiatordashboard',
+        component: InitiatorDashboardComponent
+    },
     {
         path: 'reportview',
         component: ReportsviewComponent
@@ -170,8 +175,8 @@ const routes = [
         BankinformationComponent,
         ApprovalscreenComponent,
         BankdialogComponent,
+        InitiatorDashboardComponent,
         ReportsviewComponent
-
     ],
     providers: [
         DecimalPipe

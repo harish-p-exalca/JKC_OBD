@@ -1,197 +1,436 @@
-<div id="dashboard" fxLayoutAlign="row" class="page-layout carded" >
-  <!-- <div class="center" fxLayout="column" fxLayoutGap="10px"> -->
+<div id="dashboard" fxLayoutAlign="row" class="page-layout carded">
     <mat-card class="headerbackgrnd">
         <div fxLayout>
-          <div fxFlex fxLayoutAlign="start center" style="height: 2px">
-            <img src="../../assets/images/exalca_white_logo.png" style="width: 5%;height:15px;">
-            <p class="title">Customer Portal</p>
-          </div>
-        </div>
-      </mat-card>
+            <div fxFlex fxLayoutAlign="space-between center" style="height: 2px">
+                <img
+                    src="../../assets/images/exalca_white_logo.png"
+                    style="width: 5%; height: 15px"
+                />
 
-    
-    <div fxLayout="column" fxFlex="100">
-        <div fxLayout="row"  fxFlex="7"  style="background-color: white;">
-        <div fxLayout="row" fxFlex="35" fxLayoutAlign="space-around start" style="padding:8px;margin-top: 59px;">
-            <div class="DashBoard_Box" >
-                <div fxFlex="25" class="Card_1"  style="padding: 10px;">
-                    <div fxlayout="column">
-                        <div fxLauoutAlign="start center">
-                            <img src="assets/images/Ellipse 55.svg">
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="center center">
-                            <span><label class="sign_label"></label></span>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="center center">
-                            <span style="text-align: center;"><label class="sign_label1">
-                                   Open</label></span>
-                        </div>
-                    </div>
+                <p class="title">Customer Portal</p>
+                <div fxLayout="row" fxLayoutAlign="start center" class="account-actions">
+                    <span class="user-name">User Name</span>
+                    <img src="../../assets\icons\Username.png" style="transform: scale(0.7);">
+                    <mat-icon style="color: white;cursor: pointer;">arrow_drop_down</mat-icon>
                 </div>
-             <div fxFlex="25" class="Card_2" style="padding: 10px;">
-                    <div fxLauoutAlign="start center">
-                        <img src="assets/images/Ellipse 60.svg">
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <span><label class="sign_label3"></label></span>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <span style="text-align: center;"><label class="sign_label1"> 
-                            Pending</label></span>
-                    </div>
-                </div>
-                <div fxFlex="25" class="Card_3" style="padding: 10px;">
-                    <div fxLauoutAlign="start center">
-                        <img src="assets/images/Ellipse 61.svg">
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <span><label class="sign_label2"></label></span>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <span style="text-align: center;"><label class="sign_label1">Approved</label></span>
-                    </div>
-                </div> 
-                <div fxFlex="25" class="Card_4" style="padding: 10px;">
-                    <div fxLauoutAlign="start center">
-                        <img src="assets/images/Ellipse 984.svg">
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <span><label class="sign_label2"></label></span>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <span style="text-align: center;"><label class="sign_label1">Rejected</label></span>
-                    </div>
-                </div> 
-            
             </div>
-         
-             
-          
         </div>
-        <div fxFlex="65" fxLayout="row" class="DashBoard_Box1" style="margin-top:5%"
-               >
+    </mat-card>
 
+    <div fxLayout="column" fxFlex="100" class="total-work" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+        <!-- <div fxLayout="row" fxFlex="7" style="background-color: white">
+            <div
+                fxLayout="row"
+                fxFlex="35"
+                fxLayoutAlign="space-around start"
+                style="padding: 8px; margin-top: 59px"
+            >
+                <div class="DashBoard_Box">
+                    <div fxFlex="25" class="Card_1" style="padding: 10px">
+                        <div fxlayout="column">
+                            <div fxLauoutAlign="start center">
+                                <img src="assets/images/Ellipse 55.svg" />
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <span><label class="sign_label"></label></span>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <span style="text-align: center"
+                                    ><label class="sign_label1">
+                                        Open</label
+                                    ></span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div fxFlex="25" class="Card_2" style="padding: 10px">
+                        <div fxLauoutAlign="start center">
+                            <img src="assets/images/Ellipse 60.svg" />
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <span><label class="sign_label3"></label></span>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <span style="text-align: center"
+                                ><label class="sign_label1">
+                                    Pending</label
+                                ></span
+                            >
+                        </div>
+                    </div>
+                    <div fxFlex="25" class="Card_3" style="padding: 10px">
+                        <div fxLauoutAlign="start center">
+                            <img src="assets/images/Ellipse 61.svg" />
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <span><label class="sign_label2"></label></span>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <span style="text-align: center"
+                                ><label class="sign_label1"
+                                    >Approved</label
+                                ></span
+                            >
+                        </div>
+                    </div>
+                    <div fxFlex="25" class="Card_4" style="padding: 10px">
+                        <div fxLauoutAlign="start center">
+                            <img src="assets/images/Ellipse 984.svg" />
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <span><label class="sign_label2"></label></span>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <span style="text-align: center"
+                                ><label class="sign_label1"
+                                    >Rejected</label
+                                ></span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                fxFlex="65"
+                fxLayout="row"
+                class="DashBoard_Box1"
+                style="margin-top: 5%"
+            >
                 <div fxFlex="60">
                     <div id="chart">
                         <apx-chart
-                          [series]="chartOptions.series"
-                          [chart]="chartOptions.chart"
-                         
-                          [tooltip]="chartOptions.tooltip"
-                          [dataLabels]="chartOptions.dataLabels"
-                          [responsive]="chartOptions.responsive"
-                         
-                         
+                            [series]="chartOptions.series"
+                            [chart]="chartOptions.chart"
+                            [tooltip]="chartOptions.tooltip"
+                            [dataLabels]="chartOptions.dataLabels"
+                            [responsive]="chartOptions.responsive"
                         ></apx-chart>
-                      </div>
+                    </div>
                 </div>
-                <div fxFlex="20" >
-                    <apx-chart 
-                    [series]="chartOptions1.series" 
-                    [chart]="chartOptions1.chart" 
-                    [labels]="chartOptions1.labels" 
-                    [responsive]="chartOptions1.responsive" 
-                    [legend]="chartOptions1.legend"
-                    [dataLabels]="chartOptions1.dataLabels"
-                    [colors]="chartOptions1.colors">
-                </apx-chart>
+                <div fxFlex="20">
+                    <apx-chart
+                        [series]="chartOptions1.series"
+                        [chart]="chartOptions1.chart"
+                        [labels]="chartOptions1.labels"
+                        [responsive]="chartOptions1.responsive"
+                        [legend]="chartOptions1.legend"
+                        [dataLabels]="chartOptions1.dataLabels"
+                        [colors]="chartOptions1.colors"
+                    >
+                    </apx-chart>
                 </div>
                 <div fxFlex="30">
                     <div fxFlex="50" class="">
-                        <input autocomplete="off" placeholder=" last 1 Month" formControlName="Leafno"
-                        class="inputform "  required>
-                        </div>
-                    <br>
-                        <div >
-                    <img class="image" src="../../assets/images/mi_img.svg">
-                </div>
+                        <input
+                            autocomplete="off"
+                            placeholder=" last 1 Month"
+                            formControlName="Leafno"
+                            class="inputform"
+                            required
+                        />
                     </div>
-
-                </div> 
+                    <br />
+                    <div>
+                        <img
+                            class="image"
+                            src="../../assets/images/mi_img.svg"
+                        />
+                    </div>
                 </div>
-                
-               
-            <div fxLayout="column"  fxFlex="64"  style="background-color: white;">
-               
-                <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
-                    
-    
-                    
-                        
-                            <nav mat-tab-nav-bar fxFlex="30">
-                                <a mat-tab-link *ngFor="let link of links" class="link"
-                                   (click)="activeLink = link"
-                                   [active]="activeLink == link"> {{ link }} </a>
-                               
-                              </nav>
-                              <form class="example-form">
+            </div>
+        </div> -->
 
-                                <div>
-                                     <input  class = "my-input"
-                                      autocomplete="off"
-                                      
-                                      />
-                                      <mat-icon class="search-icon" >search</mat-icon>
-                                </div>
-                                </form>
-                       
-                   
+        <!-- <div fxLayout="column" fxFlex="64" style="background-color: white">
+            <div
+                fxLayout="row"
+                fxLayoutGap="20px"
+                fxLayoutAlign="space-between center"
+            >
+                <nav mat-tab-nav-bar fxFlex="30">
+                    <a
+                        mat-tab-link
+                        *ngFor="let link of links"
+                        class="link"
+                        (click)="activeLink = link"
+                        [active]="activeLink == link"
+                    >
+                        {{ link }}
+                    </a>
+                </nav>
+                <form class="example-form">
+                    <div>
+                        <input class="my-input" autocomplete="off" />
+                        <mat-icon class="search-icon">search</mat-icon>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tablescroll" style="width: 95%; margin-left: 34px">
+                <table mat-table [dataSource]="employeesDataSource">
+                    <ng-container matColumnDef="No">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <span class="thtitle"> S.No </span>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.No }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Name">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <span class="thauthor"> Name </span>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.Status }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Gmail">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <span class="thdate">Gmail ID</span>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.EmailId1 }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Country">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <span class="thdate">Country</span>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.State }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Type">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <span class="thdate">Type</span>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.Type }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="MobileNo">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <span class="thdate">Mobile Number</span>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.Mobile1 }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Status">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <span class="thdate">Status</span>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.Status }}
+                        </td>
+                    </ng-container>
+
+                    <tr
+                        mat-header-row
+                        *matHeaderRowDef="employeesDisplayColumns; sticky: true"
+                        style="background-color: #f7f9fd"
+                    ></tr>
+                    <tr
+                        mat-row
+                        *matRowDef="let row; columns: employeesDisplayColumns"
+                    ></tr>
+                </table>
+            </div>
+        </div> -->
+        <div fxLayout="row" fxFlex="30" class="first-div">
+            <div fxFlex="40" fxLayout="row" fxLayoutAlign="space-between center" 
+            fxLayoutGap="12px" class="status-div">
+                <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr1">
+                    <img src="assets/images/Ellipse 55.svg" class="align-image"/>
+                    <div class="count clr1">
+                        100
+                    </div>
+                    <span class="status_profile">
+                        Open
+                    </span>
                 </div>
-                
-<div class="tablescroll" style="width: 95%;margin-left: 34px;"> 
-   
-     
-     <table mat-table [dataSource]="employeesDataSource">
-    
-            <ng-container matColumnDef="No">
-                <th mat-header-cell *matHeaderCellDef><span class="thtitle"> S.No </span></th>
-                <td mat-cell *matCellDef="let element"> {{element.No}} </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="Name">
-                <th mat-header-cell *matHeaderCellDef> <span class="thauthor"> Name </span></th>
-                <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="Gmail">
-                <th mat-header-cell *matHeaderCellDef><span class="thdate">Gmail ID</span> </th>
-                <td mat-cell *matCellDef="let element"> {{element.EmailId1}} </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="Country">
-                <th mat-header-cell *matHeaderCellDef><span class="thdate">Country</span> </th>
-                <td mat-cell *matCellDef="let element"> {{element.State}} </td>
-            </ng-container>
-            <ng-container matColumnDef="Type">
-                <th mat-header-cell *matHeaderCellDef><span class="thdate">Type</span> </th>
-                <td mat-cell *matCellDef="let element"> {{element.Type}} </td>
-            </ng-container>
-            <ng-container matColumnDef="MobileNo">
-                <th mat-header-cell *matHeaderCellDef><span class="thdate">Mobile Number</span> </th>
-                <td mat-cell *matCellDef="let element"> {{element.Mobile1}} </td>
-            </ng-container>
-            <ng-container matColumnDef="Status">
-                <th mat-header-cell *matHeaderCellDef><span class="thdate">Status</span> </th>
-                <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
-            </ng-container>
-          
-          
-            <tr mat-header-row *matHeaderRowDef="employeesDisplayColumns; sticky: true"
-                style="background-color: #f7f9fd;"></tr>
-            <tr mat-row *matRowDef="let row; columns: employeesDisplayColumns;"></tr>
-        </table>
-    
-    </div>
-     
-
+                <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr2">
+                    <img src="assets/images/Ellipse 60.svg" class="align-image"/>
+                    <div class="count clr2">
+                        100
+                    </div>
+                    <span class="status_profile">
+                        Pending
+                    </span>
+                </div>
+                <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr3">
+                    <img src="assets/images/Ellipse 61.svg" class="align-image"/>
+                    <div class="count clr3">
+                        100
+                    </div>
+                    <span class="status_profile">
+                        Approved
+                    </span>
+                </div>
+                <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr4">
+                    <img src="assets/images/Ellipse 984.svg" class="align-image"/>
+                    <div class="count clr4">
+                        100
+                    </div>
+                    <span class="status_profile">
+                        Rejected
+                    </span>
+                </div>
+            </div>
+            <div fxFlex="2"></div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="graph-div">
+                <div fxFlex="65">
+                    <div id="chart">
+                        <apx-chart
+                            [series]="chartOptions.series"
+                            [chart]="chartOptions.chart"
+                            [tooltip]="chartOptions.tooltip"
+                            [dataLabels]="chartOptions.dataLabels"
+                            [responsive]="chartOptions.responsive"
+                            [legend]="chartOptions.legend"
+                        ></apx-chart>
+                    </div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="space-around center">
+                    <apx-chart class="bar-chart"
+                        [series]="chartOptions1.series"
+                        [chart]="chartOptions1.chart"
+                        [labels]="chartOptions1.labels"
+                        [responsive]="chartOptions1.responsive"
+                        [legend]="chartOptions1.legend"
+                        [dataLabels]="chartOptions1.dataLabels"
+                        [colors]="chartOptions1.colors"
+                    >
+                    </apx-chart>
+                    <div class="overall_recieved">
+                        Overall Recieved
+                    </div>
+                </div>
+                <div  fxLayout="column" fxLayoutAlign="space-around center">
+                    <!-- <div class="inp-div">
+                        <input autocomplete="off" placeholder=" last 1 Month"
+                         formControlName="Leafno" class="inputform" required>
+                    </div> -->
+                    <div>
+                        <img class="image" src="../../assets/images/mi_img.svg" />
+                    </div> 
+                </div>
             </div>
         </div>
+        <div fxLayout="row" fxFlex="70" class="second-div">
+            <div fxLayout="column" fxLayoutAlign="start center" class="inner-second_div">
+                <div style="width: 100%;"
+                    fxLayout="row"
+                    fxLayoutGap="20px"
+                    fxLayoutAlign="space-between center">
+                    <nav mat-tab-nav-bar fxFlex="40" class="navigation-div">
+                        <a
+                            mat-tab-link
+                            *ngFor="let link of links"
+                            class="link"
+                            (click)="activeLink = link"
+                            [active]="activeLink == link"
+                        >
+                            {{ link }}
+                        </a>
+                    </nav>
+                    <div fxFlex="30"></div>
+                    <div fxFlex="30" fxLayout="row" class="btn_bg" fxLayoutGap="20px">
+                        <mat-icon matSuffix class="serachicon_search">search</mat-icon>
+                        <input matInput class="search_input1 forminputedit" placeholder="Search-to-do" autocomplete="off">
+                        <mat-icon matSuffix class="micicon_search">mic</mat-icon>
+                    </div>
+                </div>
+    
+                <div class="table_div" style="width: 100%;">
+                    <table mat-table [dataSource]="employeesDataSource" class="table-css">
+                        <ng-container matColumnDef="No">
+                            <th mat-header-cell *matHeaderCellDef class="header_table-class">
+                                <span class="thtitle"> S.No </span>
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="table_data">
+                                {{ element.No }}
+                            </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="Name">
+                            <th mat-header-cell *matHeaderCellDef class="header_table-class">
+                                <span class="thauthor"> Name </span>
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="table_data">
+                                {{ element.Status }}
+                            </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="Gmail">
+                            <th mat-header-cell *matHeaderCellDef class="header_table-class">
+                                <span class="thdate">Gmail ID</span>
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="table_data">
+                                {{ element.Gmail }}
+                            </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="Country">
+                            <th mat-header-cell *matHeaderCellDef class="header_table-class">
+                                <span class="thdate">Country</span>
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="table_data">
+                                {{ element.Country }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Type">
+                            <th mat-header-cell *matHeaderCellDef class="header_table-class">
+                                <span class="thdate">Type</span>
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="table_data">
+                                {{ element.Type }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="MobileNo">
+                            <th mat-header-cell *matHeaderCellDef class="header_table-class">
+                                <span class="thdate">Mobile Number</span>
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="table_data">
+                                {{ element.MobileNo }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Status">
+                            <th mat-header-cell *matHeaderCellDef class="header_table-class">
+                                <span class="thdate">Status</span>
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="table_data">
+                                <!-- {{ element.Status }} -->
+                                <div>
 
-
-                
-
-
-
-     
+                                </div>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Action">
+                            <th mat-header-cell *matHeaderCellDef class="header_table-class"
+                            style="text-align: center !important;">
+                                <span class="thdate" >Action</span>
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="table_data">
+                                <div style="text-align-last: center;">
+                                    <button mat-flat-button class="tble_btn">Review</button>
+                                </div>
+                            </td>
+                        </ng-container>
+                        <tr
+                            mat-header-row
+                            *matHeaderRowDef="employeesDisplayColumns; sticky: true"
+                             class="header-row-css"
+                        ></tr>
+                        <tr
+                            mat-row
+                            *matRowDef="let row; columns: employeesDisplayColumns" class="row-table"
+                        ></tr>
+                    </table>
+                </div>
+            </div>
         </div>
-     
+    </div>
+</div>
