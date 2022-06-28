@@ -446,7 +446,10 @@
                 <span fxFlex="30" class="marketsp">Copy of Pan Card*</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
-                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                  <p style="margin-left:14%;">{{FileName}}</p>
+                  <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csvInputChange($event)"/>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput.click()" style="color: green;">Upload</button>
+                  
                 </div>
 
 
@@ -456,7 +459,10 @@
                 <span fxFlex="30" class="marketsp">Copy of Gst Certificate</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
-                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                  <p style="margin-left:14%;">{{FileName1}}</p>
+                  <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv1InputChange($event)"/>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput1.click()" style="color: green;">Upload</button>
+                 
                 </div>
 
 
@@ -466,7 +472,10 @@
                 <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
-                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                  <p style="margin-left:14%;">{{FileName2}}</p>
+                  <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv2InputChange($event)"/>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput2.click()" style="color: green;">Upload</button>
+                  
                 </div>
 
 
@@ -477,7 +486,10 @@
                 <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
-                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                  <p style="margin-left:14%;">{{FileName3}}</p>
+                  <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv3InputChange($event)"/>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput3.click()" style="color: green;">Upload</button>
+              
                 </div>
 
 
@@ -488,7 +500,10 @@
                 <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
-                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                  <p style="margin-left:14%;">{{FileName4}}</p>
+                  <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv4InputChange($event)"/>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput4.click()" style="color: green;">Upload</button>
+                 
                 </div>
 
 
@@ -499,7 +514,10 @@
                 <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
-                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                  <p style="margin-left:14%;">{{FileName5}}</p>
+                  <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv5InputChange($event)"/>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput5.click()" style="color: green;">Upload</button>
+                
                 </div>
 
 
@@ -510,7 +528,10 @@
                 <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
-                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                  <p style="margin-left:14%;">{{FileName6}}</p>
+                  <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv6InputChange($event)"/>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput6.click()" style="color: green;">Upload</button>
+                  
                 </div>
 
 
@@ -520,7 +541,9 @@
                 <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
-                  <button mat-raised-button class="uploadbtn" style="color: green;">Upload</button>
+                  <p style="margin-left:14%;">{{FileName7}}</p>
+                  <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv7InputChange($event)"/>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput7.click()" style="color: green;">Upload</button>
                 </div>
 
 
@@ -595,11 +618,11 @@
         <img class="previousimg" src="../../assets/images/previous.svg">
         Previous</button>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px" style="margin-left:-20px">
+    <!-- <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px" style="margin-left:-20px">
       <button mat-flat-button class="next" (click)="nextbtn()">Next
         <img class="nextimg" src="../../assets/images/next.svg">
       </button>
-    </div>
+    </div> -->
     <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
       <button mat-flat-button class="clear" (click)="ClearAll()"> Clear
         <img class="clearimg" src="../../assets/images/clear.svg">
@@ -611,7 +634,7 @@
       </button>
     </div>
     <!-- [disabled]="MIform.required.invalid" -->
-    <button mat-raised-button class="savebtn" (click)="saveInfo()">Save & Next</button>
+    <button mat-raised-button class="savebtn" (click)="saveInfo()">Submit</button>
   </div>
   <br>
 </div>

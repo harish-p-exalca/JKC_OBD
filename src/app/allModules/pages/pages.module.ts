@@ -61,6 +61,7 @@ import { ApprovalscreenComponent } from '../approvalscreen/approvalscreen.compon
 import { ChartsModule } from 'ng2-charts';
  import { NgApexchartsModule } from "ng-apexcharts";
 import { BankdialogComponent } from './bankdialog/bankdialog.component';
+import { ReportsviewComponent } from './reportsview/reportsview.component';
 
 
 
@@ -92,6 +93,10 @@ const routes = [
     {
         path: 'approvalinformation',
         component: ApprovalscreenComponent
+    }, 
+    {
+        path: 'reportview',
+        component: ReportsviewComponent
     },
     // {
     //     path: 'usermanagement',
@@ -164,7 +169,8 @@ const routes = [
         MarketinformationComponent,
         BankinformationComponent,
         ApprovalscreenComponent,
-        BankdialogComponent
+        BankdialogComponent,
+        ReportsviewComponent
 
     ],
     providers: [

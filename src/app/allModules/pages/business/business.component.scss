@@ -29,7 +29,7 @@
     margin-left: 10px;
     height: 33px;
     margin-top: 32px;
-    background-color: #a5c3e3;
+    background-color: #38679f;
     width: 19%;
   }
 
@@ -62,10 +62,15 @@
   table {
     width: 100%;
 
-
+th{
+  font-weight:normal !important;
+  font-size: medium !important;
+  border-right: 1px solid #abaab9;
+}
 
     tr {
       height: 40px;
+      border-right: 1px solid #abaab9 !important;
     }
 
     .mat-input-element:disabled {

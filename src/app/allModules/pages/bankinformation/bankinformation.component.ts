@@ -23,6 +23,7 @@ import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { map, startWith } from 'rxjs/operators';
 import { BankdialogComponent } from '../bankdialog/bankdialog.component';
+import { CommonService } from 'app/services/common.service';
 
 
 @Component({
@@ -39,11 +40,19 @@ export class BankinformationComponent implements OnInit {
   selectedlist: string[] = ['Yes', 'No']
   selected = '';
   isd2rs: boolean = false;
+  FileName:any;
+  FileName1:any;
+  FileName2:any;
+  FileName3:any;
+  FileName4:any;
+  FileName5:any;
+  FileName6:any;
+  FileName7:any;
   name: any = [];
   public listData: any;
   notificationSnackBarComponent: NotificationSnackBarComponent;
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  constructor(private fb: FormBuilder, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, public dialog: MatDialog) {
+  constructor(private fb: FormBuilder,private _commonService: CommonService, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, public dialog: MatDialog) {
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar), this.listData = [];
   }
   BIform!: FormGroup;
@@ -118,9 +127,13 @@ export class BankinformationComponent implements OnInit {
     this.BIform.reset();
   }
   previousbtn(): void {
-    this._router.navigate(['pages/businessinformation']);
+    this._router.navigate(['pages/marketinformation']);
   }
   onAdd(): void {
+    if(this.BIform.valid)
+    {
+
+   
     this.listData.push(this.BIform.value);
     // this.BIform.reset();
     this.listData[this.listData.length - 1].id = this.listData.length.toString();
@@ -143,7 +156,10 @@ export class BankinformationComponent implements OnInit {
         this.notificationSnackBarComponent.openSnackBar('Something went wrong', SnackBarStatus.danger);
       },
     );
-
+  }
+  else{
+    this._commonService.ShowValidationErrors(this.BIform);
+  }
 
 
 
@@ -155,6 +171,9 @@ export class BankinformationComponent implements OnInit {
 
   }
   saveInfo(): void {
+    if(this.BIform.valid){
+
+ 
     //1st
     const dialogRef = this.dialog.open(BankdialogComponent, {
       width: "53%",
@@ -204,12 +223,46 @@ export class BankinformationComponent implements OnInit {
       },
     );
 
-
-
-
+  }
+  else
+  {
+    this._commonService.ShowValidationErrors(this.BIform);
   }
 
 
+  }
+  csvInputChange(fileInputEvent: any) {
+    this.FileName = fileInputEvent.target.files[0].name;
+    console.log(fileInputEvent.target.files[0]);
+  }
+  csv1InputChange(fileInputEvent: any) {
+    this.FileName1 = fileInputEvent.target.files[0].name;
+    console.log(fileInputEvent.target.files[0]);
+  }
+  csv2InputChange(fileInputEvent: any) {
+    this.FileName2 = fileInputEvent.target.files[0].name;
+    console.log(fileInputEvent.target.files[0]);
+  }
+  csv3InputChange(fileInputEvent: any) {
+    this.FileName3 = fileInputEvent.target.files[0].name;
+    console.log(fileInputEvent.target.files[0]);
+  }
+  csv4InputChange(fileInputEvent: any) {
+    this.FileName4 = fileInputEvent.target.files[0].name;
+    console.log(fileInputEvent.target.files[0]);
+  }
+  csv5InputChange(fileInputEvent: any) {
+    this.FileName5 = fileInputEvent.target.files[0].name;
+    console.log(fileInputEvent.target.files[0]);
+  }
+  csv6InputChange(fileInputEvent: any) {
+    this.FileName6 = fileInputEvent.target.files[0].name;
+    console.log(fileInputEvent.target.files[0]);
+  }
+  csv7InputChange(fileInputEvent: any) {
+    this.FileName7 = fileInputEvent.target.files[0].name;
+    console.log(fileInputEvent.target.files[0]);
+  }
   nextbtn(): void {
     this._router.navigate(['pages/nextlogin'])
   }

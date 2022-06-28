@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
 import { SnackBarStatus } from 'app/notifications/snackbar-status-enum';
+import { CommonService } from 'app/services/common.service';
 import { DashboardService } from 'app/services/dashboard.service';
 export interface Monthlysales {
   sale: string;
@@ -36,7 +37,7 @@ export class BusinessComponent implements OnInit {
   brandName: string[] = ['WallmaxX', 'WhitemaxX', 'GypsomaxX', 'ShieldmaxX', 'SmoothMaxX', 'RepairmaxX', 'TilemaxX', 'Woodamore'];
   columnsToDisplay: string[] = this.displayColumns.slice();
   dataSource = ELEMENT_DATA;
-  constructor(private fb: FormBuilder, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar,) {
+  constructor(private fb: FormBuilder, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, private _commonService: CommonService) {
     this.listData = [];
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(
 
@@ -92,27 +93,34 @@ export class BusinessComponent implements OnInit {
   }
 
   saveBusinessInfo(): void {
-    const personalinformation: BusinessInformation = new BusinessInformation();
-    personalinformation.Turnover = this.BIform.get('NoOfYears').value;
-    personalinformation.Retail = this.BIform.get('retail').value;
-    personalinformation.WorkingCaptial = this.BIform.get('capitalinvest').value;
-    personalinformation.Retailers = this.BIform.get('NoOfYears1').value;
-    personalinformation.NoVechicle = this.BIform.get('vehicle').value;
-    personalinformation.TotalStorage = this.BIform.get('storagecapacity').value;
-    personalinformation.Wholesale = this.BIform.get('Wholesale').value;
+    if (this.BIform.valid) {
+      const personalinformation: BusinessInformation = new BusinessInformation();
+      personalinformation.Turnover = this.BIform.get('NoOfYears').value;
+      personalinformation.Retail = this.BIform.get('retail').value;
+      personalinformation.WorkingCaptial = this.BIform.get('capitalinvest').value;
+      personalinformation.Retailers = this.BIform.get('NoOfYears1').value;
+      personalinformation.NoVechicle = this.BIform.get('vehicle').value;
+      personalinformation.TotalStorage = this.BIform.get('storagecapacity').value;
+      personalinformation.Wholesale = this.BIform.get('Wholesale').value;
+  
+  
+      this._dashboardService.AddBusinessInfo(personalinformation).subscribe(
+        (data) => {
+          console.log(data);
+          this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
+          this._router.navigate(['pages/marketinformation']);
+        },
+        (err) => {
+  
+          console.error(err);
+        },
+      );
+    }
+    else{
+      this._commonService.ShowValidationErrors(this.BIform);
+    }
 
-
-    this._dashboardService.AddBusinessInfo(personalinformation).subscribe(
-      (data) => {
-        console.log(data);
-        this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
-        this._router.navigate(['pages/bankinformation']);
-      },
-      (err) => {
-
-        console.error(err);
-      },
-    );
+   
     // this._router.navigate(['pages/nextlogin']);
   }
   public count = -1;
@@ -146,7 +154,7 @@ export class BusinessComponent implements OnInit {
     this._router.navigate(['pages/marketinformation'])
   }
   previousbtn(): void {
-    this._router.navigate(['pages/marketinformation']);
+    this._router.navigate(['pages/dashboard']);
   }
   nextbtn(): void {
     this._router.navigate(['pages/bankinformation'])

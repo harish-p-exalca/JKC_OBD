@@ -90,6 +90,7 @@ export class DashboardComponent implements OnInit {
     public listData1 = [];
     selected = '';
     currentTransaction: number;
+    SubmitValue:boolean = false;
     CustomerObdView: CustomerOnboardingView = new CustomerOnboardingView();
     constructor(
         private _router: Router,
@@ -206,6 +207,7 @@ export class DashboardComponent implements OnInit {
             Pincode: this.CustomerObdView.PersonalInfo.PersonalInformation.Pincode,
             Status: this.CustomerObdView.PersonalInfo.PersonalInformation.Status,
         });
+        this.SubmitValue=true;
         this.selected=this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
         this.IdentityData=this.CustomerObdView.PersonalInfo.Identities;
     }
@@ -247,6 +249,9 @@ export class DashboardComponent implements OnInit {
         else {
             this._commonService.ShowValidationErrors(this.PIform);
         }
+    }
+    NextButtonClick() {
+        this._router.navigate(['/pages/businessinformation']);
     }
     GetPersonalInfoFromForm(): PersonalInformation {
         var pi = new PersonalInformation();
