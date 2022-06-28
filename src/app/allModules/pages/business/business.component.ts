@@ -55,9 +55,6 @@ export class BusinessComponent implements OnInit {
       retail: ['', Validators.pattern(/^[0-9]$/)],
       vehicle: ['', Validators.required],
       Wholesale: ['', Validators.pattern(/^[a-zA-Z0-9]+$/)],
-
-
-
     })
     this.BrandForm = this.fb.group({
       sales: ['', Validators.required],
