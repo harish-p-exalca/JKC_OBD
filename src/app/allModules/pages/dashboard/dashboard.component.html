@@ -113,8 +113,9 @@
             <span fxFlex="30" class="marketsp">State</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <mat-select placeholder="Select the State" formControlName="State" required
-                (selectionChange)="SelectCity($event.value)" class="inputform2">
-                <mat-option *ngFor="let state of SOption" [value]="state.StateName">{{state.StateName}}</mat-option>
+                 class="inputform2">
+                 <!-- (selectionChange)="SelectCity($event.value)" -->
+                <mat-option *ngFor="let state of SOption" (click)="SelectCity(state)" [value]="state.StateName">{{state.StateName}}</mat-option>
               </mat-select>
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('State')?.touched && PIform?.get('State')?.hasError('required')">State is
