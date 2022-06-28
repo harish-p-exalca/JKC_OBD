@@ -203,8 +203,8 @@ export class InvitepageComponent implements OnInit {
           title: 'Personal',
           translate: 'NAV.SAMPLE.TITLE',
           type: 'item',
-          icon: 'dashboardIcon',
-          isSvgIcon: true,
+          icon: 'person',
+          isSvgIcon: false,
           url: '/pages/dashboard',
         }
       );
@@ -216,8 +216,8 @@ export class InvitepageComponent implements OnInit {
           title: 'Business',
           translate: 'NAV.SAMPLE.TITLE',
           type: 'item',
-          icon: 'reportIcon',
-          isSvgIcon: true,
+          icon: 'business',
+          isSvgIcon: false,
           url: '/pages/businessinformation',
         }
       );
@@ -229,8 +229,8 @@ export class InvitepageComponent implements OnInit {
           title: 'Market',
           translate: 'NAV.SAMPLE.TITLE',
           type: 'item',
-          icon: 'reportIcon',
-          isSvgIcon: true,
+          icon: 'gps_fixed',
+          isSvgIcon: false,
           url: '/pages/marketinformation',
         }
       );
@@ -242,8 +242,8 @@ export class InvitepageComponent implements OnInit {
           title: 'Bank',
           translate: 'NAV.SAMPLE.TITLE',
           type: 'item',
-          icon: 'reportIcon',
-          isSvgIcon: true,
+          icon: 'payment',
+          isSvgIcon: false,
           url: '/pages/bankinformation',
         }
       );
