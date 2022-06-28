@@ -76,12 +76,12 @@ const datas:Element[] =  [
   {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
 ]
 @Component({
-  selector: 'app-approvalscreen',
-  templateUrl: './approvalscreen.component.html',
-  styleUrls: ['./approvalscreen.component.scss']
+  selector: 'app-initiator-dashboard',
+  templateUrl: './initiator-dashboard.component.html',
+  styleUrls: ['./initiator-dashboard.component.scss']
 })
-export class ApprovalscreenComponent implements OnInit {
-  // lineChartData: ChartDataSets[] = [
+export class InitiatorDashboardComponent implements OnInit {
+// lineChartData: ChartDataSets[] = [
   //   { data: [85, 72, 78, 75, 77, 75], label: 'Crude oil prices' },
   // ];
   // lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June'];
@@ -267,4 +267,5 @@ export class PersonalInformation {
   EmailId1!: string;
   EmailId2!: string;
 }
+
 

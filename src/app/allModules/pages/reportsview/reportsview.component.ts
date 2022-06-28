@@ -2,17 +2,43 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Monthlysales } from '../business/business.component';
 
-const ELEMENT_DATA: Monthlysales[] = [
-  { sale: "WallmaxX" },
-  { sale: "WhitemaxX" },
-  { sale: "GypsomaxX" },
-  { sale: "ShieldmaxX" },
-  { sale: "SmoothMaxX" },
-  { sale: "RepairmaxX" },
-  { sale: "TilemaxX" },
-  { sale: "Woodamore" },
-];
-
+export interface Element {
+  Role: string,
+  Name:string,
+  MobileNo:string,
+  Emailid: string
+}
+export interface AverageSource {
+  White_Cement_Wall_Putty: string;
+  WP_Avg_Month_Sales: string;
+  WC_Avg_Month_sales: string;
+}
+export interface SaleSource {
+  Sale: string;
+  Jan: string;
+  Feb: string; 
+  Mar: string;
+  Apr: string;
+  May: string;
+  Jun: string; 
+  Jul: string;
+  Aug: string;
+  Sep: string;
+  Oct: string; 
+  Nov: string;
+  Dec: string;
+}
+const datas:Element[] =  [
+  {Role: '1', Name: 'prasath',MobileNo:'9486740455',Emailid: 'prasath@exalca.com' },
+]
+const avgdatasource: AverageSource[] = [
+  {White_Cement_Wall_Putty: 'prasath',WP_Avg_Month_Sales: 'prasath',WC_Avg_Month_sales: 'prasath'}
+]
+const sales: SaleSource[] =[
+  {Sale: 'WallmaxX',Jan: 'jan', Feb: '', Mar: '',Apr: '', May: '',Jun: '', Jul: '', Aug:'',Sep: '',Oct: '',Nov: '',Dec:''},
+  {Sale: 'Woodamore',Jan: 'jan', Feb: '', Mar: '',Apr: '', May: '',Jun: '', Jul: '', Aug:'',Sep: '',Oct: '',Nov: '',Dec:''},
+  {Sale: 'ShieldmaxX',Jan: 'jan', Feb: '', Mar: '',Apr: '', May: '',Jun: '', Jul: '', Aug:'',Sep: '',Oct: '',Nov: '',Dec:''},
+]
 @Component({
   selector: 'app-reportsview',
   templateUrl: './reportsview.component.html',
@@ -27,10 +53,12 @@ export class ReportsviewComponent implements OnInit {
   BIform !: FormGroup
   BrandForm1!: FormGroup;
   BIform1!: FormGroup;
-  displayedColumns: string[] = ["sale"]
-  displayColumns: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  columnsToDisplay: string[] = this.displayColumns.slice();
-  dataSource = ELEMENT_DATA;
+  contactDetailsColumns: string[] = ['Role', 'Name', 'MobileNo','Emailid'];
+  contactdataSource = datas;
+  averageSalesColumns: string [] = ['White_Cement_Wall_Putty', 'WP_Avg_Month_Sales', 'WC_Avg_Month_sales'];
+  averageSalesDataSource = avgdatasource;
+  saleColumns: string[] = ["Sale","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  saleDataSource = sales;
   constructor( private fb: FormBuilder,) { }
 
   ngOnInit() {

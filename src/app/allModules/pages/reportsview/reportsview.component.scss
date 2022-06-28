@@ -1,18 +1,8 @@
-.TitleName {
-    font: normal normal 500 16px Poppins;
-    margin-right: 5%;
-}
-.TitleMailID{
-    font: normal normal 500 16px Poppins;
-    color: #00061C;
-    opacity: 0.6;
-    margin-left: 5%;
-}
 @import "src/@fuse/scss/fuse";
 
-#dashboard {
+.reportsview {
   background-color: white;
-
+  padding-bottom: 50px;
   .progressBarPostion {
     position: absolute !important;
     top: 350px;
@@ -55,18 +45,6 @@
     text-decoration: var(--textDec);
   }
 
-  .title {
-    text-align: center;
-    //font: normal normal 500 22px/26px Poppins;
-    letter-spacing: 0px;
-    color: #FFFFFF;
-    opacity: 1;
-    padding-left: 40%;
-    padding-left: 40%;
-    font-size: 18px;
-    font-weight: 500;
-
-  }
 
   @mixin TableBorderRight($color) {
     border-right: 1px solid $color;
@@ -78,19 +56,6 @@
     min-width: 100px !important;
   }
 
-  table {
-    width: 100%;
-
-    tr {
-      height: 40px;
-    }
-
-    .mat-input-element:disabled {
-      color: gray !important;
-      background: whitesmoke !important;
-      cursor: not-allowed !important;
-    }
-  }
 
   .whiteBg {
     background-color: white !important;
@@ -137,15 +102,6 @@
     margin-top: 25%;
   }
   
-  ::ng-deep div.mat-form-field-outline-start {
-    border-color: 0 !important;
-    border-width: 0px !important;
-  }
-  
-  .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: white !important;
-    background-color: #f1f1f5;
-  }
   
   // input.mat-input-element {
   //  // color: white;
@@ -158,7 +114,7 @@
   }
   
   input:focus {
-    border: none !important;
+    // border: none !important;
   }
   
   .inputdivision {
@@ -185,45 +141,44 @@
     opacity: 1;
   }
   
-  .inputform {
-    color: #00061C !important;
-    font-size: 13px !important;
-    height: 36px;
-    padding: 0 12px !important;
-    line-height: 3;
-    border: none;
-    background: #f1f1f5 !important;
-  }
+  // .inputform {
+  //   color: #00061C !important;
+  //   font-size: 13px !important;
+  //   height: 36px;
+  //   padding: 0 12px !important;
+  //   line-height: 3;
+  //   border: none;
+  //   background: #f1f1f5 !important;
+  // }
   
-  .inputform1 {
-    color: #00061C !important;
-    font-size: 13px !important;
-    height: 36px;
-    padding: 0 12px !important;
-    line-height: 3;
-    border: none;
-    background: #f1f1f5 !important;
-  }
+  // .inputform1 {
+  //   color: #00061C !important;
+  //   font-size: 13px !important;
+  //   height: 36px;
+  //   padding: 0 12px !important;
+  //   line-height: 3;
+  //   border: none;
+  //   background: #f1f1f5 !important;
+  // }
   
-  .inputform2 {
-    color: #00061C !important;
-    font-size: 13px !important;
-    height: 36px;
-    padding: 0 12px !important;
-    line-height: 3;
-    border: none;
-    background: #f1f1f5 !important;
-  }
+  // .inputform2 {
+  //   color: #00061C !important;
+  //   font-size: 13px !important;
+  //   height: 36px;
+  //   padding: 0 12px !important;
+  //   line-height: 3;
+  //   border: none;
+  //   background: #f1f1f5 !important;
+  // }
   
-  .inputform:focus {
-    outline: none;
-  }
+  // .inputform:focus {
+  //   outline: none;
+  // }
   
-  .inputform::placeholder {
-    font-size: 13px !important;
-    // font-family: 'poppins-semi' !important;
-    color: #acacac !important;
-  }
+  // .inputform::placeholder {
+  //   font-size: 13px !important;
+  //   color: #acacac !important;
+  // }
   
   // ::ng-deep .mat-form-field-label-wrapper {
   //   top: -1.5em;
@@ -329,7 +284,6 @@
   
   .marketinfo {
     padding: 0%;
-    //font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     margin-top: 25px;
     width: 100%;
@@ -340,14 +294,12 @@
   // }
   .populationclass {
     padding: 0%;
-    // //font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     margin-top: 20px;
     width: 100%;
   }
   
   .errorn {
-    //font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
   }
   
@@ -458,7 +410,6 @@
   
   .previous {
     margin-top: 35px;
-    ////font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     cursor: pointer;
     background-color: white !important;
@@ -473,7 +424,6 @@
   
   .next {
     margin-top: 35px;
-    // //font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
     cursor: pointer;
     background-color: white !important;
@@ -495,7 +445,6 @@
   
   .clear {
     margin-top: 35px;
-    // //font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     cursor: pointer;
     background-color: white !important;
@@ -510,7 +459,6 @@
   
   .draft {
     margin-top: 35px;
-    // //font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     cursor: pointer;
     background-color: white !important;
@@ -536,7 +484,6 @@
     cursor: pointer;
     margin-bottom: 2px;
   }
-  
   .headerbackgrnd {
     background-image: url('^/assets/images/header_img.png') !important;
     background-repeat: no-repeat;
@@ -547,6 +494,49 @@
     z-index: 100;
     width: 100%;
   }
+  .header-div {
+    height: 2px;
+    align-items: center;
+  }
+  .title {
+    // text-align: center;
+    // letter-spacing: 0px;
+    // color: #FFFFFF;
+    // opacity: 1;
+    // padding-left: 40%;
+    // padding-left: 40%;
+    // font-size: 18px;
+    // font-weight: 500;
+
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: white !important;
+  }
+
+  // .headerbackgrnd {
+  //   position: fixed !important;
+  //   width: 100%;
+  //   height: 50px;
+  //   box-shadow: none;
+  //   .header-div{
+  //     .title {
+  //       text-align: center;
+  //       color: #00061C;
+  //       font-size: 14px;
+  //       font-weight: 500;
+  //     } 
+  //     .dividerclass{
+  //       height: 20px;
+  //       color: black;
+  //       width: 20px;
+  //     }
+  //     .customer_mail {
+  //       color: #acacac !important;
+  //       font-size: 16px;
+  //       font-weight: 500;
+  //     }
+  //   }
+  // }
   
   .savebtn {
     margin-top: 29px;
@@ -554,7 +544,6 @@
     cursor: pointer;
     border-radius: 4px;
     margin-left: 14px;
-    // //font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     background-color: #1434AA !important;
     color: white !important;
@@ -565,9 +554,302 @@
     // background-color: #00061C !important;
   }
 }
+.total_div {
+  width: 100%;
+  margin-top: 30px!important;
+  .inner_total_div {
+    padding-top: 30px;
+    width: 100%;
+    .sub_div1 {
+      padding-left: 20px;
+      width: 100%;
+      .form_div {
+        width: 100%;
+        padding-left: 20px;
+        .form_div_I {
+          width: 100%;
+          padding-left: 20px;
+          .populationclass {
+            padding: 0%;
+            font-size: 14px;
+            margin-top: 20px;
+            width: 100%;
+            .marketsp {
+              font-size: 12px;
+              font-weight: 500 !important;
+              color: #00061C !important;
+            }
+            .inp_div {
+              width: 100%;
+              background-color: transparent !important;
+              .inner-inp_div {
+                width: 70%;
+              }
+              .inputform2 {
+                color: #00061C !important;
+                font-size: 12px !important;
+              }
+              .inputform2::placeholder {
+                font-size: 10px !important;
+                color: #acacac !important;
+              }
+            }
+          }        
+        }
+        .form_div_II {
+          width: 100%;
+          padding-left: 20px;
+          .populationclass {
+            padding: 0%;
+            font-size: 14px;
+            margin-top: 20px;
+            width: 100%;
+            .marketsp {
+              font-size: 12px;
+              font-weight: 500 !important;
+              color: #00061C !important;
+            }
+            .inp_div {
+              width: 100%;
+              background-color: transparent !important;
+              .inner-inp_div {
+                width: 70%;
+              }
+              .inputform2 {
+                color: #00061C !important;
+                font-size: 12px !important;
+              }
+              .inputform {
+                color: #00061C !important;
+                font-size: 12px !important;
+              }
+              .inputform2::placeholder {
+                font-size: 10px !important;
+                color: #acacac !important;
+              }
+              .inputform::placeholder {
+                font-size: 10px !important;
+                color: #acacac !important;
+              }
+            }
+          }        
+        }
 
+        .form_div_III {
+          width: 100%;
+          padding-left: 20px;
+          .populationclass {
+            padding: 0%;
+            font-size: 14px;
+            margin-top: 20px;
+            width: 100%;
+            .inputform1 {
+              color: #00061C !important;
+              font-size: 12px !important;
+            }
+            .inputform1::placeholder {
+              font-size: 10px !important;
+              color: #acacac !important;
+            }
+            .marketsp {
+              font-size: 12px;
+              font-weight: 500 !important;
+              color: #00061C !important;
+            }
+            .inp_div {
+              width: 100%;
+              background-color: transparent !important;
+              .inner-inp_div {
+                width: 70%;
+              }
+              .inputform2 {
+                color: #00061C !important;
+                font-size: 12px !important;
+              }
+              .inputform2::placeholder {
+                font-size: 10px !important;
+                color: #acacac !important;
+              }
+            }
+          }        
+        }
+        .form_div_IV {
+          width: 100%;
+          padding-left: 20px;
+          .populationclass {
+            padding: 0%;
+            font-size: 14px;
+            margin-top: 20px;
+            width: 100%;
+            .marketsp {
+              font-size: 12px;
+              font-weight: 500 !important;
+              color: #00061C !important;
+            }
+            .inp_div {
+              width: 100%;
+              background-color: transparent !important;
+              .inner-inp_div {
+                width: 70%;
+              }
+              .inputform2 {
+                color: #00061C !important;
+                font-size: 12px !important;
+              }
+              .inputform {
+                color: #00061C !important;
+                font-size: 12px !important;
+              }
+              .inputform2::placeholder {
+                font-size: 10px !important;
+                color: #acacac !important;
+              }
+              .inputform::placeholder {
+                font-size: 10px !important;
+                color: #acacac !important;
+              }
+            }
+          }        
+        }
+      }
+    }
+  }
+}
+.label_connect .mat-form-field-appearance-legacy .mat-form-field-label {
+  font-size: 10px !important;
+  font-family: 'poppins' !important;
+  color: #596069 !important;
+  line-height: 3.5;
+  width: 100% !important;
+}
 
-
-// .mat-select-placeholder {
-//   font-family: Arial, Helvetica, sans-serif !important;
-// }
+.forminputedit {
+  color: #0d0c22 !important;
+  font-size: 10px !important;
+  font-family: 'Poppins-SemiBold' !important;
+}
+.footer_div {
+  width: 100% !important;
+  height: 60px;
+  padding: 10px;
+  margin-top: 10px;
+  .reject_btn {
+    width: 14%;
+    height: 100%;
+    border: #EF2929 1px solid;
+    border-radius: 4px;
+    color: #EF2929;
+    font-size: 12px !important;
+    font-weight: 500;
+  }
+  .approve_btn {
+    width: 14%;
+    height: 100%;
+    border: #00DE34 1px solid;
+    border-radius: 4px;
+    color: white;
+    background-color: #00DE34;
+    font-size: 12px !important;
+    font-weight: 500;
+  }
+}
+.contact-div {
+  margin-top: 20px;
+  padding: 20px 20px 20px 40px;
+  width: 100%;
+    .contact_heading {
+      font-size: 12px !important;
+      font-weight: 500;
+      color: #00061C !important;
+    }
+    .table_div {
+      font-size: 12px;
+      font-weight: 500;
+      height: 100%;
+      overflow: auto;
+      .table-css {
+        width: 100%;
+        height: 100%;
+        border: #acacac 0.4px solid;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        .header-row-css {
+          background-color: white !important;
+        }
+        .row-table {
+          overflow: scroll;
+          font-size: 10px;
+          color: #C9C9C966;
+        }
+        .header_table-class {
+          color: black;
+          font-size: 12px !important;
+          font-weight: 500;
+          border: #acacac 0.4px solid;
+        }
+        .table_data {
+          border: #acacac 0.4px solid;
+          font-size: 10px;
+          color: #ACACAC;
+          font-weight: 500;
+          background-color: white !important;
+        }
+        .tble_btn {
+          color: #1055A0;
+          background: transparent;
+          font-size: 10px;
+          font-weight: 500;
+        }
+      }
+    }
+}
+.average_sales {
+  margin-top: 20px;
+  padding: 20px 20px 20px 40px;
+  width: 100%;
+    .contact_heading {
+      font-size: 12px !important;
+      font-weight: 500;
+      color: #00061C !important;
+    }
+    .table_div {
+      font-size: 12px;
+      font-weight: 500;
+      height: 100%;
+      overflow: auto;
+      .table-css {
+        width: 100%;
+        height: 100%;
+        border: #acacac 0.4px solid;
+        border-top-left-radius: 4px !important;
+        border-top-right-radius: 4px !important;
+        .header-row-css {
+          background-color: white !important;
+        }
+        .row-table {
+          overflow: scroll;
+          font-size: 10px;
+          color: #C9C9C966;
+        }
+        .header_table-class {
+          color: black;
+          font-size: 12px !important;
+          font-weight: 500;
+          border: #acacac 0.4px solid;
+        }
+        .table_data {
+          border: #acacac 0.4px solid;
+          font-size: 10px;
+          color: #ACACAC;
+          font-weight: 500;
+          background-color: white !important;
+        }
+        .tble_btn {
+          color: #1055A0;
+          background: transparent;
+          font-size: 10px;
+          font-weight: 500;
+        }
+      }
+    }
+}
