@@ -113,6 +113,11 @@ export class DashboardComponent implements OnInit {
 
     // selectedPI: PersonalInformation = new PersonalInformation();
     ngOnInit(): void {
+        const retrievedObject = localStorage.getItem('authorizationData');
+        if (retrievedObject) {
+          this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
+          this.currentTransaction=parseInt(this.authenticationDetails.Token);
+        }
         this.InitializeFormGroup();
         this.filteropt = this.PIform.get("State").valueChanges.pipe(
             startWith(""),
@@ -121,8 +126,7 @@ export class DashboardComponent implements OnInit {
         this._dashboardService.GetAllStates().subscribe(
             (data) => {
                 this.SOption = data;
-                this.currentTransaction = parseInt(localStorage.getItem("currentTransaction"));
-                if (this.currentTransaction > 0) {
+                if (this.currentTransaction !=NaN) {
                     this.GetTransactionDetails();
                 }
             },

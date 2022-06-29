@@ -62,6 +62,7 @@ export class AuthenticationDetails {
     Expires: string;
     Issued: string;
     Expiresin: string;
+    Token:string;
 }
 export class ChangePassword {
     UserID: Guid;
@@ -124,6 +125,31 @@ export class CustomerOnboarding extends CommonClass {
 export class CustomerOnboardingView {
     Transaction: CustomerOnboarding;
     PersonalInfo: PersonalInformationView;
+}
+export class BankDetails {
+    ID: number;
+    BankName: string;
+    BankAddress: string;
+    IFSC: string;
+    AccountNum: string;
+    TransID: number;
+}
+export class DocumentRequired {
+    ID: number;
+    TransID: number;
+    DocumentTitle: string;
+    AttachmentName: string;
+    ContentType: string;
+    ContentLength: number;
+    AttachmentFile: string;
+}
+export class BusinessInformationView {
+  Businessinfo: BusinessInformation;
+  SalesandTargets: SalesAndTarget[];
+}
+export class BankDetailsView {
+  BankDetailInfo: BankDetails;
+  Documentsrequired: DocumentRequired[];
 }
 export class PersonalInformationView {
     PersonalInformation: PersonalInformation;

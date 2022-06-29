@@ -5,7 +5,7 @@ import { Observable, throwError, Subject } from 'rxjs';
 import { _MatChipListMixinBase } from '@angular/material';
 import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
-import { BusinessInformation, CustomerOnboardingView, PersonalInfo, SendMail } from 'app/models/master';
+import { BankDetailsView, BusinessInformation, BusinessInformationView, CustomerOnboardingView, PersonalInfo, SendMail } from 'app/models/master';
 import { MarketInformation } from 'app/allModules/pages/marketinformation/marketinformation.component';
 // import { BusinessInformation } from 'app/allModules/pages/business/business.component';
 import { BankDetailInformation, BankInformation, JKCInformation } from 'app/allModules/pages/bankinformation/bankinformation.component';
@@ -169,6 +169,29 @@ export class DashboardService {
     GetCustomerOnboardingView(transID: number): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerOnboardingView?transID=${transID}`)
         .pipe(catchError(this.errorHandler));
+    }
+    GetBusinessInformationView(transID: number): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/BusinessInfo/GetBusinessDatas?transID=${transID}`)
+        .pipe(catchError(this.errorHandler));
+    }
+    SaveBusinessInfoView(businessInfoView: BusinessInformationView): Observable<any> {
+        return this._httpClient.post<BusinessInformationView>(`${this.baseAddress}api/BusinessInfo/SaveBusinessInformationDetails`, businessInfoView, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        }).pipe(catchError(this.errorHandler));
+    }
+
+    GetBankDetails(transID: number): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/BankDetails/GetBankDetails?transID=${transID}`)
+        .pipe(catchError(this.errorHandler));
+    }
+    saveBankInfoView(bankDetailsView: BankDetailsView): Observable<any> {
+        return this._httpClient.post<BankDetailsView>(`${this.baseAddress}api/BankDetails/saveBankInfoView`, bankDetailsView, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        }).pipe(catchError(this.errorHandler));
     }
 }
 

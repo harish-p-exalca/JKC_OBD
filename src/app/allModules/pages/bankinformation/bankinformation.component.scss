@@ -238,94 +238,12 @@ input:focus {
   border: none !important;
 }
 
-.inputdivision {
-  //background-color: #f4f4f4;
-  height: 32px;
-  // border-radius: 4px;
-  width: 350px;
-  height: 38px;
-  /* UI Properties */
-  background: #F4F4FB 0% 0% no-repeat padding-box;
-  border-radius: 4px;
-  opacity: 1;
-}
-
-.inputdivision3 {
-  //background-color: #f4f4f4;
-  height: 32px;
-  // border-radius: 4px;
-  width: 150px;
-  height: 35px;
-  /* UI Properties */
-  background: #F4F4FB 0% 0% no-repeat padding-box;
-  border-radius: 4px;
-  opacity: 1;
-}
-
-.inputdivision2 {
-  //background-color: #f4f4f4;
-  height: 32px;
-  // border-radius: 4px;
-  width: 180px;
-  height: 48px;
-  /* UI Properties */
-  background: #F4F4FB 0% 0% no-repeat padding-box;
-  border-radius: 4px;
-  opacity: 1;
-}
-
-.inputdivision1 {
-  //background-color: #f4f4f4;
-  height: 32px;
-  // border-radius: 4px;
-  width: 225px;
-  height: 38px;
-  /* UI Properties */
-  background: #F4F4FB 0% 0% no-repeat padding-box;
-  border-radius: 4px;
-  opacity: 1;
-}
-
-.inputform {
-  color: #00061C;
-  font-size: 16px;
-  width: 100%;
-  height: 38px;
-  // padding-left: 23px;
-  line-height: 3.5;
-  border: none;
-  text-align: left;
-  background: #f1f1f5 !important;
-}
 
 .inputformm {
   color: #00061C;
   opacity: 0.6;
   text-align: left;
   margin-top: 2px !important;
-  // background: #f1f1f5 !important;
-}
-
-.inputform1 {
-  color: #00061C;
-  font-size: 16px;
-  width: 83%;
-  height: 38px;
-  // padding-left: 23px;
-  line-height: 1.5;
-  border: none;
-  // text-align: left;
-  background: #f1f1f5 !important;
-}
-
-.inputform:focus {
-  outline: none;
-}
-
-.inputform::placeholder {
-  font-size: 16px !important;
-  // font-family: 'poppins-semi' !important;
-  color: #acacac !important;
 }
 
 ::ng-deep .mat-form-field-flex>.mat-form-field-infix {
@@ -424,14 +342,6 @@ input:focus {
   padding-top: 25%;
 }
 
-.marketsp {
-  font-size: 16px;
-  //font: normal normal 600 16px/19px Poppins !important;
-  letter-spacing: 0px;
-  color: #00061C !important;
-  opacity: 1;
-  margin-top: 10px;
-}
 
 .marketinfo {
   padding: 0%;
@@ -445,18 +355,8 @@ input:focus {
   background-color: #1E457C;
 }
 
-.populationclass {
-  padding: 0%;
-  ////////font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  margin-top: 20px;
-  width: 100%;
-}
 
-.errorn {
-  ////////font-family: Arial, Helvetica, sans-serif;
-  font-size: 13px;
-}
+
 
 .cement {
   width: 132%;
@@ -574,114 +474,6 @@ table {
   overflow: visible;
 }
 
-.previousimg {
-  width: 13%;
-  cursor: pointer;
-  margin-bottom: 2px;
-
-}
-
-.previousimg:hover {
-  color: #00061C;
-}
-
-.previous {
-  margin-top: 35px;
-  //////////font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: white !important;
-  color: #8e8f92 !important;
-  margin-left: 42px;
-}
-
-.previous:hover {
-  color: #1434AA !important;
-  // background-color: #00061C !important;
-}
-
-.next {
-  margin-top: 35px;
-  // ////////font-family: Arial, Helvetica, sans-serif;
-  font-size: 17px;
-  cursor: pointer;
-  background-color: white !important;
-  color: #8e8f92 !important;
-  margin-left: 30px;
-}
-
-.next:hover {
-  color: #1434AA !important;
-  // background-color: #00061C !important;
-}
-
-.nextimg {
-  // margin-top: 36px;
-  width: 18%;
-  cursor: pointer;
-  margin-bottom: 2px;
-}
-
-.clear {
-  margin-top: 35px;
-  // ////////font-family: Arial, Helvetica, sans-serif;
-  font-size: 17px;
-  cursor: pointer;
-  background-color: white !important;
-  color: #8e8f92 !important;
-  // margin-left: 35px;
-}
-
-.clear:hover {
-  color: #1434AA !important;
-  // background-color: #00061C !important;
-}
-
-.draft {
-  margin-top: 35px;
-  // ////////font-family: Arial, Helvetica, sans-serif;
-  font-size: 17px;
-  cursor: pointer;
-  background-color: white !important;
-  color: #8e8f92 !important;
-  margin-left: -27px;
-}
-
-.draft:hover {
-  color: #1434AA !important;
-  // background-color: #00061C !important;
-}
-
-.clearimg {
-  // margin-top: 36px;
-  width: 24%;
-  cursor: pointer;
-  margin-bottom: 2px;
-}
-
-.draftimg {
-  // margin-top: 36px;
-  width: 16%;
-  cursor: pointer;
-  margin-bottom: 2px;
-}
-
-.savebtn {
-  margin-top: 29px;
-  width: 16%;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-left: 14px;
-  // ////////font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  background-color: #1434AA !important;
-  color: white !important;
-}
-
-.savebtn:hover {
-  background-color: #90B645 !important;
-  // background-color: #00061C !important;
-}
 
 .title {
   text-align: center;
@@ -703,4 +495,179 @@ table {
 
 ::ng-deep .mat-step-header .mat-step-icon-selected {
   background-color: red !important;
+}
+
+.form_div {
+  width: 100%;
+  padding-left: 20px;
+  .form_div_I {
+    width: 100%;
+    padding-left: 20px;
+    .populationclass {
+      padding: 0%;
+      font-size: 14px;
+      margin-top: 20px;
+      width: 100%;
+      .errorn {
+        font-size: 10px;
+        font-weight: 500;
+      }
+      .marketsp {
+        font-size: 12px;
+        font-weight: 500 !important;
+        color: #00061C !important;
+      }
+      .inp_div {
+        width: 100%;
+        background-color: transparent !important;
+        .inner-inp_div {
+          width: 70%;
+        }
+        .inputform {
+          color: #00061C !important;
+          font-size: 12px !important;
+          padding: 0px 20px 0px 20px;
+          height: 36px;
+          line-height: 3.5;
+          border: none;
+          text-align: left;
+          background: #f1f1f5 !important;
+        }
+        .inputform::placeholder {
+          font-size: 10px !important;
+          font-weight: 500;
+          color: #acacac !important;
+        }
+        .inputform1 {
+          color: #00061C !important;
+          font-size: 12px;
+          padding: 0px 20px 0px 20px;
+          height: 36px;
+          line-height: 1.5;text-align: left;
+          border: none;
+          background: #f1f1f5 !important;
+        }
+        .inputform:focus {
+          outline: none;
+        }
+        .inputform1:focus {
+          outline: none;
+        }
+        .inputform1::placeholder {
+          font-size: 10px !important;
+          font-weight: 500;
+          color: #acacac !important;
+        }
+      }
+    } 
+  }
+}
+
+.previous {
+  cursor: pointer;
+  background-color: white !important;
+  .prev_span {
+    color: #8e8f92 !important;
+    font-size: 14px;
+  }
+  .previousimg {
+    width: 13%;
+    cursor: pointer;
+    margin-bottom: 2px;
+  }
+  .previous:hover {
+    color: #1434AA !important;
+  }
+  .prev_span:hover {
+    color: #1434AA !important;
+  }
+  .previousimg:hover {
+    color: #00061C;
+  }
+}
+
+
+
+.next {
+  margin-top: 35px;
+  font-size: 17px;
+  cursor: pointer;
+  background-color: white !important;
+  color: #8e8f92 !important;
+  margin-left: 30px;
+}
+
+.next:hover {
+  color: #1434AA !important;
+  // background-color: #00061C !important;
+}
+
+.nextimg {
+  // margin-top: 36px;
+  width: 18%;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+.clear {
+  font-size: 14px;
+  cursor: pointer;
+  background-color: white !important;
+  color: #8e8f92 !important;
+  .prev_span {
+    color: #8e8f92 !important;
+    font-size: 14px;
+  }
+  .prev_span:hover {
+    color: #1434AA !important;
+  }
+}
+
+.clear:hover {
+  color: #1434AA !important;
+}
+
+.draft {
+  font-size: 14px;
+  cursor: pointer;
+  background-color: white !important;
+  color: #8e8f92 !important;
+  .prev_span {
+    color: #8e8f92 !important;
+    font-size: 14px;
+  }
+  .prev_span:hover {
+    color: #1434AA !important;
+  }
+}
+
+.draft:hover {
+  color: #1434AA !important;
+}
+
+.clearimg {
+  // margin-top: 36px;
+  width: 24%;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+.draftimg {
+  // margin-top: 36px;
+  width: 16%;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+.savebtn {
+  width: 16%;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 14px;
+  font-size: 14px;
+  background-color: #1434AA !important;
+  color: white !important;
+}
+.savebtn:hover {
+  background-color: #a4be6f !important;
 }
