@@ -5,9 +5,9 @@ import { Observable, throwError, Subject } from 'rxjs';
 import { _MatChipListMixinBase } from '@angular/material';
 import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
-import { CustomerOnboardingView, PersonalInfo, SendMail } from 'app/models/master';
+import { BusinessInformation, CustomerOnboardingView, PersonalInfo, SendMail } from 'app/models/master';
 import { MarketInformation } from 'app/allModules/pages/marketinformation/marketinformation.component';
-import { BusinessInformation } from 'app/allModules/pages/business/business.component';
+// import { BusinessInformation } from 'app/allModules/pages/business/business.component';
 import { BankDetailInformation, BankInformation, JKCInformation } from 'app/allModules/pages/bankinformation/bankinformation.component';
 
 @Injectable({

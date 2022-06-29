@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { BusinessInformation } from 'app/models/master';
 import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
 import { SnackBarStatus } from 'app/notifications/snackbar-status-enum';
 import { CommonService } from 'app/services/common.service';
@@ -50,6 +51,7 @@ export class BusinessComponent implements OnInit {
     this.BIform = this.fb.group({
       NoOfYears: ['', Validators.required],
       NoOfYears1: ['', Validators.required],
+      NoOfYears2: ['', Validators.required],
       capitalinvest: ['', Validators.required],
       storagecapacity: ['', Validators.required],
       retail: ['', Validators.pattern(/^[0-9]$/)],
@@ -92,23 +94,21 @@ export class BusinessComponent implements OnInit {
   saveBusinessInfo(): void {
     if (this.BIform.valid) {
       const personalinformation: BusinessInformation = new BusinessInformation();
-      personalinformation.Turnover = this.BIform.get('NoOfYears').value;
+      personalinformation.Turnover1 = this.BIform.get('NoOfYears').value;
+      personalinformation.Turnover2 = this.BIform.get('NoOfYears1').value;
+      personalinformation.Turnover3 = this.BIform.get('NoOfYears2').value;
       personalinformation.Retail = this.BIform.get('retail').value;
       personalinformation.WorkingCaptial = this.BIform.get('capitalinvest').value;
-      personalinformation.Retailers = this.BIform.get('NoOfYears1').value;
+      // personalinformation.Retailers = this.BIform.get('NoOfYears1').value;
       personalinformation.NoVechicle = this.BIform.get('vehicle').value;
       personalinformation.TotalStorage = this.BIform.get('storagecapacity').value;
       personalinformation.Wholesale = this.BIform.get('Wholesale').value;
-  
-  
       this._dashboardService.AddBusinessInfo(personalinformation).subscribe(
         (data) => {
-          console.log(data);
           this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
           this._router.navigate(['pages/marketinformation']);
         },
         (err) => {
-  
           console.error(err);
         },
       );
@@ -116,36 +116,33 @@ export class BusinessComponent implements OnInit {
     else{
       this._commonService.ShowValidationErrors(this.BIform);
     }
-
-   
     // this._router.navigate(['pages/nextlogin']);
   }
   public count = -1;
   public a: string = "";
   public data = [];
+  public SaleData = [];
   add(): void {
     var d = new Date();
     d.setDate(1); //REM: To prevent month skipping.
     this.data.push(this.displayColumns[d.getMonth()])
     for (var i = 0; i < 11; i++) {
       d.setMonth(d.getMonth() + 1);
-      this.data.push(this.displayColumns[d.getMonth()])
-      console.log(this.displayColumns[d.getMonth()], d.getFullYear())
+      this.data.push(this.displayColumns[d.getMonth()]);
+      console.log(this.displayColumns[d.getMonth()], d.getFullYear());
     };
-
     if (this.count < 12) {
       this.count++;
     }
     this.a += " " + this.data[this.count]
-    console.log(this.a)
     this.displayedColumns.push(this.data[this.count]);
-    console.log(this.displayColumns)
-
+  }
+  addSales() {
+    // this.SaleData.push(this.displayedColumns[this.brandName]);
   }
   onAdd(): void {
     this.listData.push(this.BrandForm.value);
     this.BrandForm.reset();
-
   }
   RegistrationClicked(): void {
     this._router.navigate(['pages/marketinformation'])
@@ -161,16 +158,14 @@ export class BusinessComponent implements OnInit {
   }
 
 }
-export class BusinessInformation {
-  ID !: string;
-  Turnover !: string;
-  WorkingCaptial!: string;
-  Retail!: number;
-  NoVechicle!: number;
-  TotalStorage!: string;
-  Wholesale!: number;
-  Retailers!: string;
-
-
-}
+// export class BusinessInformation {
+//   ID !: string;
+//   Turnover !: string;
+//   WorkingCaptial!: string;
+//   Retail!: number;
+//   NoVechicle!: number;
+//   TotalStorage!: string;
+//   Wholesale!: number;
+//   Retailers!: string;
+// }
 
