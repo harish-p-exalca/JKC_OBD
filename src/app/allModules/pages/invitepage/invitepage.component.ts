@@ -150,15 +150,8 @@ export class InvitepageComponent implements OnInit {
         (res) => {
           this.IsProgressBarVisibile = false;
           console.log(res);
-          if (res.Status == 1) {
-            this.notificationSnackBarComponent.openSnackBar('Logged In Successfully', SnackBarStatus.success);
-            this.UpdateMenu();
-            localStorage.setItem("currentTransaction",this.TransID.toString());
-            this._router.navigate(['pages/dashboard']);
-          }
-          else {
-            this.notificationSnackBarComponent.openSnackBar(res.Error, SnackBarStatus.danger);
-          }
+          const dat = res as AuthenticationDetails;
+          this.saveUserDetails(dat);
         },
         (err) => {
           this.IsProgressBarVisibile = false;
@@ -172,6 +165,13 @@ export class InvitepageComponent implements OnInit {
         abstractControl.markAsDirty();
       });
     }
+  }
+  saveUserDetails(data: any): void {
+    console.log(data);
+    localStorage.setItem('authorizationData', JSON.stringify(data));
+    this.UpdateMenu();
+    this.notificationSnackBarComponent.openSnackBar('Logged in successfully', SnackBarStatus.success);
+    this._router.navigate(['pages/dashboard']);
   }
   CreateOTP(): void {
     console.log("otp requested");
@@ -195,8 +195,14 @@ export class InvitepageComponent implements OnInit {
     );
   }
   UpdateMenu(): void {
-    this.MenuItems = ["Dashboard", "MarketInformation", "BusinessInformation", "BankInformation"]
-    if (this.MenuItems.indexOf('Dashboard') >= 0) {
+    const retrievedObject = localStorage.getItem('authorizationData');
+    if (retrievedObject) {
+      this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
+      this.MenuItems = this.authenticationDetails.MenuItemNames.split(',');
+      console.log(this.MenuItems);
+    } else {
+    }
+    if (this.MenuItems.indexOf('Personal') >= 0) {
       this.children.push(
         {
           id: 'dashboard',
@@ -209,7 +215,7 @@ export class InvitepageComponent implements OnInit {
         }
       );
     }
-    if (this.MenuItems.indexOf('BusinessInformation') >= 0) {
+    if (this.MenuItems.indexOf('Business') >= 0) {
       this.children.push(
         {
           id: 'business',
@@ -222,7 +228,7 @@ export class InvitepageComponent implements OnInit {
         }
       );
     }
-    if (this.MenuItems.indexOf('MarketInformation') >= 0) {
+    if (this.MenuItems.indexOf('Market') >= 0) {
       this.children.push(
         {
           id: 'market',
@@ -235,7 +241,7 @@ export class InvitepageComponent implements OnInit {
         }
       );
     }
-    if (this.MenuItems.indexOf('BankInformation') >= 0) {
+    if (this.MenuItems.indexOf('Bank') >= 0) {
       this.children.push(
         {
           id: 'bank',
