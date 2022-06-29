@@ -195,51 +195,49 @@ export class NextloginComponent implements OnInit {
           type: 'item',
           icon: 'person',
           isSvgIcon: false,
-          // icon: 'dashboard',
           url: '/pages/dashboard',
         }
       );
     }
-    // if (this.MenuItems.indexOf('InvoiceDetails') >= 0) {
-    //   this.children.push(
-    //     {
-    //       id: 'invoiceDetails',
-    //       title: 'Invoices',
-    //       translate: 'NAV.SAMPLE.TITLE',
-    //       type: 'item',
-    //       icon: 'receiptIcon',
-    //       isSvgIcon: true,
-    //       // icon: 'receipt',
-    //       url: '/pages/invoices',
-    //     }
-    //   );
-    // }
-    // if (true||this.MenuItems.indexOf('Reports') >= 0) {
-    //   this.children.push(
-    //     {
-    //       id: 'reports',
-    //       title: 'Report',
-    //       translate: 'NAV.SAMPLE.TITLE',
-    //       type: 'item',
-    //       icon: 'reportIcon',
-    //       isSvgIcon: true,
-    //       // icon: 'assignment',
-    //       url: '/reports',
-    //     }
-    //   );
-    // }
-    // if (this.MenuItems.indexOf('InvoiceItem') >= 0) {
-    //   this.children.push(
-    //     {
-    //       id: 'invItem',
-    //       title: 'Invoice Item',
-    //       translate: 'NAV.SAMPLE.TITLE',
-    //       type: 'item',
-    //       icon: 'dashboard',
-    //       url: '/pages/courses',
-    //     }
-    //   );
-    // }
+    if (this.MenuItems.indexOf('Business') >= 0) {
+      this.children.push(
+        {
+          id: 'business',
+          title: 'Business',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'business',
+          isSvgIcon: false,
+          url: '/pages/businessinformation',
+        }
+      );
+    }
+    if (this.MenuItems.indexOf('Market') >= 0) {
+      this.children.push(
+        {
+          id: 'market',
+          title: 'Market',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'gps_fixed',
+          isSvgIcon: false,
+          url: '/pages/marketinformation',
+        }
+      );
+    }
+    if (this.MenuItems.indexOf('Bank') >= 0) {
+      this.children.push(
+        {
+          id: 'bank',
+          title: 'Bank',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'payment',
+          isSvgIcon: false,
+          url: '/pages/bankinformation',
+        }
+      );
+    }
     if (this.MenuItems.indexOf('App') >= 0) {
       this.subChildren.push(
         {
