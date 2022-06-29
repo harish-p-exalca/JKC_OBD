@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
 import { SnackBarStatus } from 'app/notifications/notification-snack-bar/notification-snackbar-status-enum';
-import { AuthenticationDetails, PersonalInfo } from 'app/models/master';
+import { AuthenticationDetails, BankDetailsView, PersonalInfo, States } from 'app/models/master';
 import { fuseAnimations } from '@fuse/animations';
 import { DashboardService } from 'app/services/dashboard.service';
 import { ShareParameterService } from 'app/services/share-parameters.service';
@@ -51,6 +51,11 @@ export class BankinformationComponent implements OnInit {
   name: any = [];
   public listData: any;
   notificationSnackBarComponent: NotificationSnackBarComponent;
+  authenticationDetails: AuthenticationDetails;
+  currentTransaction: number;
+  SOption: States[] = [
+  ];
+  bankInfoView: BankDetailsView = new BankDetailsView();
   @ViewChild(MatAccordion) accordion: MatAccordion;
   constructor(private fb: FormBuilder,private _commonService: CommonService, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, public dialog: MatDialog) {
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar), this.listData = [];
@@ -58,6 +63,18 @@ export class BankinformationComponent implements OnInit {
   BIform!: FormGroup;
   selectedPersonalInfo: PersonalInfo = null;
   ngOnInit(): void {
+    const retrievedObject = localStorage.getItem('authorizationData');
+    if (retrievedObject) {
+      this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
+      this.currentTransaction=parseInt(this.authenticationDetails.Token);
+    }
+    this._dashboardService.GetAllStates().subscribe(
+      (data) => {
+          this.SOption = data;
+          this.GetBusinessDetails();
+      },
+      (err) => console.log(err)
+  );
     const retrievedvalue = localStorage.getItem('retail_D2RS');
     console.log(retrievedvalue);
     this.BIform = this.fb.group({
@@ -128,6 +145,33 @@ export class BankinformationComponent implements OnInit {
   }
   previousbtn(): void {
     this._router.navigate(['pages/marketinformation']);
+  }
+
+  GetBusinessDetails() {
+    this._dashboardService.GetBusinessInformationView(this.currentTransaction).subscribe(res => {
+      console.log("view", res);
+      this.bankInfoView = res;
+      this.SetBankDetailInfoView(this.bankInfoView);
+  },
+      err => {
+          console.log(err);
+      });
+  }
+  SetBankDetailInfoView( bankInfoView: BankDetailsView = new BankDetailsView()) {
+    if (bankInfoView.BankDetailInfo.TransID != null) {
+      // businessinformation = businessInfoView.Businessinfo;
+      this.BIform.patchValue({
+        bankname: bankInfoView.BankDetailInfo.BankName,
+        bankaddress: bankInfoView.BankDetailInfo.BankAddress,
+        ifsccode: bankInfoView.BankDetailInfo.IFSC,
+        bankacno: bankInfoView.BankDetailInfo.AccountNum,
+      });
+      // this.BrandForm.patchValue({
+      //   sales: ['', Validators.required],
+      //   date1: [''],
+      //   date2: [''],
+      // });
+    }
   }
   onAdd(): void {
     if(this.BIform.valid)

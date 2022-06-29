@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
-import { BusinessInformation } from 'app/models/master';
+import { AuthenticationDetails, BusinessInformation, BusinessInformationView, BusinessInfoView, States } from 'app/models/master';
 import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
 import { SnackBarStatus } from 'app/notifications/snackbar-status-enum';
 import { CommonService } from 'app/services/common.service';
@@ -37,7 +37,12 @@ export class BusinessComponent implements OnInit {
   //displayColumns:string[]=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   brandName: string[] = ['WallmaxX', 'WhitemaxX', 'GypsomaxX', 'ShieldmaxX', 'SmoothMaxX', 'RepairmaxX', 'TilemaxX', 'Woodamore'];
   columnsToDisplay: string[] = this.displayColumns.slice();
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource;
+  SOption: States[] = [
+  ];
+  authenticationDetails: AuthenticationDetails;
+  currentTransaction: number;
+  businessInfoView: BusinessInformationView = new BusinessInformationView();
   constructor(private fb: FormBuilder, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, private _commonService: CommonService) {
     this.listData = [];
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(
@@ -48,21 +53,27 @@ export class BusinessComponent implements OnInit {
   }
 
   ngOnInit() {
+    const retrievedObject = localStorage.getItem('authorizationData');
+    if (retrievedObject) {
+      this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
+      this.currentTransaction=parseInt(this.authenticationDetails.Token);
+    }
     this.BIform = this.fb.group({
       NoOfYears: ['', Validators.required],
       NoOfYears1: ['', Validators.required],
       NoOfYears2: ['', Validators.required],
       capitalinvest: ['', Validators.required],
       storagecapacity: ['', Validators.required],
-      retail: ['', Validators.pattern(/^[0-9]$/)],
+      retail: ['', Validators.required],
       vehicle: ['', Validators.required],
-      Wholesale: ['', Validators.pattern(/^[a-zA-Z0-9]+$/)],
-    })
+      Wholesale: ['', Validators.required],
+    });
     this.BrandForm = this.fb.group({
       sales: ['', Validators.required],
       date1: [''],
       date2: [''],
-    })
+    });
+    // [a-zA-Z0-9]+$
     this.BIform.get('Wholesale')
       .valueChanges
       .subscribe(value => {
@@ -78,7 +89,52 @@ export class BusinessComponent implements OnInit {
         }
       }
       );
+      this._dashboardService.GetAllStates().subscribe(
+        (data) => {
+            this.SOption = data;
+            this.GetBusinessDetails();
+        },
+        (err) => console.log(err)
+    );
+  }
+  GetBusinessDetails() {
+    this._dashboardService.GetBusinessInformationView(this.currentTransaction).subscribe(res => {
+      console.log("view", res);
+      this.businessInfoView = res;
+      this.SetBusinessInfoDetails(this.businessInfoView);
+  },
+      err => {
+          console.log(err);
+      });
+  }
+  SetBusinessInfoDetails(businessInfoView:BusinessInformationView = new BusinessInformationView() ) {
 
+    if (businessInfoView.Businessinfo.TransID != null) {
+      // businessinformation = businessInfoView.Businessinfo;
+      this.BIform.patchValue({
+        NoOfYears: businessInfoView.Businessinfo.Turnover1,
+        NoOfYears1: businessInfoView.Businessinfo.Turnover2,
+        NoOfYears2: businessInfoView.Businessinfo.Turnover3,
+        capitalinvest: businessInfoView.Businessinfo.WorkingCaptial,
+        storagecapacity: businessInfoView.Businessinfo.TotalStorage,
+        retail: businessInfoView.Businessinfo.Retail,
+        vehicle: businessInfoView.Businessinfo.NoVechicle,
+        Wholesale: businessInfoView.Businessinfo.Wholesale,
+      });
+      // this.BrandForm.patchValue({
+      //   sales: ['', Validators.required],
+      //   date1: [''],
+      //   date2: [''],
+      // });
+    }
+  }
+  public saletableNumber: number = 0;
+  addSales() {
+    const number = 1;
+    if(this.data || this.dataSource.filteredData) {
+      this.dataSource.filteredData.push(this.brandName[this.saletableNumber]);
+      this.saletableNumber = this.saletableNumber + number;
+    }
   }
   keyPressNumbers(event) {
     var charCode = (event.which) ? event.which : event.keyCode;
@@ -93,18 +149,18 @@ export class BusinessComponent implements OnInit {
 
   saveBusinessInfo(): void {
     if (this.BIform.valid) {
-      const personalinformation: BusinessInformation = new BusinessInformation();
-      personalinformation.Turnover1 = this.BIform.get('NoOfYears').value;
-      personalinformation.Turnover2 = this.BIform.get('NoOfYears1').value;
-      personalinformation.Turnover3 = this.BIform.get('NoOfYears2').value;
-      personalinformation.Retail = this.BIform.get('retail').value;
-      personalinformation.WorkingCaptial = this.BIform.get('capitalinvest').value;
-      // personalinformation.Retailers = this.BIform.get('NoOfYears1').value;
-      personalinformation.NoVechicle = this.BIform.get('vehicle').value;
-      personalinformation.TotalStorage = this.BIform.get('storagecapacity').value;
-      personalinformation.Wholesale = this.BIform.get('Wholesale').value;
-      this._dashboardService.AddBusinessInfo(personalinformation).subscribe(
+      const businessformvalues: BusinessInformation = new BusinessInformation();
+      businessformvalues.Turnover1 = this.BIform.get('NoOfYears').value;
+      businessformvalues.Turnover2 = this.BIform.get('NoOfYears1').value;
+      businessformvalues.Turnover3 = this.BIform.get('NoOfYears2').value;
+      businessformvalues.Retail = parseInt(this.BIform.get('retail').value);
+      businessformvalues.WorkingCaptial = this.BIform.get('capitalinvest').value;
+      businessformvalues.NoVechicle = parseInt(this.BIform.get('vehicle').value);
+      businessformvalues.TotalStorage = this.BIform.get('storagecapacity').value;
+      businessformvalues.Wholesale = parseInt(this.BIform.get('Wholesale').value);
+      this._dashboardService.AddBusinessInfo(businessformvalues).subscribe(
         (data) => {
+          console.log(data);
           this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
           this._router.navigate(['pages/marketinformation']);
         },
@@ -137,9 +193,7 @@ export class BusinessComponent implements OnInit {
     this.a += " " + this.data[this.count]
     this.displayedColumns.push(this.data[this.count]);
   }
-  addSales() {
-    // this.SaleData.push(this.displayedColumns[this.brandName]);
-  }
+
   onAdd(): void {
     this.listData.push(this.BrandForm.value);
     this.BrandForm.reset();
