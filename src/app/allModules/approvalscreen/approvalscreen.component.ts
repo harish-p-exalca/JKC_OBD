@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { DashboardService } from 'app/services/dashboard.service';
 // import { ChartDataSets, ChartOptions } from 'chart.js';
@@ -78,7 +78,8 @@ const datas:Element[] =  [
 @Component({
   selector: 'app-approvalscreen',
   templateUrl: './approvalscreen.component.html',
-  styleUrls: ['./approvalscreen.component.scss']
+  styleUrls: ['./approvalscreen.component.scss'],
+  encapsulation:ViewEncapsulation.None
 })
 export class ApprovalscreenComponent implements OnInit {
   // lineChartData: ChartDataSets[] = [
