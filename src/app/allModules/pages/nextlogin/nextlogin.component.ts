@@ -118,8 +118,11 @@ export class NextloginComponent implements OnInit {
     if (data.UserRole === 'Admin') {
       this._router.navigate(['master/user']);
     } 
-    else {
+    else if(data.UserRole=='SSA') {
       this._router.navigate(['pages/dashboard']);
+    }
+    else{
+      this._router.navigate(['pages/approvalinformation']);
     }
   }
   OpenChangePasswordDialog(data: AuthenticationDetails): void {
@@ -186,11 +189,37 @@ export class NextloginComponent implements OnInit {
       console.log(this.MenuItems);
     } else {
     }
+    if (this.MenuItems.indexOf('InitiatorDashboard') >= 0) {
+      this.children.push(
+        {
+          id: 'dashboard',
+          title: 'Dashboard',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'dashboard',
+          isSvgIcon: false,
+          url: '/pages/initiatordashboard',
+        }
+      );
+    }
+    if (this.MenuItems.indexOf('ApproverDashboard') >= 0) {
+      this.children.push(
+        {
+          id: 'dashboard',
+          title: 'Dashboard',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'dashboard',
+          isSvgIcon: false,
+          url: '/pages/approvalinformation',
+        }
+      );
+    }
     if (this.MenuItems.indexOf('Personal') >= 0) {
       this.children.push(
         {
           id: 'dashboard',
-          title: 'Personal',
+          title: 'Initiate',
           translate: 'NAV.SAMPLE.TITLE',
           type: 'item',
           icon: 'person',
