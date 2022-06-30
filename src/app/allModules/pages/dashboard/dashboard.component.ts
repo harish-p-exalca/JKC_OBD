@@ -84,6 +84,7 @@ export class DashboardComponent implements OnInit {
     States: string[] = [];
     City: Cities[] = [];
     arr: any;
+    Role:boolean = false;
     filteropt: Observable<string[]>;
     firmForm!: FormGroup;
     private listData: any;
@@ -91,6 +92,7 @@ export class DashboardComponent implements OnInit {
     selected = '';
     currentTransaction: number;
     SubmitValue:boolean = false;
+    transID:any;
     CustomerObdView: CustomerOnboardingView = new CustomerOnboardingView();
     constructor(
         private _router: Router,
@@ -118,11 +120,31 @@ export class DashboardComponent implements OnInit {
           this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
           this.currentTransaction=parseInt(this.authenticationDetails.Token);
         }
+        if(this.authenticationDetails.UserRole == "Customer")
+        {
+            this.Role = true;
+        } 
+        if(localStorage.getItem('ActionStatus') == "Draft")
+        {
+            this.SubmitValue = true;
+        } 
         this.InitializeFormGroup();
         this.filteropt = this.PIform.get("State").valueChanges.pipe(
             startWith(""),
             map((value) => this._filterstate(value))
         );
+        this.transID = localStorage.getItem('TransID');
+        if(this.transID != null)
+        {
+            this._dashboardService.GetCustomerOnboardingView(this.transID).subscribe(res => {
+                console.log("view", res);
+                this.CustomerObdView = res;
+                this.SetPersonalInfoValues();
+            },
+                err => {
+                    console.log(err);
+                });
+        }
         this._dashboardService.GetAllStates().subscribe(
             (data) => {
                 this.SOption = data;
@@ -137,7 +159,7 @@ export class DashboardComponent implements OnInit {
         this.PIform = this.fb.group({
             category: ["", Validators.required],
             product: ["", Validators.required],
-            Name: ["", Validators.required],
+            Name: ["", [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
             Address: ["", Validators.required],
             latitude: [''],
             longitude: [''],
@@ -211,9 +233,12 @@ export class DashboardComponent implements OnInit {
             Pincode: this.CustomerObdView.PersonalInfo.PersonalInformation.Pincode,
             Status: this.CustomerObdView.PersonalInfo.PersonalInformation.Status,
         });
-        this.SubmitValue=true;
+
         this.selected=this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
         this.IdentityData=this.CustomerObdView.PersonalInfo.Identities;
+    }
+    FirmStatusChange(){
+        this.IdentityData = [];
     }
     SubmitButtonClick(isDraft: boolean = false) {
         if (this.PIform.valid) {

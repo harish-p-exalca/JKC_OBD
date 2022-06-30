@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { Router } from '@angular/router';
+import { PersonalInfoStatusView } from 'app/models/master';
 import { DashboardService } from 'app/services/dashboard.service';
 // import { ChartDataSets, ChartOptions } from 'chart.js';
 // import { Color, Label } from 'ng2-charts';
@@ -99,18 +101,18 @@ export class InitiatorDashboardComponent implements OnInit {
   // lineChartPlugins = [];
   // lineChartType = 'line';
   PI: PersonalInformation[] = [];
-  // employeesDataSource: MatTableDataSource<PersonalInformation>;
-  employeesDisplayColumns: string[] = ['No', 'Name', 'Gmail', 'Type', 'Country', 'MobileNo','Status','Action'];
-  employeesDataSource = datas;
+  employeesDataSource: MatTableDataSource<PersonalInfoStatusView>;
+  employeesDisplayColumns: string[] = ['No', 'Name', 'Gmail', 'Type', 'Country','Status','Action'];
+  //employeesDataSource = datas;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   public chartOptions1: Partial<ChartOptions1>;
   public chart1: any;
-  links = ['All', 'Open', 'Pending','Approved','Rejected'];
+  links = ['All','Draft', 'Open', 'Pending','Approved','Rejected'];
   activeLink = this.links[0];
-  constructor( private _dashboardService: DashboardService,private elementRef: ElementRef){
+  constructor( private _router: Router,private _dashboardService: DashboardService,private elementRef: ElementRef){
 
     this.chartOptions = {
       series: [
@@ -232,21 +234,25 @@ ngOnInit() {
   
 }
 GetEmployees(): void {
-  // this._dashboardService.getPersonalInfo().subscribe(
-  //     (data:any) => {
+  this._dashboardService.getPersonalInfo().subscribe(
+      (data:any) => {
       
-  //           this.employeesDataSource = new MatTableDataSource < PersonalInformation > (data); //pass the array you want in the table
-  //           this.employeesDataSource.sort = this.sort;
-  //           this.employeesDataSource.paginator = this.paginator;
-  //           return data
-  //         })
+            this.employeesDataSource = new MatTableDataSource <PersonalInfoStatusView> (data); //pass the array you want in the table
+            this.employeesDataSource.sort = this.sort;
+            this.employeesDataSource.paginator = this.paginator;
+            return data
+          })
      
 
 }
 
 
+GotoPersonalInfo(TransID):void {
+localStorage.setItem('TransID',TransID);
+localStorage.setItem('ActionStatus',"Draft");
+this._router.navigate(['pages/dashboard']);
 }
-
+}
 export class PersonalInformation {
   ID!: string;
   category!: string;

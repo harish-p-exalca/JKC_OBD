@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
 import { SnackBarStatus } from 'app/notifications/notification-snack-bar/notification-snackbar-status-enum';
-import { AuthenticationDetails, BankDetailsView, PersonalInfo, States } from 'app/models/master';
+import { AuthenticationDetails, BankDetails, BankDetailsView, PersonalInfo, SecurityDepositDetail, States } from 'app/models/master';
 import { fuseAnimations } from '@fuse/animations';
 import { DashboardService } from 'app/services/dashboard.service';
 import { ShareParameterService } from 'app/services/share-parameters.service';
@@ -60,6 +60,21 @@ export class BankinformationComponent implements OnInit {
   constructor(private fb: FormBuilder,private _commonService: CommonService, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, public dialog: MatDialog) {
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar), this.listData = [];
   }
+  IdentityData: BankDetails[] = [];
+    IdentityAddClicked() {
+        if (this.BIform.valid) {
+            var identity = new BankDetails();
+            identity.AccountNum = this.BIform.get("bankacno").value;
+            identity.BankAddress = this.BIform.get("bankaddress").value;
+            identity.BankName = this.BIform.get("bankname").value;
+            identity.IFSC = this.BIform.get("ifsccode").value;
+            identity.TransID = this.currentTransaction;
+            this.IdentityData.push(identity);
+            // this.BIform.reset();
+        } else {
+            this._commonService.ShowValidationErrors(this.BIform);
+        }
+    }
   BIform!: FormGroup;
   selectedPersonalInfo: PersonalInfo = null;
   ngOnInit(): void {
@@ -68,77 +83,47 @@ export class BankinformationComponent implements OnInit {
       this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
       this.currentTransaction=parseInt(this.authenticationDetails.Token);
     }
-    this._dashboardService.GetAllStates().subscribe(
-      (data) => {
-          this.SOption = data;
-          this.GetBusinessDetails();
-      },
-      (err) => console.log(err)
-  );
-    const retrievedvalue = localStorage.getItem('retail_D2RS');
-    console.log(retrievedvalue);
+    // const retrievedvalue = localStorage.getItem('retail_D2RS');
+    // console.log(retrievedvalue);
     this.BIform = this.fb.group({
       leaf: ['', Validators.required],
       Leafno: ['', Validators.required],
       Date: ['', Validators.required],
       Amount: ['', Validators.required],
       nameofbank: ['', Validators.required],
-      bankno: [''],
+      bankno: ['',Validators.required],
       bankname: ['', Validators.required],
       bankaddress: ['', Validators.required],
       ifsccode: ['', Validators.required],
       bankacno: ['', Validators.required],
-      jkc1: ['', Validators.required],
-      politicalParty: ['', Validators.required],
-      police: ['', Validators.required],
-      admin: ['', Validators.required],
-      sales: ['', Validators.required],
-      asmname: ['', Validators.required],
-      headname: ['', Validators.required],
-      jkc1Name: ['',],
-      jkcMobile: [''],
-      jkcPerson: [''],
-      politicalname: [''],
-      politicalMobile: [''],
-      politicalPerson: [''],
-      policeName: [''],
-      policeMobile: [''],
-      policePerson: [''],
-      adminName: [''],
-      adminMobile: [''],
-      adminperson: [''],
-      salesName: [''],
-      salesMobile: [''],
-      salesPerson: [''],
-      asmname1: [''],
-      asmnMobile: [''],
-      asmnperson: [''],
-      headname1: [''],
-      headMobile: [''],
-      headPerson: [''],
-      declare: [''],
-      billing: []
     });
-    if (retrievedvalue == 'ok') {
-      this.isd2rs = true;
-      this.BIform.get('leaf').disable();
-      this.BIform.get('Leafno').disable();
-      this.BIform.get('Date').disable();
-      this.BIform.get('Amount').disable();
-      this.BIform.get('nameofbank').disable();
-    }
-    else {
-      this.BIform.get('leaf').enable();
-      this.BIform.get('Leafno').enable();
-      this.BIform.get('Date').enable();
-      this.BIform.get('Amount').enable();
-      this.BIform.get('nameofbank').enable();
-      this.isd2rs = false;
-    }
+    // if (retrievedvalue == 'ok') {
+    //   this.isd2rs = true;
+    //   this.BIform.get('leaf').disable();
+    //   this.BIform.get('Leafno').disable();
+    //   this.BIform.get('Date').disable();
+    //   this.BIform.get('Amount').disable();
+    //   this.BIform.get('nameofbank').disable();
+    // }
+    // else {
+    //   this.BIform.get('leaf').enable();
+    //   this.BIform.get('Leafno').enable();
+    //   this.BIform.get('Date').enable();
+    //   this.BIform.get('Amount').enable();
+    //   this.BIform.get('nameofbank').enable();
+    //   this.isd2rs = false;
+    // }
     this.selectedPersonalInfo = this._dashboardService.GetPersonalInfo();
     console.log(this.selectedPersonalInfo.Name);
     this.name = this.selectedPersonalInfo.Name;
     this._dashboardService.SetPersonalInfo(null);
+    this._dashboardService.GetAllStates().subscribe(
+      (data) => {
+          this.SOption = data;
+          this.GetBankDetails();
+      },
+      (err) => console.log(err)
+  );
   }
   ClearAll(): void {
     this.BIform.reset();
@@ -147,24 +132,25 @@ export class BankinformationComponent implements OnInit {
     this._router.navigate(['pages/marketinformation']);
   }
 
-  GetBusinessDetails() {
-    this._dashboardService.GetBusinessInformationView(this.currentTransaction).subscribe(res => {
+  GetBankDetails() {
+    this._dashboardService.GetSecurityDetails(this.currentTransaction).subscribe(res => {
       console.log("view", res);
       this.bankInfoView = res;
-      this.SetBankDetailInfoView(this.bankInfoView);
+      this.SetSecurityDepositDetailInfoView(this.bankInfoView);
   },
       err => {
           console.log(err);
       });
   }
-  SetBankDetailInfoView( bankInfoView: BankDetailsView = new BankDetailsView()) {
-    if (bankInfoView.BankDetailInfo.TransID != null) {
+  SetSecurityDepositDetailInfoView( bankInfoView: BankDetailsView = new BankDetailsView()) {
+    if (bankInfoView.SecurityDetails.TransID != null) {
       // businessinformation = businessInfoView.Businessinfo;
       this.BIform.patchValue({
-        bankname: bankInfoView.BankDetailInfo.BankName,
-        bankaddress: bankInfoView.BankDetailInfo.BankAddress,
-        ifsccode: bankInfoView.BankDetailInfo.IFSC,
-        bankacno: bankInfoView.BankDetailInfo.AccountNum,
+        leaf: bankInfoView.SecurityDetails.Leaf,
+        Leafno: bankInfoView.SecurityDetails.Type,
+        Date: bankInfoView.SecurityDetails.Date,
+        Amount: bankInfoView.SecurityDetails.Amount,
+        nameofbank:bankInfoView.SecurityDetails.BankName
       });
       // this.BrandForm.patchValue({
       //   sales: ['', Validators.required],
@@ -173,33 +159,63 @@ export class BankinformationComponent implements OnInit {
       // });
     }
   }
+  SubmitButtonClick(isDraft: boolean = false) {
+    if (this.BIform.valid) {
+        var cobView = new BankDetailsView();
+        cobView.SecurityDetails = this.GetSecurityInfoFromForm();
+        cobView.BankDetailInfo = this.IdentityData;
+        console.log("cobView", cobView);
+        this._dashboardService.SaveBankInfoView(cobView).subscribe(
+            (res) => {
+                console.log("From save api", res);
+                this._router.navigate(["pages/bankinformation"]);
+                this.ClearAll();
+            },
+            (err) => {
+                this.notificationSnackBarComponent.openSnackBar(
+                    err instanceof Object ? "Something went wrong" : err,
+                    SnackBarStatus.danger
+                );
+            }
+        );
+    } else {
+        this._commonService.ShowValidationErrors(this.BIform);
+    }
+}
+GetSecurityInfoFromForm(): SecurityDepositDetail {
+  const personalinformation: SecurityDepositDetail = new SecurityDepositDetail();
+    personalinformation.Leaf = this.BIform.get('leaf').value;
+    personalinformation.Type = this.BIform.get('Leafno').value;
+    personalinformation.Date = this.BIform.get('Date').value;
+    personalinformation.Amount = this.BIform.get('Amount').value;
+    personalinformation.BankName = this.BIform.get('nameofbank').value;
+  return personalinformation;
+}
   onAdd(): void {
     if(this.BIform.valid)
     {
 
-   
     this.listData.push(this.BIform.value);
+    this.IdentityAddClicked();
     // this.BIform.reset();
     this.listData[this.listData.length - 1].id = this.listData.length.toString();
-    const personalinformation: BankDetailInformation = new BankDetailInformation();
-    personalinformation.BankName = this.BIform.get('bankname').value;
-    personalinformation.BankAddress = this.BIform.get('bankaddress').value;
-    personalinformation.IFSC = this.BIform.get('ifsccode').value;
-    personalinformation.AccountNum = this.BIform.get('bankacno').value;
+    // const personalinformation: BankDetails = new BankDetails();
+    // personalinformation.BankName = this.BIform.get('bankname').value;
+    // personalinformation.BankAddress = this.BIform.get('bankaddress').value;
+    // personalinformation.IFSC = this.BIform.get('ifsccode').value;
+    // personalinformation.AccountNum = this.BIform.get('bankacno').value;
+    // this._dashboardService.AddBankDetInfo(personalinformation).subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //     this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
+    //     // this._router.navigate(['pages/nextlogin']);
+    //   },
+    //   (err) => {
 
-
-    this._dashboardService.AddBankDetInfo(personalinformation).subscribe(
-      (data) => {
-        console.log(data);
-        this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
-        // this._router.navigate(['pages/nextlogin']);
-      },
-      (err) => {
-
-        console.error(err);
-        this.notificationSnackBarComponent.openSnackBar('Something went wrong', SnackBarStatus.danger);
-      },
-    );
+    //     console.error(err);
+    //     this.notificationSnackBarComponent.openSnackBar('Something went wrong', SnackBarStatus.danger);
+    //   },
+    // );
   }
   else{
     this._commonService.ShowValidationErrors(this.BIform);
@@ -211,70 +227,70 @@ export class BankinformationComponent implements OnInit {
   remove() {
 
   }
-  additem(row: BankDetailInformation) {
+  // additem(row: BankDetailInformation) {
 
-  }
-  saveInfo(): void {
-    if(this.BIform.valid){
+  // }
+  // saveInfo(): void {
+  //   if(this.BIform.valid){
 
  
-    //1st
-    const dialogRef = this.dialog.open(BankdialogComponent, {
-      width: "53%",
+  //   //1st
+  //   const dialogRef = this.dialog.open(BankdialogComponent, {
+  //     width: "53%",
 
 
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-    const personalinformation: BankInformation = new BankInformation();
-    personalinformation.Leaf = this.BIform.get('leaf').value;
-    personalinformation.Bill = this.BIform.get('Leafno').value;
-    personalinformation.Date = this.BIform.get('Date').value;
-    personalinformation.Amount = this.BIform.get('Amount').value;
-    personalinformation.BankName = this.BIform.get('nameofbank').value;
+  //   });
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+  //   const personalinformation: BankInformation = new BankInformation();
+  //   personalinformation.Leaf = this.BIform.get('leaf').value;
+  //   personalinformation.Bill = this.BIform.get('Leafno').value;
+  //   personalinformation.Date = this.BIform.get('Date').value;
+  //   personalinformation.Amount = this.BIform.get('Amount').value;
+  //   personalinformation.BankName = this.BIform.get('nameofbank').value;
 
-    this._dashboardService.AddBankInfo(personalinformation).subscribe(
-      (data) => {
-        console.log(data);
-        // this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
-        this._router.navigate(['pages/businessinformation']);
-      },
-      (err) => {
+  //   this._dashboardService.AddBankInfo(personalinformation).subscribe(
+  //     (data) => {
+  //       console.log(data);
+  //       // this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
+  //       this._router.navigate(['pages/businessinformation']);
+  //     },
+  //     (err) => {
 
-        console.error(err);
-        // this.notificationSnackBarComponent.openSnackBar('Something went wrong', SnackBarStatus.danger);
-      },
-    );
+  //       console.error(err);
+  //       // this.notificationSnackBarComponent.openSnackBar('Something went wrong', SnackBarStatus.danger);
+  //     },
+  //   );
 
-    //jkc connection
-    const personalinformation1: JKCInformation = new JKCInformation();
-    personalinformation1.JKDirectory = this.BIform.get('jkc1').value;
-    personalinformation1.political = this.BIform.get('politicalParty').value;
-    personalinformation1.police = this.BIform.get('police').value;
-    personalinformation1.Authority = this.BIform.get('admin').value;
+  //   //jkc connection
+  //   const personalinformation1: JKCInformation = new JKCInformation();
+  //   personalinformation1.JKDirectory = this.BIform.get('jkc1').value;
+  //   personalinformation1.political = this.BIform.get('politicalParty').value;
+  //   personalinformation1.police = this.BIform.get('police').value;
+  //   personalinformation1.Authority = this.BIform.get('admin').value;
 
-    this._dashboardService.AddconnectionInfo(personalinformation1).subscribe(
-      (data) => {
-        console.log(data);
-        // this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
-        this._router.navigate(['pages/businessinformation']);
-      },
-      (err) => {
+  //   this._dashboardService.AddconnectionInfo(personalinformation1).subscribe(
+  //     (data) => {
+  //       console.log(data);
+  //       // this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
+  //       this._router.navigate(['pages/businessinformation']);
+  //     },
+  //     (err) => {
 
-        console.error(err);
-        // this.notificationSnackBarComponent.openSnackBar('Something went wrong', SnackBarStatus.danger);
-      },
-    );
+  //       console.error(err);
+  //       // this.notificationSnackBarComponent.openSnackBar('Something went wrong', SnackBarStatus.danger);
+  //     },
+  //   );
 
-  }
-  else
-  {
-    this._commonService.ShowValidationErrors(this.BIform);
-  }
+  // }
+  // else
+  // {
+  //   this._commonService.ShowValidationErrors(this.BIform);
+  // }
 
 
-  }
+  // }
   csvInputChange(fileInputEvent: any) {
     this.FileName = fileInputEvent.target.files[0].name;
     console.log(fileInputEvent.target.files[0]);
@@ -310,53 +326,4 @@ export class BankinformationComponent implements OnInit {
   nextbtn(): void {
     this._router.navigate(['pages/nextlogin'])
   }
-}
-export class BankInformation {
-  ID !: string;
-  Leaf !: number;
-  Bill!: string;
-  Date!: Date;
-  Amount!: number
-  BankName!: string;
-
-}
-export class BankDetailInformation {
-  ID !: string;
-  BankName !: string;
-  BankAddress!: string;
-  IFSC!: string;
-  AccountNum!: number
-
-}
-export class JKCInformation {
-  JKDirectory!: boolean
-  political!: boolean
-  police!: boolean
-  Authority!: boolean
-  // sales!:boolean
-  // asmname!:boolean
-  // headname!:boolean
-  // jkc1Name!:string
-  // jkcMobile!:number
-  // jkcPerson!:string
-  // politicalname!:string
-  // politicalMobile!:number
-  // politicalPerson!:string
-  // policeName!:string
-  // policeMobile!:number
-  // policePerson!:string
-  // adminName!:string
-  // adminMobile!:number
-  // adminperson!:string
-  // salesName!:string
-  // salesMobile!:number
-  // salesPerson!:string
-  // asmname1!:string
-  // asmnMobile!:number
-  // asmnperson!:string
-  // headname1!:string
-  // headMobile!:number
-  // headPerson!:string
-
-
 }

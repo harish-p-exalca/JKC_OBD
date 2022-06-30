@@ -65,7 +65,7 @@
                 <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                   <div fxLayout="column" fxFlex="100"  class="inner-inp_div">
                     <input autocomplete="off" placeholder=" Enter the capacity" formControlName="storagecapacity"
-                    class="inputform"  required>
+                    class="inputform" (keypress)="keyPressNumbers($event)" required>
                     <mat-error class="errorn"
                     *ngIf="BIform?.get('storagecapacity')?.touched && BIform?.get('storagecapacity')?.hasError('required')">
                     Capacity
@@ -194,15 +194,15 @@
             </span>
           </button>
         </div>
-        <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px" style="margin-left:-38px">
+        <!-- <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px" style="margin-left:-38px">
           <button mat-flat-button class="draft" (click)="ClearAll()" fxLayout="row" fxLayoutGap="10px"> 
             <img class="draftimg" src="../../assets/images/bi.png">
             <span class="prev_span">
               Save as Draft
             </span>
           </button>
-        </div>
-        <button mat-raised-button class="savebtn" (click)="saveBusinessInfo()">Save & Next</button>
+        </div> -->
+        <button mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Save & Next</button>
       </div>
       <br>
     

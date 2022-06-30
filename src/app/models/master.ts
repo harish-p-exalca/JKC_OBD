@@ -148,7 +148,8 @@ export class BusinessInformationView {
   SalesandTargets: SalesAndTarget[];
 }
 export class BankDetailsView {
-  BankDetailInfo: BankDetails;
+  BankDetailInfo: BankDetails[];
+  SecurityDetails:SecurityDepositDetail;
   Documentsrequired: DocumentRequired[];
 }
 export class PersonalInformationView {
@@ -171,6 +172,24 @@ export class PersonalInformation {
     TransID: number;
     Latitude:string;
     Logitude:string;
+}
+export interface PersonalInfoStatusView {
+    Name: string;
+    City: string;
+    District: string;
+    State: string;
+    TransID: number;
+    Status: string;
+}
+export class SecurityDepositDetail {
+    ID: number;
+    TransID: number;
+    Type: string;
+    Leaf: string;
+    Date: Date | string;
+    Amount: number;
+    BankName: string;
+    AdvBillingParty: boolean;
 }
 export class States {
     ID: number;
@@ -204,13 +223,41 @@ export class BusinessInformation {
     Wholesale: number;
     Retailers: string;
 }
-export interface SalesAndTarget {
+export class SalesAndTarget {
     ID: number;
     TransID: number;
     Month: string;
     Value: number;
 }
-export class BusinessInfoView{
-    Business:BusinessInformation;
-    Sales:SalesAndTarget[];
-}
+export class MarketInformation {
+        ID: number;
+        MarketName: string;
+        Population: number;
+        MarketPotential: string;
+        StockList: string;
+        Distance: number;
+        StockListName: string;
+        Year: number;
+        Area: string;
+        Total: number;
+        MonthlySale: number;
+        PanNo: string;
+        GstNo: string;
+        Background: string;
+        TransID: number;
+
+    }
+    export class AverageSale {
+        ID: number;
+        TransID: number;
+        Brand: string;
+        AvgSale: number;
+    }
+    export class MarketInformationView {
+        AverageSale: AverageSale[];
+        MarketInformation: MarketInformation;
+    }
+// export class BusinessInfoView{
+//     Business:BusinessInformation;
+//     Sales:SalesAndTarget[];
+// }
