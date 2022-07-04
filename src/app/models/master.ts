@@ -173,7 +173,7 @@ export class PersonalInformation {
     Latitude:string;
     Logitude:string;
 }
-export interface PersonalInfoStatusView {
+export class PersonalInfoStatusView {
     Name: string;
     City: string;
     District: string;

@@ -124,10 +124,7 @@ export class DashboardComponent implements OnInit {
         {
             this.Role = true;
         } 
-        if(localStorage.getItem('ActionStatus') == "Draft")
-        {
-            this.SubmitValue = true;
-        } 
+        
         this.InitializeFormGroup();
         this.filteropt = this.PIform.get("State").valueChanges.pipe(
             startWith(""),
@@ -202,6 +199,7 @@ export class DashboardComponent implements OnInit {
             console.log("view", res);
             this.CustomerObdView = res;
             this.SetPersonalInfoValues();
+           
         },
             err => {
                 console.log(err);
@@ -233,7 +231,14 @@ export class DashboardComponent implements OnInit {
             Pincode: this.CustomerObdView.PersonalInfo.PersonalInformation.Pincode,
             Status: this.CustomerObdView.PersonalInfo.PersonalInformation.Status,
         });
-
+        if(localStorage.getItem('ActionStatus') == "Draft")
+        {
+            this.SubmitValue = true;
+        } 
+        if(localStorage.getItem('ActionStatus') == "Responded")
+        {
+            this.PIform.disable();
+        } 
         this.selected=this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
         this.IdentityData=this.CustomerObdView.PersonalInfo.Identities;
     }
@@ -540,5 +545,8 @@ export class DashboardComponent implements OnInit {
         }
         return true;
     }
-
+    ngOnDestroy(): void {
+        localStorage.removeItem('ActionStatus');
+        localStorage.removeItem('TransID');
+    }
 }
