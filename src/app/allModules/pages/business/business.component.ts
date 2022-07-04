@@ -1,8 +1,9 @@
+import { SalesAndTarget, BusinessInformation } from './../../../models/master';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
-import { AuthenticationDetails, BusinessInformation, BusinessInformationView, BusinessInfoView, States } from 'app/models/master';
+import { AuthenticationDetails, BusinessInformationView, States } from 'app/models/master';
 import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
 import { SnackBarStatus } from 'app/notifications/snackbar-status-enum';
 import { CommonService } from 'app/services/common.service';
@@ -51,7 +52,20 @@ export class BusinessComponent implements OnInit {
 
     );
   }
-
+  IdentityData: SalesAndTarget[] = [];
+  IdentityAddClicked() {
+      if (this.BrandForm.valid) {
+          var identity = new SalesAndTarget();
+          identity.Value = this.BrandForm.get('sales').value;
+          identity.Month = this.BrandForm.get('date1').value;
+          identity.TransID = this.currentTransaction;
+          this.IdentityData.push(identity);
+          this.BrandForm.reset();
+      }
+      else {
+          this._commonService.ShowValidationErrors(this.BrandForm);
+      }
+  }
   ngOnInit() {
     const retrievedObject = localStorage.getItem('authorizationData');
     if (retrievedObject) {
@@ -128,6 +142,41 @@ export class BusinessComponent implements OnInit {
       // });
     }
   }
+  SubmitButtonClick(isDraft: boolean = false) {
+    if (this.BIform.valid) {
+     
+            var cobView = new BusinessInformationView();
+            cobView.Businessinfo = this.GetBusinessInfoFromForm();
+            cobView.SalesandTargets = this.IdentityData;
+            console.log("cobView", cobView);
+            this._dashboardService.SaveBusinessInfoView(cobView).subscribe(res => {
+                console.log("From save api", res);
+                this._router.navigate(['pages/marketinformation']);
+                this.ClearAll();
+            },
+                err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+                }
+            );
+    }
+    else {
+        this._commonService.ShowValidationErrors(this.BIform);
+    }
+}
+GetBusinessInfoFromForm():BusinessInformation
+{
+  const businessformvalues: BusinessInformation = new BusinessInformation();
+  businessformvalues.Turnover1 = this.BIform.get('NoOfYears').value;
+  businessformvalues.Turnover2 = this.BIform.get('NoOfYears1').value;
+  businessformvalues.Turnover3 = this.BIform.get('NoOfYears2').value;
+  businessformvalues.Retail = parseInt(this.BIform.get('retail').value);
+  businessformvalues.WorkingCaptial = this.BIform.get('capitalinvest').value;
+  businessformvalues.NoVechicle = parseInt(this.BIform.get('vehicle').value);
+  businessformvalues.TotalStorage = this.BIform.get('storagecapacity').value;
+  businessformvalues.Wholesale = parseInt(this.BIform.get('Wholesale').value);
+  businessformvalues.TransID = this.currentTransaction;
+  return businessformvalues;
+}
   public saletableNumber: number = 0;
   addSales() {
     const number = 1;

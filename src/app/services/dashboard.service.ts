@@ -1,3 +1,4 @@
+import { MarketInformationView } from './../models/master';
 import { Guid } from 'guid-typescript';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -6,9 +7,7 @@ import { _MatChipListMixinBase } from '@angular/material';
 import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
 import { BankDetailsView, BusinessInformation, BusinessInformationView, CustomerOnboardingView, PersonalInfo, SendMail } from 'app/models/master';
-import { MarketInformation } from 'app/allModules/pages/marketinformation/marketinformation.component';
 // import { BusinessInformation } from 'app/allModules/pages/business/business.component';
-import { BankDetailInformation, BankInformation, JKCInformation } from 'app/allModules/pages/bankinformation/bankinformation.component';
 
 @Injectable({
     providedIn: 'root'
@@ -49,10 +48,14 @@ export class DashboardService {
     //     return this._httpClient.get<PersonalInformation[]>('http://10.43.13.9:80/api/PersonalInfo/GetEmployees')
     //         .pipe(catchError(this.errorHandler));
     // }
-    // getPersonalInfo(): Observable<PersonalInformation[] | string> {
-    //     return this._httpClient.get<PersonalInformation[]>('http://10.43.13.9:80/api/PersonalInfo/GetAllPersoalDetails')
-    //         .pipe(catchError(this.errorHandler));
-    // }
+    getPersonalInfo(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetAllPersoalDetailsAndStatus`)
+            .pipe(catchError(this.errorHandler));
+    }
+    getPersonalInfoByStatus(status:string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetAllPersoalDetailsByStatus?status=${status}`,)
+            .pipe(catchError(this.errorHandler));
+    }
     // AddEmployee(personalHistory: PersonalInformation): Observable<PersonalInformation | string> {
     //     return this._httpClient.post<PersonalInformation>('http://10.43.13.9:80/api/PersonalInfo/CreatePersonalInfo', personalHistory, {
     //         headers: new HttpHeaders({
@@ -78,14 +81,14 @@ export class DashboardService {
         })
             .pipe(catchError(this.errorHandler));
     }
-    AddMArketInfo(marketInfo: MarketInformation): Observable<MarketInformation | string> {
-        return this._httpClient.post<MarketInformation>('http://10.43.13.9:80/api/MarketInfo/CreateMarketInfo', marketInfo, {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        })
-            .pipe(catchError(this.errorHandler));
-    }
+    // AddMArketInfo(marketInfo: MarketInformation): Observable<MarketInformation | string> {
+    //     return this._httpClient.post<MarketInformation>('http://10.43.13.9:80/api/MarketInfo/CreateMarketInfo', marketInfo, {
+    //         headers: new HttpHeaders({
+    //             'Content-Type': 'application/json'
+    //         })
+    //     })
+    //         .pipe(catchError(this.errorHandler));
+    // }
     AddBusinessInfo(businessInfo: BusinessInformation): Observable<BusinessInformation | string> {
         return this._httpClient.post<BusinessInformation>('http://10.43.13.9:80/api/BusinessInfo/CreateBusinessInfo', businessInfo, {
             headers: new HttpHeaders({
@@ -94,30 +97,30 @@ export class DashboardService {
         })
             .pipe(catchError(this.errorHandler));
     }
-    AddBankInfo(bankInfo: BankInformation): Observable<BankInformation | string> {
-        return this._httpClient.post<BankInformation>('http://10.43.13.9:80/api/BankDetails/CreateBankDetailInfo', bankInfo, {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        })
-            .pipe(catchError(this.errorHandler));
-    }
-    AddBankDetInfo(bankInfo: BankDetailInformation): Observable<BankDetailInformation | string> {
-        return this._httpClient.post<BankDetailInformation>('http://10.43.13.9:80/api/BankDetails/CreateBankInfo', bankInfo, {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        })
-            .pipe(catchError(this.errorHandler));
-    }
-    AddconnectionInfo(bankInfo: JKCInformation): Observable<JKCInformation | string> {
-        return this._httpClient.post<JKCInformation>('http://10.43.13.9:80/api/BankDetails/CreateConnectionInfo', bankInfo, {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        })
-            .pipe(catchError(this.errorHandler));
-    }
+    // AddBankInfo(bankInfo: BankInformation): Observable<BankInformation | string> {
+    //     return this._httpClient.post<BankInformation>('http://10.43.13.9:80/api/BankDetails/CreateBankDetailInfo', bankInfo, {
+    //         headers: new HttpHeaders({
+    //             'Content-Type': 'application/json'
+    //         })
+    //     })
+    //         .pipe(catchError(this.errorHandler));
+    // }
+    // AddBankDetInfo(bankInfo: BankDetailInformation): Observable<BankDetailInformation | string> {
+    //     return this._httpClient.post<BankDetailInformation>('http://10.43.13.9:80/api/BankDetails/CreateBankInfo', bankInfo, {
+    //         headers: new HttpHeaders({
+    //             'Content-Type': 'application/json'
+    //         })
+    //     })
+    //         .pipe(catchError(this.errorHandler));
+    // }
+    // AddconnectionInfo(bankInfo: JKCInformation): Observable<JKCInformation | string> {
+    //     return this._httpClient.post<JKCInformation>('http://10.43.13.9:80/api/BankDetails/CreateConnectionInfo', bankInfo, {
+    //         headers: new HttpHeaders({
+    //             'Content-Type': 'application/json'
+    //         })
+    //     })
+    //         .pipe(catchError(this.errorHandler));
+    // }
     // AddFirmInfo(firmInfo: FirmInformation): Observable<FirmInformation | string> {
     //     return this._httpClient.post<FirmInformation>('http://10.43.13.9:80/api/PersonalInfo/CreateFirmInfo', firmInfo, {
     //         headers: new HttpHeaders({
@@ -174,24 +177,41 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/BusinessInfo/GetBusinessDatas?transID=${transID}`)
         .pipe(catchError(this.errorHandler));
     }
-    SaveBusinessInfoView(businessInfoView: BusinessInformationView): Observable<any> {
-        return this._httpClient.post<BusinessInformationView>(`${this.baseAddress}api/BusinessInfo/SaveBusinessInformationDetails`, businessInfoView, {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        }).pipe(catchError(this.errorHandler));
-    }
-
-    GetBankDetails(transID: number): Observable<any> {
-        return this._httpClient.get<any>(`${this.baseAddress}api/BankDetails/GetBankDetails?transID=${transID}`)
+    GetMarketInformationView(transID: number): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/MarketInfo/GetMarketDatas?transID=${transID}`)
         .pipe(catchError(this.errorHandler));
     }
-    saveBankInfoView(bankDetailsView: BankDetailsView): Observable<any> {
-        return this._httpClient.post<BankDetailsView>(`${this.baseAddress}api/BankDetails/saveBankInfoView`, bankDetailsView, {
+    SaveMarketInfoView(cobView: MarketInformationView): Observable<any> {
+        return this._httpClient.post<MarketInformationView>(`${this.baseAddress}api/MarketInfo/SaveCustomerMarketDetails`, cobView, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
         }).pipe(catchError(this.errorHandler));
+    }
+    SaveBankInfoView(cobView: BankDetailsView): Observable<any> {
+        return this._httpClient.post<BankDetailsView>(`${this.baseAddress}api/BankDetails/saveBankInfoView`, cobView, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        }).pipe(catchError(this.errorHandler));
+    }
+    // SaveBusinessInfoView(businessInfoView: BusinessInformationView): Observable<any> {
+    //     return this._httpClient.post<BusinessInformationView>(`${this.baseAddress}api/BusinessInfo/SaveBusinessInformationDetails`, businessInfoView, {
+    //         headers: new HttpHeaders({
+    //             'Content-Type': 'application/json'
+    //         })
+    //     }).pipe(catchError(this.errorHandler));
+    // }
+    SaveBusinessInfoView(cobView: BusinessInformationView): Observable<any> {
+        return this._httpClient.post<BusinessInformationView>(`${this.baseAddress}api/BusinessInfo/SaveBusinessInformationDetails`, cobView, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        }).pipe(catchError(this.errorHandler));
+    }
+    GetSecurityDetails(transID: number): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/BankDetails/GetSecurityDepositDetails?transID=${transID}`)
+        .pipe(catchError(this.errorHandler));
     }
 }
 

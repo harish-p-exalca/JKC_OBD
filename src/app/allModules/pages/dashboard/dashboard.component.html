@@ -81,6 +81,10 @@
                 *ngIf=" PIform?.get('Name')?.touched && PIform?.get('Name')?.hasError('required')">Name is
                 required
               </mat-error>
+              <mat-error class="errorn"
+              *ngIf="PIform?.get('Name')?.touched && !PIform?.get('Name')?.hasError('required') && PIform?.get('Name')?.hasError('pattern')">
+              Please enter a valid Name
+            </mat-error>
             </div>
 
           </div>
@@ -190,7 +194,7 @@
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Pincode</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <input matInput placeholder="Enter Pincode" formControlName="Pincode" (keypress)="decimalOnly($event)"
+              <input matInput placeholder="Enter Pincode" formControlName="Pincode" (keypress)="decimalOnly($event)" minLength="6" maxLength="6"
                 class="inputform">
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('Pincode')?.touched && PIform?.get('Pincode')?.hasError('required')">Pincode is
@@ -206,8 +210,8 @@
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Status of the Firm</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected"
-                formControlName="Status">
+              <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected" (selectionChange)="FirmStatusChange()"
+                formControlName="Status" >
                 <mat-option value="Proprietor">Proprietor</mat-option>
                 <mat-option value="Partnership">Partnership</mat-option>
                 <mat-option value="Huf">Huf</mat-option>
@@ -315,7 +319,7 @@
         <img class="clearimg" src="../../assets/images/clear.svg">
       </button>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px" style="margin-left:-38px">
+    <div *ngIf="Role!=true" fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px" style="margin-left:-38px">
       <button mat-flat-button class="draft" (click)="SubmitButtonClick(true)"> Save as Draft
         <img class="draftimg" src="../../assets/images/bi.png">
       </button>
