@@ -1,3 +1,4 @@
+import { CustomerOnboarding } from './../../../models/master';
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
@@ -146,6 +147,7 @@ export class ReportsviewComponent implements OnInit {
     transID: any;
     MarketInfoView: MarketInformationView = new MarketInformationView();
     businessInfoView: BusinessInformationView = new BusinessInformationView();
+    Role: any;
     constructor(
         private fb: FormBuilder,
         private _dashboardService: DashboardService
@@ -153,7 +155,6 @@ export class ReportsviewComponent implements OnInit {
 
     ngOnInit() {
         const retrievedObject = localStorage.getItem("authorizationData");
-
         if (retrievedObject) {
             this.authenticationDetails = JSON.parse(
                 retrievedObject
@@ -161,6 +162,7 @@ export class ReportsviewComponent implements OnInit {
             this.currentTransaction = parseInt(
                 this.authenticationDetails.Token
             );
+            this.Role = this.authenticationDetails.UserRole;
         }
         this.InitializeFormGroup();
         this.transID = localStorage.getItem("TransID");
@@ -189,14 +191,18 @@ export class ReportsviewComponent implements OnInit {
                         console.log(err);
                     }
                 );
-                this._dashboardService.GetBusinessInformationView(this.transID).subscribe(res => {
-                  console.log("view", res);
-                  this.businessInfoView = res;
-                  this.SetBusinessInfoDetails(this.businessInfoView);
-              },
-                  err => {
-                      console.log(err);
-                  });
+            this._dashboardService
+                .GetBusinessInformationView(this.transID)
+                .subscribe(
+                    (res) => {
+                        console.log("view", res);
+                        this.businessInfoView = res;
+                        this.SetBusinessInfoDetails(this.businessInfoView);
+                    },
+                    (err) => {
+                        console.log(err);
+                    }
+                );
         }
         this.MIform = this.fb.group({
             market: [""],
@@ -233,14 +239,14 @@ export class ReportsviewComponent implements OnInit {
             wcMonth: [""],
         });
         this.BIform = this.fb.group({
-          NoOfYears: ['', Validators.required],
-          NoOfYears1: ['', Validators.required],
-          NoOfYears2: ['', Validators.required],
-          capitalinvest: ['', Validators.required],
-          storagecapacity: ['', Validators.required],
-          retail: ['', Validators.required],
-          vehicle: ['', Validators.required],
-          Wholesale: ['', Validators.required],
+            NoOfYears: ["", Validators.required],
+            NoOfYears1: ["", Validators.required],
+            NoOfYears2: ["", Validators.required],
+            capitalinvest: ["", Validators.required],
+            storagecapacity: ["", Validators.required],
+            retail: ["", Validators.required],
+            vehicle: ["", Validators.required],
+            Wholesale: ["", Validators.required],
         });
         this.BrandForm1 = this.fb.group({
             sales: ["", Validators.required],
@@ -418,25 +424,112 @@ export class ReportsviewComponent implements OnInit {
             // });
         }
     }
-    SetBusinessInfoDetails(businessInfoView:BusinessInformationView = new BusinessInformationView() ) {
-
-      if (businessInfoView.Businessinfo.TransID != null) {
-        // businessinformation = businessInfoView.Businessinfo;
-        this.BIform.patchValue({
-          NoOfYears: businessInfoView.Businessinfo.Turnover1,
-          NoOfYears1: businessInfoView.Businessinfo.Turnover2,
-          NoOfYears2: businessInfoView.Businessinfo.Turnover3,
-          capitalinvest: businessInfoView.Businessinfo.WorkingCaptial,
-          storagecapacity: businessInfoView.Businessinfo.TotalStorage,
-          retail: businessInfoView.Businessinfo.Retail,
-          vehicle: businessInfoView.Businessinfo.NoVechicle,
-          Wholesale: businessInfoView.Businessinfo.Wholesale,
-        });
-        // this.BrandForm.patchValue({
-        //   sales: ['', Validators.required],
-        //   date1: [''],
-        //   date2: [''],
-        // });
-      }
+    SetBusinessInfoDetails(
+        businessInfoView: BusinessInformationView = new BusinessInformationView()
+    ) {
+        if (businessInfoView.Businessinfo.TransID != null) {
+            // businessinformation = businessInfoView.Businessinfo;
+            this.BIform.patchValue({
+                NoOfYears: businessInfoView.Businessinfo.Turnover1,
+                NoOfYears1: businessInfoView.Businessinfo.Turnover2,
+                NoOfYears2: businessInfoView.Businessinfo.Turnover3,
+                capitalinvest: businessInfoView.Businessinfo.WorkingCaptial,
+                storagecapacity: businessInfoView.Businessinfo.TotalStorage,
+                retail: businessInfoView.Businessinfo.Retail,
+                vehicle: businessInfoView.Businessinfo.NoVechicle,
+                Wholesale: businessInfoView.Businessinfo.Wholesale,
+            });
+            // this.BrandForm.patchValue({
+            //   sales: ['', Validators.required],
+            //   date1: [''],
+            //   date2: [''],
+            // });
+        }
+    }
+    Approve(): void {
+        if (this.Role == "ASM") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "ASMApproved";
+            Cusotmer.TranID = this.currentTransaction;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                },(err) =>{
+                    console.log(err);
+                }
+            );
+        }
+        if (this.Role == "Stokist") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "StokistApproved";
+            Cusotmer.TranID = this.currentTransaction;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                },(err) =>{
+                    console.log(err);
+                }
+            );
+        }
+        if (this.Role == "DH") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "DHApproved";
+            Cusotmer.TranID = this.currentTransaction;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                },(err) =>{
+                    console.log(err);
+                }
+            );
+        }
+        if (this.Role == "ZH") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "ZHApproved";
+            Cusotmer.TranID = this.currentTransaction;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                },(err) =>{
+                    console.log(err);
+                }
+            );
+        }
+        if (this.Role == "SH") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "SHApproved";
+            Cusotmer.TranID = this.currentTransaction;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                },(err) =>{
+                    console.log(err);
+                }
+            );
+        }
+        if (this.Role == "RAC") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "RACApproved";
+            Cusotmer.TranID = this.currentTransaction;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                },(err) =>{
+                    console.log(err);
+                }
+            );
+        }
+    }
+    Reject(): void {
+        var Cusotmer = new CustomerOnboarding();
+        Cusotmer.Status = "Rejected";
+        Cusotmer.TranID = this.currentTransaction;
+        this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+            (data) => {
+                console.log(data);
+            },(err) =>{
+                console.log(err);
+            }
+        );
     }
 }

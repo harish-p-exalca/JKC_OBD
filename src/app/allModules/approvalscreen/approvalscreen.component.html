@@ -231,9 +231,9 @@
           </div>
       </div> -->
       <div fxLayout="row" fxFlex="30" class="first-div">
-          <div fxFlex="40" fxLayout="row" fxLayoutAlign="space-between center" 
+          <div fxFlex="40" fxLayout="row" fxLayoutAlign="space-around center" 
           fxLayoutGap="12px" class="status-div">
-              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr1">
+              <!-- <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr1">
                   <img src="assets/images/Ellipse 55.svg" class="align-image"/>
                   <div class="count clr1">
                       {{AllDraftDetails.length}}
@@ -241,17 +241,17 @@
                   <span class="status_profile">
                       Draft
                   </span>
-              </div>
-              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr2">
+              </div> -->
+              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-evenly start" class="inner_statusdiv bg-clr2">
                   <img src="assets/images/Ellipse 60.svg" class="align-image"/>
                   <div class="count clr2">
-                    {{RespondedDetails.length}}
+                    {{AllOpenDetails.length}}
                   </div>
                   <span class="status_profile">
                       Open
                   </span>
               </div>
-              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr3">
+              <!-- <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr3">
                   <img src="assets/images/Ellipse 61.svg" class="align-image"/>
                   <div class="count clr3">
                     {{AllPendingDetails.length}}
@@ -259,7 +259,7 @@
                   <span class="status_profile">
                       Pending
                   </span>
-              </div>
+              </div> -->
               <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr4">
                   <img src="assets/images/Ellipse 984.svg" class="align-image"/>
                   <div class="count clr4">
@@ -408,8 +408,7 @@
                                     <td mat-cell *matCellDef="let element" class="table_data">
                                         <!-- {{ element.Action }} -->
                                         <div style="text-align-last: center;">
-                                            <button *ngIf="element.Status == 'InitiatorReleased'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
-                                            <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button>
+                                            <button mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
                                         </div>
                                     </td>
                                 </ng-container>
@@ -425,7 +424,7 @@
                             </table>
                         </div>
                     </mat-tab>
-                    <mat-tab class="link" label="Draft" (click)="GetEmployeewithDraft()">
+                    <mat-tab class="link" label="Open" (click)="GetEmployeewithOpenStatus()">
                         <div class="table_div" style="width: 100%;">
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
@@ -498,8 +497,8 @@
                                     <td mat-cell *matCellDef="let element" class="table_data">
                                         <!-- {{ element.Action }} -->
                                         <div style="text-align-last: center;">
-                                            <button *ngIf="element.Status == 'InitiatorReleased'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
-                                            <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button>
+                                            <button mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
+                                            <!-- <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button> -->
                                         </div>
                                     </td>
                                 </ng-container>
@@ -515,7 +514,7 @@
                             </table>
                         </div>
                     </mat-tab>
-                    <mat-tab class="link" label="Open" (click)="GetEmployeewithRespodedStatus()">
+                    <mat-tab class="link" label="Approve" (click)="GetEmployeewithApprovedStatus()">
                         <div class="table_div" style="width: 100%;">
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
@@ -588,188 +587,8 @@
                                     <td mat-cell *matCellDef="let element" class="table_data">
                                         <!-- {{ element.Action }} -->
                                         <div style="text-align-last: center;">
-                                            <button *ngIf="element.Status == 'InitiatorReleased'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
-                                            <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button>
-                                        </div>
-                                    </td>
-                                </ng-container>
-                                <tr
-                                    mat-header-row
-                                    *matHeaderRowDef="employeesDisplayColumns; sticky: true"
-                                     class="header-row-css"
-                                ></tr>
-                                <tr
-                                    mat-row
-                                    *matRowDef="let row; columns: employeesDisplayColumns" class="row-table"
-                                ></tr>
-                            </table>
-                        </div>
-                    </mat-tab>
-                    <mat-tab class="link" label="Pending" (click)="GetEmployeewithPendingStatus()">
-                        <div class="table_div" style="width: 100%;">
-                            <table mat-table [dataSource]="employeesDataSource" class="table-css">
-                                <ng-container matColumnDef="No">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
-                                    </td>
-                                </ng-container>
-            
-                                <ng-container matColumnDef="Name">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thauthor"> Name </span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.Name }}
-                                    </td>
-                                </ng-container>
-            
-                                <ng-container matColumnDef="Gmail">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thdate">State</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.State }}
-                                    </td>
-                                </ng-container>
-            
-                                <ng-container matColumnDef="Country">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thdate">District</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.District }}
-                                    </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Type">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thdate">City</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.City }}
-                                    </td>
-                                </ng-container>
-                                <!-- <ng-container matColumnDef="MobileNo">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thdate">Mobile Number</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.MobileNo }}
-                                    </td>
-                                </ng-container> -->
-                                <ng-container matColumnDef="Status">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thdate">Status</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.Status }}
-                                        <div>
-          
-                                        </div>
-                                    </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Action">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class"
-                                    style="text-align: center !important;">
-                                        <span class="thdate" >Action</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        <!-- {{ element.Action }} -->
-                                        <div style="text-align-last: center;">
-                                            <button *ngIf="element.Status == 'InitiatorReleased'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
-                                            <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button>
-                                        </div>
-                                    </td>
-                                </ng-container>
-                                <tr
-                                    mat-header-row
-                                    *matHeaderRowDef="employeesDisplayColumns; sticky: true"
-                                     class="header-row-css"
-                                ></tr>
-                                <tr
-                                    mat-row
-                                    *matRowDef="let row; columns: employeesDisplayColumns" class="row-table"
-                                ></tr>
-                            </table>
-                        </div>
-                    </mat-tab>
-                    <mat-tab class="link" label="Approved" (click)="GetEmployeewithApprovesStatus()">
-                        <div class="table_div" style="width: 100%;">
-                            <table mat-table [dataSource]="employeesDataSource" class="table-css">
-                                <ng-container matColumnDef="No">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
-                                    </td>
-                                </ng-container>
-            
-                                <ng-container matColumnDef="Name">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thauthor"> Name </span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.Name }}
-                                    </td>
-                                </ng-container>
-            
-                                <ng-container matColumnDef="Gmail">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thdate">State</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.State }}
-                                    </td>
-                                </ng-container>
-            
-                                <ng-container matColumnDef="Country">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thdate">District</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.District }}
-                                    </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Type">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thdate">City</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.City }}
-                                    </td>
-                                </ng-container>
-                                <!-- <ng-container matColumnDef="MobileNo">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thdate">Mobile Number</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.MobileNo }}
-                                    </td>
-                                </ng-container> -->
-                                <ng-container matColumnDef="Status">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thdate">Status</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.Status }}
-                                        <div>
-          
-                                        </div>
-                                    </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Action">
-                                    <th mat-header-cell *matHeaderCellDef class="header_table-class"
-                                    style="text-align: center !important;">
-                                        <span class="thdate" >Action</span>
-                                    </th>
-                                    <td mat-cell *matCellDef="let element" class="table_data">
-                                        <!-- {{ element.Action }} -->
-                                        <div style="text-align-last: center;">
-                                            <button *ngIf="element.Status == 'InitiatorReleased'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
-                                            <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button>
+                                            <button mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
+                                            <!-- <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button> -->
                                         </div>
                                     </td>
                                 </ng-container>
@@ -858,8 +677,8 @@
                                     <td mat-cell *matCellDef="let element" class="table_data">
                                         <!-- {{ element.Action }} -->
                                         <div style="text-align-last: center;">
-                                            <button *ngIf="element.Status == 'InitiatorReleased'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
-                                            <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button>
+                                            <button mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
+                                            <!-- <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button> -->
                                         </div>
                                     </td>
                                 </ng-container>
@@ -894,8 +713,6 @@
                       <mat-icon matSuffix class="micicon_search">mic</mat-icon>
                   </div> -->
               </div>
-  
-           
           </div>
       </div>
   </div>
