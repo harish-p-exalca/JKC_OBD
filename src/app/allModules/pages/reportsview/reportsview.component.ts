@@ -12,6 +12,10 @@ import {
 } from "app/models/master";
 import { DashboardService } from "app/services/dashboard.service";
 import { Monthlysales } from "../business/business.component";
+import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
+import { MatSnackBar } from '@angular/material';
+import { SnackBarStatus } from 'app/notifications/snackbar-status-enum';
+import { Router } from '@angular/router';
 
 export interface Element {
     Role: string;
@@ -147,11 +151,12 @@ export class ReportsviewComponent implements OnInit {
     transID: any;
     MarketInfoView: MarketInformationView = new MarketInformationView();
     businessInfoView: BusinessInformationView = new BusinessInformationView();
+    notificationSnackBarComponent: NotificationSnackBarComponent;
     Role: any;
     constructor(
         private fb: FormBuilder,
-        private _dashboardService: DashboardService
-    ) {}
+        private _dashboardService: DashboardService,public snackBar: MatSnackBar,  private _router: Router,
+    ) {this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar)}
 
     ngOnInit() {
         const retrievedObject = localStorage.getItem("authorizationData");
@@ -450,72 +455,85 @@ export class ReportsviewComponent implements OnInit {
         if (this.Role == "ASM") {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "ASMApproved";
-            Cusotmer.TranID = this.currentTransaction;
+            Cusotmer.TranID = this.transID;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                },(err) =>{
-                    console.log(err);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
         }
         if (this.Role == "Stokist") {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "StokistApproved";
-            Cusotmer.TranID = this.currentTransaction;
+            Cusotmer.TranID = this.transID;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                },(err) =>{
-                    console.log(err);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
         }
         if (this.Role == "DH") {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "DHApproved";
-            Cusotmer.TranID = this.currentTransaction;
+            Cusotmer.TranID = this.transID;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                },(err) =>{
-                    console.log(err);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
         }
         if (this.Role == "ZH") {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "ZHApproved";
-            Cusotmer.TranID = this.currentTransaction;
+            Cusotmer.TranID = this.transID;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                },(err) =>{
-                    console.log(err);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
         }
         if (this.Role == "SH") {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "SHApproved";
-            Cusotmer.TranID = this.currentTransaction;
+            Cusotmer.TranID = this.transID;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                },(err) =>{
-                    console.log(err);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
         }
         if (this.Role == "RAC") {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "RACApproved";
-            Cusotmer.TranID = this.currentTransaction;
+            Cusotmer.TranID = this.transID;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                },(err) =>{
-                    console.log(err);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
         }
@@ -523,12 +541,14 @@ export class ReportsviewComponent implements OnInit {
     Reject(): void {
         var Cusotmer = new CustomerOnboarding();
         Cusotmer.Status = "Rejected";
-        Cusotmer.TranID = this.currentTransaction;
+        Cusotmer.TranID = this.transID;
         this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
             (data) => {
                 console.log(data);
-            },(err) =>{
-                console.log(err);
+                this.notificationSnackBarComponent.openSnackBar('Rejected successfully', SnackBarStatus.success);
+                this._router.navigate(['/pages/approvalinformation']); 
+            }, err => {
+                this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
             }
         );
     }

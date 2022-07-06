@@ -497,24 +497,24 @@ export class ApprovalscreenComponent implements OnInit {
             this.Role = this.authenticationDetails.UserRole;
         }
         if (this.Role == "ASM") {
-            // this._dashboardService
-            //     .getPersonalInfoByStatus("CustomerReleased")
-            //     .subscribe((data) => {
-            //         this.AllHeaderDetails = data;
-            //         this.LoadTableSource(this.AllHeaderDetails);
-            //     });
-        }
-        if (this.Role == "Stokist") {
             this._dashboardService
-                .getPersonalInfoByStatus("RACApproved")
+                .getPersonalInfoByStatusAndRole(this.Role,"CustomerReleased")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
                 });
         }
+        if (this.Role == "Stokist") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });    
+        }
         if (this.Role == "DH") {
             this._dashboardService
-                .getPersonalInfoByStatus("ZHApproved")
+            .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
@@ -522,7 +522,7 @@ export class ApprovalscreenComponent implements OnInit {
         }
         if (this.Role == "ZH") {
             this._dashboardService
-                .getPersonalInfoByStatus("SHApproved")
+            .getPersonalInfoByStatusAndRole(this.Role,"SHApproved")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
@@ -530,7 +530,7 @@ export class ApprovalscreenComponent implements OnInit {
         }
         if (this.Role == "SH") {
             this._dashboardService
-                .getPersonalInfoByStatus("ASMApproved")
+            .getPersonalInfoByStatusAndRole(this.Role,"ASMApproved")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
@@ -538,7 +538,7 @@ export class ApprovalscreenComponent implements OnInit {
         }
         if (this.Role == "RAC") {
             this._dashboardService
-                .getPersonalInfoByStatus("DHApproved")
+            .getPersonalInfoByStatusAndRole(this.Role,"DHApproved")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
@@ -551,6 +551,9 @@ export class ApprovalscreenComponent implements OnInit {
             .subscribe((data) => {
                 this.AllRejectedDetails = data;
             });
+            this.GetEmployeewithOpenStatus();
+            this.GetEmployeewithApprovedStatus();
+            this.GetEmployeewithRejectedStatus();
         //   this.GetEmployeewithDraft();
         //   this.GetEmployeewithRespodedStatus();
         //   this.GetEmployeewithPendingStatus();
@@ -567,6 +570,9 @@ export class ApprovalscreenComponent implements OnInit {
         if (this.tab === "Open") {
             this.GetEmployeewithOpenStatus();
         }
+        if (this.tab === "Approve") {
+            this.GetEmployeewithApprovedStatus();
+        }
         if (this.tab === "Rejected") {
             this.GetEmployeewithRejectedStatus();
         }
@@ -574,7 +580,7 @@ export class ApprovalscreenComponent implements OnInit {
     GetEmployees(): void {
         if (this.Role == "ASM") {
             this._dashboardService
-                .getPersonalInfoByStatus("CustomerReleased")
+                .getPersonalInfoByStatusAndRole(this.Role,"CustomerReleased")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
@@ -582,15 +588,15 @@ export class ApprovalscreenComponent implements OnInit {
         }
         if (this.Role == "Stokist") {
             this._dashboardService
-                .getPersonalInfoByStatus("RACApproved")
+            .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
-                });
+                });    
         }
         if (this.Role == "DH") {
             this._dashboardService
-                .getPersonalInfoByStatus("ZHApproved")
+            .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
@@ -598,7 +604,7 @@ export class ApprovalscreenComponent implements OnInit {
         }
         if (this.Role == "ZH") {
             this._dashboardService
-                .getPersonalInfoByStatus("SHApproved")
+            .getPersonalInfoByStatusAndRole(this.Role,"SHApproved")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
@@ -606,7 +612,7 @@ export class ApprovalscreenComponent implements OnInit {
         }
         if (this.Role == "SH") {
             this._dashboardService
-                .getPersonalInfoByStatus("ASMApproved")
+            .getPersonalInfoByStatusAndRole(this.Role,"ASMApproved")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
@@ -614,7 +620,7 @@ export class ApprovalscreenComponent implements OnInit {
         }
         if (this.Role == "RAC") {
             this._dashboardService
-                .getPersonalInfoByStatus("DHApproved")
+            .getPersonalInfoByStatusAndRole(this.Role,"DHApproved")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
                     this.LoadTableSource(this.AllHeaderDetails);
@@ -701,8 +707,8 @@ export class ApprovalscreenComponent implements OnInit {
             this._dashboardService
                 .getPersonalInfoByStatus("ASMApproved")
                 .subscribe((data) => {
-                    this.AllOpenDetails = data;
-                    this.LoadTableSource(this.AllOpenDetails);
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
                     // this.employeesDataSource =
                     //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                     // this.employeesDataSource.sort = this.sort;
@@ -713,8 +719,8 @@ export class ApprovalscreenComponent implements OnInit {
             this._dashboardService
                 .getPersonalInfoByStatus("Stokist")
                 .subscribe((data) => {
-                    this.AllOpenDetails = data;
-                    this.LoadTableSource(this.AllOpenDetails);
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
                     // this.employeesDataSource =
                     //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                     // this.employeesDataSource.sort = this.sort;
@@ -725,8 +731,8 @@ export class ApprovalscreenComponent implements OnInit {
             this._dashboardService
                 .getPersonalInfoByStatus("DHApproved")
                 .subscribe((data) => {
-                    this.AllOpenDetails = data;
-                    this.LoadTableSource(this.AllOpenDetails);
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
                     // this.employeesDataSource =
                     //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                     // this.employeesDataSource.sort = this.sort;
@@ -737,8 +743,8 @@ export class ApprovalscreenComponent implements OnInit {
             this._dashboardService
                 .getPersonalInfoByStatus("ZHApproved")
                 .subscribe((data) => {
-                    this.AllOpenDetails = data;
-                    this.LoadTableSource(this.AllOpenDetails);
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
                     // this.employeesDataSource =
                     //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                     // this.employeesDataSource.sort = this.sort;
@@ -749,8 +755,8 @@ export class ApprovalscreenComponent implements OnInit {
             this._dashboardService
                 .getPersonalInfoByStatus("SHApproved")
                 .subscribe((data) => {
-                    this.AllOpenDetails = data;
-                    this.LoadTableSource(this.AllOpenDetails);
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
                     // this.employeesDataSource =
                     //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                     // this.employeesDataSource.sort = this.sort;
@@ -761,8 +767,8 @@ export class ApprovalscreenComponent implements OnInit {
             this._dashboardService
                 .getPersonalInfoByStatus("RACApproved")
                 .subscribe((data) => {
-                    this.AllOpenDetails = data;
-                    this.LoadTableSource(this.AllOpenDetails);
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
                     // this.employeesDataSource =
                     //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                     // this.employeesDataSource.sort = this.sort;

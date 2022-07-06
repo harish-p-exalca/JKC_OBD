@@ -63,6 +63,10 @@ export class DashboardService {
             })
         }).pipe(catchError(this.errorHandler));
     }
+    getPersonalInfoByStatusAndRole(Role:string,status:string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetPersonalInfoByStatusAndRole?Role=${Role}&status=${status}`,)
+            .pipe(catchError(this.errorHandler));
+    }
     // AddEmployee(personalHistory: PersonalInformation): Observable<PersonalInformation | string> {
     //     return this._httpClient.post<PersonalInformation>('http://10.43.13.9:80/api/PersonalInfo/CreatePersonalInfo', personalHistory, {
     //         headers: new HttpHeaders({

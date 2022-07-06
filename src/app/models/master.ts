@@ -181,6 +181,16 @@ export class PersonalInfoStatusView {
     TransID: number;
     Status: string;
 }
+export class PersonalInfoByStatusView {
+    Role: string;
+    Name: string;
+    City: string;
+    District: string;
+    State: string;
+    TransID: number;
+    Status: string;
+
+}
 export class SecurityDepositDetail {
     ID: number;
     TransID: number;
