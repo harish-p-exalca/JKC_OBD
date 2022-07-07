@@ -1,4 +1,4 @@
-import { MarketInformationView } from './../models/master';
+import { MarketInformationView, CustomerOnboarding } from './../models/master';
 import { Guid } from 'guid-typescript';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -54,6 +54,17 @@ export class DashboardService {
     }
     getPersonalInfoByStatus(status:string): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetAllPersoalDetailsByStatus?status=${status}`,)
+            .pipe(catchError(this.errorHandler));
+    }
+    updateCustomerOnboardingStatus(CustomerOnboarding): Observable<any> {
+        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingStatus`, CustomerOnboarding, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        }).pipe(catchError(this.errorHandler));
+    }
+    getPersonalInfoByStatusAndRole(Role:string,status:string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetPersonalInfoByStatusAndRole?Role=${Role}&status=${status}`,)
             .pipe(catchError(this.errorHandler));
     }
     // AddEmployee(personalHistory: PersonalInformation): Observable<PersonalInformation | string> {

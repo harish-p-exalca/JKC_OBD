@@ -1,3 +1,4 @@
+import { CustomerOnboarding } from './../../../models/master';
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
@@ -11,6 +12,10 @@ import {
 } from "app/models/master";
 import { DashboardService } from "app/services/dashboard.service";
 import { Monthlysales } from "../business/business.component";
+import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
+import { MatSnackBar } from '@angular/material';
+import { SnackBarStatus } from 'app/notifications/snackbar-status-enum';
+import { Router } from '@angular/router';
 
 export interface Element {
     Role: string;
@@ -146,14 +151,15 @@ export class ReportsviewComponent implements OnInit {
     transID: any;
     MarketInfoView: MarketInformationView = new MarketInformationView();
     businessInfoView: BusinessInformationView = new BusinessInformationView();
+    notificationSnackBarComponent: NotificationSnackBarComponent;
+    Role: any;
     constructor(
         private fb: FormBuilder,
-        private _dashboardService: DashboardService
-    ) {}
+        private _dashboardService: DashboardService,public snackBar: MatSnackBar,  private _router: Router,
+    ) {this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar)}
 
     ngOnInit() {
         const retrievedObject = localStorage.getItem("authorizationData");
-
         if (retrievedObject) {
             this.authenticationDetails = JSON.parse(
                 retrievedObject
@@ -161,6 +167,7 @@ export class ReportsviewComponent implements OnInit {
             this.currentTransaction = parseInt(
                 this.authenticationDetails.Token
             );
+            this.Role = this.authenticationDetails.UserRole;
         }
         this.InitializeFormGroup();
         this.transID = localStorage.getItem("TransID");
@@ -189,14 +196,18 @@ export class ReportsviewComponent implements OnInit {
                         console.log(err);
                     }
                 );
-                this._dashboardService.GetBusinessInformationView(this.transID).subscribe(res => {
-                  console.log("view", res);
-                  this.businessInfoView = res;
-                  this.SetBusinessInfoDetails(this.businessInfoView);
-              },
-                  err => {
-                      console.log(err);
-                  });
+            this._dashboardService
+                .GetBusinessInformationView(this.transID)
+                .subscribe(
+                    (res) => {
+                        console.log("view", res);
+                        this.businessInfoView = res;
+                        this.SetBusinessInfoDetails(this.businessInfoView);
+                    },
+                    (err) => {
+                        console.log(err);
+                    }
+                );
         }
         this.MIform = this.fb.group({
             market: [""],
@@ -233,14 +244,14 @@ export class ReportsviewComponent implements OnInit {
             wcMonth: [""],
         });
         this.BIform = this.fb.group({
-          NoOfYears: ['', Validators.required],
-          NoOfYears1: ['', Validators.required],
-          NoOfYears2: ['', Validators.required],
-          capitalinvest: ['', Validators.required],
-          storagecapacity: ['', Validators.required],
-          retail: ['', Validators.required],
-          vehicle: ['', Validators.required],
-          Wholesale: ['', Validators.required],
+            NoOfYears: ["", Validators.required],
+            NoOfYears1: ["", Validators.required],
+            NoOfYears2: ["", Validators.required],
+            capitalinvest: ["", Validators.required],
+            storagecapacity: ["", Validators.required],
+            retail: ["", Validators.required],
+            vehicle: ["", Validators.required],
+            Wholesale: ["", Validators.required],
         });
         this.BrandForm1 = this.fb.group({
             sales: ["", Validators.required],
@@ -418,25 +429,127 @@ export class ReportsviewComponent implements OnInit {
             // });
         }
     }
-    SetBusinessInfoDetails(businessInfoView:BusinessInformationView = new BusinessInformationView() ) {
+    SetBusinessInfoDetails(
+        businessInfoView: BusinessInformationView = new BusinessInformationView()
+    ) {
+        if (businessInfoView.Businessinfo.TransID != null) {
+            // businessinformation = businessInfoView.Businessinfo;
+            this.BIform.patchValue({
+                NoOfYears: businessInfoView.Businessinfo.Turnover1,
+                NoOfYears1: businessInfoView.Businessinfo.Turnover2,
+                NoOfYears2: businessInfoView.Businessinfo.Turnover3,
+                capitalinvest: businessInfoView.Businessinfo.WorkingCaptial,
+                storagecapacity: businessInfoView.Businessinfo.TotalStorage,
+                retail: businessInfoView.Businessinfo.Retail,
+                vehicle: businessInfoView.Businessinfo.NoVechicle,
+                Wholesale: businessInfoView.Businessinfo.Wholesale,
+            });
+            // this.BrandForm.patchValue({
+            //   sales: ['', Validators.required],
+            //   date1: [''],
+            //   date2: [''],
+            // });
+        }
+    }
+    Approve(): void {
+        if (this.Role == "ASM") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "ASMApproved";
+            Cusotmer.TranID = this.transID;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+                }
+            );
+        }
+        if (this.Role == "Stokist") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "StokistApproved";
+            Cusotmer.TranID = this.transID;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+                }
+            );
+        }
+        if (this.Role == "DH") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "DHApproved";
+            Cusotmer.TranID = this.transID;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+                }
+            );
+        }
+        if (this.Role == "ZH") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "ZHApproved";
+            Cusotmer.TranID = this.transID;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+                }
+            );
+        }
+        if (this.Role == "SH") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "SHApproved";
+            Cusotmer.TranID = this.transID;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+                }
+            );
+        }
+        if (this.Role == "RAC") {
+            var Cusotmer = new CustomerOnboarding();
+            Cusotmer.Status = "RACApproved";
+            Cusotmer.TranID = this.transID;
+            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+                (data) => {
+                    console.log(data);
+                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
+                    this._router.navigate(['/pages/approvalinformation']); 
 
-      if (businessInfoView.Businessinfo.TransID != null) {
-        // businessinformation = businessInfoView.Businessinfo;
-        this.BIform.patchValue({
-          NoOfYears: businessInfoView.Businessinfo.Turnover1,
-          NoOfYears1: businessInfoView.Businessinfo.Turnover2,
-          NoOfYears2: businessInfoView.Businessinfo.Turnover3,
-          capitalinvest: businessInfoView.Businessinfo.WorkingCaptial,
-          storagecapacity: businessInfoView.Businessinfo.TotalStorage,
-          retail: businessInfoView.Businessinfo.Retail,
-          vehicle: businessInfoView.Businessinfo.NoVechicle,
-          Wholesale: businessInfoView.Businessinfo.Wholesale,
-        });
-        // this.BrandForm.patchValue({
-        //   sales: ['', Validators.required],
-        //   date1: [''],
-        //   date2: [''],
-        // });
-      }
+                }, err => {
+                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+                }
+            );
+        }
+    }
+    Reject(): void {
+        var Cusotmer = new CustomerOnboarding();
+        Cusotmer.Status = "Rejected";
+        Cusotmer.TranID = this.transID;
+        this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
+            (data) => {
+                console.log(data);
+                this.notificationSnackBarComponent.openSnackBar('Rejected successfully', SnackBarStatus.success);
+                this._router.navigate(['/pages/approvalinformation']); 
+            }, err => {
+                this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+            }
+        );
     }
 }

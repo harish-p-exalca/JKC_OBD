@@ -494,15 +494,50 @@ export class InitiatorDashboardComponent implements OnInit {
     }
     ngOnInit() {
       this.tab="All";
-      if(this.tab==="All")
-      {
-      this.GetEmployees();
-       }
-       this.GetEmployeewithDraft();
-       this.GetEmployeewithRespodedStatus();
-       this.GetEmployeewithPendingStatus();
-       this.GetEmployeewithApprovesStatus();
-       this.GetEmployeewithRejectedStatus();
+      this._dashboardService.getPersonalInfo().subscribe((data: any) => {
+        this.PIStatus.push(data);
+        this.AllHeaderDetails = data;
+        this.LoadTableSource(this.AllHeaderDetails);
+        // this.employeesDataSource =
+        //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+        // this.employeesDataSource.sort = this.sort;
+        // this.employeesDataSource.paginator = this.paginator;
+        // return data;
+    });
+    this._dashboardService
+    .getPersonalInfoByStatus("InitiatorDraft")
+    .subscribe((data) => {
+        this.AllDraftDetails = data;
+    });
+    this._dashboardService
+    .getPersonalInfoByStatus("InitiatorReleased")
+    .subscribe((data) => {
+        this.RespondedDetails = data;
+    });
+    this._dashboardService
+    .getPersonalInfoByStatus("CustomerReleased")
+    .subscribe((data) => {
+        this.AllPendingDetails = data;
+    });
+    this._dashboardService
+    .getPersonalInfoByStatus("Approved")
+    .subscribe((data) => {
+        this.AllApprovedDetails = data;
+    });
+    this._dashboardService
+    .getPersonalInfoByStatus("Rejected")
+    .subscribe((data) => {
+        this.AllRejectedDetails = data;
+    });
+    //   if(this.tab==="All")
+    //   {
+    //   this.GetEmployees();
+    //    }
+    //    this.GetEmployeewithDraft();
+    //    this.GetEmployeewithRespodedStatus();
+    //    this.GetEmployeewithPendingStatus();
+    //    this.GetEmployeewithApprovesStatus();
+    //    this.GetEmployeewithRejectedStatus();
         // this.GetEmployees(); // forgeted this line
     }
     tabClick(event: MatTabChangeEvent):void{

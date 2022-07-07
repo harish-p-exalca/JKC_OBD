@@ -1,98 +1,352 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator, MatTabChangeEvent } from '@angular/material';
-import { Router } from '@angular/router';
-import { PersonalInfoStatusView } from 'app/models/master';
-import { DashboardService } from 'app/services/dashboard.service';
+import {
+    Component,
+    ElementRef,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation,
+} from "@angular/core";
+import {
+    MatTableDataSource,
+    MatSort,
+    MatPaginator,
+    MatTabChangeEvent,
+} from "@angular/material";
+import { Router } from "@angular/router";
+import {
+    AuthenticationDetails,
+    PersonalInfoStatusView,
+} from "app/models/master";
+import { DashboardService } from "app/services/dashboard.service";
 // import { ChartDataSets, ChartOptions } from 'chart.js';
 // import { Color, Label } from 'ng2-charts';
-import { Chart } from 'chart.js';
+import { Chart } from "chart.js";
 import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexDataLabels,
-  ApexTooltip,
-  ApexStroke,
-  ApexResponsive,
-  ApexNonAxisChartSeries,
-  ApexLegend,
- 
+    ChartComponent,
+    ApexAxisChartSeries,
+    ApexChart,
+    ApexXAxis,
+    ApexDataLabels,
+    ApexTooltip,
+    ApexStroke,
+    ApexResponsive,
+    ApexNonAxisChartSeries,
+    ApexLegend,
 } from "ng-apexcharts";
 export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  stroke: ApexStroke;
-  tooltip: ApexTooltip;
-  responsive: ApexResponsive[];
-  dataLabels: ApexDataLabels;
-  legend: ApexLegend
+    series: ApexAxisChartSeries;
+    chart: ApexChart;
+    xaxis: ApexXAxis;
+    stroke: ApexStroke;
+    tooltip: ApexTooltip;
+    responsive: ApexResponsive[];
+    dataLabels: ApexDataLabels;
+    legend: ApexLegend;
 };
 export type ChartOptions1 = {
-  series: ApexNonAxisChartSeries;
-  chart: ApexChart;
-  responsive: ApexResponsive[];
-  labels: any;
-  legend:any;
-  dataLabels: ApexDataLabels; // add this
-  colors: any[]
+    series: ApexNonAxisChartSeries;
+    chart: ApexChart;
+    responsive: ApexResponsive[];
+    labels: any;
+    legend: any;
+    dataLabels: ApexDataLabels; // add this
+    colors: any[];
 };
 export interface Element {
-  No: number,
-  Name:string,
-  Gmail:string,
-  Type:string,
-  Country:string,
-  MobileNo:string,
-  Status:string,
-  Action:string
+    No: number;
+    Name: string;
+    Gmail: string;
+    Type: string;
+    Country: string;
+    MobileNo: string;
+    Status: string;
+    Action: string;
 }
-const datas:Element[] =  [
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-  {No: 1, Name: 'prasath',Gmail:'prasath@exalca.com',Type: 'jagdb',Country:'India',MobileNo:'9486740455', Status: 'Single',Action: 'action' },
-]
+const datas: Element[] = [
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+    {
+        No: 1,
+        Name: "prasath",
+        Gmail: "prasath@exalca.com",
+        Type: "jagdb",
+        Country: "India",
+        MobileNo: "9486740455",
+        Status: "Single",
+        Action: "action",
+    },
+];
 @Component({
-  selector: 'app-approvalscreen',
-  templateUrl: './approvalscreen.component.html',
-  styleUrls: ['./approvalscreen.component.scss'],
-  encapsulation:ViewEncapsulation.None
+    selector: "app-approvalscreen",
+    templateUrl: "./approvalscreen.component.html",
+    styleUrls: ["./approvalscreen.component.scss"],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ApprovalscreenComponent implements OnInit {
-  PI: PersonalInformation[] = [];
+    PI: PersonalInformation[] = [];
     PIStatus: PersonalInfoStatusView[] = [];
-    AllDraftDetails: any[] = [];
+    AllOpenDetails: any[] = [];
     AllHeaderDetails: any[] = [];
-    RespondedDetails: any[] = [];
-    AllPendingDetails: any[] = [];
     AllApprovedDetails: any[] = [];
     AllRejectedDetails: any[] = [];
-    tab:any;
+    tab: any;
     employeesDataSource: MatTableDataSource<PersonalInfoStatusView>;
     employeesDisplayColumns: string[] = [
         "No",
@@ -110,8 +364,11 @@ export class ApprovalscreenComponent implements OnInit {
     public chartOptions: Partial<ChartOptions>;
     public chartOptions1: Partial<ChartOptions1>;
     public chart1: any;
-    links = ["All", "Draft", "Open", "Pending", "Approved", "Rejected"];
+    authenticationDetails: AuthenticationDetails;
+    currentTransaction: number;
+    links = ["All", "Open", "Approved", "Rejected"];
     activeLink = this.links[0];
+    Role: string;
     constructor(
         private _router: Router,
         private _dashboardService: DashboardService,
@@ -229,106 +486,295 @@ export class ApprovalscreenComponent implements OnInit {
         // };
     }
     ngOnInit() {
-      this.tab="All";
-      if(this.tab==="All")
-      {
-      this.GetEmployees();
-       }
-       this.GetEmployeewithDraft();
-       this.GetEmployeewithRespodedStatus();
-       this.GetEmployeewithPendingStatus();
-       this.GetEmployeewithApprovesStatus();
-       this.GetEmployeewithRejectedStatus();
+        const retrievedObject = localStorage.getItem("authorizationData");
+        if (retrievedObject) {
+            this.authenticationDetails = JSON.parse(
+                retrievedObject
+            ) as AuthenticationDetails;
+            this.currentTransaction = parseInt(
+                this.authenticationDetails.Token
+            );
+            this.Role = this.authenticationDetails.UserRole;
+        }
+        if (this.Role == "ASM") {
+            this._dashboardService
+                .getPersonalInfoByStatusAndRole(this.Role,"CustomerReleased")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+        }
+        if (this.Role == "Stokist") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });    
+        }
+        if (this.Role == "DH") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+        }
+        if (this.Role == "ZH") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"SHApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+        }
+        if (this.Role == "SH") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"ASMApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+        }
+        if (this.Role == "RAC") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"DHApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+        }
+        this.tab = "All";
+
+        this._dashboardService
+            .getPersonalInfoByStatus("Rejected")
+            .subscribe((data) => {
+                this.AllRejectedDetails = data;
+            });
+            this.GetEmployeewithOpenStatus();
+            this.GetEmployeewithApprovedStatus();
+            this.GetEmployeewithRejectedStatus();
+        //   this.GetEmployeewithDraft();
+        //   this.GetEmployeewithRespodedStatus();
+        //   this.GetEmployeewithPendingStatus();
+        //   this.GetEmployeewithApprovesStatus();
+        //   this.GetEmployeewithRejectedStatus();
         // this.GetEmployees(); // forgeted this line
     }
-    tabClick(event: MatTabChangeEvent):void{
-      this.tab = event.tab.textLabel;
-      console.log(this.tab);
-      if(this.tab==="All")
-       {
-       this.GetEmployees();
+    tabClick(event: MatTabChangeEvent): void {
+        this.tab = event.tab.textLabel;
+        console.log(this.tab);
+        if (this.tab === "All") {
+            this.GetEmployees();
         }
-        if(this.tab==="Draft")
-       {
-         this.GetEmployeewithDraft();
+        if (this.tab === "Open") {
+            this.GetEmployeewithOpenStatus();
         }
-        if(this.tab==="Open")
-       {
-        this.GetEmployeewithRespodedStatus();
+        if (this.tab === "Approve") {
+            this.GetEmployeewithApprovedStatus();
         }
-        if(this.tab==="Pending")
-       {
-         this.GetEmployeewithPendingStatus();
-        }
-        if(this.tab==="Approved")
-       {
-       this.GetEmployeewithApprovesStatus();
-        }
-        if(this.tab==="Rejected")
-       {
-      this.GetEmployeewithRejectedStatus();
+        if (this.tab === "Rejected") {
+            this.GetEmployeewithRejectedStatus();
         }
     }
     GetEmployees(): void {
-        this._dashboardService.getPersonalInfo().subscribe((data: any) => {
-            this.PIStatus.push(data);
-            this.AllHeaderDetails = data;
-            this.LoadTableSource(this.AllHeaderDetails);
-            // this.employeesDataSource =
-            //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-            // this.employeesDataSource.sort = this.sort;
-            // this.employeesDataSource.paginator = this.paginator;
-            // return data;
-        });
-    }
-    GetEmployeewithDraft(): void {
-        this._dashboardService
-            .getPersonalInfoByStatus("InitiatorDraft")
-            .subscribe((data) => {
-                this.AllDraftDetails = data;
-                this.LoadTableSource(this.AllDraftDetails);
-                // this.employeesDataSource =
-                //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-                // this.employeesDataSource.sort = this.sort;
-                // this.employeesDataSource.paginator = this.paginator;
-            });
-    }
-    GetEmployeewithRespodedStatus(): void {
-        this._dashboardService
-            .getPersonalInfoByStatus("InitiatorReleased")
-            .subscribe((data) => {
-                this.RespondedDetails = data;
-                this.LoadTableSource(this.RespondedDetails);
-                // this.employeesDataSource =
-                //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-                // this.employeesDataSource.sort = this.sort;
-                // this.employeesDataSource.paginator = this.paginator;
-            });
-    }
-    GetEmployeewithPendingStatus(): void {
-        this._dashboardService
-            .getPersonalInfoByStatus("CustomerReleased")
-            .subscribe((data) => {
-                this.AllPendingDetails = data;
-                this.LoadTableSource(this.AllPendingDetails);
-                // this.employeesDataSource =
-                //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-                // this.employeesDataSource.sort = this.sort;
-                // this.employeesDataSource.paginator = this.paginator;
-            });
+        if (this.Role == "ASM") {
+            this._dashboardService
+                .getPersonalInfoByStatusAndRole(this.Role,"CustomerReleased")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+        }
+        if (this.Role == "Stokist") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });    
+        }
+        if (this.Role == "DH") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+        }
+        if (this.Role == "ZH") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"SHApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+        }
+        if (this.Role == "SH") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"ASMApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+        }
+        if (this.Role == "RAC") {
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"DHApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+        }
     }
 
-    GetEmployeewithApprovesStatus(): void {
-        this._dashboardService
-            .getPersonalInfoByStatus("Approved")
-            .subscribe((data) => {
-                this.AllApprovedDetails = data;
-                this.LoadTableSource(this.AllApprovedDetails);
-                // this.employeesDataSource =
-                //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-                // this.employeesDataSource.sort = this.sort;
-                // this.employeesDataSource.paginator = this.paginator;
-            });
+    GetEmployeewithOpenStatus(): void {
+        if (this.Role == "ASM") {
+            this._dashboardService
+                .getPersonalInfoByStatus("CustomerReleased")
+                .subscribe((data) => {
+                    this.AllOpenDetails = data;
+                    this.LoadTableSource(this.AllOpenDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+        if (this.Role == "Stokist") {
+            this._dashboardService
+                .getPersonalInfoByStatus("RACApproved")
+                .subscribe((data) => {
+                    this.AllOpenDetails = data;
+                    this.LoadTableSource(this.AllOpenDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+        if (this.Role == "DH") {
+            this._dashboardService
+                .getPersonalInfoByStatus("ZHApproved")
+                .subscribe((data) => {
+                    this.AllOpenDetails = data;
+                    this.LoadTableSource(this.AllOpenDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+        if (this.Role == "ZH") {
+            this._dashboardService
+                .getPersonalInfoByStatus("SHApproved")
+                .subscribe((data) => {
+                    this.AllOpenDetails = data;
+                    this.LoadTableSource(this.AllOpenDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+        if (this.Role == "SH") {
+            this._dashboardService
+                .getPersonalInfoByStatus("ASMApproved")
+                .subscribe((data) => {
+                    this.AllOpenDetails = data;
+                    this.LoadTableSource(this.AllOpenDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+        if (this.Role == "RAC") {
+            this._dashboardService
+                .getPersonalInfoByStatus("DHApproved")
+                .subscribe((data) => {
+                    this.AllOpenDetails = data;
+                    this.LoadTableSource(this.AllOpenDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+    }
+    GetEmployeewithApprovedStatus(): void {
+        if (this.Role == "ASM") {
+            this._dashboardService
+                .getPersonalInfoByStatus("ASMApproved")
+                .subscribe((data) => {
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+        if (this.Role == "Stokist") {
+            this._dashboardService
+                .getPersonalInfoByStatus("Stokist")
+                .subscribe((data) => {
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+        if (this.Role == "DH") {
+            this._dashboardService
+                .getPersonalInfoByStatus("DHApproved")
+                .subscribe((data) => {
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+        if (this.Role == "ZH") {
+            this._dashboardService
+                .getPersonalInfoByStatus("ZHApproved")
+                .subscribe((data) => {
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+        if (this.Role == "SH") {
+            this._dashboardService
+                .getPersonalInfoByStatus("SHApproved")
+                .subscribe((data) => {
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
+        if (this.Role == "RAC") {
+            this._dashboardService
+                .getPersonalInfoByStatus("RACApproved")
+                .subscribe((data) => {
+                    this.AllApprovedDetails = data;
+                    this.LoadTableSource(this.AllApprovedDetails);
+                    // this.employeesDataSource =
+                    //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                    // this.employeesDataSource.sort = this.sort;
+                    // this.employeesDataSource.paginator = this.paginator;
+                });
+        }
     }
     GetEmployeewithRejectedStatus(): void {
         this._dashboardService
@@ -360,24 +806,23 @@ export class ApprovalscreenComponent implements OnInit {
 }
 
 export class PersonalInformation {
-  ID!: string;
-  category!: string;
-  Name!: string;
-  Address!: string;
-  District!: string;
-  Product!:string;
-  City: string;
-  Taluk: string;
-  Tehsil: string;
-  State!: string;
-  Pincode!: number;
-  Status!: string;
-  identity!: string;
-  Name1!: string;
-  DOB!: Date;
-  Mobile1!: number;
-  Mobile2!: number;
-  EmailId1!: string;
-  EmailId2!: string;
+    ID!: string;
+    category!: string;
+    Name!: string;
+    Address!: string;
+    District!: string;
+    Product!: string;
+    City: string;
+    Taluk: string;
+    Tehsil: string;
+    State!: string;
+    Pincode!: number;
+    Status!: string;
+    identity!: string;
+    Name1!: string;
+    DOB!: Date;
+    Mobile1!: number;
+    Mobile2!: number;
+    EmailId1!: string;
+    EmailId2!: string;
 }
-
