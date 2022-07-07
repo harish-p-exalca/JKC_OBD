@@ -147,11 +147,16 @@ export class BusinessInformationView {
   Businessinfo: BusinessInformation;
   SalesandTargets: SalesAndTarget[];
 }
+// export class BankDetailsView {
+//   BankDetailInfo: BankDetails[];
+//   SecurityDetails:SecurityDepositDetail;
+//   Documentsrequired: DocumentRequired[];
+// }
 export class BankDetailsView {
-  BankDetailInfo: BankDetails[];
-  SecurityDetails:SecurityDepositDetail;
-  Documentsrequired: DocumentRequired[];
-}
+    BankDetailInfo: BankDetails[];
+    SecurityDeposit: SecurityDepositDetail;
+    Documentsrequired: DocumentRequired[];
+  }
 export class PersonalInformationView {
     PersonalInformation: PersonalInformation;
     Identities: PersonIdentity[];

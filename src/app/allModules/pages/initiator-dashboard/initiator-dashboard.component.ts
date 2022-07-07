@@ -374,6 +374,7 @@ export class InitiatorDashboardComponent implements OnInit {
     public chartOptions: Partial<ChartOptions>;
     public chartOptions1: Partial<ChartOptions1>;
     public chart1: any;
+    isProgressBarVisibile:boolean;
     links = ["All", "Draft", "Open", "Pending", "Approved", "Rejected"];
     activeLink = this.links[0];
     constructor(
@@ -494,10 +495,12 @@ export class InitiatorDashboardComponent implements OnInit {
     }
     ngOnInit() {
       this.tab="All";
+      this.isProgressBarVisibile=true;
       this._dashboardService.getPersonalInfo().subscribe((data: any) => {
         this.PIStatus.push(data);
         this.AllHeaderDetails = data;
         this.LoadTableSource(this.AllHeaderDetails);
+        this.isProgressBarVisibile=false;
         // this.employeesDataSource =
         //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
         // this.employeesDataSource.sort = this.sort;
@@ -508,26 +511,31 @@ export class InitiatorDashboardComponent implements OnInit {
     .getPersonalInfoByStatus("InitiatorDraft")
     .subscribe((data) => {
         this.AllDraftDetails = data;
+        this.isProgressBarVisibile=false;
     });
     this._dashboardService
     .getPersonalInfoByStatus("InitiatorReleased")
     .subscribe((data) => {
         this.RespondedDetails = data;
+        this.isProgressBarVisibile=false;
     });
     this._dashboardService
     .getPersonalInfoByStatus("CustomerReleased")
     .subscribe((data) => {
         this.AllPendingDetails = data;
+        this.isProgressBarVisibile=false;
     });
     this._dashboardService
     .getPersonalInfoByStatus("Approved")
     .subscribe((data) => {
         this.AllApprovedDetails = data;
+        this.isProgressBarVisibile=false;
     });
     this._dashboardService
     .getPersonalInfoByStatus("Rejected")
     .subscribe((data) => {
         this.AllRejectedDetails = data;
+        this.isProgressBarVisibile=false;
     });
     //   if(this.tab==="All")
     //   {
@@ -569,10 +577,12 @@ export class InitiatorDashboardComponent implements OnInit {
         }
     }
     GetEmployees(): void {
+        this.isProgressBarVisibile=true;
         this._dashboardService.getPersonalInfo().subscribe((data: any) => {
             this.PIStatus.push(data);
             this.AllHeaderDetails = data;
             this.LoadTableSource(this.AllHeaderDetails);
+            this.isProgressBarVisibile=false;
             // this.employeesDataSource =
             //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
             // this.employeesDataSource.sort = this.sort;
@@ -581,11 +591,13 @@ export class InitiatorDashboardComponent implements OnInit {
         });
     }
     GetEmployeewithDraft(): void {
+        this.isProgressBarVisibile=true;
         this._dashboardService
             .getPersonalInfoByStatus("InitiatorDraft")
             .subscribe((data) => {
                 this.AllDraftDetails = data;
                 this.LoadTableSource(this.AllDraftDetails);
+                this.isProgressBarVisibile=false;
                 // this.employeesDataSource =
                 //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                 // this.employeesDataSource.sort = this.sort;
@@ -593,11 +605,13 @@ export class InitiatorDashboardComponent implements OnInit {
             });
     }
     GetEmployeewithRespodedStatus(): void {
+        this.isProgressBarVisibile=true;
         this._dashboardService
             .getPersonalInfoByStatus("InitiatorReleased")
             .subscribe((data) => {
                 this.RespondedDetails = data;
                 this.LoadTableSource(this.RespondedDetails);
+                this.isProgressBarVisibile=false;
                 // this.employeesDataSource =
                 //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                 // this.employeesDataSource.sort = this.sort;
@@ -605,11 +619,13 @@ export class InitiatorDashboardComponent implements OnInit {
             });
     }
     GetEmployeewithPendingStatus(): void {
+        this.isProgressBarVisibile=true;
         this._dashboardService
             .getPersonalInfoByStatus("CustomerReleased")
             .subscribe((data) => {
                 this.AllPendingDetails = data;
                 this.LoadTableSource(this.AllPendingDetails);
+                this.isProgressBarVisibile=false;
                 // this.employeesDataSource =
                 //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                 // this.employeesDataSource.sort = this.sort;
@@ -618,11 +634,13 @@ export class InitiatorDashboardComponent implements OnInit {
     }
 
     GetEmployeewithApprovesStatus(): void {
+        this.isProgressBarVisibile=true;
         this._dashboardService
             .getPersonalInfoByStatus("Approved")
             .subscribe((data) => {
                 this.AllApprovedDetails = data;
                 this.LoadTableSource(this.AllApprovedDetails);
+                this.isProgressBarVisibile=false;
                 // this.employeesDataSource =
                 //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                 // this.employeesDataSource.sort = this.sort;
@@ -630,11 +648,13 @@ export class InitiatorDashboardComponent implements OnInit {
             });
     }
     GetEmployeewithRejectedStatus(): void {
+        this.isProgressBarVisibile=true;
         this._dashboardService
             .getPersonalInfoByStatus("Rejected")
             .subscribe((data) => {
                 this.AllRejectedDetails = data;
                 this.LoadTableSource(this.AllRejectedDetails);
+                this.isProgressBarVisibile=false;
                 // this.employeesDataSource =
                 //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
                 // this.employeesDataSource.sort = this.sort;

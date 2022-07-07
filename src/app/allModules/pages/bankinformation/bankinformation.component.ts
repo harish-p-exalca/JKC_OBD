@@ -1,3 +1,4 @@
+import { DocumentRequired } from './../../../models/master';
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
@@ -40,6 +41,8 @@ export class BankinformationComponent implements OnInit {
   selectedlist: string[] = ['Yes', 'No']
   selected = '';
   isd2rs: boolean = false;
+  SelectedFile
+  files:any[] = [];
   FileName:any;
   FileName1:any;
   FileName2:any;
@@ -50,6 +53,7 @@ export class BankinformationComponent implements OnInit {
   FileName7:any;
   name: any = [];
   public listData: any;
+  isProgressBarVisibile:boolean;
   notificationSnackBarComponent: NotificationSnackBarComponent;
   authenticationDetails: AuthenticationDetails;
   currentTransaction: number;
@@ -58,24 +62,27 @@ export class BankinformationComponent implements OnInit {
   bankInfoView: BankDetailsView = new BankDetailsView();
   @ViewChild(MatAccordion) accordion: MatAccordion;
   constructor(private fb: FormBuilder,private _commonService: CommonService, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, public dialog: MatDialog) {
+    this.isProgressBarVisibile = false;
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar), this.listData = [];
   }
   IdentityData: BankDetails[] = [];
     IdentityAddClicked() {
-        if (this.BIform.valid) {
+        // if (this.BIform.valid) {
             var identity = new BankDetails();
-            identity.AccountNum = this.BIform.get("bankacno").value;
-            identity.BankAddress = this.BIform.get("bankaddress").value;
-            identity.BankName = this.BIform.get("bankname").value;
-            identity.IFSC = this.BIform.get("ifsccode").value;
+            identity.AccountNum = this.BankForm.get("bankacno").value;
+            identity.BankAddress = this.BankForm.get("bankaddress").value;
+            identity.BankName = this.BankForm.get("bankname").value;
+            identity.IFSC = this.BankForm.get("ifsccode").value;
             identity.TransID = this.currentTransaction;
-            this.IdentityData.push(identity);
+            this.listData.push(identity);
+            // this.listData[this.listData.length - 1].id = this.listData.length.toString();
             // this.BIform.reset();
-        } else {
-            this._commonService.ShowValidationErrors(this.BIform);
-        }
+        // } else {
+        //     this._commonService.ShowValidationErrors(this.BIform);
+        // }
     }
   BIform!: FormGroup;
+  BankForm!: FormGroup;
   selectedPersonalInfo: PersonalInfo = null;
   ngOnInit(): void {
     const retrievedObject = localStorage.getItem('authorizationData');
@@ -87,16 +94,18 @@ export class BankinformationComponent implements OnInit {
     // console.log(retrievedvalue);
     this.BIform = this.fb.group({
       leaf: ['', Validators.required],
-      Leafno: ['', Validators.required],
+      Type: ['', Validators.required],
       Date: ['', Validators.required],
       Amount: ['', Validators.required],
       nameofbank: ['', Validators.required],
-      bankno: ['',Validators.required],
-      bankname: ['', Validators.required],
-      bankaddress: ['', Validators.required],
-      ifsccode: ['', Validators.required],
-      bankacno: ['', Validators.required],
     });
+  this.BankForm = this.fb.group({
+    bankno: ['',Validators.required],
+    bankname: ['', Validators.required],
+    bankaddress: ['', Validators.required],
+    ifsccode: ['', Validators.required],
+    bankacno: ['', Validators.required],
+  })
     // if (retrievedvalue == 'ok') {
     //   this.isd2rs = true;
     //   this.BIform.get('leaf').disable();
@@ -113,14 +122,17 @@ export class BankinformationComponent implements OnInit {
     //   this.BIform.get('nameofbank').enable();
     //   this.isd2rs = false;
     // }
-    this.selectedPersonalInfo = this._dashboardService.GetPersonalInfo();
-    console.log(this.selectedPersonalInfo.Name);
-    this.name = this.selectedPersonalInfo.Name;
+    // this.selectedPersonalInfo = this._dashboardService.GetPersonalInfo();
+    // console.log(this.selectedPersonalInfo.Name);
+    // this.name = this.selectedPersonalInfo.Name;
+    this.isProgressBarVisibile = true;
     this._dashboardService.SetPersonalInfo(null);
+    this.isProgressBarVisibile = true;
     this._dashboardService.GetAllStates().subscribe(
       (data) => {
           this.SOption = data;
           this.GetBankDetails();
+          this.isProgressBarVisibile = false;
       },
       (err) => console.log(err)
   );
@@ -133,24 +145,26 @@ export class BankinformationComponent implements OnInit {
   }
 
   GetBankDetails() {
+    this.isProgressBarVisibile = true;
     this._dashboardService.GetSecurityDetails(this.currentTransaction).subscribe(res => {
       console.log("view", res);
       this.bankInfoView = res;
       this.SetSecurityDepositDetailInfoView(this.bankInfoView);
+      this.isProgressBarVisibile = false;
   },
       err => {
           console.log(err);
       });
   }
   SetSecurityDepositDetailInfoView( bankInfoView: BankDetailsView = new BankDetailsView()) {
-    if (bankInfoView.SecurityDetails.TransID != null) {
+    if (bankInfoView.SecurityDeposit.TransID != null) {
       // businessinformation = businessInfoView.Businessinfo;
       this.BIform.patchValue({
-        leaf: bankInfoView.SecurityDetails.Leaf,
-        Leafno: bankInfoView.SecurityDetails.Type,
-        Date: bankInfoView.SecurityDetails.Date,
-        Amount: bankInfoView.SecurityDetails.Amount,
-        nameofbank:bankInfoView.SecurityDetails.BankName
+        leaf: bankInfoView.SecurityDeposit.Leaf,
+        Leafno: bankInfoView.SecurityDeposit.Type,
+        Date: bankInfoView.SecurityDeposit.Date,
+        Amount: bankInfoView.SecurityDeposit.Amount,
+        nameofbank:bankInfoView.SecurityDeposit.BankName
       });
       // this.BrandForm.patchValue({
       //   sales: ['', Validators.required],
@@ -160,15 +174,18 @@ export class BankinformationComponent implements OnInit {
     }
   }
   SubmitButtonClick(isDraft: boolean = false) {
-    if (this.BIform.valid) {
+    // if (this.BIform.valid) {
         var cobView = new BankDetailsView();
-        cobView.SecurityDetails = this.GetSecurityInfoFromForm();
-        cobView.BankDetailInfo = this.IdentityData;
+        cobView.SecurityDeposit = this.GetSecurityInfoFromForm();
+        cobView.BankDetailInfo = this.listData;
+        // cobView.Documentsrequired = this.files;
         console.log("cobView", cobView);
+        this.isProgressBarVisibile = true;
         this._dashboardService.SaveBankInfoView(cobView).subscribe(
             (res) => {
                 console.log("From save api", res);
                 this._router.navigate(["pages/bankinformation"]);
+                this.isProgressBarVisibile = false;
                 this.ClearAll();
             },
             (err) => {
@@ -178,27 +195,39 @@ export class BankinformationComponent implements OnInit {
                 );
             }
         );
-    } else {
-        this._commonService.ShowValidationErrors(this.BIform);
-    }
+    // } else {
+    //     this._commonService.ShowValidationErrors(this.BIform);
+    // }
 }
 GetSecurityInfoFromForm(): SecurityDepositDetail {
   const personalinformation: SecurityDepositDetail = new SecurityDepositDetail();
     personalinformation.Leaf = this.BIform.get('leaf').value;
-    personalinformation.Type = this.BIform.get('Leafno').value;
+    personalinformation.Type = this.BIform.get('Type').value;
     personalinformation.Date = this.BIform.get('Date').value;
     personalinformation.Amount = this.BIform.get('Amount').value;
     personalinformation.BankName = this.BIform.get('nameofbank').value;
+    personalinformation.TransID = this.currentTransaction;
   return personalinformation;
 }
+GetAttachment(File:any,Tilte):DocumentRequired{
+  const Attachment: DocumentRequired = new DocumentRequired();
+  Attachment.AttachmentFile = File;
+  Attachment.AttachmentName = File.name;
+  Attachment.ContentLength = File.ContentLength;
+  Attachment.ID = this.currentTransaction;
+  Attachment.DocumentTitle = Tilte;
+  Attachment.ContentType = File.ContentType;
+  this.files.push(Attachment);
+  return Attachment;
+}
   onAdd(): void {
-    if(this.BIform.valid)
-    {
+    // if(this.BIform.valid)
+    // {
 
-    this.listData.push(this.BIform.value);
+    //this.listData.push(this.BIform.value);
     this.IdentityAddClicked();
     // this.BIform.reset();
-    this.listData[this.listData.length - 1].id = this.listData.length.toString();
+     //this.listData[this.listData.length - 1].id = this.listData.length.toString();
     // const personalinformation: BankDetails = new BankDetails();
     // personalinformation.BankName = this.BIform.get('bankname').value;
     // personalinformation.BankAddress = this.BIform.get('bankaddress').value;
@@ -216,10 +245,10 @@ GetSecurityInfoFromForm(): SecurityDepositDetail {
     //     this.notificationSnackBarComponent.openSnackBar('Something went wrong', SnackBarStatus.danger);
     //   },
     // );
-  }
-  else{
-    this._commonService.ShowValidationErrors(this.BIform);
-  }
+  //}
+  // else{
+  //   this._commonService.ShowValidationErrors(this.BIform);
+  // }
 
 
 
@@ -291,39 +320,67 @@ GetSecurityInfoFromForm(): SecurityDepositDetail {
 
 
   // }
-  csvInputChange(fileInputEvent: any) {
-    this.FileName = fileInputEvent.target.files[0].name;
-    console.log(fileInputEvent.target.files[0]);
+  
+  csvInputChange(event) {
+    this.files[0]=event.addedFiles[0];
+    console.log(this.files[0]);
+    
+    // this.FileName = fileInputEvent.target.files[0].name;
+    // console.log(fileInputEvent.target.files[0]);
+    // this.GetAttachment(fileInputEvent.target.files[0],"PAN");
+  }
+  onSelect(event) {
+    this.files[0]=event.addedFiles[0];
+    // this.SelectedFileName=this.files[0].name;
+    // this.File  Error=false;
   }
   csv1InputChange(fileInputEvent: any) {
+  
     this.FileName1 = fileInputEvent.target.files[0].name;
     console.log(fileInputEvent.target.files[0]);
+    this.GetAttachment(fileInputEvent.target.files[0],"GST");
   }
   csv2InputChange(fileInputEvent: any) {
     this.FileName2 = fileInputEvent.target.files[0].name;
     console.log(fileInputEvent.target.files[0]);
+    this.GetAttachment(fileInputEvent.target.files[0],"AADHAR CARD");
   }
   csv3InputChange(fileInputEvent: any) {
     this.FileName3 = fileInputEvent.target.files[0].name;
     console.log(fileInputEvent.target.files[0]);
+    this.GetAttachment(fileInputEvent.target.files[0],"Cancelled Cheque");
   }
   csv4InputChange(fileInputEvent: any) {
     this.FileName4 = fileInputEvent.target.files[0].name;
     console.log(fileInputEvent.target.files[0]);
+    this.GetAttachment(fileInputEvent.target.files[0],"Photograph");
   }
   csv5InputChange(fileInputEvent: any) {
     this.FileName5 = fileInputEvent.target.files[0].name;
     console.log(fileInputEvent.target.files[0]);
+    this.GetAttachment(fileInputEvent.target.files[0],"TDS");
   }
   csv6InputChange(fileInputEvent: any) {
     this.FileName6 = fileInputEvent.target.files[0].name;
     console.log(fileInputEvent.target.files[0]);
+    this.GetAttachment(fileInputEvent.target.files[0],"Address Proof");
   }
   csv7InputChange(fileInputEvent: any) {
     this.FileName7 = fileInputEvent.target.files[0].name;
     console.log(fileInputEvent.target.files[0]);
+    this.GetAttachment(fileInputEvent.target.files[0],"Signed Digital Document");
   }
   nextbtn(): void {
     this._router.navigate(['pages/nextlogin'])
+  }
+  keyPressNumbers(event) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
   }
 }

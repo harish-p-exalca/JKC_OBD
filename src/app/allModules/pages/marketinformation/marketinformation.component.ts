@@ -71,6 +71,7 @@ export class MarketinformationComponent implements OnInit {
     authenticationDetails: AuthenticationDetails;
     currentTransaction: number;
     SOption: States[] = [];
+    isProgressBarVisibile:boolean;
     MarketInfoView: MarketInformationView = new MarketInformationView();
     constructor(
         private fb: FormBuilder,
@@ -79,6 +80,7 @@ export class MarketinformationComponent implements OnInit {
         private _dashboardService: DashboardService,
         private _commonService: CommonService
     ) {
+        this.isProgressBarVisibile=false;
         this.notificationSnackBarComponent = new NotificationSnackBarComponent(
             this.snackBar
         );
@@ -141,15 +143,18 @@ export class MarketinformationComponent implements OnInit {
             wpMonth: [""],
             wcMonth: [""],
         });
+        this.isProgressBarVisibile=true;
         this._dashboardService.GetAllStates().subscribe(
             (data) => {
                 this.SOption = data;
                 this.GetMarketDetails();
+                this.isProgressBarVisibile=false;
             },
             (err) => console.log(err)
         );
     }
     GetMarketDetails() {
+        this.isProgressBarVisibile=true;
         this._dashboardService
             .GetMarketInformationView(this.currentTransaction)
             .subscribe(
@@ -157,6 +162,7 @@ export class MarketinformationComponent implements OnInit {
                     console.log("view", res);
                     this.MarketInfoView = res;
                     this.SetMarketInfoDetails(this.MarketInfoView);
+                    this.isProgressBarVisibile=false;
                 },
                 (err) => {
                     console.log(err);
@@ -196,9 +202,11 @@ export class MarketinformationComponent implements OnInit {
             cobView.MarketInformation = this.GetMarketInfoFromForm();
             cobView.AverageSale = this.IdentityData;
             console.log("cobView", cobView);
+            this.isProgressBarVisibile=true;
             this._dashboardService.SaveMarketInfoView(cobView).subscribe(
                 (res) => {
                     console.log("From save api", res);
+                    this.isProgressBarVisibile=false;
                     this._router.navigate(["pages/bankinformation"]);
                     this.ClearAll();
                 },

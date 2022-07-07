@@ -311,7 +311,7 @@
       </form>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="" fxFlex="100" fxLayoutGap="4px" style="margin-top: 23px;background: white;">
+  <div *ngIf="Responded != 'Review'" fxLayout="row" fxLayoutAlign="" fxFlex="100" fxLayoutGap="4px" style="margin-top: 23px;background: white;">
     <div fxFlex="48"></div>
 
     <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
@@ -319,14 +319,18 @@
         <img class="clearimg" src="../../assets/images/clear.svg">
       </button>
     </div>
-    <div *ngIf="Role!=true" fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px" style="margin-left:-38px">
+    <div *ngIf="Role != true" fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px" style="margin-left:-38px">
       <button mat-flat-button class="draft" (click)="SubmitButtonClick(true)"> Save as Draft
         <img class="draftimg" src="../../assets/images/bi.png">
       </button>
     </div>
     <!-- [disabled]="MIform.required.invalid" -->
-    <button *ngIf="SubmitValue != true" mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Submit</button>
-    <button *ngIf="SubmitValue == true" mat-raised-button class="savebtn" (click)="NextButtonClick()">Next</button>
+      <button *ngIf="SubmitValue != true" mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Submit</button>
+      <button *ngIf="SubmitValue == true" mat-raised-button class="savebtn" (click)="NextButtonClick()">Next</button>
+
   </div>
   <br>
+  <mat-progress-spinner *ngIf="isProgressBarVisibile" class="progressBarPostion" color="accent" mode="indeterminate">
+  </mat-progress-spinner>
+  <div id="overlay" *ngIf="isProgressBarVisibile"></div>
 </div>

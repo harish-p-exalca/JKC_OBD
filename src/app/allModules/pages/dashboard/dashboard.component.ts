@@ -93,6 +93,8 @@ export class DashboardComponent implements OnInit {
     currentTransaction: number;
     SubmitValue:boolean = false;
     transID:any;
+    UserRole:string;
+    Responded:string;
     CustomerObdView: CustomerOnboardingView = new CustomerOnboardingView();
     constructor(
         private _router: Router,
@@ -120,6 +122,11 @@ export class DashboardComponent implements OnInit {
           this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
           this.currentTransaction=parseInt(this.authenticationDetails.Token);
         }
+        this.UserRole = this.authenticationDetails.UserRole;
+        if(this.UserRole == "SSA")
+        {
+            this.SubmitValue = false;
+        }
         if(this.authenticationDetails.UserRole == "Customer")
         {
             this.Role = true;
@@ -133,20 +140,24 @@ export class DashboardComponent implements OnInit {
         this.transID = localStorage.getItem('TransID');
         if(this.transID != null)
         {
+            this.isProgressBarVisibile = true;
             this._dashboardService.GetCustomerOnboardingView(this.transID).subscribe(res => {
                 console.log("view", res);
                 this.CustomerObdView = res;
                 this.SetPersonalInfoValues();
+                this.isProgressBarVisibile = false;
             },
                 err => {
                     console.log(err);
                 });
         }
+        this.isProgressBarVisibile = true;
         this._dashboardService.GetAllStates().subscribe(
             (data) => {
                 this.SOption = data;
                 if (this.currentTransaction !=NaN) {
                     this.GetTransactionDetails();
+                    this.isProgressBarVisibile = false;
                 }
             },
             (err) => console.log(err)
@@ -195,11 +206,12 @@ export class DashboardComponent implements OnInit {
         });
     }
     GetTransactionDetails() {
+        this.isProgressBarVisibile = true;
         this._dashboardService.GetCustomerOnboardingView(this.currentTransaction).subscribe(res => {
             console.log("view", res);
             this.CustomerObdView = res;
             this.SetPersonalInfoValues();
-           
+            this.isProgressBarVisibile = false;
         },
             err => {
                 console.log(err);
@@ -231,13 +243,15 @@ export class DashboardComponent implements OnInit {
             Pincode: this.CustomerObdView.PersonalInfo.PersonalInformation.Pincode,
             Status: this.CustomerObdView.PersonalInfo.PersonalInformation.Status,
         });
-        if(localStorage.getItem('ActionStatus') == "Draft")
+        if(localStorage.getItem('ActionStatus') == "Draft" && this.UserRole == "Customer")
         {
             this.SubmitValue = true;
         } 
         if(localStorage.getItem('ActionStatus') == "Responded")
         {
+            this.Responded = "Review";
             this.PIform.disable();
+
         } 
         this.selected=this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
         this.IdentityData=this.CustomerObdView.PersonalInfo.Identities;
@@ -255,10 +269,12 @@ export class DashboardComponent implements OnInit {
                 cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
                 cobView.PersonalInfo.Identities = this.IdentityData;
                 console.log("cobView", cobView);
+                this.isProgressBarVisibile = true;
                 this._dashboardService.SaveCustomerPersonalDetails(cobView).subscribe(res => {
                     console.log("From save api", res);
                     if (res.Status == 1) {
                         if (isDraft) {
+                            this.isProgressBarVisibile = false;
                             this.notificationSnackBarComponent.openSnackBar("Draft saved successfully", SnackBarStatus.success);
                         }
                         else {
@@ -408,10 +424,12 @@ export class DashboardComponent implements OnInit {
     //     );
     // }
     SelectCity(event): void {
+        this.isProgressBarVisibile = true;
         this._dashboardService.GetCityByState(event.ID).subscribe(
             (data) => {
                 this.City = data;
                 console.log(this.City);
+                this.isProgressBarVisibile = false;
             }
         );
     }
