@@ -41,10 +41,13 @@ export class BusinessComponent implements OnInit {
   dataSource = new MatTableDataSource;
   SOption: States[] = [
   ];
+  isProgressBarVisibile:boolean;
   authenticationDetails: AuthenticationDetails;
+  
   currentTransaction: number;
   businessInfoView: BusinessInformationView = new BusinessInformationView();
   constructor(private fb: FormBuilder, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, private _commonService: CommonService) {
+    this.isProgressBarVisibile = false;
     this.listData = [];
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(
 
@@ -103,19 +106,23 @@ export class BusinessComponent implements OnInit {
         }
       }
       );
+      this.isProgressBarVisibile = true;
       this._dashboardService.GetAllStates().subscribe(
         (data) => {
             this.SOption = data;
             this.GetBusinessDetails();
+            this.isProgressBarVisibile = false;
         },
         (err) => console.log(err)
     );
   }
   GetBusinessDetails() {
+    this.isProgressBarVisibile = true;
     this._dashboardService.GetBusinessInformationView(this.currentTransaction).subscribe(res => {
       console.log("view", res);
       this.businessInfoView = res;
       this.SetBusinessInfoDetails(this.businessInfoView);
+      this.isProgressBarVisibile = false;
   },
       err => {
           console.log(err);
@@ -149,8 +156,10 @@ export class BusinessComponent implements OnInit {
             cobView.Businessinfo = this.GetBusinessInfoFromForm();
             cobView.SalesandTargets = this.IdentityData;
             console.log("cobView", cobView);
+            this.isProgressBarVisibile = true;
             this._dashboardService.SaveBusinessInfoView(cobView).subscribe(res => {
                 console.log("From save api", res);
+                this.isProgressBarVisibile = false;
                 this._router.navigate(['pages/marketinformation']);
                 this.ClearAll();
             },

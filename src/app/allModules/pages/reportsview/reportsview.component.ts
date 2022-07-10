@@ -153,6 +153,7 @@ export class ReportsviewComponent implements OnInit {
     businessInfoView: BusinessInformationView = new BusinessInformationView();
     notificationSnackBarComponent: NotificationSnackBarComponent;
     Role: any;
+    isProgressBarVisibile:boolean;
     constructor(
         private fb: FormBuilder,
         private _dashboardService: DashboardService,public snackBar: MatSnackBar,  private _router: Router,
@@ -172,6 +173,7 @@ export class ReportsviewComponent implements OnInit {
         this.InitializeFormGroup();
         this.transID = localStorage.getItem("TransID");
         if (this.transID != null) {
+            this.isProgressBarVisibile=true;
             this._dashboardService
                 .GetCustomerOnboardingView(this.transID)
                 .subscribe(
@@ -179,6 +181,7 @@ export class ReportsviewComponent implements OnInit {
                         console.log("view", res);
                         this.CustomerObdView = res;
                         this.SetPersonalInfoValues();
+                        this.isProgressBarVisibile=false;
                     },
                     (err) => {
                         console.log(err);
@@ -191,6 +194,7 @@ export class ReportsviewComponent implements OnInit {
                         console.log("view", res);
                         this.MarketInfoView = res;
                         this.SetMarketInfoDetails(this.MarketInfoView);
+                        this.isProgressBarVisibile=false;
                     },
                     (err) => {
                         console.log(err);
@@ -203,6 +207,7 @@ export class ReportsviewComponent implements OnInit {
                         console.log("view", res);
                         this.businessInfoView = res;
                         this.SetBusinessInfoDetails(this.businessInfoView);
+                        this.isProgressBarVisibile=false;
                     },
                     (err) => {
                         console.log(err);
@@ -344,6 +349,7 @@ export class ReportsviewComponent implements OnInit {
         // });
     }
     GetTransactionDetails() {
+        this.isProgressBarVisibile=true;
         this._dashboardService
             .GetCustomerOnboardingView(this.currentTransaction)
             .subscribe(
@@ -351,6 +357,7 @@ export class ReportsviewComponent implements OnInit {
                     console.log("view", res);
                     this.CustomerObdView = res;
                     this.SetPersonalInfoValues();
+                    this.isProgressBarVisibile=false;
                 },
                 (err) => {
                     console.log(err);
@@ -456,9 +463,11 @@ export class ReportsviewComponent implements OnInit {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "ASMApproved";
             Cusotmer.TranID = this.transID;
+            this.isProgressBarVisibile=true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
                 }, err => {
@@ -470,9 +479,11 @@ export class ReportsviewComponent implements OnInit {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "StokistApproved";
             Cusotmer.TranID = this.transID;
+            this.isProgressBarVisibile=true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
                 }, err => {
@@ -484,9 +495,11 @@ export class ReportsviewComponent implements OnInit {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "DHApproved";
             Cusotmer.TranID = this.transID;
+            this.isProgressBarVisibile=true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
                 }, err => {
@@ -498,9 +511,11 @@ export class ReportsviewComponent implements OnInit {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "ZHApproved";
             Cusotmer.TranID = this.transID;
+            this.isProgressBarVisibile=true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
                 }, err => {
@@ -512,9 +527,11 @@ export class ReportsviewComponent implements OnInit {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "SHApproved";
             Cusotmer.TranID = this.transID;
+            this.isProgressBarVisibile=true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
                 }, err => {
@@ -526,9 +543,11 @@ export class ReportsviewComponent implements OnInit {
             var Cusotmer = new CustomerOnboarding();
             Cusotmer.Status = "RACApproved";
             Cusotmer.TranID = this.transID;
+            this.isProgressBarVisibile=true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
 
@@ -542,9 +561,11 @@ export class ReportsviewComponent implements OnInit {
         var Cusotmer = new CustomerOnboarding();
         Cusotmer.Status = "Rejected";
         Cusotmer.TranID = this.transID;
+        this.isProgressBarVisibile=true;
         this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
             (data) => {
                 console.log(data);
+                this.isProgressBarVisibile=false;
                 this.notificationSnackBarComponent.openSnackBar('Rejected successfully', SnackBarStatus.success);
                 this._router.navigate(['/pages/approvalinformation']); 
             }, err => {

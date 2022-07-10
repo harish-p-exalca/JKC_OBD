@@ -347,11 +347,11 @@
       <button mat-raised-button class="savebtn" (click)="SubmitButtonClick()" >Save & Next</button>
     </div>
     <br>
+    <mat-progress-spinner *ngIf=" isProgressBarVisibile" class="progressBarPostion"   mode="determinate" value="40">
+    </mat-progress-spinner>
+    <div id="overlay" *ngIf="isProgressBarVisibile"></div>  
   </div>
-  <!-- <mat-progress-spinner *ngIf=" isProgressBarVisibile" class="progressBarPostion"   mode="determinate" value="40">
-  </mat-progress-spinner>
-  <div id="overlay" *ngIf="isProgressBarVisibile"></div>
-</div> -->
+ 
 
 
 
