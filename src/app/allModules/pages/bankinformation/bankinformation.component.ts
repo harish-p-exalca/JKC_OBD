@@ -42,7 +42,7 @@ export class BankinformationComponent implements OnInit {
   selected = '';
   isd2rs: boolean = false;
   SelectedFile
-  files:any[] = [];
+  files:DocumentRequired[] = [];
   FileName:any;
   FileName1:any;
   FileName2:any;
@@ -52,7 +52,7 @@ export class BankinformationComponent implements OnInit {
   FileName6:any;
   FileName7:any;
   name: any = [];
-  public listData: any;
+  public listData: BankDetails[] = [];
   isProgressBarVisibile:boolean;
   notificationSnackBarComponent: NotificationSnackBarComponent;
   authenticationDetails: AuthenticationDetails;
@@ -61,6 +61,7 @@ export class BankinformationComponent implements OnInit {
   ];
   bankInfoView: BankDetailsView = new BankDetailsView();
   @ViewChild(MatAccordion) accordion: MatAccordion;
+  btn_name: string;
   constructor(private fb: FormBuilder,private _commonService: CommonService, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, public dialog: MatDialog) {
     this.isProgressBarVisibile = false;
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar), this.listData = [];
@@ -178,7 +179,7 @@ export class BankinformationComponent implements OnInit {
         var cobView = new BankDetailsView();
         cobView.SecurityDeposit = this.GetSecurityInfoFromForm();
         cobView.BankDetailInfo = this.listData;
-        // cobView.Documentsrequired = this.files;
+        cobView.Documentsrequired = this.files;
         console.log("cobView", cobView);
         this.isProgressBarVisibile = true;
         this._dashboardService.SaveBankInfoView(cobView).subscribe(
@@ -322,10 +323,8 @@ GetAttachment(File:any,Tilte):DocumentRequired{
   // }
   
   csvInputChange(event) {
-    this.files[0]=event.addedFiles[0];
-    console.log(this.files[0]);
-    
-    // this.FileName = fileInputEvent.target.files[0].name;
+    this.handleFileInput(event);
+     this.FileName = event.target.files[0].name;
     // console.log(fileInputEvent.target.files[0]);
     // this.GetAttachment(fileInputEvent.target.files[0],"PAN");
   }
@@ -334,44 +333,62 @@ GetAttachment(File:any,Tilte):DocumentRequired{
     // this.SelectedFileName=this.files[0].name;
     // this.File  Error=false;
   }
-  csv1InputChange(fileInputEvent: any) {
+  csv1InputChange(event) {
   
-    this.FileName1 = fileInputEvent.target.files[0].name;
-    console.log(fileInputEvent.target.files[0]);
-    this.GetAttachment(fileInputEvent.target.files[0],"GST");
+     this.FileName1 =event.target.files[0].name;
+    // console.log(fileInputEvent.target.files[0]);
+    this.handleFileInput(event);
+    // this.GetAttachment(fileInputEvent.target.files[0],"GST");
   }
-  csv2InputChange(fileInputEvent: any) {
-    this.FileName2 = fileInputEvent.target.files[0].name;
-    console.log(fileInputEvent.target.files[0]);
-    this.GetAttachment(fileInputEvent.target.files[0],"AADHAR CARD");
+  csv2InputChange(event) {
+    this.FileName2 = event.target.files[0].name;
+    // console.log(fileInputEvent.target.files[0]);
+    // this.GetAttachment(fileInputEvent.target.files[0],"AADHAR CARD");
+    this.handleFileInput(event);
   }
-  csv3InputChange(fileInputEvent: any) {
-    this.FileName3 = fileInputEvent.target.files[0].name;
-    console.log(fileInputEvent.target.files[0]);
-    this.GetAttachment(fileInputEvent.target.files[0],"Cancelled Cheque");
+  csv3InputChange(event) {
+     this.FileName3 = event.target.files[0].name;
+    // console.log(fileInputEvent.target.files[0]);
+    // this.GetAttachment(fileInputEvent.target.files[0],"Cancelled Cheque");
+    this.handleFileInput(event);
   }
-  csv4InputChange(fileInputEvent: any) {
-    this.FileName4 = fileInputEvent.target.files[0].name;
-    console.log(fileInputEvent.target.files[0]);
-    this.GetAttachment(fileInputEvent.target.files[0],"Photograph");
+  csv4InputChange(event) {
+    this.handleFileInput(event);
+     this.FileName4 = event.target.files[0].name;
+    // console.log(fileInputEvent.target.files[0]);
+    // this.GetAttachment(fileInputEvent.target.files[0],"Photograph");
   }
-  csv5InputChange(fileInputEvent: any) {
-    this.FileName5 = fileInputEvent.target.files[0].name;
-    console.log(fileInputEvent.target.files[0]);
-    this.GetAttachment(fileInputEvent.target.files[0],"TDS");
+  csv5InputChange(event) {
+    this.handleFileInput(event);
+     this.FileName5 = event.target.files[0].name;
+    // console.log(fileInputEvent.target.files[0]);
+    // this.GetAttachment(fileInputEvent.target.files[0],"TDS");
   }
-  csv6InputChange(fileInputEvent: any) {
-    this.FileName6 = fileInputEvent.target.files[0].name;
-    console.log(fileInputEvent.target.files[0]);
-    this.GetAttachment(fileInputEvent.target.files[0],"Address Proof");
+  csv6InputChange(event) {
+    this.handleFileInput(event);
+    this.FileName6 = event.target.files[0].name;
+    // console.log(fileInputEvent.target.files[0]);
+    // this.GetAttachment(fileInputEvent.target.files[0],"Address Proof");
   }
-  csv7InputChange(fileInputEvent: any) {
-    this.FileName7 = fileInputEvent.target.files[0].name;
-    console.log(fileInputEvent.target.files[0]);
-    this.GetAttachment(fileInputEvent.target.files[0],"Signed Digital Document");
+  csv7InputChange(event) {
+    this.handleFileInput(event);
+    this.FileName7 = event.target.files[0].name;
+    // console.log(fileInputEvent.target.files[0]);
+    // this.GetAttachment(fileInputEvent.target.files[0],"Signed Digital Document");
   }
   nextbtn(): void {
     this._router.navigate(['pages/nextlogin'])
+  }
+  handleFileInput(event): DocumentRequired {
+    const File = new DocumentRequired();
+    File.AttachmentName = event.target.files[0].name;
+    File.ContentType = event.target.files[0].type;
+    File.ContentLength = event.target.files[0].size;
+    const selectedFiles = event.target.files[0];
+    File.AttachmentFile = selectedFiles;
+    console.log(File);
+    this.files.push(File);
+    return File;
   }
   keyPressNumbers(event) {
     var charCode = (event.which) ? event.which : event.keyCode;

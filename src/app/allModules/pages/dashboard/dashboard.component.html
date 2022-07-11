@@ -74,9 +74,9 @@
 
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
-            <span fxFlex="30" class="marketsp">Name of the Firm</span>
+            <span fxFlex="30" class="marketsp">Name of the Firm*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <input matInput placeholder="Enter Firm Name" formControlName="Name" class="inputform">
+              <input matInput placeholder="Enter Firm Name" formControlName="Name" class="inputform" (keypress)="AlphabetsonlyOnly($event)">
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('Name')?.touched && PIform?.get('Name')?.hasError('required')">Name is
                 required
@@ -91,7 +91,7 @@
 
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
-            <span fxFlex="30" class="marketsp">Address (Shop/Road No.Etc)</span>
+            <span fxFlex="30" class="marketsp">Address (Shop/Road No.Etc)*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input matInput placeholder="Enter Address" formControlName="Address" class="inputform">
               <mat-error class="errorn"
@@ -114,7 +114,7 @@
           </div>
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
-            <span fxFlex="30" class="marketsp">State</span>
+            <span fxFlex="30" class="marketsp">State*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <mat-select placeholder="Select the State" formControlName="State" required
                  class="inputform2">
@@ -131,7 +131,7 @@
 
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
-            <span fxFlex="30" class="marketsp">District</span>
+            <span fxFlex="30" class="marketsp">District*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input matInput placeholder="Enter District" formControlName="District" class="inputform">
               <mat-error class="errorn"
@@ -144,7 +144,7 @@
 
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
-            <span fxFlex="30" class="marketsp">City</span>
+            <span fxFlex="30" class="marketsp">City*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <mat-select placeholder="Select the City" class="inputform2" formControlName="City" required>
                 <mat-option *ngFor="let city of City" [value]="city.City">{{city.City}}</mat-option>
@@ -160,7 +160,7 @@
 
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
-            <span fxFlex="30" class="marketsp">Taluka</span>
+            <span fxFlex="30" class="marketsp">Taluka*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input matInput placeholder="Enter Taluka" formControlName="Taluka" class="inputform">
               <mat-error class="errorn"
@@ -174,7 +174,7 @@
 
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
-            <span fxFlex="30" class="marketsp">Tehsil</span>
+            <span fxFlex="30" class="marketsp">Tehsil*</span>
 
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input matInput placeholder="Enter Tehsil" formControlName="Tehsil" class="inputform">
@@ -192,7 +192,7 @@
 
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
-            <span fxFlex="30" class="marketsp">Pincode</span>
+            <span fxFlex="30" class="marketsp">Pincode*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input matInput placeholder="Enter Pincode" formControlName="Pincode" (keypress)="decimalOnly($event)" minLength="6" maxLength="6"
                 class="inputform">
@@ -251,8 +251,8 @@
                 <mat-label style="margin-bottom: 10px;font-weight: 500;font-size: 13px;">Mobile</mat-label>
               </div>
               <div fxLayout="column" fxFlex="60">
-                <input matInput placeholder="Enter Mobile number" formControlName="Mobile1" style="width: 200px;"
-                  class="inputform">
+                <input matInput placeholder="Enter Mobile number" formControlName="Mobile1" style="width: 200px;" (keypress)="keyPressNumbers($event)"
+                  class="inputform" minLength="10" maxLength="10">
                   <mat-error class="errorn"
                   *ngIf="firmForm?.get('Mobile1')?.touched && firmForm?.get('Mobile1')?.hasError('required')">Mobile number is required
                 </mat-error>
