@@ -130,6 +130,7 @@ export class DashboardComponent implements OnInit {
         if(this.authenticationDetails.UserRole == "Customer")
         {
             this.Role = true;
+            this.SubmitValue = true;
         } 
         
         this.InitializeFormGroup();
@@ -251,6 +252,7 @@ export class DashboardComponent implements OnInit {
         {
             this.Responded = "Review";
             this.PIform.disable();
+            this.firmForm.disable();
 
         } 
         this.selected=this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
@@ -552,6 +554,16 @@ export class DashboardComponent implements OnInit {
         }
         return true;
     }
+    keyPressNumbers(event) {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        // Only Numbers 0-9
+        if ((charCode < 48 || charCode > 57)) {
+          event.preventDefault();
+          return false;
+        } else {
+          return true;
+        }
+      }
     AlphabetsonlyOnly(event): boolean {
         const charCode = (event.which) ? event.which : event.keyCode;
         if (charCode === 8 || charCode === 9 || charCode === 13 || charCode === 46

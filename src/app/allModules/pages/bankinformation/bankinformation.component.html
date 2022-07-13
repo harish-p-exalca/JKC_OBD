@@ -80,7 +80,7 @@
                 <span fxFlex="30" class="marketsp">Amount(In lakhs)*</span>
                 <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                   <div fxLayout="column" fxFlex="100"  class="inner-inp_div">
-                    <input autocomplete="off" style="margin-left: 4px !important;" placeholder=" Enter the Amount"
+                    <input autocomplete="off" style="margin-left: 4px !important;" placeholder=" Enter the Amount" (keypress)="keyPressNumbers($event)"
                       formControlName="Amount" class="inputform" required>
                     <mat-error class="errorn"
                       *ngIf="BIform?.get('Amount')?.touched && BIform?.get('Amount')?.hasError('required')">
@@ -96,7 +96,7 @@
                 <span fxFlex="30" class="marketsp">Enter Name of Bank</span>
                 <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                   <div fxLayout="column" fxFlex="100"  class="inner-inp_div">
-                    <input autocomplete="off" style="margin-left: 4px !important;" placeholder=" Enter Name of Bank"
+                    <input autocomplete="off" style="margin-left: 4px !important;" (keypress)="AlphabetsonlyOnly($event)" placeholder=" Enter Name of Bank"
                       formControlName="nameofbank" class="inputform" required>
                     <mat-error class="errorn"
                       *ngIf="BIform?.get('nameofbank')?.touched && BIform?.get('nameofbank')?.hasError('required')">
@@ -127,7 +127,7 @@
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                   <mat-form-field appearance="" class="formleaf" style="margin-top:25px;">
-                    <input matInput placeholder="Enter Bank Name" formControlName="bankname" style="width: 100%;"
+                    <input matInput placeholder="Enter Bank Name" (keypress)="AlphabetsonlyOnly($event)" formControlName="bankname" style="width: 100%;"
                       class="inputformm">
                     <mat-error class="errorn"
                       *ngIf="BankForm?.get('bankname')?.touched && BankForm?.get('bankname')?.hasError('required')">
@@ -167,6 +167,10 @@
                       is
                       required
                     </mat-error>
+                    <mat-error class="errorn" *ngIf=" BankForm?.get('ifsccode')?.hasError('pattern')">
+                      Enter a valid IFSC Code
+                    </mat-error>
+                  
                   </mat-form-field>
                 </div>
               </div>
@@ -176,7 +180,7 @@
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                   <mat-form-field appearance="" class="formleaf">
-                    <input matInput placeholder="Enter Bank A/c Numberter" formControlName="bankacno"
+                    <input matInput placeholder="Enter Bank A/c Numberter" formControlName="bankacno" (keypress)="keyPressNumbers($event)"
                       style="width: 100%;" class="inputformm">
                     <mat-error class="errorn"
                       *ngIf="BankForm?.get('bankacno')?.touched && BankForm?.get('bankacno')?.hasError('required')">
