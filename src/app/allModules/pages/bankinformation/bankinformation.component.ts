@@ -42,7 +42,7 @@ export class BankinformationComponent implements OnInit {
   selected = '';
   isd2rs: boolean = false;
   SelectedFile
-  files:DocumentRequired[] = [];
+  files:File[] = [];
   FileName:any;
   FileName1:any;
   FileName2:any;
@@ -104,7 +104,7 @@ export class BankinformationComponent implements OnInit {
     bankno: ['',Validators.required],
     bankname: ['', Validators.required],
     bankaddress: ['', Validators.required],
-    ifsccode: ['', Validators.required],
+    ifsccode: ['',[Validators.required,Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$')]],
     bankacno: ['', Validators.required],
   })
     // if (retrievedvalue == 'ok') {
@@ -162,11 +162,12 @@ export class BankinformationComponent implements OnInit {
       // businessinformation = businessInfoView.Businessinfo;
       this.BIform.patchValue({
         leaf: bankInfoView.SecurityDeposit.Leaf,
-        Leafno: bankInfoView.SecurityDeposit.Type,
+        Type: bankInfoView.SecurityDeposit.Type,
         Date: bankInfoView.SecurityDeposit.Date,
         Amount: bankInfoView.SecurityDeposit.Amount,
         nameofbank:bankInfoView.SecurityDeposit.BankName
       });
+      this.listData = bankInfoView.BankDetailInfo;
       // this.BrandForm.patchValue({
       //   sales: ['', Validators.required],
       //   date1: [''],
@@ -179,23 +180,32 @@ export class BankinformationComponent implements OnInit {
         var cobView = new BankDetailsView();
         cobView.SecurityDeposit = this.GetSecurityInfoFromForm();
         cobView.BankDetailInfo = this.listData;
-        cobView.Documentsrequired = this.files;
+        // cobView.Documentsrequired = this.files;
         console.log("cobView", cobView);
         this.isProgressBarVisibile = true;
         this._dashboardService.SaveBankInfoView(cobView).subscribe(
             (res) => {
-                console.log("From save api", res);
-                this._router.navigate(["pages/bankinformation"]);
+                console.log("From save api", res); 
                 this.isProgressBarVisibile = false;
-                this.ClearAll();
+                this._dashboardService.AddDocumentRequiredAttachment(this.currentTransaction,this.files).subscribe(
+                  (res) => {
+                    console.log("Attachment added",res);
+                    this.isProgressBarVisibile = false;
+                    this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
+                    this._router.navigate(["pages/nextlogin"]);
+                    this.ClearAll();
+                  }  
+                );
+               
             },
             (err) => {
                 this.notificationSnackBarComponent.openSnackBar(
                     err instanceof Object ? "Something went wrong" : err,
                     SnackBarStatus.danger
                 );
-            }
+            }  
         );
+      
     // } else {
     //     this._commonService.ShowValidationErrors(this.BIform);
     // }
@@ -204,23 +214,23 @@ GetSecurityInfoFromForm(): SecurityDepositDetail {
   const personalinformation: SecurityDepositDetail = new SecurityDepositDetail();
     personalinformation.Leaf = this.BIform.get('leaf').value;
     personalinformation.Type = this.BIform.get('Type').value;
-    personalinformation.Date = this.BIform.get('Date').value;
+    personalinformation.Date = this.BIform.get('Date').value.toString();
     personalinformation.Amount = this.BIform.get('Amount').value;
     personalinformation.BankName = this.BIform.get('nameofbank').value;
     personalinformation.TransID = this.currentTransaction;
   return personalinformation;
 }
-GetAttachment(File:any,Tilte):DocumentRequired{
-  const Attachment: DocumentRequired = new DocumentRequired();
-  Attachment.AttachmentFile = File;
-  Attachment.AttachmentName = File.name;
-  Attachment.ContentLength = File.ContentLength;
-  Attachment.ID = this.currentTransaction;
-  Attachment.DocumentTitle = Tilte;
-  Attachment.ContentType = File.ContentType;
-  this.files.push(Attachment);
-  return Attachment;
-}
+// GetAttachment(File:any,Tilte):DocumentRequired{
+//   const Attachment: DocumentRequired = new DocumentRequired();
+//   Attachment.AttachmentFile = File;
+//   Attachment.AttachmentName = File.name;
+//   Attachment.ContentLength = File.ContentLength;
+//   Attachment.ID = this.currentTransaction;
+//   Attachment.DocumentTitle = Tilte;
+//   Attachment.ContentType = File.ContentType;
+//   this.files.push(Attachment);
+//   return Attachment;
+// }
   onAdd(): void {
     // if(this.BIform.valid)
     // {
@@ -387,7 +397,7 @@ GetAttachment(File:any,Tilte):DocumentRequired{
     const selectedFiles = event.target.files[0];
     File.AttachmentFile = selectedFiles;
     console.log(File);
-    this.files.push(File);
+    this.files.push(selectedFiles);
     return File;
   }
   keyPressNumbers(event) {
@@ -400,4 +410,15 @@ GetAttachment(File:any,Tilte):DocumentRequired{
       return true;
     }
   }
+  AlphabetsonlyOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode === 8 || charCode === 9 || charCode === 13 || charCode === 46
+        || charCode === 37 || charCode === 39 || charCode === 123 || charCode === 190 || charCode === 32) {
+        return true;
+    }
+    else if (charCode < 65 || charCode > 122) {
+        return false;
+    }
+    return true;
+}
 }

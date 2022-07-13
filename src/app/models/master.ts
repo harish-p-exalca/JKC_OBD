@@ -155,7 +155,6 @@ export class BusinessInformationView {
 export class BankDetailsView {
     BankDetailInfo: BankDetails[];
     SecurityDeposit: SecurityDepositDetail;
-    Documentsrequired: DocumentRequired[];
   }
 export class PersonalInformationView {
     PersonalInformation: PersonalInformation;

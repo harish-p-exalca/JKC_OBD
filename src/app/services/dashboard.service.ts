@@ -1,4 +1,4 @@
-import { MarketInformationView, CustomerOnboarding } from './../models/master';
+import { MarketInformationView, CustomerOnboarding, DocumentRequired } from './../models/master';
 import { Guid } from 'guid-typescript';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -206,6 +206,27 @@ export class DashboardService {
             })
         }).pipe(catchError(this.errorHandler));
     }
+    AddDocumentRequiredAttachment(TransID: number,selectedFiles: File[]): Observable<any> {
+        const formData: FormData = new FormData();
+        if (selectedFiles && selectedFiles.length) {
+            selectedFiles.forEach(x => {
+                formData.append(x.name, x, x.name);
+            });
+        }
+        // formData.append('DocumentTitle', header.DocumentTitle);
+        formData.append('TransID', TransID.toString());
+      
+
+        return this._httpClient.post<any>(`${this.baseAddress}api/BankDetails/AddDocumentRequiredAttachment`,
+            formData,
+            // {
+            //   headers: new HttpHeaders({
+            //     'Content-Type': 'application/json'
+            //   })
+            // }
+        ).pipe(catchError(this.errorHandler));
+    }
+
     // SaveBusinessInfoView(businessInfoView: BusinessInformationView): Observable<any> {
     //     return this._httpClient.post<BusinessInformationView>(`${this.baseAddress}api/BusinessInfo/SaveBusinessInformationDetails`, businessInfoView, {
     //         headers: new HttpHeaders({
@@ -221,7 +242,7 @@ export class DashboardService {
         }).pipe(catchError(this.errorHandler));
     }
     GetSecurityDetails(transID: number): Observable<any> {
-        return this._httpClient.get<any>(`${this.baseAddress}api/BankDetails/GetSecurityDepositDetails?transID=${transID}`)
+        return this._httpClient.get<any>(`${this.baseAddress}api/BankDetails/GetBankViewDetails?transID=${transID}`)
         .pipe(catchError(this.errorHandler));
     }
 }
