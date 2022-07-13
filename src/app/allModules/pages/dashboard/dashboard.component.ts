@@ -335,6 +335,7 @@ export class DashboardComponent implements OnInit {
         pi.Status = this.PIform.get('Status').value;
         pi.Latitude = this.PIform.get('latitude').value;
         pi.Logitude = this.PIform.get('longitude').value;
+        pi.TransID = Number(localStorage.getItem('TransID'));
         return pi;
     }
     OpenSuccessDialog() {

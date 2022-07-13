@@ -90,8 +90,8 @@ export class MarketinformationComponent implements OnInit {
     IdentityAddClicked() {
         if (this.BrandForm.valid) {
             var identity = new AverageSale();
-            identity.AvgSale = this.BrandForm.get("brand").value;
-            identity.Brand = this.BrandForm.get("wpMonth").value;
+            identity.AvgSale = this.BrandForm.get("wpMonth").value;
+            identity.Brand = this.BrandForm.get("brand").value;
             identity.TransID = this.currentTransaction;
             this.IdentityData.push(identity);
             this.BrandForm.reset();
@@ -316,7 +316,7 @@ export class MarketinformationComponent implements OnInit {
     }
     onAdd(): void {
         this.listData.push(this.BrandForm.value);
-
+        this.IdentityAddClicked();
         this.BrandForm.reset();
     }
 
