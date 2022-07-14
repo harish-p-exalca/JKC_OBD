@@ -181,7 +181,7 @@
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                   <mat-form-field appearance="" class="formleaf">
                     <input matInput placeholder="Enter Bank A/c Numberter" formControlName="bankacno" (keypress)="keyPressNumbers($event)"
-                      style="width: 100%;" class="inputformm">
+                      style="width: 100%;" class="inputformm"  minLength="14" maxLength="16">
                     <mat-error class="errorn"
                       *ngIf="BankForm?.get('bankacno')?.touched && BankForm?.get('bankacno')?.hasError('required')">
                       Bank A/c Number
