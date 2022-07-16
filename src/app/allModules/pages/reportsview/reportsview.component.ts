@@ -1,5 +1,7 @@
-import { CustomerOnboarding } from './../../../models/master';
+// import { CustomerOnboarding } from './../../../models/master';
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { CustomerOnboarding, CustomerOnboardingView1 } from './../../../models/master';
+// import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
     AuthenticationDetails,
@@ -154,11 +156,11 @@ export class ReportsviewComponent implements OnInit {
     businessInfoView: BusinessInformationView = new BusinessInformationView();
     notificationSnackBarComponent: NotificationSnackBarComponent;
     Role: any;
-    isProgressBarVisibile:boolean;
+    isProgressBarVisibile: boolean;
     constructor(
         private fb: FormBuilder,
-        private _dashboardService: DashboardService,public snackBar: MatSnackBar,  private _router: Router,
-    ) {this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar)}
+        private _dashboardService: DashboardService, public snackBar: MatSnackBar, private _router: Router,
+    ) { this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar) }
 
     ngOnInit() {
         const retrievedObject = localStorage.getItem("authorizationData");
@@ -174,7 +176,7 @@ export class ReportsviewComponent implements OnInit {
         this.InitializeFormGroup();
         this.transID = localStorage.getItem("TransID");
         if (this.transID != null) {
-            this.isProgressBarVisibile=true;
+            this.isProgressBarVisibile = true;
             this._dashboardService
                 .GetCustomerOnboardingView(this.transID)
                 .subscribe(
@@ -182,7 +184,7 @@ export class ReportsviewComponent implements OnInit {
                         console.log("view", res);
                         this.CustomerObdView = res;
                         this.SetPersonalInfoValues();
-                        this.isProgressBarVisibile=false;
+                        this.isProgressBarVisibile = false;
                     },
                     (err) => {
                         console.log(err);
@@ -195,7 +197,7 @@ export class ReportsviewComponent implements OnInit {
                         console.log("view", res);
                         this.MarketInfoView = res;
                         this.SetMarketInfoDetails(this.MarketInfoView);
-                        this.isProgressBarVisibile=false;
+                        this.isProgressBarVisibile = false;
                     },
                     (err) => {
                         console.log(err);
@@ -208,7 +210,7 @@ export class ReportsviewComponent implements OnInit {
                         console.log("view", res);
                         this.businessInfoView = res;
                         this.SetBusinessInfoDetails(this.businessInfoView);
-                        this.isProgressBarVisibile=false;
+                        this.isProgressBarVisibile = false;
                     },
                     (err) => {
                         console.log(err);
@@ -350,7 +352,7 @@ export class ReportsviewComponent implements OnInit {
         // });
     }
     GetTransactionDetails() {
-        this.isProgressBarVisibile=true;
+        this.isProgressBarVisibile = true;
         this._dashboardService
             .GetCustomerOnboardingView(this.currentTransaction)
             .subscribe(
@@ -358,7 +360,7 @@ export class ReportsviewComponent implements OnInit {
                     console.log("view", res);
                     this.CustomerObdView = res;
                     this.SetPersonalInfoValues();
-                    this.isProgressBarVisibile=false;
+                    this.isProgressBarVisibile = false;
                 },
                 (err) => {
                     console.log(err);
@@ -461,16 +463,19 @@ export class ReportsviewComponent implements OnInit {
     }
     Approve(): void {
         if (this.Role == "ASM") {
-            var Cusotmer = new CustomerOnboarding();
+            var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "ASMApproved";
             Cusotmer.TranID = this.transID;
-            this.isProgressBarVisibile=true;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionID = this.authenticationDetails.PositionID;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                    this.isProgressBarVisibile=false;
+                    this.isProgressBarVisibile = false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']); 
+                    this._router.navigate(['/pages/approvalinformation']);
                 }, err => {
                     this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
@@ -478,16 +483,19 @@ export class ReportsviewComponent implements OnInit {
             );
         }
         if (this.Role == "Stokist") {
-            var Cusotmer = new CustomerOnboarding();
+            var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "StokistApproved";
             Cusotmer.TranID = this.transID;
-            this.isProgressBarVisibile=true;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionID = this.authenticationDetails.PositionID;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                    this.isProgressBarVisibile=false;
+                    this.isProgressBarVisibile = false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']); 
+                    this._router.navigate(['/pages/approvalinformation']);
                 }, err => {
                     this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
@@ -495,16 +503,19 @@ export class ReportsviewComponent implements OnInit {
             );
         }
         if (this.Role == "DH") {
-            var Cusotmer = new CustomerOnboarding();
+            var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "DHApproved";
             Cusotmer.TranID = this.transID;
-            this.isProgressBarVisibile=true;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionID = this.authenticationDetails.PositionID;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                    this.isProgressBarVisibile=false;
+                    this.isProgressBarVisibile = false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']); 
+                    this._router.navigate(['/pages/approvalinformation']);
                 }, err => {
                     this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
@@ -512,16 +523,19 @@ export class ReportsviewComponent implements OnInit {
             );
         }
         if (this.Role == "ZH") {
-            var Cusotmer = new CustomerOnboarding();
+            var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "ZHApproved";
             Cusotmer.TranID = this.transID;
-            this.isProgressBarVisibile=true;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionID = this.authenticationDetails.PositionID;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                    this.isProgressBarVisibile=false;
+                    this.isProgressBarVisibile = false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']); 
+                    this._router.navigate(['/pages/approvalinformation']);
                 }, err => {
                     this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
@@ -529,16 +543,19 @@ export class ReportsviewComponent implements OnInit {
             );
         }
         if (this.Role == "SH") {
-            var Cusotmer = new CustomerOnboarding();
+            var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "SHApproved";
             Cusotmer.TranID = this.transID;
-            this.isProgressBarVisibile=true;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionID = this.authenticationDetails.PositionID;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                    this.isProgressBarVisibile=false;
+                    this.isProgressBarVisibile = false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']); 
+                    this._router.navigate(['/pages/approvalinformation']);
                 }, err => {
                     this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
@@ -546,16 +563,19 @@ export class ReportsviewComponent implements OnInit {
             );
         }
         if (this.Role == "RAC") {
-            var Cusotmer = new CustomerOnboarding();
+            var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "RACApproved";
             Cusotmer.TranID = this.transID;
-            this.isProgressBarVisibile=true;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionID = this.authenticationDetails.PositionID;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
             this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
                 (data) => {
                     console.log(data);
-                    this.isProgressBarVisibile=false;
+                    this.isProgressBarVisibile = false;
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']); 
+                    this._router.navigate(['/pages/approvalinformation']);
 
                 }, err => {
                     this.isProgressBarVisibile=false;
@@ -565,16 +585,19 @@ export class ReportsviewComponent implements OnInit {
         }
     }
     Reject(): void {
-        var Cusotmer = new CustomerOnboarding();
+        var Cusotmer = new CustomerOnboardingView1();
         Cusotmer.Status = "Rejected";
         Cusotmer.TranID = this.transID;
-        this.isProgressBarVisibile=true;
+        Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+        Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        Cusotmer.RoleName = this.authenticationDetails.UserRole;
+        this.isProgressBarVisibile = true;
         this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
             (data) => {
                 console.log(data);
-                this.isProgressBarVisibile=false;
+                this.isProgressBarVisibile = false;
                 this.notificationSnackBarComponent.openSnackBar('Rejected successfully', SnackBarStatus.success);
-                this._router.navigate(['/pages/approvalinformation']); 
+                this._router.navigate(['/pages/approvalinformation']);
             }, err => {
                 this.isProgressBarVisibile=false;
                 this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);

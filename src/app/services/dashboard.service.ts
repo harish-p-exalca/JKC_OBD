@@ -52,7 +52,7 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetAllPersoalDetailsAndStatus`)
             .pipe(catchError(this.errorHandler));
     }
-    getPersonalInfoByStatus(status:string): Observable<any> {
+    getPersonalInfoByStatus(status: string): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetAllPersoalDetailsByStatus?status=${status}`,)
             .pipe(catchError(this.errorHandler));
     }
@@ -63,8 +63,24 @@ export class DashboardService {
             })
         }).pipe(catchError(this.errorHandler));
     }
-    getPersonalInfoByStatusAndRole(Role:string,status:string): Observable<any> {
+    getPersonalInfoByStatusAndRole(Role: string, status: string): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetPersonalInfoByStatusAndRole?Role=${Role}&status=${status}`,)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetAllCustomerOnBoardingByUserPosition(PositionID: string,UserID: string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetAllCustomerOnBoardingByUserPosition?PositionID=${PositionID}&UserID=${UserID}`,)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetOpenCustomerOnBoardingByPosition(PositionID: string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetOpenCustomerOnBoardingByPosition?PositionID=${PositionID}`,)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetApprovedCustomerOnBoardingByUser(UserID: string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetApprovedCustomerOnBoardingByUser?UserID=${UserID}`,)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetRejectedCustomerOnBoardingByUser(UserID: string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetRejectedCustomerOnBoardingByUser?UserID=${UserID}`,)
             .pipe(catchError(this.errorHandler));
     }
     // AddEmployee(personalHistory: PersonalInformation): Observable<PersonalInformation | string> {
@@ -170,27 +186,27 @@ export class DashboardService {
     }
     GetIdentityByTransID(ID: number): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetIdentityByTransID?transID=${ID}`)
-        .pipe(catchError(this.errorHandler));
+            .pipe(catchError(this.errorHandler));
     }
     GenerateOTPForCustomer(transID: number): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GenerateOTPForCustomer?transID=${transID}`)
-        .pipe(catchError(this.errorHandler));
+            .pipe(catchError(this.errorHandler));
     }
-    AuthenticateCustomerWithOTP(otp:number,transID: number): Observable<any> {
+    AuthenticateCustomerWithOTP(otp: number, transID: number): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/AuthenticateCustomerWithOTP?otp=${otp}&transID=${transID}`)
-        .pipe(catchError(this.errorHandler));
+            .pipe(catchError(this.errorHandler));
     }
     GetCustomerOnboardingView(transID: number): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerOnboardingView?transID=${transID}`)
-        .pipe(catchError(this.errorHandler));
+            .pipe(catchError(this.errorHandler));
     }
     GetBusinessInformationView(transID: number): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/BusinessInfo/GetBusinessDatas?transID=${transID}`)
-        .pipe(catchError(this.errorHandler));
+            .pipe(catchError(this.errorHandler));
     }
     GetMarketInformationView(transID: number): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/MarketInfo/GetMarketDatas?transID=${transID}`)
-        .pipe(catchError(this.errorHandler));
+            .pipe(catchError(this.errorHandler));
     }
     SaveMarketInfoView(cobView: MarketInformationView): Observable<any> {
         return this._httpClient.post<MarketInformationView>(`${this.baseAddress}api/MarketInfo/SaveCustomerMarketDetails`, cobView, {
@@ -206,7 +222,7 @@ export class DashboardService {
             })
         }).pipe(catchError(this.errorHandler));
     }
-    AddDocumentRequiredAttachment(TransID: number,selectedFiles: File[]): Observable<any> {
+    AddDocumentRequiredAttachment(TransID: number, selectedFiles: File[]): Observable<any> {
         const formData: FormData = new FormData();
         if (selectedFiles && selectedFiles.length) {
             selectedFiles.forEach(x => {
@@ -215,7 +231,7 @@ export class DashboardService {
         }
         // formData.append('DocumentTitle', header.DocumentTitle);
         formData.append('TransID', TransID.toString());
-      
+
 
         return this._httpClient.post<any>(`${this.baseAddress}api/BankDetails/AddDocumentRequiredAttachment`,
             formData,
@@ -243,7 +259,7 @@ export class DashboardService {
     }
     GetSecurityDetails(transID: number): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/BankDetails/GetBankViewDetails?transID=${transID}`)
-        .pipe(catchError(this.errorHandler));
+            .pipe(catchError(this.errorHandler));
     }
     GetGeoLocationMasters(column: string,key:string): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetGeoLocationMasters?column=${column}&key=${key}`)

@@ -7,9 +7,13 @@ export class CommonClass {
     ModifiedOn: Date | string | null;
     ModifiedBy: string;
 }
+
+
 export class UserWithRole {
     UserID: Guid;
     RoleID: Guid;
+    PositionID: string;
+    ReportingTo: string;
     UserName: string;
     Plant: string;
     Email: string;
@@ -53,6 +57,8 @@ export class AuthenticationDetails {
     isAuth: boolean;
     UserID: Guid;
     UserName: string;
+    PositionID: string;
+    ReportingTo: string;
     DisplayName: string;
     EmailAddress: string;
     UserRole: string;
@@ -62,7 +68,7 @@ export class AuthenticationDetails {
     Expires: string;
     Issued: string;
     Expiresin: string;
-    Token:string;
+    Token: string;
 }
 export class ChangePassword {
     UserID: Guid;
@@ -122,7 +128,16 @@ export class CustomerOnboarding extends CommonClass {
     TranID: number;
     Status: string;
 }
+export class CustomerOnboardingView1 extends CommonClass {
+    TranID: number;
+    Status: string;
+    UserID: string;
+    PositionID: string;
+    RoleName: string;
+}
 export class CustomerOnboardingView {
+    UserID: string;
+    PositionID: string;
     Transaction: CustomerOnboarding;
     PersonalInfo: PersonalInformationView;
 }
@@ -144,8 +159,8 @@ export class DocumentRequired {
     AttachmentFile: string;
 }
 export class BusinessInformationView {
-  Businessinfo: BusinessInformation;
-  SalesandTargets: SalesAndTarget[];
+    Businessinfo: BusinessInformation;
+    SalesandTargets: SalesAndTarget[];
 }
 // export class BankDetailsView {
 //   BankDetailInfo: BankDetails[];
@@ -155,7 +170,7 @@ export class BusinessInformationView {
 export class BankDetailsView {
     BankDetailInfo: BankDetails[];
     SecurityDeposit: SecurityDepositDetail;
-  }
+}
 export class PersonalInformationView {
     PersonalInformation: PersonalInformation;
     Identities: PersonIdentity[];
@@ -174,10 +189,11 @@ export class PersonalInformation {
     Pincode: number;
     Status: string;
     TransID: number;
-    Latitude:string;
-    Logitude:string;
+    Latitude: string;
+    Logitude: string;
 }
 export class PersonalInfoStatusView {
+    TranID: number;
     Name: string;
     City: string;
     District: string;
@@ -244,34 +260,62 @@ export class SalesAndTarget {
     Value: number;
 }
 export class MarketInformation {
-        ID: number;
-        MarketName: string;
-        Population: number;
-        MarketPotential: string;
-        StockList: string;
-        Distance: number;
-        StockListName: string;
-        Year: number;
-        Area: string;
-        Total: number;
-        MonthlySale: number;
-        PanNo: string;
-        GstNo: string;
-        Background: string;
-        TransID: number;
+    ID: number;
+    MarketName: string;
+    Population: number;
+    MarketPotential: string;
+    StockList: string;
+    Distance: number;
+    StockListName: string;
+    Year: number;
+    Area: string;
+    Total: number;
+    MonthlySale: number;
+    PanNo: string;
+    GstNo: string;
+    Background: string;
+    TransID: number;
 
-    }
-    export class AverageSale {
-        ID: number;
-        TransID: number;
-        Brand: string;
-        AvgSale: number;
-    }
-    export class MarketInformationView {
-        AverageSale: AverageSale[];
-        MarketInformation: MarketInformation;
-    }
+}
+export class AverageSale {
+    ID: number;
+    TransID: number;
+    Brand: string;
+    AvgSale: number;
+}
+export class MarketInformationView {
+    AverageSale: AverageSale[];
+    MarketInformation: MarketInformation;
+}
 // export class BusinessInfoView{
 //     Business:BusinessInformation;
 //     Sales:SalesAndTarget[];
 // }
+
+
+export class CustomerOnboardingApprovalMatrix extends CommonClass {
+    ID: number;
+    TranID: number;
+    InitialApproverPositionID: string;
+    LastApproverPositionID: string;
+    IsASMApproved: boolean;
+    ASMApprovedOn: Date | string | null;
+    ASMApprover: string;
+
+    IsSHApproved: boolean;
+    SHApprovedOn: Date | string | null;
+    SHApprover: string;
+
+    IsZHApproved: boolean;
+    ZHApprovedOn: Date | string | null;
+    ZHApprover: string;
+
+    IsDHApproved: boolean;
+    DHApprovedOn: Date | string | null;
+    DHApprover: string;
+
+    IsRejected: boolean;
+    RejectededOn: Date | string | null;
+    RejectedBy: string;
+
+}
