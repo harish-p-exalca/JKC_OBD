@@ -152,6 +152,7 @@ export class DashboardComponent implements OnInit {
                     console.log(err);
                 });
         }
+        
         this.isProgressBarVisibile = true;
         this._dashboardService.GetAllStates().subscribe(
             (data) => {
@@ -266,6 +267,7 @@ export class DashboardComponent implements OnInit {
             if (this.IdentityData.length > 0) {
                 var cobView = new CustomerOnboardingView();
                 cobView.Transaction = new CustomerOnboarding();
+             cobView.Transaction.TranID =  Number(localStorage.getItem('TransID'));;
                 cobView.Transaction.Status = isDraft ? "InitiatorDraft" : "InitiatorReleased";
                 cobView.PersonalInfo = new PersonalInformationView();
                 cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();

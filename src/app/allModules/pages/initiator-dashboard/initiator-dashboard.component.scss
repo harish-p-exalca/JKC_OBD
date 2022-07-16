@@ -264,17 +264,26 @@
   }
 
   .bg-clr3 {
-    background-color: #f4f8ec !important;
+    background-color: #fdf8c6 !important;
+   // background-color: #f4f8ec !important;
 
     .clr3 {
-      color: #90B645;
+      color:	#FFD700;
+      //color: #90B645;
     }
   }
 
   .bg-clr4 {
-    background-color: #ffecec !important;
+    background-color: #f4f8ec !important;
 
     .clr4 {
+      color: #90B645;
+    }
+  }
+  .bg-clr5 {
+    background-color: #ffecec !important;
+
+    .clr5 {
       color: #FF4646;
     }
   }

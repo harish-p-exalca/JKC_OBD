@@ -433,37 +433,7 @@ export class ApprovalscreenComponent implements OnInit {
                 },
             ],
         };
-        this.chartOptions1 = {
-            series: [45, 52, 22, 51, 30],
-            chart: {
-                type: "donut",
-                width: "200px",
-            },
-            labels: [],
-            // labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F'],
-            colors: ["#1158A6", "#1158A6", "#1158A6", "#1158A6", "#C1D6EA"], // add this part to modify colours
-            responsive: [
-                {
-                    breakpoint: 480,
-                    options: {
-                        chart: {
-                            width: 100,
-                        },
-                    },
-                },
-            ],
-
-            legend: {
-                show: false,
-            },
-            dataLabels: {
-                // add this part to remove %
-                enabled: false,
-                formatter(value: any, opts: any): any {
-                    return opts.w.config.series[opts.seriesIndex];
-                },
-            },
-        };
+   
 
         // this.chartOptions1 = {
         //   series: [44, 55, 13, 43, 22],
@@ -486,6 +456,7 @@ export class ApprovalscreenComponent implements OnInit {
         //   ]
         // };
     }
+    public series =[];
     ngOnInit() {
         const retrievedObject = localStorage.getItem("authorizationData");
         if (retrievedObject) {
@@ -565,6 +536,7 @@ export class ApprovalscreenComponent implements OnInit {
                 this.AllRejectedDetails = data;
                 this.isProgressBarVisibile=false;
             });
+            
             this.GetEmployeewithOpenStatus();
             this.GetEmployeewithApprovedStatus();
             this.GetEmployeewithRejectedStatus();
@@ -573,7 +545,57 @@ export class ApprovalscreenComponent implements OnInit {
         //   this.GetEmployeewithPendingStatus();
         //   this.GetEmployeewithApprovesStatus();
         //   this.GetEmployeewithRejectedStatus();
-        // this.GetEmployees(); // forgeted this line
+         this.GetEmployees(); // forgeted this line
+         this.series = [this.AllOpenDetails.length,this.AllApprovedDetails.length,this.AllRejectedDetails.length];
+            console.log(this.series);
+         this.RenderDounghtChart();
+
+    }
+    RenderDounghtChart(){
+        this.chartOptions1 = {
+            series: [],
+            chart: {
+                type: "donut",
+                width: "200px",
+                events: {
+                    dataPointSelection: (event, chartContext, config) => {
+                      if (config.dataPointIndex == 0) {
+                        this.LoadTableSource(this.AllOpenDetails);
+                      }
+                      if (config.dataPointIndex == 1) {
+                        this.LoadTableSource(this.AllApprovedDetails);
+                      }
+                      if (config.dataPointIndex == 2) {
+                        this.LoadTableSource(this.AllRejectedDetails);
+                      }
+                    }
+                  }
+            },
+            labels: [],
+            // labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F'],
+            colors: ["#1158A6", "#1158A6", "#1158A6", "#1158A6", "#C1D6EA"], // add this part to modify colours
+            responsive: [
+                {
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 100,
+                        },
+                    },
+                },
+            ],
+
+            legend: {
+                show: false,
+            },
+            dataLabels: {
+                // add this part to remove %
+                enabled: false,
+                formatter(value: any, opts: any): any {
+                    return opts.w.config.series[opts.seriesIndex];
+                },
+            },
+        };
     }
     tabClick(event: MatTabChangeEvent): void {
         this.tab = event.tab.textLabel;
