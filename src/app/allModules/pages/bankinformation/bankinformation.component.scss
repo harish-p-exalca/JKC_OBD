@@ -246,9 +246,6 @@ input:focus {
   margin-top: 2px !important;
 }
 
-::ng-deep .mat-form-field-flex>.mat-form-field-infix {
-  // padding: 0.4em 0px !important;
-}
 
 ::ng-deep .mat-form-field-label-wrapper {
   top: -1.5em;
@@ -369,7 +366,7 @@ table {
   width: 100% !important;
   margin-top: 26px;
   ////////font-family: Arial, Helvetica, sans-serif;
-  background-color: #cdccdc !important;
+  // background-color: #cdccdc !important;
 }
 
 .mat-row:nth-child(even) {

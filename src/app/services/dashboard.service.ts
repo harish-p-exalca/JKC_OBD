@@ -245,5 +245,9 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/BankDetails/GetBankViewDetails?transID=${transID}`)
         .pipe(catchError(this.errorHandler));
     }
+    GetGeoLocationMasters(column: string,key:string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetGeoLocationMasters?column=${column}&key=${key}`)
+        .pipe(catchError(this.errorHandler));
+    }
 }
 

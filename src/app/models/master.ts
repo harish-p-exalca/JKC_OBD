@@ -72,7 +72,7 @@ export class ChangePassword {
 }
 export class EMailModel {
     EmailAddress: string;
-    siteURL: string;
+    PortalAddress: string;
 }
 export class ForgotPassword {
     UserID: Guid;

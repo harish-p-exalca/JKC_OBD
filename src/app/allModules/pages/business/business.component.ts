@@ -1,5 +1,5 @@
 import { SalesAndTarget, BusinessInformation } from "./../../../models/master";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import {
     FormControl,
     FormBuilder,
@@ -22,8 +22,8 @@ export interface Monthlysales {
 }
 const ELEMENT_DATA: Monthlysales[] = [
     { Product: "WallmaxX" },
-    { Product: "WhitemaxX" },
-    { Product: "GypsomaxX" },
+    { Product: "WhitemaxX"},
+    { Product: "GypsomaxX"},
     { Product: "ShieldmaxX" },
     { Product: "SmoothMaxX" },
     { Product: "RepairmaxX" },
@@ -34,12 +34,14 @@ const ELEMENT_DATA: Monthlysales[] = [
     selector: "app-business",
     templateUrl: "./business.component.html",
     styleUrls: ["./business.component.scss"],
+    encapsulation:ViewEncapsulation.None
 })
 export class BusinessComponent implements OnInit {
     BIform!: FormGroup;
     BrandForm!: FormGroup;
     private listData: any;
     notificationSnackBarComponent: NotificationSnackBarComponent;
+    salesTargetArr:any[][]=[];
     displayedColumns: string[] = ["Product"];
     displayColumns: string[] = [
         "Jan",
@@ -55,7 +57,6 @@ export class BusinessComponent implements OnInit {
         "Nov",
         "Dec",
     ];
-    //displayColumns:string[]=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     brandName: string[] = [
         "WallmaxX",
         "WhitemaxX",
@@ -184,6 +185,7 @@ export class BusinessComponent implements OnInit {
         }
     }
     SubmitButtonClick(isDraft: boolean = false) {
+        console.log(this.salesTargetArr);
         if (this.BIform.valid) {
             var cobView = new BusinessInformationView();
             cobView.Businessinfo = this.GetBusinessInfoFromForm();
@@ -295,7 +297,7 @@ export class BusinessComponent implements OnInit {
         var d = new Date();
         d.setDate(1); //REM: To prevent month skipping.
         this.data.push(this.displayColumns[d.getMonth()]);
-        console.log(this.displayColumns);
+        console.log("displayColumns",this.displayColumns);
         console.log("data ", this.data);
 
         for (var i = 0; i < 11; i++) {

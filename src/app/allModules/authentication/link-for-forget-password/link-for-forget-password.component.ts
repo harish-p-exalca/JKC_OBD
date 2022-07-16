@@ -80,7 +80,7 @@ export class LinkForForgetPasswordComponent implements OnInit {
       this.emailModel = new EMailModel();
       this.emailModel.EmailAddress = this.forgotPasswordForm.get('email').value;
       const Origin = (this._platformLocation as any).location.origin;
-      this.emailModel.siteURL = `${Origin}/#/auth/forgotPassword`;
+      this.emailModel.PortalAddress = `${Origin}/#/auth/forgotPassword`;
 
       this._authService.SendResetLinkToMail(this.emailModel).subscribe(
         (data) => {

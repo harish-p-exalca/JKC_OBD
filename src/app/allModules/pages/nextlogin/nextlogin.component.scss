@@ -51,6 +51,7 @@
     letter-spacing: 0.72px;
     color: #1055A0;
     padding-left: 43%;
+    cursor: pointer;
 }
 .titleCP{
     font-size: 45px;
@@ -169,3 +170,9 @@
 input.mat-input-element {
     margin-top: 0px !important;
 }
+.ProgressBarPostion {
+    position: absolute !important;
+    top: 43%;
+    z-index: 1;
+    left: 62%;
+  }

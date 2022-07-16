@@ -1,6 +1,6 @@
 @import "src/@fuse/scss/fuse";
 
-#dashboard {
+#business {
   background-color: white;
 
   .progressBarPostion {
@@ -26,12 +26,11 @@
   }
 
   .addrow {
-    margin-left: 10px;
-    height: 33px;
-    margin-top: 32px;
+    height: 32px;
     background-color: #38679f;
-    width: 19%;
+    width: 74px;
   }
+
   .addrow-II {
     // margin-left: 10px;
     height: 33px;
@@ -39,6 +38,7 @@
     background-color: #38679f;
     width: 100%;
   }
+
   .boldItalicClass {
     @extend .boldClass;
     font-style: italic;
@@ -61,37 +61,54 @@
 
   .TablePadFont {
     padding: 5px;
-    font-size: 12px;
+    font-size: 13px;
     min-width: 100px !important;
   }
-.table_ext {
-  .tble_data {
-    font-size: 12px;
-    color: #00061C !important;
-    font-weight: 500;
+
+  .table_ext {
+    .tble_data {
+      font-size: 13px;
+      color: #00061C !important;
+      font-weight: 500;
+      border-right: 1px solid #0000001f;
+    }
+
+    .tbls_hdr {
+      font-size: 14 !important;
+      font-weight: 500;
+      color: #00061C !important;
+    }
   }
-  .tbls_hdr {
-    font-size: 14 !important;
-    font-weight: 500;
-    color: #00061C !important;
-  }
-}
+
   table {
     width: 100%;
-    th{
-      font-weight:500 !important;
-      font-size: 14 !important;
-      border-right: 1px solid #abaab9;
+    border: 1px solid #abaab9;
+
+    th {
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      border-right: 1px solid #0000001f;
+      padding: 0 24px;
     }
+
     tr {
       height: 40px;
-      border-right: 1px solid #abaab9 !important;
     }
-    .mat-input-element:disabled {
-      color: gray !important;
-      background: whitesmoke !important;
-      cursor: not-allowed !important;
+
+    td {
+      padding: 0 24px;
     }
+
+    // .mat-input-element:disabled {
+    //   color: gray !important;
+    //   background: whitesmoke !important;
+    //   cursor: not-allowed !important;
+    // }
+  }
+
+  .tbl_input {
+    font-size: 13px;
+    height: 36px;
   }
 
   .whiteBg {
@@ -162,9 +179,8 @@
   outline: none !important;
 }
 
-input:focus {
-  border: none !important;
-}
+// 
+
 
 .inputdivision {
   //background-color: #f4f4f4;
@@ -208,7 +224,7 @@ input:focus {
   overflow: hidden;
   margin-bottom: 0px;
   height: 0px;
-  position: fixed;
+  position: fixed !important;
   z-index: 100;
   width: 100%;
 }
@@ -221,8 +237,8 @@ input:focus {
   opacity: 1;
   padding-left: 40%;
   padding-left: 40%;
-  font-size: 17px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 500;
 
 }
 
@@ -325,17 +341,14 @@ input:focus {
 
 
 .cement {
-  width: 132%;
-  margin-top: 44px;
-  // height: 10%;
+  margin: 16px;
+  padding: 16px;
   border: 1px solid lightgray;
-}
 
-table {
-  width: 100% !important;
-  margin-top: 26px;
-  //font-family: Arial, Helvetica, sans-serif;
-  background-color: #cdccdc !important;
+  .table-title {
+    font-size: 16px;
+    font-weight: 500;
+  }
 }
 
 .mat-row:nth-child(even) {
@@ -441,21 +454,26 @@ table {
 .previous {
   cursor: pointer;
   background-color: white !important;
+
   .prev_span {
     color: #8e8f92 !important;
     font-size: 14px;
   }
+
   .previousimg {
     width: 13%;
     cursor: pointer;
     margin-bottom: 2px;
   }
+
   .previous:hover {
     color: #1434AA !important;
   }
+
   .prev_span:hover {
     color: #1434AA !important;
   }
+
   .previousimg:hover {
     color: #00061C;
   }
@@ -489,10 +507,12 @@ table {
   cursor: pointer;
   background-color: white !important;
   color: #8e8f92 !important;
+
   .prev_span {
     color: #8e8f92 !important;
     font-size: 14px;
   }
+
   .prev_span:hover {
     color: #1434AA !important;
   }
@@ -507,10 +527,12 @@ table {
   cursor: pointer;
   background-color: white !important;
   color: #8e8f92 !important;
+
   .prev_span {
     color: #8e8f92 !important;
     font-size: 14px;
   }
+
   .prev_span:hover {
     color: #1434AA !important;
   }
@@ -543,39 +565,50 @@ table {
   background-color: #1434AA !important;
   color: white !important;
 }
+
 .savebtn:hover {
   background-color: #a4be6f !important;
 }
+
 .sub_div1 {
   padding-left: 20px;
   padding-top: 20px;
   width: 100%;
+
   .form_div {
     width: 100%;
     padding-left: 20px;
+
     .form_div_I {
       width: 100%;
       padding-left: 20px;
+
       .populationclass {
         padding: 0%;
         font-size: 14px;
         margin-top: 20px;
         width: 100%;
+
         .errorn {
-          font-size: 10px;
+          font-size: 13px;
+          ;
           font-weight: 500;
         }
+
         .marketsp {
-          font-size: 12px;
+          font-size: 13px;
           font-weight: 500 !important;
           color: #00061C !important;
         }
+
         .inp_div {
           width: 100%;
           background-color: transparent !important;
+
           .inner-inp_div {
             width: 70%;
           }
+
           .inputform {
             color: #00061C !important;
             font-size: 12px !important;
@@ -586,33 +619,39 @@ table {
             text-align: left;
             background: #f1f1f5 !important;
           }
+
           .inputform::placeholder {
-            font-size: 10px !important;
+            font-size: 13px !important;
             font-weight: 500;
             color: #acacac !important;
           }
+
           .inputform1 {
             color: #00061C !important;
-            font-size: 12px;
+            font-size: 13px;
             padding: 0px 20px 0px 20px;
             height: 36px;
-            line-height: 1.5;text-align: left;
+            line-height: 1.5;
+            text-align: left;
             border: none;
             background: #f1f1f5 !important;
           }
+
           .inputform:focus {
             outline: none;
           }
+
           .inputform1:focus {
             outline: none;
           }
+
           .inputform1::placeholder {
-            font-size: 10px !important;
+            font-size: 13px !important;
             font-weight: 500;
             color: #acacac !important;
           }
         }
-      } 
+      }
     }
   }
 }

@@ -135,36 +135,43 @@ export class InvitepageComponent implements OnInit {
     });
   }
   LoginClicked(): void {
-    if (this.InviteForm.valid) {
-      this.IsProgressBarVisibile = true;
-      this.OTP[0] = (this.InviteForm.get('OTP1').value);
-      this.OTP[1] = (this.InviteForm.get('OTP2').value);
-      this.OTP[2] = (this.InviteForm.get('OTP3').value);
-      this.OTP[3] = (this.InviteForm.get('OTP4').value);
-      this.OTP[4] = (this.InviteForm.get('OTP5').value);
-      this.OTP[5] = (this.InviteForm.get('OTP6').value);
-      var OTPNo = this.OTP.join();
-      var status = OTPNo.replace(/,/g, '').toString();
-      console.log("otp",parseInt(status));
-      this._dashboardService.AuthenticateCustomerWithOTP(parseInt(status), this.TransID).subscribe(
-        (res) => {
-          this.IsProgressBarVisibile = false;
-          console.log(res);
-          const dat = res as AuthenticationDetails;
-          this.saveUserDetails(dat);
-        },
-        (err) => {
-          this.IsProgressBarVisibile = false;
-          console.error(err);
-          this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-        }
-      );
-    } else {
-      Object.keys(this.InviteForm.controls).forEach(key => {
-        const abstractControl = this.InviteForm.get(key);
-        abstractControl.markAsDirty();
-      });
-    }
+    this.IsProgressBarVisibile = true;
+    this._dashboardService.AuthenticateCustomerWithOTP(parseInt(this.otp), this.TransID).subscribe(
+      (res) => {
+        this.IsProgressBarVisibile = false;
+        console.log(res);
+        const dat = res as AuthenticationDetails;
+        this.saveUserDetails(dat);
+      },
+      (err) => {
+        this.IsProgressBarVisibile = false;
+        console.error(err);
+        this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+      }
+    );
+    // if (this.InviteForm.valid) {
+    //   // this.IsProgressBarVisibile = true;
+    //   // this.OTP[0] = (this.InviteForm.get('OTP1').value);
+    //   // this.OTP[1] = (this.InviteForm.get('OTP2').value);
+    //   // this.OTP[2] = (this.InviteForm.get('OTP3').value);
+    //   // this.OTP[3] = (this.InviteForm.get('OTP4').value);
+    //   // this.OTP[4] = (this.InviteForm.get('OTP5').value);
+    //   // this.OTP[5] = (this.InviteForm.get('OTP6').value);
+    //   // var OTPNo = this.OTP.join();
+    //   // var status = OTPNo.replace(/,/g, '').toString();
+    //   // console.log("otp",parseInt(status));
+      
+    // } else {
+    //   Object.keys(this.InviteForm.controls).forEach(key => {
+    //     const abstractControl = this.InviteForm.get(key);
+    //     abstractControl.markAsDirty();
+    //   });
+    // }
+  }
+  otp:string;
+  onOtpChange(otp) {
+    this.otp = otp;
+    console.log(this.otp);
   }
   saveUserDetails(data: any): void {
     console.log(data);
@@ -175,6 +182,7 @@ export class InvitepageComponent implements OnInit {
   }
   CreateOTP(): void {
     console.log("otp requested");
+    this.IsProgressBarVisibile = true;
     this._dashboardService.GenerateOTPForCustomer(this.TransID).subscribe(
       (res) => {
         this.IsProgressBarVisibile = false;

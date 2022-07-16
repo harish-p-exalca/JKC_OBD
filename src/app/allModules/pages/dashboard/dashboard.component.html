@@ -76,15 +76,16 @@
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Name of the Firm*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <input matInput placeholder="Enter Firm Name" formControlName="Name" class="inputform" (keypress)="AlphabetsonlyOnly($event)">
+              <input matInput placeholder="Enter Firm Name" formControlName="Name" class="inputform"
+                (keypress)="AlphabetsonlyOnly($event)">
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('Name')?.touched && PIform?.get('Name')?.hasError('required')">Name is
                 required
               </mat-error>
               <mat-error class="errorn"
-              *ngIf="PIform?.get('Name')?.touched && !PIform?.get('Name')?.hasError('required') && PIform?.get('Name')?.hasError('pattern')">
-              Please enter a valid Name
-            </mat-error>
+                *ngIf="PIform?.get('Name')?.touched && !PIform?.get('Name')?.hasError('required') && PIform?.get('Name')?.hasError('pattern')">
+                Please enter a valid Name
+              </mat-error>
             </div>
 
           </div>
@@ -105,9 +106,11 @@
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Geo-Location</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48">
-              <div fxLayout="row" fxLayoutGap="53px" fxFlex="100">
-                <input fxFlex matInput (keypress)="decimalOnly($event)" placeholder="Latitude" formControlName="latitude" class="inputform">
-                <input fxFlex matInput (keypress)="decimalOnly($event)" placeholder="Longitude" formControlName="longitude" class="inputform">
+              <div fxLayout="row" style="width: 100%;" fxLayoutAlign="start center" fxLayoutGap="32px">
+                <input fxFlex matInput (keypress)="decimalOnly($event)" placeholder="Latitude"
+                  formControlName="latitude" class="inputform">
+                <input fxFlex matInput (keypress)="decimalOnly($event)" placeholder="Longitude"
+                  formControlName="longitude" class="inputform">
               </div>
 
             </div>
@@ -116,10 +119,10 @@
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">State*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <mat-select placeholder="Select the State" formControlName="State" required
-                 class="inputform2">
-                 <!-- (selectionChange)="SelectCity($event.value)" -->
-                <mat-option *ngFor="let state of SOption" (click)="SelectCity(state)" [value]="state.StateName">{{state.StateName}}</mat-option>
+              <mat-select placeholder="Select the State" formControlName="State" required class="inputform2">
+                <!-- (selectionChange)="SelectCity($event.value)" -->
+                <mat-option *ngFor="let state of SOption" (click)="SelectCity(state)" [value]="state.StateName">
+                  {{state.StateName}}</mat-option>
               </mat-select>
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('State')?.touched && PIform?.get('State')?.hasError('required')">State is
@@ -133,7 +136,13 @@
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">District*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <input matInput placeholder="Enter District" formControlName="District" class="inputform">
+              <input matInput placeholder="Enter District" [matAutocomplete]="autoDistrict" formControlName="District"
+                class="inputform">
+              <mat-autocomplete #autoDistrict="matAutocomplete" (optionSelected)="districtSelected($event)">
+                <mat-option *ngFor="let d of Districts" [value]="d" style="font-size: 12px;">
+                  {{d}}
+                </mat-option>
+              </mat-autocomplete>
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('District')?.touched && PIform?.get('District')?.hasError('required')">District
                 is required
@@ -162,7 +171,13 @@
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Taluka*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <input matInput placeholder="Enter Taluka" formControlName="Taluka" class="inputform">
+              <input matInput [matAutocomplete]="autoTaluka" placeholder="Enter Taluka" formControlName="Taluka"
+                class="inputform">
+              <mat-autocomplete #autoTaluka="matAutocomplete" (optionSelected)="talukaSelected($event)">
+                <mat-option *ngFor="let d of Talukas" [value]="d" style="font-size: 12px;">
+                  {{d}}
+                </mat-option>
+              </mat-autocomplete>
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('Taluka')?.touched && PIform?.get('Taluka')?.hasError('required')">Taluka
                 is required
@@ -190,28 +205,33 @@
             </div>
           </div>
 
-          <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+          <div fxLayout="row" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Pincode*</span>
-            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <input matInput placeholder="Enter Pincode" formControlName="Pincode" (keypress)="decimalOnly($event)" minLength="6" maxLength="6"
-                class="inputform">
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48">
+              <input matInput placeholder="Enter Pincode" [matAutocomplete]="autoPinCode" formControlName="Pincode"
+                (keypress)="decimalOnly($event)" minLength="6" maxLength="6" class="inputform">
+              <mat-autocomplete #autoPinCode="matAutocomplete">
+                <mat-option *ngFor="let d of PinCodes" [value]="d" style="font-size: 12px;">
+                  {{d}}
+                </mat-option>
+              </mat-autocomplete>
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('Pincode')?.touched && PIform?.get('Pincode')?.hasError('required')">Pincode is
                 required
               </mat-error>
               <mat-error class="errorn"
-                  *ngIf="PIform?.get('Pincode')?.touched && !PIform?.get('Pincode')?.hasError('required') && PIform?.get('Pincode')?.hasError('pattern')">
-                  Please enter valid pincode
-                </mat-error>
+                *ngIf="PIform?.get('Pincode')?.touched && !PIform?.get('Pincode')?.hasError('required') && PIform?.get('Pincode')?.hasError('pattern')">
+                Please enter valid pincode
+              </mat-error>
             </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Status of the Firm</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected" (selectionChange)="FirmStatusChange()"
-                formControlName="Status" >
+              <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected"
+                (selectionChange)="FirmStatusChange()" formControlName="Status">
                 <mat-option value="Proprietor">Proprietor</mat-option>
                 <mat-option value="Partnership">Partnership</mat-option>
                 <mat-option value="Huf">Huf</mat-option>
@@ -229,7 +249,7 @@
       </form>
       <form [formGroup]="firmForm" class="firmForm" *ngIf="selected">
 
-        <div fxLayout="column" style="width:60%;margin-left: 10%;">
+        <div fxLayout="column" style="width:86%;margin-left: 10%;">
           <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px" style="margin-top: 3%;">
 
             <div fxLayout="column" fxFlex="60">
@@ -237,9 +257,9 @@
                 <mat-label style="margin-bottom: 10px;font-weight: 500;font-size: 13px;">Name</mat-label>
               </div>
               <div fxLayout="column" fxFlex="60">
-                <input (keypress)="AlphabetsonlyOnly($event)" matInput placeholder="Enter the Name" formControlName="Name1" style="width: 200px;"
-                  class="inputform">
-                  <mat-error class="errorn"
+                <input (keypress)="AlphabetsonlyOnly($event)" matInput placeholder="Enter the Name"
+                  formControlName="Name1" style="width: 200px;" class="inputform">
+                <mat-error class="errorn"
                   *ngIf="firmForm?.get('Name1')?.touched && firmForm?.get('Name1')?.hasError('required')">Name
                   is
                   required
@@ -251,10 +271,11 @@
                 <mat-label style="margin-bottom: 10px;font-weight: 500;font-size: 13px;">Mobile</mat-label>
               </div>
               <div fxLayout="column" fxFlex="60">
-                <input matInput placeholder="Enter Mobile number" formControlName="Mobile1" style="width: 200px;" (keypress)="keyPressNumbers($event)"
-                  class="inputform" minLength="10" maxLength="10">
-                  <mat-error class="errorn"
-                  *ngIf="firmForm?.get('Mobile1')?.touched && firmForm?.get('Mobile1')?.hasError('required')">Mobile number is required
+                <input matInput placeholder="Enter Mobile number" formControlName="Mobile1" style="width: 200px;"
+                  (keypress)="keyPressNumbers($event)" class="inputform" minLength="10" maxLength="10">
+                <mat-error class="errorn"
+                  *ngIf="firmForm?.get('Mobile1')?.touched && firmForm?.get('Mobile1')?.hasError('required')">Mobile
+                  number is required
                 </mat-error>
                 <mat-error class="errorn"
                   *ngIf="firmForm?.get('Mobile1')?.touched && !firmForm?.get('Mobile1')?.hasError('required') && firmForm?.get('Mobile1')?.hasError('pattern')">
@@ -271,8 +292,9 @@
               <div fxLayout="column" fxFlex="60" class="">
                 <input matInput placeholder="example@gmail.com" formControlName="email1" style="width: 200px;"
                   class="inputform">
-                  <mat-error class="errorn"
-                  *ngIf="firmForm?.get('email1')?.touched && firmForm?.get('email1')?.hasError('required')">Email is required
+                <mat-error class="errorn"
+                  *ngIf="firmForm?.get('email1')?.touched && firmForm?.get('email1')?.hasError('required')">Email is
+                  required
                 </mat-error>
                 <mat-error class="errorn"
                   *ngIf="firmForm?.get('email1')?.touched && !firmForm?.get('email1')?.hasError('required') && firmForm?.get('email1')?.hasError('pattern')">
@@ -311,7 +333,8 @@
       </form>
     </div>
   </div>
-  <div *ngIf="Responded != 'Review'" fxLayout="row" fxLayoutAlign="" fxFlex="100" fxLayoutGap="4px" style="margin-top: 23px;background: white;">
+  <div *ngIf="Responded != 'Review'" fxLayout="row" fxLayoutAlign="" fxFlex="100" fxLayoutGap="4px"
+    style="margin-top: 23px;background: white;">
     <div fxFlex="48"></div>
 
     <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
@@ -319,14 +342,15 @@
         <img class="clearimg" src="../../assets/images/clear.svg">
       </button>
     </div>
-    <div *ngIf="Role != true" fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px" style="margin-left:-38px">
+    <div *ngIf="Role != true" fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px"
+      style="margin-left:-38px">
       <button mat-flat-button class="draft" (click)="SubmitButtonClick(true)"> Save as Draft
         <img class="draftimg" src="../../assets/images/bi.png">
       </button>
     </div>
     <!-- [disabled]="MIform.required.invalid" -->
-      <button *ngIf="SubmitValue != true" mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Submit</button>
-      <button *ngIf="SubmitValue == true" mat-raised-button class="savebtn" (click)="NextButtonClick()">Next</button>
+    <button *ngIf="SubmitValue != true" mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Submit</button>
+    <button *ngIf="SubmitValue == true" mat-raised-button class="savebtn" (click)="NextButtonClick()">Next</button>
 
   </div>
   <br>

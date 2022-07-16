@@ -88,7 +88,7 @@ export class ForgotPasswordComponent implements OnInit {
           this.ResetControl();
           this.IsProgressBarVisibile = false;
           this.notificationSnackBarComponent.openSnackBar('Password changed successfully', SnackBarStatus.success);
-          this._router.navigate(['auth/login']);
+          this._router.navigate(['pages/nextlogin']);
         },
         (err) => {
           console.error(err);

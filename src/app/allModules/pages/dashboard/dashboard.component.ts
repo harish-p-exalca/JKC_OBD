@@ -96,6 +96,9 @@ export class DashboardComponent implements OnInit {
     UserRole:string;
     Responded:string;
     CustomerObdView: CustomerOnboardingView = new CustomerOnboardingView();
+    Districts:string[]=[];
+    Talukas:string[]=[];
+    PinCodes:string[]=[];
     constructor(
         private _router: Router,
         private route: ActivatedRoute,
@@ -139,7 +142,7 @@ export class DashboardComponent implements OnInit {
             map((value) => this._filterstate(value))
         );
         this.transID = localStorage.getItem('TransID');
-        if(this.transID != null)
+        if(this.transID != null || this.transID!=NaN)
         {
             this.isProgressBarVisibile = true;
             this._dashboardService.GetCustomerOnboardingView(this.transID).subscribe(res => {
@@ -150,6 +153,7 @@ export class DashboardComponent implements OnInit {
             },
                 err => {
                     console.log(err);
+                    this.isProgressBarVisibile = false;
                 });
         }
         
@@ -272,26 +276,26 @@ export class DashboardComponent implements OnInit {
                 cobView.PersonalInfo = new PersonalInformationView();
                 cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
                 cobView.PersonalInfo.Identities = this.IdentityData;
+                if(this.transID != null){
+                    cobView.Transaction.TranID=this.transID;
+                }
                 console.log("cobView", cobView);
                 this.isProgressBarVisibile = true;
                 this._dashboardService.SaveCustomerPersonalDetails(cobView).subscribe(res => {
                     console.log("From save api", res);
+                    this.isProgressBarVisibile = false;
                     if (res.Status == 1) {
-                        if (isDraft) {
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar("Draft saved successfully", SnackBarStatus.success);
-                        }
-                        else {
-                            this.OpenSuccessDialog();
-                        }
-                        // this.notificationSnackBarComponent.openSnackBar(isDraft?"Draft saved successfully":"Details submitted successfully",SnackBarStatus.success);
+                        this.notificationSnackBarComponent.openSnackBar(isDraft?"Draft saved successfully":"Details submitted successfully",SnackBarStatus.success);
                     }
                     else {
                         this.notificationSnackBarComponent.openSnackBar(res.Error, SnackBarStatus.danger);
                     }
-                    this.ClearAll();
+                    if(!isDraft){
+                        this.ClearAll();
+                    }
                 },
                     err => {
+                        this.isProgressBarVisibile = false;
                         this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                     }
                 );
@@ -437,6 +441,19 @@ export class DashboardComponent implements OnInit {
                 this.isProgressBarVisibile = false;
             }
         );
+        this._dashboardService.GetGeoLocationMasters("district",event.StateName).subscribe(res=>{
+            this.Districts=res;
+        });
+    }
+    districtSelected($event){
+        this._dashboardService.GetGeoLocationMasters("taluka",$event.option.value).subscribe(res=>{
+            this.Talukas=res;
+        });
+    }
+    talukaSelected($event){
+        this._dashboardService.GetGeoLocationMasters("pincode",$event.option.value).subscribe(res=>{
+            this.PinCodes=res;
+        });
     }
     // GetEmployees(): void {
     //     this._dashboardService.getEmployee().subscribe(

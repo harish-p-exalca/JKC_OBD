@@ -119,7 +119,7 @@ export class NextloginComponent implements OnInit {
       this._router.navigate(['master/user']);
     } 
     else if(data.UserRole=='SSA') {
-      this._router.navigate(['pages/dashboard']);
+      this._router.navigate(['pages/initiatordashboard']);
     }
     else{
       this._router.navigate(['pages/approvalinformation']);
@@ -165,8 +165,8 @@ export class NextloginComponent implements OnInit {
           this.IsProgressBarVisibile = true;
           this._authService.SendResetLinkToMail(emailModel).subscribe(
             (data) => {
-              const res = data as string;
-              this.notificationSnackBarComponent.openSnackBar(res, SnackBarStatus.success);
+              console.log(data);
+              this.notificationSnackBarComponent.openSnackBar(data.Comment, SnackBarStatus.success);
               // this.notificationSnackBarComponent.openSnackBar(`Reset password link sent successfully to ${emailModel.EmailAddress}`, SnackBarStatus.success);
               // this.ResetControl();
               this.IsProgressBarVisibile = false;

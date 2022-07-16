@@ -40,7 +40,7 @@ const authRoutes: Routes = [
         ForgotPasswordComponent,
         LinkForForgetPasswordComponent,
         ChangePasswordDialogComponent,
-        ForgetPasswordLinkDialogComponent
+        // ForgetPasswordLinkDialogComponent
     ],
     imports: [
         MatButtonModule,
@@ -56,7 +56,7 @@ const authRoutes: Routes = [
     ],
     entryComponents: [
         ChangePasswordDialogComponent,
-        ForgetPasswordLinkDialogComponent
+        // ForgetPasswordLinkDialogComponent
     ]
 })
 export class AuthenticationModule {

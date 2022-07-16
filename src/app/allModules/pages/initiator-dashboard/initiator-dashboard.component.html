@@ -248,28 +248,29 @@
                     {{RespondedDetails.length}}
                   </div>
                   <span class="status_profile">
-                      Open
+                      Initiated
                   </span>
               </div>
-              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr3">
-                  <img src="assets/images/Ellipse 62.svg" class="align-image"/>
-                  <div class="count clr3">
+              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr5">
+                  <!-- <img src="assets/images/Ellipse 61.svg" class="align-image"/> -->
+                  <div style="background-color:#ffa946;height: 10px;width: 10px;border-radius: 50%;margin-left: 6px;"></div>
+                  <div class="count clr5">
                     {{AllPendingDetails.length}}
                   </div>
                   <span class="status_profile">
                       Pending
                   </span>
               </div>
+              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr3">
+                <img src="assets/images/Ellipse 61.svg" class="align-image"/>
+                <div class="count clr3">
+                  {{AllApprovedDetails.length}}
+                </div>
+                <span class="status_profile">
+                    Approved
+                </span>
+            </div>
               <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr4">
-                  <img src="assets/images/Ellipse 61.svg" class="align-image"/>
-                  <div class="count clr4">
-                    {{AllApprovedDetails.length}}
-                  </div>
-                  <span class="status_profile">
-                      Approved
-                  </span>
-              </div>
-              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr5">
                 <img src="assets/images/Ellipse 984.svg" class="align-image"/>
                 <div class="count clr5">
                     {{AllRejectedDetails.length}}
@@ -340,10 +341,10 @@
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
                                     <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
+                                        <span class="thtitle"> TransID </span>
                                     </th>
-                                    <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
+                                    <td mat-cell *matCellDef="let element" class="table_data">
+                                      {{element.TransID}}
                                     </td>
                                 </ng-container>
             
@@ -408,7 +409,7 @@
                                     <td mat-cell *matCellDef="let element" class="table_data">
                                         <!-- {{ element.Action }} -->
                                         <div style="text-align-last: center;">
-                                            <button *ngIf="element.Status == 'InitiatorReleased'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">Review</button>
+                                            <button *ngIf="element.Status != 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.TransID)">View</button>
                                             <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button>
                                         </div>
                                     </td>
@@ -430,10 +431,10 @@
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
                                     <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
+                                        <span class="thtitle"> TransID </span>
                                     </th>
                                     <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
+                                      {{element.TransID}}
                                     </td>
                                 </ng-container>
             
@@ -520,10 +521,10 @@
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
                                     <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
+                                        <span class="thtitle"> TransID </span>
                                     </th>
-                                    <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
+                                    <td mat-cell *matCellDef="let element;" class="table_data">
+                                      {{element.TransID}}
                                     </td>
                                 </ng-container>
             
@@ -610,10 +611,10 @@
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
                                     <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
+                                        <span class="thtitle">TransID </span>
                                     </th>
                                     <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
+                                      {{element.TransID}}
                                     </td>
                                 </ng-container>
             
@@ -700,10 +701,10 @@
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
                                     <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
+                                        <span class="thtitle"> TransID </span>
                                     </th>
                                     <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
+                                      {{element.TransID}}
                                     </td>
                                 </ng-container>
             
@@ -790,10 +791,10 @@
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
                                     <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
+                                        <span class="thtitle"> TransID </span>
                                     </th>
                                     <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
+                                      {{element.TransID}}
                                     </td>
                                 </ng-container>
             
