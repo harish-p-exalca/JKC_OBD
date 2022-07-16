@@ -1,5 +1,5 @@
 import { CustomerOnboarding } from './../../../models/master';
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
     AuthenticationDetails,
@@ -109,6 +109,7 @@ const sales: SaleSource[] = [
     selector: "app-reportsview",
     templateUrl: "./reportsview.component.html",
     styleUrls: ["./reportsview.component.scss"],
+    encapsulation:ViewEncapsulation.None
 })
 export class ReportsviewComponent implements OnInit {
     PIform: FormGroup;
@@ -471,6 +472,7 @@ export class ReportsviewComponent implements OnInit {
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
                 }, err => {
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
@@ -487,6 +489,7 @@ export class ReportsviewComponent implements OnInit {
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
                 }, err => {
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
@@ -503,6 +506,7 @@ export class ReportsviewComponent implements OnInit {
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
                 }, err => {
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
@@ -519,6 +523,7 @@ export class ReportsviewComponent implements OnInit {
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
                 }, err => {
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
@@ -535,6 +540,7 @@ export class ReportsviewComponent implements OnInit {
                     this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
                     this._router.navigate(['/pages/approvalinformation']); 
                 }, err => {
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
@@ -552,6 +558,7 @@ export class ReportsviewComponent implements OnInit {
                     this._router.navigate(['/pages/approvalinformation']); 
 
                 }, err => {
+                    this.isProgressBarVisibile=false;
                     this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
                 }
             );
@@ -569,6 +576,7 @@ export class ReportsviewComponent implements OnInit {
                 this.notificationSnackBarComponent.openSnackBar('Rejected successfully', SnackBarStatus.success);
                 this._router.navigate(['/pages/approvalinformation']); 
             }, err => {
+                this.isProgressBarVisibile=false;
                 this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
             }
         );

@@ -63,7 +63,9 @@ import { ChartsModule } from 'ng2-charts';
 import { BankdialogComponent } from './bankdialog/bankdialog.component';
 import { InitiatorDashboardComponent } from './initiator-dashboard/initiator-dashboard.component';
 import { ReportsviewComponent } from './reportsview/reportsview.component';
-
+import { ForgotPasswordComponent } from '../authentication/forgot-password/forgot-password.component';
+import { ForgetPasswordLinkDialogComponent } from '../authentication/forget-password-link-dialog/forget-password-link-dialog.component';
+import { NgOtpInputModule } from  'ng-otp-input';
 
 
 const routes = [
@@ -164,6 +166,7 @@ const routes = [
         FormsModule,
        ChartsModule,
        NgApexchartsModule,
+       NgOtpInputModule
     ],
     declarations: [
         DashboardComponent,
@@ -176,14 +179,16 @@ const routes = [
         ApprovalscreenComponent,
         BankdialogComponent,
         InitiatorDashboardComponent,
-        ReportsviewComponent
+        ReportsviewComponent,
+        ForgetPasswordLinkDialogComponent
     ],
     providers: [
         DecimalPipe
     ],
     entryComponents: [
         dialogComponent,
-        BankdialogComponent
+        BankdialogComponent,
+        ForgetPasswordLinkDialogComponent
     ]
 })
 export class PagesModule { }
