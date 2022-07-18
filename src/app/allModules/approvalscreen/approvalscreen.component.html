@@ -242,7 +242,7 @@
                       Draft
                   </span>
               </div> -->
-              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-evenly start" class="inner_statusdiv bg-clr2">
+              <div fxLayout="column" fxFlex="30" fxLayoutAlign="space-evenly start" class="inner_statusdiv bg-clr2">
                   <img src="assets/images/Ellipse 60.svg" class="align-image"/>
                   <div class="count clr2">
                     {{AllOpenDetails.length}}
@@ -260,7 +260,7 @@
                       Pending
                   </span>
               </div> -->
-              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr4">
+              <div fxLayout="column" fxFlex="30" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr4">
                   <img src="assets/images/Ellipse 61.svg" class="align-image"/>
                   <div class="count clr4">
                     {{AllApprovedDetails.length}}
@@ -269,7 +269,7 @@
                       Approved
                   </span>
               </div>
-              <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr5">
+              <div fxLayout="column" fxFlex="30" fxLayoutAlign="space-around start" class="inner_statusdiv bg-clr5">
                 <img src="assets/images/Ellipse 984.svg" class="align-image"/>
                 <div class="count clr5">
                     {{AllRejectedDetails.length}}
@@ -340,10 +340,10 @@
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
                                     <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
+                                        <span class="thtitle"> TransID </span>
                                     </th>
-                                    <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
+                                    <td mat-cell *matCellDef="let element;" class="table_data">
+                                        {{element.TransID}}
                                     </td>
                                 </ng-container>
             
@@ -429,10 +429,10 @@
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
                                     <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
+                                        <span class="thtitle"> TransID </span>
                                     </th>
-                                    <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
+                                    <td mat-cell *matCellDef="let element;" class="table_data">
+                                        {{element.TransID}}
                                     </td>
                                 </ng-container>
             
@@ -514,15 +514,15 @@
                             </table>
                         </div>
                     </mat-tab>
-                    <mat-tab class="link" label="Approve" (click)="GetEmployeewithApprovedStatus()">
+                    <mat-tab class="link" label="Approved" (click)="GetEmployeewithApprovedStatus()">
                         <div class="table_div" style="width: 100%;">
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
                                     <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
+                                        <span class="thtitle"> TransID</span>
                                     </th>
-                                    <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
+                                    <td mat-cell *matCellDef="let element;" class="table_data">
+                                        {{element.TransID}}
                                     </td>
                                 </ng-container>
             
@@ -609,10 +609,10 @@
                             <table mat-table [dataSource]="employeesDataSource" class="table-css">
                                 <ng-container matColumnDef="No">
                                     <th mat-header-cell *matHeaderCellDef class="header_table-class">
-                                        <span class="thtitle"> S.No </span>
+                                        <span class="thtitle"> TransID</span>
                                     </th>
-                                    <td mat-cell *matCellDef="let element;let i=index" class="table_data">
-                                      {{i + 1}}
+                                    <td mat-cell *matCellDef="let element;" class="table_data">
+                                        {{element.TransID}}
                                     </td>
                                 </ng-container>
             

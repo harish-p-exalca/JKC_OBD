@@ -441,37 +441,95 @@ export class InitiatorDashboardComponent implements OnInit {
             ],
         };
         this.chartOptions1 = {
-            series: [45, 52, 22, 51, 30],
+            series: [],
             chart: {
                 type: "donut",
                 width: "200px",
             },
-            labels: [],
-            // labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F'],
-            colors: ["#1158A6", "#1158A6", "#1158A6", "#1158A6", "#C1D6EA"], // add this part to modify colours
-            responsive: [
-                {
-                    breakpoint: 480,
-                    options: {
-                        chart: {
-                            width: 100,
-                        },
-                    },
-                },
-            ],
-
-            legend: {
-                show: false,
-            },
+            
+            labels: ["Draft", "Open", "Pending", "Approved", "Rejected"],
             dataLabels: {
-                // add this part to remove %
+              enabled: true,
+              distributed: true,
+              textAnchor: 'middle',
+              style: {
+                fontSize: '10px',
+                fontFamily: 'Poppins',
+                fontWeight: '600',
+                colors: ["#1158A6", "#1158A6", "#1158A6", "#1158A6", "#C1D6EA"],
+              },
+              dropShadow: {
                 enabled: false,
-                formatter(value: any, opts: any): any {
-                    return opts.w.config.series[opts.seriesIndex];
-                },
+              }
             },
-        };
+            legend: {
+              show: false,
+              position: 'left',
+              horizontalAlign: 'center',
+              floating: false,
+              fontSize: '11px',
+              fontFamily: 'Poppins',
+              fontWeight: 600,
+              width: undefined,
+              height: undefined,
+              tooltipHoverFormatter: undefined,
+              offsetX: 0,
+              offsetY: -16,
+              labels: {
+                colors: ["#1158A6", "#1158A6", "#1158A6", "#1158A6", "#C1D6EA"],
+                useSeriesColors: false
+              },
+              markers: {
+                width: 6,
+                height: 6,
+                strokeWidth: 0,
+                strokeColor: '#fff',
+                fillColors: undefined,
+                radius: 6,
+                customHTML: undefined,
+                onClick: undefined,
+                offsetX: 0,
+                offsetY: 0
+              },
+              itemMargin: {
+                horizontal: 8,
+                vertical: 4
+              },
+              onItemClick: {
+                toggleDataSeries: true
+              },
+              onItemHover: {
+                highlightDataSeries: true
+              },
+            }
 
+
+        //     labels: [],
+        //     // labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F'],
+        //     colors: ["#1158A6", "#1158A6", "#1158A6", "#1158A6", "#C1D6EA"], // add this part to modify colours
+        //     responsive: [
+        //         {
+        //             breakpoint: 480,
+        //             options: {
+        //                 chart: {
+        //                     width: 100,
+        //                 },
+        //             },
+        //         },
+        //     ],
+
+        //     legend: {
+        //         show: false,
+        //     },
+        //     dataLabels: {
+        //         // add this part to remove %
+        //         enabled: false,
+        //         formatter(value: any, opts: any): any {
+        //             return opts.w.config.series[opts.seriesIndex];
+        //         },
+        //     },
+        // };
+       
         // this.chartOptions1 = {
         //   series: [44, 55, 13, 43, 22],
         //   chart: {
@@ -491,10 +549,15 @@ export class InitiatorDashboardComponent implements OnInit {
         //       }
         //     }
         //   ]
-        // };
+         };
     }
     ngOnInit() {
       this.tab="All";
+      this._dashboardService.GetInitiatorApprovedPieData().subscribe(
+        x => {
+            this.chartOptions1.series = x;
+          }
+      );
       this.isProgressBarVisibile=true;
       this._dashboardService.getPersonalInfo().subscribe((data: any) => {
         this.PIStatus.push(data);
@@ -526,7 +589,7 @@ export class InitiatorDashboardComponent implements OnInit {
         this.isProgressBarVisibile=false;
     });
     this._dashboardService
-    .getPersonalInfoByStatus("Approved")
+    .getPersonalInfoByStatus("StokistApproved")
     .subscribe((data) => {
         this.AllApprovedDetails = data;
         this.isProgressBarVisibile=false;
@@ -636,7 +699,7 @@ export class InitiatorDashboardComponent implements OnInit {
     GetEmployeewithApprovesStatus(): void {
         this.isProgressBarVisibile=true;
         this._dashboardService
-            .getPersonalInfoByStatus("Approved")
+            .getPersonalInfoByStatus("StokistApproved")
             .subscribe((data) => {
                 this.AllApprovedDetails = data;
                 this.LoadTableSource(this.AllApprovedDetails);

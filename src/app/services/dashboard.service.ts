@@ -249,5 +249,34 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetGeoLocationMasters?column=${column}&key=${key}`)
         .pipe(catchError(this.errorHandler));
     }
+    GetInitiatorApprovedPieData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetInitiatorPieData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetASMPieData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetASMPieData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetSHPieData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetSHPieData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetZHPieData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetZHPieData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetDHPieData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetDHPieData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetRACPieData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetRACPieData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetStokistPieData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetStokistPieData`)
+            .pipe(catchError(this.errorHandler));
+    }
 }
+
 
