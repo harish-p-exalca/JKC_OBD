@@ -490,6 +490,7 @@ export class ApprovalscreenComponent implements OnInit {
             // .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
             //     .subscribe((data) => {
             //         this.AllHeaderDetails = data;
+            //         console.log(data);
             //         this.isProgressBarVisibile=false;
             //         this.LoadTableSource(this.AllHeaderDetails);
             //     });
