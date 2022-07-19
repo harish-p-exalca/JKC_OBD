@@ -845,7 +845,7 @@ export class ApprovalscreenComponent implements OnInit {
         // }
     }
     GetEmployeewithApprovedStatus(): void {
-
+        localStorage.setItem("Approved", "Approved");
         this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString())
             .subscribe((data) => {
                 this.AllApprovedDetails = data;
@@ -955,6 +955,7 @@ export class ApprovalscreenComponent implements OnInit {
         //         // this.employeesDataSource.sort = this.sort;
         //         // this.employeesDataSource.paginator = this.paginator;
         //     });
+        localStorage.setItem("Rejected", "Rejected");
         this._dashboardService.GetRejectedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString())
             .subscribe((data) => {
                 this.AllRejectedDetails = data;

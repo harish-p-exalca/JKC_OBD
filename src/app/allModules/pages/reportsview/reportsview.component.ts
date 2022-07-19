@@ -1,8 +1,14 @@
-
-import { BankDetailsView, CustomerOnboarding } from './../../../models/master';
+import {
+    BankDetailsView,
+    CustomerOnboarding,
+    AverageSale,
+    BankDetails,
+    DocumentRequired,
+    AttachmentDetails,
+} from "./../../../models/master";
 
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { CustomerOnboarding, CustomerOnboardingView1 } from './../../../models/master';
+import { CustomerOnboardingView1 } from "./../../../models/master";
 // import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
@@ -16,10 +22,18 @@ import {
 } from "app/models/master";
 import { DashboardService } from "app/services/dashboard.service";
 import { Monthlysales } from "../business/business.component";
-import { NotificationSnackBarComponent } from 'app/notifications/notification-snack-bar/notification-snack-bar.component';
-import { MatSnackBar } from '@angular/material';
-import { SnackBarStatus } from 'app/notifications/snackbar-status-enum';
-import { Router } from '@angular/router';
+import { NotificationSnackBarComponent } from "app/notifications/notification-snack-bar/notification-snack-bar.component";
+import {
+    MatDialog,
+    MatDialogConfig,
+    MatSnackBar,
+    MatTableDataSource,
+} from "@angular/material";
+import { SnackBarStatus } from "app/notifications/snackbar-status-enum";
+import { Router } from "@angular/router";
+import { DomSanitizer } from "@angular/platform-browser";
+import { AttachmentDialogComponent } from "../attachment-dialog/attachment-dialog.component";
+import { saveAs } from "file-saver";
 
 export interface Element {
     Role: string;
@@ -129,7 +143,7 @@ const sales: SaleSource[] = [
     selector: "app-reportsview",
     templateUrl: "./reportsview.component.html",
     styleUrls: ["./reportsview.component.scss"],
-    encapsulation:ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
 export class ReportsviewComponent implements OnInit {
     PIform: FormGroup;
@@ -139,15 +153,26 @@ export class ReportsviewComponent implements OnInit {
     BrandForm1!: FormGroup;
     BIform1!: FormGroup;
     contactDetailsColumns: string[] = ["Role", "Name", "MobileNo", "Emailid"];
-    contactdataSource = datas;
-    bankdetailsdataSource = bdatas;
-    bankDetailsColumns: string[] = ["BankDetailNo", "BankName", "BankAddress", "IFSCCode","BankAcNumber"];
+    contactdataSource: MatTableDataSource<PersonIdentity>;
+    //contactdataSource = MatTableDataSource<any>;
+    Contactdetails: any[] = [];
+    bankdetails: any[] = [];
+    bankdetailsdataSource: MatTableDataSource<BankDetails>;
+    bankDetailsColumns: string[] = [
+        "BankDetailNo",
+        "BankName",
+        "BankAddress",
+        "IFSCCode",
+        "BankAcNumber",
+    ];
     averageSalesColumns: string[] = [
         "White_Cement_Wall_Putty",
         "WP_Avg_Month_Sales",
         "WC_Avg_Month_sales",
     ];
-    averageSalesDataSource = avgdatasource;
+    averageSalesDetails: any[] = [];
+
+    averageSalesDataSource: MatTableDataSource<AverageSale>;
     saleColumns: string[] = [
         "Sale",
         "Jan",
@@ -177,16 +202,28 @@ export class ReportsviewComponent implements OnInit {
     businessInfoView: BusinessInformationView = new BusinessInformationView();
     notificationSnackBarComponent: NotificationSnackBarComponent;
     Role: any;
-
-    isProgressBarVisibile:boolean;
+    ApprovalButton: boolean = false;
+    isProgressBarVisibile: boolean;
     DepositForm!: FormGroup;
-  BankForm!: FormGroup;
-  leaflist: string[] = ['DD', 'RTGS UTR', 'NEFT', 'IMPS', 'Cheque'];
-  isd2rs: boolean = false;
+    BankForm!: FormGroup;
+    Attach: DocumentRequired;
+    leaflist: string[] = ["DD", "RTGS UTR", "NEFT", "IMPS", "Cheque"];
+    AttachmentFiles: File[] = [];
+    isd2rs: boolean = false;
+    fileUrl;
+    AttachmentData: any;
     constructor(
         private fb: FormBuilder,
-        private _dashboardService: DashboardService, public snackBar: MatSnackBar, private _router: Router,
-    ) { this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar) }
+        private sanitizer: DomSanitizer,
+        private dialog: MatDialog,
+        private _dashboardService: DashboardService,
+        public snackBar: MatSnackBar,
+        private _router: Router
+    ) {
+        this.notificationSnackBarComponent = new NotificationSnackBarComponent(
+            this.snackBar
+        );
+    }
 
     ngOnInit() {
         const retrievedObject = localStorage.getItem("authorizationData");
@@ -201,6 +238,12 @@ export class ReportsviewComponent implements OnInit {
         }
         this.InitializeFormGroup();
         this.transID = localStorage.getItem("TransID");
+        if (
+            localStorage.getItem("Approved") == "Approved" ||
+            localStorage.getItem("Rejected") == "Rejected"
+        ) {
+            this.ApprovalButton = true;
+        }
         if (this.transID != null) {
             this.isProgressBarVisibile = true;
             this._dashboardService
@@ -242,15 +285,29 @@ export class ReportsviewComponent implements OnInit {
                         console.log(err);
                     }
                 );
-                this._dashboardService.GetSecurityDetails(this.transID).subscribe(res => {
+            this._dashboardService.GetSecurityDetails(this.transID).subscribe(
+                (res) => {
                     console.log("view", res);
                     this.bankInfoView = res;
                     this.SetSecurityDepositDetailInfoView(this.bankInfoView);
                     this.isProgressBarVisibile = false;
                 },
-                    err => {
-                        console.log(err);
-                    });  
+                (err) => {
+                    console.log(err);
+                }
+            );
+
+            this._dashboardService.GetAttachment(this.transID).subscribe(
+                (data) => {
+                    this.Attach = data as DocumentRequired;
+                    if (this.Attach) {
+                        // this.SelectedASNView.InvAttachmentName = this.invAttach.AttachmentName;
+                    }
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
         }
         this.MIform = this.fb.group({
             market: [""],
@@ -344,19 +401,25 @@ export class ReportsviewComponent implements OnInit {
             billing: [],
         });
         this.DepositForm = this.fb.group({
-            leaf: ['', Validators.required],
-            Type: ['', Validators.required],
-            Date: ['', Validators.required],
-            Amount: ['', Validators.required],
-            nameofbank: ['', Validators.required],
-          });
+            leaf: ["", Validators.required],
+            Type: ["", Validators.required],
+            Date: ["", Validators.required],
+            Amount: ["", Validators.required],
+            nameofbank: ["", Validators.required],
+        });
         this.BankForm = this.fb.group({
-          bankno: ['',Validators.required],
-          bankname: ['', Validators.required],
-          bankaddress: ['', Validators.required],
-          ifsccode: ['',[Validators.required,Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$')]],
-          bankacno: ['', Validators.required],
-        })
+            bankno: ["", Validators.required],
+            bankname: ["", Validators.required],
+            bankaddress: ["", Validators.required],
+            ifsccode: [
+                "",
+                [
+                    Validators.required,
+                    Validators.pattern("^[A-Z]{4}0[A-Z0-9]{6}$"),
+                ],
+            ],
+            bankacno: ["", Validators.required],
+        });
     }
     InitializeFormGroup() {
         this.PIform = this.fb.group({
@@ -402,28 +465,36 @@ export class ReportsviewComponent implements OnInit {
     }
     GetBankDetails() {
         this.isProgressBarVisibile = true;
-        this._dashboardService.GetSecurityDetails(this.currentTransaction).subscribe(res => {
-          console.log("view", res);
-          this.bankInfoView = res;
-          this.SetSecurityDepositDetailInfoView(this.bankInfoView);
-          this.isProgressBarVisibile = false;
-      },
-          err => {
-              console.log(err);
-          });
-      }
-      SetSecurityDepositDetailInfoView( bankInfoView: BankDetailsView = new BankDetailsView()) {
+        this._dashboardService
+            .GetSecurityDetails(this.currentTransaction)
+            .subscribe(
+                (res) => {
+                    console.log("view", res);
+                    this.bankInfoView = res;
+                    this.SetSecurityDepositDetailInfoView(this.bankInfoView);
+                    this.isProgressBarVisibile = false;
+                },
+                (err) => {
+                    console.log(err);
+                }
+            );
+    }
+    SetSecurityDepositDetailInfoView(
+        bankInfoView: BankDetailsView = new BankDetailsView()
+    ) {
         if (bankInfoView.SecurityDeposit.TransID != null) {
-          // businessinformation = businessInfoView.Businessinfo;
-          this.DepositForm.patchValue({
-            leaf: bankInfoView.SecurityDeposit.Leaf,
-            Type: bankInfoView.SecurityDeposit.Type,
-            Date: bankInfoView.SecurityDeposit.Date,
-            Amount: bankInfoView.SecurityDeposit.Amount,
-            nameofbank:bankInfoView.SecurityDeposit.BankName
-          });
+            // businessinformation = businessInfoView.Businessinfo;
+            this.DepositForm.patchValue({
+                leaf: bankInfoView.SecurityDeposit.Leaf,
+                Type: bankInfoView.SecurityDeposit.Type,
+                Date: bankInfoView.SecurityDeposit.Date,
+                Amount: bankInfoView.SecurityDeposit.Amount,
+                nameofbank: bankInfoView.SecurityDeposit.BankName,
+            });
         }
-      }
+        this.bankdetails = bankInfoView.BankDetailInfo;
+        this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
+    }
     GetTransactionDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService
@@ -483,7 +554,8 @@ export class ReportsviewComponent implements OnInit {
         });
         this.selected =
             this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
-        this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
+        this.Contactdetails = this.CustomerObdView.PersonalInfo.Identities;
+        this.contactdataSource = new MatTableDataSource(this.Contactdetails);
     }
     SetMarketInfoDetails(
         MarketInfoView: MarketInformationView = new MarketInformationView()
@@ -505,6 +577,10 @@ export class ReportsviewComponent implements OnInit {
                 Gst: MarketInfoView.MarketInformation.GstNo,
                 PartyBackground: MarketInfoView.MarketInformation.Background,
             });
+            this.averageSalesDetails = MarketInfoView.AverageSale;
+            this.averageSalesDataSource = new MatTableDataSource(
+                this.averageSalesDetails
+            );
             // this.BrandForm.patchValue({
             //   sales: ['', Validators.required],
             //   date1: [''],
@@ -543,17 +619,28 @@ export class ReportsviewComponent implements OnInit {
             Cusotmer.PositionID = this.authenticationDetails.PositionID;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
-                (data) => {
-                    console.log(data);
-                    this.isProgressBarVisibile = false;
-                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']);
-                }, err => {
-                    this.isProgressBarVisibile=false;
-                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-                }
-            );
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Cusotmer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
         }
         if (this.Role == "Stokist") {
             var Cusotmer = new CustomerOnboardingView1();
@@ -563,17 +650,28 @@ export class ReportsviewComponent implements OnInit {
             Cusotmer.PositionID = this.authenticationDetails.PositionID;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
-                (data) => {
-                    console.log(data);
-                    this.isProgressBarVisibile = false;
-                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']);
-                }, err => {
-                    this.isProgressBarVisibile=false;
-                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-                }
-            );
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Cusotmer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
         }
         if (this.Role == "DH") {
             var Cusotmer = new CustomerOnboardingView1();
@@ -583,17 +681,28 @@ export class ReportsviewComponent implements OnInit {
             Cusotmer.PositionID = this.authenticationDetails.PositionID;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
-                (data) => {
-                    console.log(data);
-                    this.isProgressBarVisibile = false;
-                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']);
-                }, err => {
-                    this.isProgressBarVisibile=false;
-                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-                }
-            );
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Cusotmer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
         }
         if (this.Role == "ZH") {
             var Cusotmer = new CustomerOnboardingView1();
@@ -603,17 +712,28 @@ export class ReportsviewComponent implements OnInit {
             Cusotmer.PositionID = this.authenticationDetails.PositionID;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
-                (data) => {
-                    console.log(data);
-                    this.isProgressBarVisibile = false;
-                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']);
-                }, err => {
-                    this.isProgressBarVisibile=false;
-                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-                }
-            );
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Cusotmer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
         }
         if (this.Role == "SH") {
             var Cusotmer = new CustomerOnboardingView1();
@@ -623,17 +743,28 @@ export class ReportsviewComponent implements OnInit {
             Cusotmer.PositionID = this.authenticationDetails.PositionID;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
-                (data) => {
-                    console.log(data);
-                    this.isProgressBarVisibile = false;
-                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']);
-                }, err => {
-                    this.isProgressBarVisibile=false;
-                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-                }
-            );
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Cusotmer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
         }
         if (this.Role == "RAC") {
             var Cusotmer = new CustomerOnboardingView1();
@@ -643,18 +774,28 @@ export class ReportsviewComponent implements OnInit {
             Cusotmer.PositionID = this.authenticationDetails.PositionID;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-            this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
-                (data) => {
-                    console.log(data);
-                    this.isProgressBarVisibile = false;
-                    this.notificationSnackBarComponent.openSnackBar('Approved successfully', SnackBarStatus.success);
-                    this._router.navigate(['/pages/approvalinformation']);
-
-                }, err => {
-                    this.isProgressBarVisibile=false;
-                    this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-                }
-            );
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Cusotmer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
         }
     }
     Reject(): void {
@@ -665,16 +806,88 @@ export class ReportsviewComponent implements OnInit {
         Cusotmer.PositionID = this.authenticationDetails.PositionID;
         Cusotmer.RoleName = this.authenticationDetails.UserRole;
         this.isProgressBarVisibile = true;
-        this._dashboardService.updateCustomerOnboardingStatus(Cusotmer).subscribe(
-            (data) => {
-                console.log(data);
-                this.isProgressBarVisibile = false;
-                this.notificationSnackBarComponent.openSnackBar('Rejected successfully', SnackBarStatus.success);
-                this._router.navigate(['/pages/approvalinformation']);
-            }, err => {
-                this.isProgressBarVisibile=false;
-                this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-            }
+        this._dashboardService
+            .updateCustomerOnboardingStatus(Cusotmer)
+            .subscribe(
+                (data) => {
+                    console.log(data);
+                    this.isProgressBarVisibile = false;
+                    this.notificationSnackBarComponent.openSnackBar(
+                        "Rejected successfully",
+                        SnackBarStatus.success
+                    );
+                    this._router.navigate(["/pages/approvalinformation"]);
+                },
+                (err) => {
+                    this.isProgressBarVisibile = false;
+                    this.notificationSnackBarComponent.openSnackBar(
+                        err instanceof Object ? "Something went wrong" : err,
+                        SnackBarStatus.danger
+                    );
+                }
+            );
+    }
+    GetAttachment(fileName: string, file?: File): void {
+        // if (file && file.size) {
+        //     const blob = new Blob([file], { type: file.type });
+        //     this.OpenAttachmentDialog(fileName, blob);
+        // } else {
+        this.isProgressBarVisibile = true;
+        this._dashboardService
+            .DowloandAttachment(fileName, this.transID)
+            .subscribe(
+                (data) => {
+                    if (data) {
+                        let fileType = "image/jpg";
+                        fileType = fileName.toLowerCase().includes(".jpg")
+                            ? "image/jpg"
+                            : fileName.toLowerCase().includes(".jpeg")
+                            ? "image/jpeg"
+                            : fileName.toLowerCase().includes(".png")
+                            ? "image/png"
+                            : fileName.toLowerCase().includes(".gif")
+                            ? "image/gif"
+                            : fileName.toLowerCase().includes(".pdf")
+                            ? "application/pdf"
+                            : "";
+                        const blob = new Blob([data], { type: fileType });
+                        const fileURL = URL.createObjectURL(blob);
+                        this.AttachmentData =
+                            this.sanitizer.bypassSecurityTrustResourceUrl(
+                                fileURL
+                            );
+                        saveAs(blob, fileName);
+                       // this.OpenAttachmentDialog(fileName, blob);
+                    }
+                    this.isProgressBarVisibile = false;
+                },
+                (error) => {
+                    console.error(error);
+                    this.isProgressBarVisibile = false;
+                }
+            );
+        // }
+    }
+    OpenAttachmentDialog(FileName: string, blob: Blob): void {
+        const attachmentDetails: AttachmentDetails = {
+            FileName: FileName,
+            blob: blob,
+        };
+        const dialogConfig: MatDialogConfig = {
+            data: attachmentDetails,
+            panelClass: "attachment-dialog",
+        };
+        const dialogRef = this.dialog.open(
+            AttachmentDialogComponent,
+            dialogConfig
         );
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+            }
+        });
+    }
+    ngOnDestroy(): void {
+        localStorage.removeItem("Approved");
+        localStorage.removeItem("Rejected");
     }
 }

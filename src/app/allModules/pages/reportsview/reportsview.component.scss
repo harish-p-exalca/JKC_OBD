@@ -358,7 +358,17 @@
   .cell {
     font-weight: 100;
   }
-  
+  .uploadbtn {
+    background-color: #00499c !important;
+    color: white !important;
+    text-align: center;
+    font-size: 13px;
+    ////////font-family: Arial, Helvetica, sans-serif;
+    width: 115px;
+    border-radius: 5px;
+    // margin-top: 40px;
+    margin-left: 55px;
+  }
   .add1 {
     background-color: #dde6fb;
     //height: 363px !important;

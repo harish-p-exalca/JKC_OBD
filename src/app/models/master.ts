@@ -149,6 +149,10 @@ export class BankDetails {
     AccountNum: string;
     TransID: number;
 }
+export class AttachmentDetails {
+    FileName: string;
+    blob: Blob;
+}
 export class DocumentRequired {
     ID: number;
     TransID: number;
@@ -292,7 +296,15 @@ export class MarketInformationView {
 //     Business:BusinessInformation;
 //     Sales:SalesAndTarget[];
 // }
-
+export class LineChartData {
+    ID: number;
+    Month: string;
+    InitiatorDraftCount: number;
+    InitiatorReleasedCount: number;
+    CustomerReleasedCount: number;
+    StokistApprovedCount: number;
+    RejectedCount: number;
+}
 
 export class CustomerOnboardingApprovalMatrix extends CommonClass {
     ID: number;
