@@ -84,17 +84,17 @@ export class DashboardComponent implements OnInit {
     States: string[] = [];
     City: Cities[] = [];
     arr: any;
-    Role:boolean = false;
+    Role: boolean = false;
     filteropt: Observable<string[]>;
     firmForm!: FormGroup;
     private listData: any;
     public listData1 = [];
     selected = '';
     currentTransaction: number;
-    SubmitValue:boolean = false;
-    transID:any;
-    UserRole:string;
-    Responded:string;
+    SubmitValue: boolean = false;
+    transID: any;
+    UserRole: string;
+    Responded: string;
     CustomerObdView: CustomerOnboardingView = new CustomerOnboardingView();
     Districts:string[]=[];
     Talukas:string[]=[];
@@ -122,20 +122,18 @@ export class DashboardComponent implements OnInit {
     ngOnInit(): void {
         const retrievedObject = localStorage.getItem('authorizationData');
         if (retrievedObject) {
-          this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
-          this.currentTransaction=parseInt(this.authenticationDetails.Token);
+            this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
+            this.currentTransaction = parseInt(this.authenticationDetails.Token);
         }
         this.UserRole = this.authenticationDetails.UserRole;
-        if(this.UserRole == "SSA")
-        {
+        if (this.UserRole == "SSA") {
             this.SubmitValue = false;
         }
-        if(this.authenticationDetails.UserRole == "Customer")
-        {
+        if (this.authenticationDetails.UserRole == "Customer") {
             this.Role = true;
             this.SubmitValue = true;
-        } 
-        
+        }
+
         this.InitializeFormGroup();
         this.filteropt = this.PIform.get("State").valueChanges.pipe(
             startWith(""),
@@ -144,6 +142,7 @@ export class DashboardComponent implements OnInit {
         this.transID = localStorage.getItem('TransID');
         if(this.transID != null || this.transID!=NaN)
         {
+        // if (this.transID != null) {
             this.isProgressBarVisibile = true;
             this._dashboardService.GetCustomerOnboardingView(this.transID).subscribe(res => {
                 console.log("view", res);
@@ -161,7 +160,7 @@ export class DashboardComponent implements OnInit {
         this._dashboardService.GetAllStates().subscribe(
             (data) => {
                 this.SOption = data;
-                if (this.currentTransaction !=NaN) {
+                if (this.currentTransaction != NaN) {
                     this.GetTransactionDetails();
                     this.isProgressBarVisibile = false;
                 }
@@ -173,7 +172,7 @@ export class DashboardComponent implements OnInit {
         this.PIform = this.fb.group({
             category: ["", Validators.required],
             product: ["", Validators.required],
-            Name: ["", [Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+            Name: ["", [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
             Address: ["", Validators.required],
             latitude: [''],
             longitude: [''],
@@ -228,11 +227,11 @@ export class DashboardComponent implements OnInit {
         if (this.CustomerObdView.PersonalInfo.PersonalInformation.product != null) {
             products = this.CustomerObdView.PersonalInfo.PersonalInformation.product.split(',');
         }
-        var state=new States();
-        state.StateName=this.CustomerObdView.PersonalInfo.PersonalInformation.State;
+        var state = new States();
+        state.StateName = this.CustomerObdView.PersonalInfo.PersonalInformation.State;
         this.SOption.push(state);
-        var city=new Cities();
-        city.City=this.CustomerObdView.PersonalInfo.PersonalInformation.City;
+        var city = new Cities();
+        city.City = this.CustomerObdView.PersonalInfo.PersonalInformation.City;
         this.City.push(city);
         this.PIform.patchValue({
             category: this.CustomerObdView.PersonalInfo.PersonalInformation.category,
@@ -249,21 +248,19 @@ export class DashboardComponent implements OnInit {
             Pincode: this.CustomerObdView.PersonalInfo.PersonalInformation.Pincode,
             Status: this.CustomerObdView.PersonalInfo.PersonalInformation.Status,
         });
-        if(localStorage.getItem('ActionStatus') == "Draft" && this.UserRole == "Customer")
-        {
+        if (localStorage.getItem('ActionStatus') == "Draft" && this.UserRole == "Customer") {
             this.SubmitValue = true;
-        } 
-        if(localStorage.getItem('ActionStatus') == "Responded")
-        {
+        }
+        if (localStorage.getItem('ActionStatus') == "Responded") {
             this.Responded = "Review";
             this.PIform.disable();
             this.firmForm.disable();
 
-        } 
-        this.selected=this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
-        this.IdentityData=this.CustomerObdView.PersonalInfo.Identities;
+        }
+        this.selected = this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
+        this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
     }
-    FirmStatusChange(){
+    FirmStatusChange() {
         this.IdentityData = [];
     }
     SubmitButtonClick(isDraft: boolean = false) {
@@ -271,7 +268,7 @@ export class DashboardComponent implements OnInit {
             if (this.IdentityData.length > 0) {
                 var cobView = new CustomerOnboardingView();
                 cobView.Transaction = new CustomerOnboarding();
-             cobView.Transaction.TranID =  Number(localStorage.getItem('TransID'));;
+                cobView.Transaction.TranID =  Number(localStorage.getItem('TransID'));;
                 cobView.Transaction.Status = isDraft ? "InitiatorDraft" : "InitiatorReleased";
                 cobView.PersonalInfo = new PersonalInformationView();
                 cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
@@ -279,6 +276,8 @@ export class DashboardComponent implements OnInit {
                 if(this.transID != null){
                     cobView.Transaction.TranID=this.transID;
                 }
+                cobView.PositionID = this.authenticationDetails.PositionID;
+                cobView.UserID = this.authenticationDetails.UserID.toString();
                 console.log("cobView", cobView);
                 this.isProgressBarVisibile = true;
                 this._dashboardService.SaveCustomerPersonalDetails(cobView).subscribe(res => {
@@ -578,12 +577,12 @@ export class DashboardComponent implements OnInit {
         var charCode = (event.which) ? event.which : event.keyCode;
         // Only Numbers 0-9
         if ((charCode < 48 || charCode > 57)) {
-          event.preventDefault();
-          return false;
+            event.preventDefault();
+            return false;
         } else {
-          return true;
+            return true;
         }
-      }
+    }
     AlphabetsonlyOnly(event): boolean {
         const charCode = (event.which) ? event.which : event.keyCode;
         if (charCode === 8 || charCode === 9 || charCode === 13 || charCode === 46

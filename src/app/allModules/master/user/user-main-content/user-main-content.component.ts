@@ -20,7 +20,7 @@ import { UserWithRole, RoleWithApp, AuthenticationDetails } from 'app/models/mas
   animations: fuseAnimations
 })
 export class UserMainContentComponent implements OnInit, OnChanges {
-
+  @Input() AllUsers: UserWithRole[] = [];
   @Input() currentSelectedUser: UserWithRole = new UserWithRole();
   @Output() SaveSucceed: EventEmitter<string> = new EventEmitter<string>();
   @Output() ShowProgressBarEvent: EventEmitter<string> = new EventEmitter<string>();
@@ -43,6 +43,8 @@ export class UserMainContentComponent implements OnInit, OnChanges {
     this.userMainFormGroup = this._formBuilder.group({
       userName: ['', Validators.required],
       roleID: ['', Validators.required],
+      PositionID: ['', Validators.required],
+      ReportingTo: [''],
       email: ['', [Validators.required, Validators.email]],
       contactNumber: ['', [Validators.required, Validators.pattern]],
       plant: [''],
@@ -108,6 +110,8 @@ export class UserMainContentComponent implements OnInit, OnChanges {
               this.user.Plant = this.userMainFormGroup.get('plant').value;
               this.user.RoleID = <Guid>this.userMainFormGroup.get('roleID').value;
               this.user.Email = this.userMainFormGroup.get('email').value;
+              this.user.PositionID = this.userMainFormGroup.get('PositionID').value;
+              this.user.ReportingTo = this.userMainFormGroup.get('ReportingTo').value;
               this.user.ContactNumber = this.userMainFormGroup.get('contactNumber').value;
               // this.user.Password = this.userMainFormGroup.get('password').value;
               this.user.ModifiedBy = this.authenticationDetails.UserID.toString();
@@ -147,6 +151,8 @@ export class UserMainContentComponent implements OnInit, OnChanges {
               this.user.Plant = this.userMainFormGroup.get('plant').value;
               this.user.RoleID = this.userMainFormGroup.get('roleID').value;
               this.user.Email = this.userMainFormGroup.get('email').value;
+              this.user.PositionID = this.userMainFormGroup.get('PositionID').value;
+              this.user.ReportingTo = this.userMainFormGroup.get('ReportingTo').value;
               this.user.ContactNumber = this.userMainFormGroup.get('contactNumber').value;
               // this.user.Password = this.userMainFormGroup.get('password').value;
               this.user.CreatedBy = this.authenticationDetails.UserID.toString();
@@ -195,6 +201,8 @@ export class UserMainContentComponent implements OnInit, OnChanges {
               this.user.Plant = this.userMainFormGroup.get('plant').value;
               this.user.RoleID = <Guid>this.userMainFormGroup.get('roleID').value;
               this.user.Email = this.userMainFormGroup.get('email').value;
+              this.user.PositionID = this.userMainFormGroup.get('PositionID').value;
+              this.user.ReportingTo = this.userMainFormGroup.get('ReportingTo').value;
               this.user.ContactNumber = this.userMainFormGroup.get('contactNumber').value;
               // this.user.Password = this.userMainFormGroup.get('password').value;
               this.user.ModifiedBy = this.authenticationDetails.UserID.toString();
@@ -232,6 +240,8 @@ export class UserMainContentComponent implements OnInit, OnChanges {
       this.user.Plant = this.currentSelectedUser.Plant;
       this.user.RoleID = this.currentSelectedUser.RoleID;
       this.user.Email = this.currentSelectedUser.Email;
+      this.user.PositionID = this.currentSelectedUser.PositionID;
+      this.user.ReportingTo = this.currentSelectedUser.ReportingTo;
       this.user.ContactNumber = this.currentSelectedUser.ContactNumber;
       this.user.Password = this.currentSelectedUser.Password;
       this.user.CreatedBy = this.currentSelectedUser.CreatedBy;
@@ -242,6 +252,8 @@ export class UserMainContentComponent implements OnInit, OnChanges {
       this.userMainFormGroup.get('plant').patchValue(this.user.Plant);
       this.userMainFormGroup.get('roleID').patchValue(this.user.RoleID);
       this.userMainFormGroup.get('email').patchValue(this.user.Email);
+      this.userMainFormGroup.get('PositionID').patchValue(this.user.PositionID);
+      this.userMainFormGroup.get('ReportingTo').patchValue(this.user.ReportingTo);
       this.userMainFormGroup.get('contactNumber').patchValue(this.user.ContactNumber);
       // this.userMainFormGroup.get('password').patchValue(this.user.Password);
       // this.userMainFormGroup.get('confirmPassword').patchValue(this.user.Password);
