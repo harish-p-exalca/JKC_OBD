@@ -17,13 +17,14 @@ import { NotificationSnackBarComponent } from "app/notifications/notification-sn
 import { SnackBarStatus } from "app/notifications/snackbar-status-enum";
 import { CommonService } from "app/services/common.service";
 import { DashboardService } from "app/services/dashboard.service";
+import { DatePipe } from "@angular/common";
 export interface Monthlysales {
     Product: string;
 }
 const ELEMENT_DATA: Monthlysales[] = [
     { Product: "WallmaxX" },
-    { Product: "WhitemaxX"},
-    { Product: "GypsomaxX"},
+    { Product: "WhitemaxX" },
+    { Product: "GypsomaxX" },
     { Product: "ShieldmaxX" },
     { Product: "SmoothMaxX" },
     { Product: "RepairmaxX" },
@@ -34,29 +35,15 @@ const ELEMENT_DATA: Monthlysales[] = [
     selector: "app-business",
     templateUrl: "./business.component.html",
     styleUrls: ["./business.component.scss"],
-    encapsulation:ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None
 })
 export class BusinessComponent implements OnInit {
     BIform!: FormGroup;
     BrandForm!: FormGroup;
     private listData: any;
     notificationSnackBarComponent: NotificationSnackBarComponent;
-    salesTargetArr:any[][]=[];
+    salesTargetArr: any[][] = [];
     displayedColumns: string[] = ["Product"];
-    displayColumns: string[] = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-    ];
     brandName: string[] = [
         "WallmaxX",
         "WhitemaxX",
@@ -67,7 +54,6 @@ export class BusinessComponent implements OnInit {
         "TilemaxX",
         "Woodamore",
     ];
-    columnsToDisplay: string[] = this.displayColumns.slice();
     dataSource: Monthlysales[] = ELEMENT_DATA;
     SOption: States[] = [];
     isProgressBarVisibile: boolean;
@@ -80,7 +66,8 @@ export class BusinessComponent implements OnInit {
         private _router: Router,
         private _dashboardService: DashboardService,
         public snackBar: MatSnackBar,
-        private _commonService: CommonService
+        private _commonService: CommonService,
+        private datePipe: DatePipe
     ) {
         this.isProgressBarVisibile = false;
         this.listData = [];
@@ -129,6 +116,12 @@ export class BusinessComponent implements OnInit {
         // [a-zA-Z0-9]+$
         this.BIform.get("Wholesale").valueChanges.subscribe((value) => {
             if (value != "") {
+                if (value > 100) {
+                    value = 100;
+                    this.BIform.get("Wholesale").setValue(
+                        value
+                    );
+                }
                 this.BIform.get("retail").setValue(
                     isNaN(value) ? 0 : 100 - value
                 );
@@ -143,8 +136,13 @@ export class BusinessComponent implements OnInit {
                 this.GetBusinessDetails();
                 this.isProgressBarVisibile = false;
             },
-            (err) => console.log(err)
+            (err) => {
+                this.isProgressBarVisibile = false;
+                console.log(err)
+            }
         );
+        this.salesTargetArr=this.Create2DModel(8,12,'');
+        console.log("2dmatrix",this.salesTargetArr);
     }
     GetBusinessDetails() {
         this.isProgressBarVisibile = true;
@@ -185,11 +183,22 @@ export class BusinessComponent implements OnInit {
         }
     }
     SubmitButtonClick(isDraft: boolean = false) {
-        console.log(this.salesTargetArr);
+        var sts=[];
+        for(let i=0;i<8;i++){
+            for (let j = 0; j < 12; j++) {
+                var month=this.displayedColumns[j+1];
+                var val=this.salesTargetArr[j][i]==''?0:this.salesTargetArr[j][i];
+                if(month!=undefined){
+                    var st=this.ConstructSaleTarget(this.dataSource[i].Product,month,val);
+                    sts.push(st);
+                }
+            }
+        }
+        console.log("saleTargets",sts);
         if (this.BIform.valid) {
             var cobView = new BusinessInformationView();
             cobView.Businessinfo = this.GetBusinessInfoFromForm();
-            cobView.SalesandTargets = this.IdentityData;
+            cobView.SalesandTargets = sts;
             console.log("cobView", cobView);
             this.isProgressBarVisibile = true;
             this._dashboardService.SaveBusinessInfoView(cobView).subscribe(
@@ -250,74 +259,90 @@ export class BusinessComponent implements OnInit {
     }
 
     saveBusinessInfo(): void {
-        if (this.BIform.valid) {
-            const businessformvalues: BusinessInformation =
-                new BusinessInformation();
-            businessformvalues.Turnover1 = this.BIform.get("NoOfYears").value;
-            businessformvalues.Turnover2 = this.BIform.get("NoOfYears1").value;
-            businessformvalues.Turnover3 = this.BIform.get("NoOfYears2").value;
-            businessformvalues.Retail = parseInt(
-                this.BIform.get("retail").value
-            );
-            businessformvalues.WorkingCaptial =
-                this.BIform.get("capitalinvest").value;
-            businessformvalues.NoVechicle = parseInt(
-                this.BIform.get("vehicle").value
-            );
-            businessformvalues.TotalStorage =
-                this.BIform.get("storagecapacity").value;
-            businessformvalues.Wholesale = parseInt(
-                this.BIform.get("Wholesale").value
-            );
-            this._dashboardService
-                .AddBusinessInfo(businessformvalues)
-                .subscribe(
-                    (data) => {
-                        console.log(data);
-                        this.notificationSnackBarComponent.openSnackBar(
-                            "Saved successfully",
-                            SnackBarStatus.success
-                        );
-                        this._router.navigate(["pages/marketinformation"]);
-                    },
-                    (err) => {
-                        console.error(err);
-                    }
-                );
-        } else {
-            this._commonService.ShowValidationErrors(this.BIform);
-        }
+        // if (this.BIform.valid) {
+        //     const businessformvalues: BusinessInformation =
+        //         new BusinessInformation();
+        //     businessformvalues.Turnover1 = this.BIform.get("NoOfYears").value;
+        //     businessformvalues.Turnover2 = this.BIform.get("NoOfYears1").value;
+        //     businessformvalues.Turnover3 = this.BIform.get("NoOfYears2").value;
+        //     businessformvalues.Retail = parseInt(
+        //         this.BIform.get("retail").value
+        //     );
+        //     businessformvalues.WorkingCaptial =
+        //         this.BIform.get("capitalinvest").value;
+        //     businessformvalues.NoVechicle = parseInt(
+        //         this.BIform.get("vehicle").value
+        //     );
+        //     businessformvalues.TotalStorage =
+        //         this.BIform.get("storagecapacity").value;
+        //     businessformvalues.Wholesale = parseInt(
+        //         this.BIform.get("Wholesale").value
+        //     );
+        //     this._dashboardService
+        //         .AddBusinessInfo(businessformvalues)
+        //         .subscribe(
+        //             (data) => {
+        //                 console.log(data);
+        //                 this.notificationSnackBarComponent.openSnackBar(
+        //                     "Saved successfully",
+        //                     SnackBarStatus.success
+        //                 );
+        //                 this._router.navigate(["pages/marketinformation"]);
+        //             },
+        //             (err) => {
+        //                 console.error(err);
+        //             }
+        //         );
+        // } else {
+        //     this._commonService.ShowValidationErrors(this.BIform);
+        // }
         // this._router.navigate(['pages/nextlogin']);
     }
-    public count = -1;
+    public count = 0;
+    fiYrReached: boolean = false;
     public a: string = "";
     public data = [];
     public SaleData = [];
-    add(): void {
-        var d = new Date();
-        d.setDate(1); //REM: To prevent month skipping.
-        this.data.push(this.displayColumns[d.getMonth()]);
-        console.log("displayColumns",this.displayColumns);
-        console.log("data ", this.data);
-
-        for (var i = 0; i < 11; i++) {
-            d.setMonth(d.getMonth() + 1);
-            this.data.push(this.displayColumns[d.getMonth()]);
-            console.log(this.displayColumns[d.getMonth()], d.getFullYear());
-        }
-        if (this.count < 12) {
+    addBtnClicked(): void {
+        if (!this.fiYrReached) {
+            var d = new Date();
+            d.setDate(1); //REM: To prevent month skipping.
+            d.setMonth(d.getMonth() + this.count);
+            if (d.getMonth() == 2) {
+                this.fiYrReached = true;
+            }
+            this.displayedColumns.push(this.datePipe.transform(d, "MMM-yy"));
             this.count++;
         }
-        if (this.data[this.count] != "Mar") {
-            this.a += " " + this.data[this.count];
-            this.displayedColumns.push(this.data[this.count]);
-        } else {
-            this.a += " " + this.data[this.count];
-            this.displayedColumns.push(this.data[this.count]);
-            this.count = 13;
-        }
+        // console.log("2dmatrix",this.salesTargetArr);
+        // for (var i = 0; i < 11; i++) {
+        //     d.setMonth(d.getMonth() + 1);
+        //     this.data.push(this.displayColumns[d.getMonth()]);
+        //     console.log(this.displayColumns[d.getMonth()], d.getFullYear());
+        // }
+        // if (this.count < 12) {
+        //     this.count++;
+        // }
+        // if (this.data[this.count] != "Mar") {
+        //     this.a += " " + this.data[this.count];
+        //     this.displayedColumns.push(this.data[this.count]);
+        // } else {
+        //     this.a += " " + this.data[this.count];
+        //     this.displayedColumns.push(this.data[this.count]);
+        //     this.count = 13;
+        // }
     }
-
+    decimalOnly(event): boolean {
+        const charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode === 8 || charCode === 9 || charCode === 13 || charCode === 46
+            || charCode === 37 || charCode === 39 || charCode === 123 || charCode === 190) {
+            return true;
+        }
+        else if (charCode < 48 || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
     onAdd(): void {
         this.listData.push(this.BrandForm.value);
         this.BrandForm.reset();
@@ -333,6 +358,23 @@ export class BusinessComponent implements OnInit {
     }
     ClearAll(): void {
         this.BIform.reset();
+    }
+    Create2DModel(w,h,val) {
+        var arr = [];
+        for (let i = 0; i < h; i++) {
+            arr[i] = [];
+            for (let j = 0; j < w; j++) {
+                arr[i][j] = val;
+            }
+        }
+        return arr;
+    }
+    ConstructSaleTarget(p,m,val):SalesAndTarget{
+        var st=new SalesAndTarget();
+        st.Product=p;
+        st.Month=m;
+        st.Value=parseInt(val);
+        return st;
     }
 }
 // export class BusinessInformation {
