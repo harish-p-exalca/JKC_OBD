@@ -83,6 +83,17 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetRejectedCustomerOnBoardingByUser?UserID=${UserID}`,)
             .pipe(catchError(this.errorHandler));
     }
+    GetAttachment(TransID: number): Observable<DocumentRequired | string> {
+        return this._httpClient.get<DocumentRequired>(`${this.baseAddress}api/BankDetails/GetDocumentAttachment?TransID=${TransID}`)
+            .pipe(catchError(this.errorHandler));
+    }
+    DowloandAttachment(AttachmentName: string,TransID: number): Observable<Blob | string> {
+        return this._httpClient.get(`${this.baseAddress}api/BankDetails/DowloandDocumentAttachment?AttachmentName=${AttachmentName}&TransID=${TransID}`, {
+          responseType: 'blob',
+          headers: new HttpHeaders().append('Content-Type', 'application/json')
+        })
+          .pipe(catchError(this.errorHandler));
+      }
     // AddEmployee(personalHistory: PersonalInformation): Observable<PersonalInformation | string> {
     //     return this._httpClient.post<PersonalInformation>('http://10.43.13.9:80/api/PersonalInfo/CreatePersonalInfo', personalHistory, {
     //         headers: new HttpHeaders({
@@ -293,6 +304,47 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetStokistPieData`)
             .pipe(catchError(this.errorHandler));
     }
+    GetCustomerInitiatedDraftBarData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerInitiatedDraftBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetCustomerInitiatedReleasedBarData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerInitiatedReleasedBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetCustomerCustomerReleasedBarData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerCustomerReleasedBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetCustomerStokistApprovedBarData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerStokistApprovedBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetCustomerRejectedBarData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerRejectedBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetCustomerASMApprovedBarData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerASMApprovedBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetCustomerSHApprovedBarData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerSHApprovedBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetCustomerZHApprovedBarData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerZHApprovedBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetCustomerDHApprovedBarData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerDHApprovedBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+    GetCustomerRACApprovedBarData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerRACApprovedBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+
 }
 
 

@@ -66,6 +66,7 @@ import { ReportsviewComponent } from './reportsview/reportsview.component';
 import { ForgotPasswordComponent } from '../authentication/forgot-password/forgot-password.component';
 import { ForgetPasswordLinkDialogComponent } from '../authentication/forget-password-link-dialog/forget-password-link-dialog.component';
 import { NgOtpInputModule } from  'ng-otp-input';
+import { AttachmentDialogComponent } from './attachment-dialog/attachment-dialog.component';
 
 
 const routes = [
@@ -180,7 +181,8 @@ const routes = [
         BankdialogComponent,
         InitiatorDashboardComponent,
         ReportsviewComponent,
-        ForgetPasswordLinkDialogComponent
+        ForgetPasswordLinkDialogComponent,
+        AttachmentDialogComponent,
     ],
     providers: [
         DecimalPipe
@@ -188,7 +190,8 @@ const routes = [
     entryComponents: [
         dialogComponent,
         BankdialogComponent,
-        ForgetPasswordLinkDialogComponent
+        ForgetPasswordLinkDialogComponent,
+        AttachmentDialogComponent,
     ]
 })
 export class PagesModule { }

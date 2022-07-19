@@ -375,6 +375,16 @@ export class InitiatorDashboardComponent implements OnInit {
     public chartOptions1: Partial<ChartOptions1>;
     public chart1: any;
     isProgressBarVisibile:boolean;
+    Draft:any[] =[];
+    Draft1=0;
+    Draft2=0;
+    Draft3=0;
+    Draft4=0;
+    Draft5=0;
+    Open:any[] = [];
+    Pending:any[] =[];
+    Approved:any[] = [];
+    Rejected:any[] = [];
     links = ["All", "Draft", "Open", "Pending", "Approved", "Rejected"];
     activeLink = this.links[0];
     constructor(
@@ -385,14 +395,26 @@ export class InitiatorDashboardComponent implements OnInit {
         this.chartOptions = {
             series: [
                 {
-                    name: "series1",
-                    data: [31, 40, 28, 51, 42, 109, 100],
+                  name: "Draft",
+                  data: [1,1,0,0,0,0,0,0,0,0,0,0,0]
                 },
                 {
-                    name: "series2",
-                    data: [11, 32, 45, 32, 34, 52, 41],
+                  name: "Open",
+                  data: [1,1,0,0,0,0,0,0,0,0,0,0,0]
                 },
-            ],
+                {
+                  name: "Pending",
+                  data:[1,1,0,0,0,0,0,0,0,0,0,0,0]
+                },
+                {
+                  name: "Approved",
+                  data: [1,1,0,0,0,0,0,0,0,0,0,0,0]
+                },
+                {
+                    name: "Rejected",
+                    data: [1,1,0,0,0,0,0,0,0,0,0,0,0]
+                  }
+              ],
             chart: {
                 height: 150,
                 width: 400,
@@ -411,21 +433,28 @@ export class InitiatorDashboardComponent implements OnInit {
                 curve: "smooth",
             },
             xaxis: {
-                type: "datetime",
+                type: "category",
 
                 categories: [
-                    "2018-09-19T00:00:00.000Z",
-                    "2018-09-19T01:30:00.000Z",
-                    "2018-09-19T02:30:00.000Z",
-                    "2018-09-19T03:30:00.000Z",
-                    "2018-09-19T04:30:00.000Z",
-                    "2018-09-19T05:30:00.000Z",
-                    "2018-09-19T06:30:00.000Z",
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                  "",
+                  ""
                 ],
             },
             tooltip: {
                 x: {
-                    format: "dd/MM/yy HH:mm",
+                    // format: "dd/MM/yy HH:mm",
                 },
             },
             responsive: [
@@ -558,6 +587,36 @@ export class InitiatorDashboardComponent implements OnInit {
             this.chartOptions1.series = x;
           }
       );
+      this._dashboardService.GetCustomerInitiatedDraftBarData().subscribe(
+        x =>{
+            this.Draft = x; 
+            this.Draft1 = this.Draft[0];
+            this.Draft2 = this.Draft[1];
+            this.Draft3 = this.Draft[2];
+            this.Draft4 = this.Draft[3];
+            this.Draft5 = this.Draft[4];
+        }
+      );
+      this._dashboardService.GetCustomerInitiatedReleasedBarData().subscribe(
+        x => {
+            this.Open = x;
+        }
+      );
+      this._dashboardService.GetCustomerCustomerReleasedBarData().subscribe(
+        x => {
+            this.Pending = x;
+        }
+      );
+      this._dashboardService.GetCustomerStokistApprovedBarData().subscribe(
+        x => {
+            this.Approved = x;
+        }
+      );
+      this._dashboardService.GetCustomerRejectedBarData().subscribe(
+        x => {
+            this.Rejected = x;
+        }
+      );
       this.isProgressBarVisibile=true;
       this._dashboardService.getPersonalInfo().subscribe((data: any) => {
         this.PIStatus.push(data);
@@ -610,7 +669,7 @@ export class InitiatorDashboardComponent implements OnInit {
     //    this.GetEmployeewithApprovesStatus();
     //    this.GetEmployeewithRejectedStatus();
         // this.GetEmployees(); // forgeted this line
-    }
+      }
     tabClick(event: MatTabChangeEvent):void{
       this.tab = event.tab.textLabel;
       console.log(this.tab);
