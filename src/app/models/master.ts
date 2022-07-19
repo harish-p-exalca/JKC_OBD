@@ -256,6 +256,7 @@ export class BusinessInformation {
 export class SalesAndTarget {
     ID: number;
     TransID: number;
+    Product:string;
     Month: string;
     Value: number;
 }
