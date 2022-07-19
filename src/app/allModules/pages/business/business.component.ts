@@ -141,8 +141,8 @@ export class BusinessComponent implements OnInit {
                 console.log(err)
             }
         );
-        this.salesTargetArr=this.Create2DModel(8,12,'');
-        console.log("2dmatrix",this.salesTargetArr);
+        this.salesTargetArr = this.Create2DModel(8, 12, '');
+        console.log("2dmatrix", this.salesTargetArr);
     }
     GetBusinessDetails() {
         this.isProgressBarVisibile = true;
@@ -164,7 +164,6 @@ export class BusinessComponent implements OnInit {
         businessInfoView: BusinessInformationView = new BusinessInformationView()
     ) {
         if (businessInfoView.Businessinfo.TransID != null) {
-            // businessinformation = businessInfoView.Businessinfo;
             this.BIform.patchValue({
                 NoOfYears: businessInfoView.Businessinfo.Turnover1,
                 NoOfYears1: businessInfoView.Businessinfo.Turnover2,
@@ -175,26 +174,42 @@ export class BusinessComponent implements OnInit {
                 vehicle: businessInfoView.Businessinfo.NoVechicle,
                 Wholesale: businessInfoView.Businessinfo.Wholesale,
             });
-            // this.BrandForm.patchValue({
-            //   sales: ['', Validators.required],
-            //   date1: [''],
-            //   date2: [''],
-            // });
+            this.SetSalesTargets(businessInfoView.SalesandTargets);
+        }
+    }
+    SetSalesTargets(sales:SalesAndTarget[]){
+        var months=sales.length/8;
+        console.log("sales",sales);
+        console.log("displayed columns",this.displayedColumns);
+        var records;
+        if(sales.length>0){
+            records=sales.filter(x=>x.Product==sales[0].Product);
+            records.forEach(record => {
+                this.displayedColumns.push(record.Month);
+                this.count++;
+            });
+        }
+
+        for(let i=0;i<this.dataSource.length;i++){
+            var value=sales.filter(x=>x.Product==this.dataSource[i].Product).sort((a, b) => (a.Month < b.Month ? -1 : 1));
+            for(let j=0;j<value.length;j++){
+                this.salesTargetArr[j][i]=value[j].Value;
+            }
         }
     }
     SubmitButtonClick(isDraft: boolean = false) {
-        var sts=[];
-        for(let i=0;i<8;i++){
+        var sts = [];
+        for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 12; j++) {
-                var month=this.displayedColumns[j+1];
-                var val=this.salesTargetArr[j][i]==''?0:this.salesTargetArr[j][i];
-                if(month!=undefined){
-                    var st=this.ConstructSaleTarget(this.dataSource[i].Product,month,val);
+                var month = this.displayedColumns[j + 1];
+                var val = this.salesTargetArr[j][i] == '' ? 0 : this.salesTargetArr[j][i];
+                if (month != undefined) {
+                    var st = this.ConstructSaleTarget(this.dataSource[i].Product, month, val);
                     sts.push(st);
                 }
             }
         }
-        console.log("saleTargets",sts);
+        console.log("saleTargets", sts);
         if (this.BIform.valid) {
             var cobView = new BusinessInformationView();
             cobView.Businessinfo = this.GetBusinessInfoFromForm();
@@ -311,9 +326,12 @@ export class BusinessComponent implements OnInit {
             if (d.getMonth() == 2) {
                 this.fiYrReached = true;
             }
-            this.displayedColumns.push(this.datePipe.transform(d, "MMM-yy"));
+            if(this.displayedColumns.findIndex(t=>t==this.datePipe.transform(d, "MMM-yy"))<0){
+                this.displayedColumns.push(this.datePipe.transform(d, "MMM-yy"));
+            }
             this.count++;
         }
+        console.log(this.salesTargetArr);
         // console.log("2dmatrix",this.salesTargetArr);
         // for (var i = 0; i < 11; i++) {
         //     d.setMonth(d.getMonth() + 1);
@@ -359,7 +377,7 @@ export class BusinessComponent implements OnInit {
     ClearAll(): void {
         this.BIform.reset();
     }
-    Create2DModel(w,h,val) {
+    Create2DModel(w, h, val) {
         var arr = [];
         for (let i = 0; i < h; i++) {
             arr[i] = [];
@@ -369,11 +387,11 @@ export class BusinessComponent implements OnInit {
         }
         return arr;
     }
-    ConstructSaleTarget(p,m,val):SalesAndTarget{
-        var st=new SalesAndTarget();
-        st.Product=p;
-        st.Month=m;
-        st.Value=parseInt(val);
+    ConstructSaleTarget(p, m, val): SalesAndTarget {
+        var st = new SalesAndTarget();
+        st.Product = p;
+        st.Month = m;
+        st.Value = parseInt(val);
         return st;
     }
 }
