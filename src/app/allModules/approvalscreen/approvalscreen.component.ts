@@ -468,141 +468,179 @@ export class ApprovalscreenComponent implements OnInit {
             );
             this.Role = this.authenticationDetails.UserRole;
         }
-        // if (this.Role == "ASM") {
-        //     this.isProgressBarVisibile=true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatusAndRole(this.Role,"CustomerReleased")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile=false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
-        // if (this.Role == "Stokist") {
-        //     this.isProgressBarVisibile=true;
-        //     this._dashboardService
-        //     .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile=false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });    
-        // }
-        // if (this.Role == "DH") {
-        //     this.isProgressBarVisibile=true;
-        //     this._dashboardService
-        //     .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile=false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
-        // if (this.Role == "ZH") {
-        //     this.isProgressBarVisibile=true;
-        //     this._dashboardService
-        //     .getPersonalInfoByStatusAndRole(this.Role,"SHApproved")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile=false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
-        // if (this.Role == "SH") {
-        //     this.isProgressBarVisibile=true;
-        //     this._dashboardService
-        //     .getPersonalInfoByStatusAndRole(this.Role,"ASMApproved")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile=false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
-        // if (this.Role == "RAC") {
-        //     this.isProgressBarVisibile=true;
-        //     this._dashboardService
-        //     .getPersonalInfoByStatusAndRole(this.Role,"DHApproved")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile=false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
 
-
-
-        this.tab = "All";
-
+        if (this.Role == "ASM") {
+            // this.isProgressBarVisibile=true;
+            // this._dashboardService
+            //     .getPersonalInfoByStatusAndRole(this.Role,"CustomerReleased")
+            //     .subscribe((data) => {
+            //         this.AllHeaderDetails = data;
+            //         this.isProgressBarVisibile=false;
+            //         this.LoadTableSource(this.AllHeaderDetails);
+            //     });
+                this._dashboardService.GetASMPieData().subscribe(
+                    x => {
+                        this.chartOptions1.series = x;
+                      }
+                );
+        }
+        if (this.Role == "Stokist") {
+            // this.isProgressBarVisibile=true;
+            // this._dashboardService
+            // .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
+            //     .subscribe((data) => {
+            //         this.AllHeaderDetails = data;
+            //         this.isProgressBarVisibile=false;
+            //         this.LoadTableSource(this.AllHeaderDetails);
+            //     });
+                this._dashboardService.GetStokistPieData().subscribe(
+                    x => {
+                        this.chartOptions1.series = x;
+                      }
+                );    
+        }
+        if (this.Role == "DH") {
+            // this.isProgressBarVisibile=true;
+            // this._dashboardService
+            // .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
+            //     .subscribe((data) => {
+            //         this.AllHeaderDetails = data;
+            //         this.isProgressBarVisibile=false;
+            //         this.LoadTableSource(this.AllHeaderDetails);
+            //     });
+                this._dashboardService.GetDHPieData().subscribe(
+                    x => {
+                        this.chartOptions1.series = x;
+                      }
+                );
+        }
+        if (this.Role == "ZH") {
+            // this.isProgressBarVisibile=true;
+            // this._dashboardService
+            // .getPersonalInfoByStatusAndRole(this.Role,"SHApproved")
+            //     .subscribe((data) => {
+            //         this.AllHeaderDetails = data;
+            //         this.isProgressBarVisibile=false;
+            //         this.LoadTableSource(this.AllHeaderDetails);
+            //     });
+                this._dashboardService.GetZHPieData().subscribe(
+                    x => {
+                        this.chartOptions1.series = x;
+                      }
+                );
+        }
+        if (this.Role == "SH") {
+            // this.isProgressBarVisibile=true;
+            // this._dashboardService
+            // .getPersonalInfoByStatusAndRole(this.Role,"ASMApproved")
+            //     .subscribe((data) => {
+            //         this.AllHeaderDetails = data;
+            //         this.isProgressBarVisibile=false;
+            //         this.LoadTableSource(this.AllHeaderDetails);
+            //     });
+                this._dashboardService.GetSHPieData().subscribe(
+                    x => {
+                        this.chartOptions1.series = x;
+                      }
+                );
+        }
+        if (this.Role == "RAC") {
+            // this.isProgressBarVisibile=true;
+            // this._dashboardService
+            // .getPersonalInfoByStatusAndRole(this.Role,"DHApproved")
+            //     .subscribe((data) => {
+            //         this.AllHeaderDetails = data;
+            //         this.isProgressBarVisibile=false;
+            //         this.LoadTableSource(this.AllHeaderDetails);
+            //     });
+                this._dashboardService.GetRACPieData().subscribe(
+                    x => {
+                        this.chartOptions1.series = x;
+                      }
+                );
+        }
+        console.log(this.Role);
         this._dashboardService
             .getPersonalInfoByStatus("Rejected")
             .subscribe((data) => {
                 this.AllRejectedDetails = data;
                 this.isProgressBarVisibile = false;
             });
-            
+           // this.GetEmployees(); // forgeted this line
             this.GetEmployeewithOpenStatus();
             this.GetEmployeewithApprovedStatus();
             this.GetEmployeewithRejectedStatus();
-        // this.GetEmployeewithOpenStatus();
-        // this.GetEmployeewithApprovedStatus();
-        // this.GetEmployeewithRejectedStatus();
-        //   this.GetEmployeewithDraft();
-        //   this.GetEmployeewithRespodedStatus();
-        //   this.GetEmployeewithPendingStatus();
-        //   this.GetEmployeewithApprovesStatus();
-        //   this.GetEmployeewithRejectedStatus();
-         this.GetEmployees(); // forgeted this line
-         this.series = [this.AllOpenDetails.length,this.AllApprovedDetails.length,this.AllRejectedDetails.length];
-            console.log(this.series);
+            this.GetEmployees(); 
          this.RenderDounghtChart();
 
     }
+    
     RenderDounghtChart(){
         this.chartOptions1 = {
             series: [],
             chart: {
                 type: "donut",
                 width: "200px",
-                events: {
-                    dataPointSelection: (event, chartContext, config) => {
-                      if (config.dataPointIndex == 0) {
-                        this.LoadTableSource(this.AllOpenDetails);
-                      }
-                      if (config.dataPointIndex == 1) {
-                        this.LoadTableSource(this.AllApprovedDetails);
-                      }
-                      if (config.dataPointIndex == 2) {
-                        this.LoadTableSource(this.AllRejectedDetails);
-                      }
-                    }
-                  }
             },
-            labels: [],
-            // labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F'],
-            colors: ["#1158A6", "#1158A6", "#1158A6", "#1158A6", "#C1D6EA"], // add this part to modify colours
-            responsive: [
-                {
-                    breakpoint: 480,
-                    options: {
-                        chart: {
-                            width: 100,
-                        },
-                    },
-                },
-            ],
-
-            legend: {
-                show: false,
-            },
+            
+            labels: ["Open", "Approved", "Rejected"],
             dataLabels: {
-                // add this part to remove %
+              enabled: true,
+              distributed: true,
+              textAnchor: 'middle',
+              style: {
+                fontSize: '10px',
+                fontFamily: 'Poppins',
+                fontWeight: '600',
+                colors: ["#1158A6", "#1158A6", "#C1D6EA"],
+              },
+              dropShadow: {
                 enabled: false,
-                formatter(value: any, opts: any): any {
-                    return opts.w.config.series[opts.seriesIndex];
-                },
+              }
             },
+            legend: {
+              show: false,
+              position: 'left',
+              horizontalAlign: 'center',
+              floating: false,
+              fontSize: '11px',
+              fontFamily: 'Poppins',
+              fontWeight: 600,
+              width: undefined,
+              height: undefined,
+              tooltipHoverFormatter: undefined,
+              offsetX: 0,
+              offsetY: -16,
+              labels: {
+                colors: ["#1158A6", "#1158A6", "#1158A6", "#1158A6", "#C1D6EA"],
+                useSeriesColors: false
+              },
+              markers: {
+                width: 6,
+                height: 6,
+                strokeWidth: 0,
+                strokeColor: '#fff',
+                fillColors: undefined,
+                radius: 6,
+                customHTML: undefined,
+                onClick: undefined,
+                offsetX: 0,
+                offsetY: 0
+              },
+              itemMargin: {
+                horizontal: 8,
+                vertical: 4
+              },
+              onItemClick: {
+                toggleDataSeries: true
+              },
+              onItemHover: {
+                highlightDataSeries: true
+              },
+            }
         };
     }
+   
     tabClick(event: MatTabChangeEvent): void {
         this.tab = event.tab.textLabel;
         console.log(this.tab);
@@ -612,7 +650,7 @@ export class ApprovalscreenComponent implements OnInit {
         if (this.tab === "Open") {
             this.GetEmployeewithOpenStatus();
         }
-        if (this.tab === "Approve") {
+        if (this.tab === "Approved") {
             this.GetEmployeewithApprovedStatus();
         }
         if (this.tab === "Rejected") {
@@ -620,76 +658,91 @@ export class ApprovalscreenComponent implements OnInit {
         }
     }
     GetEmployees(): void {
-        // if (this.Role == "ASM") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatusAndRole(this.Role, "CustomerReleased")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
-        // if (this.Role == "Stokist") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatusAndRole(this.Role, "RACApproved")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
-        // if (this.Role == "DH") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatusAndRole(this.Role, "ZHApproved")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
-        // if (this.Role == "ZH") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatusAndRole(this.Role, "SHApproved")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
-        // if (this.Role == "SH") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatusAndRole(this.Role, "ASMApproved")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
-        // if (this.Role == "RAC") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatusAndRole(this.Role, "DHApproved")
-        //         .subscribe((data) => {
-        //             this.AllHeaderDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllHeaderDetails);
-        //         });
-        // }
-        this._dashboardService.GetOpenCustomerOnBoardingByPosition(this.authenticationDetails.PositionID)
-            .subscribe((data) => {
-                this.AllOpenDetails = data;
-                this.isProgressBarVisibile = false;
-                this.LoadTableSource(this.AllOpenDetails);
-                // this.employeesDataSource =
-                //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-                // this.employeesDataSource.sort = this.sort;
-                // this.employeesDataSource.paginator = this.paginator;
-            });
+             
+        if (this.Role == "ASM") {
+            this.isProgressBarVisibile=true;
+            setTimeout(()=>{                           //<<<---using ()=> syntax
+                this._dashboardService
+                .getPersonalInfoByStatusAndRole(this.Role,"CustomerReleased")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    console.log(data)
+                    this.isProgressBarVisibile=false;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+           }, 3000);
+           
+        }
+        if (this.Role == "Stokist") {
+            setTimeout(()=>{                           //<<<---using ()=> syntax
+                this.isProgressBarVisibile=true;
+                this._dashboardService
+                .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
+                    .subscribe((data) => {
+                        this.AllHeaderDetails = data;
+                        console.log(data)
+                        this.isProgressBarVisibile=false;
+                        this.LoadTableSource(this.AllHeaderDetails);
+                    });    
+           }, 3000);
+           
+        }
+        if (this.Role == "DH") {
+            setTimeout(()=>{                           //<<<---using ()=> syntax
+                this.isProgressBarVisibile=true;
+                this._dashboardService
+                .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
+                    .subscribe((data) => {
+                        this.AllHeaderDetails = data;
+                        console.log(data)
+                        this.isProgressBarVisibile=false;
+                        this.LoadTableSource(this.AllHeaderDetails);
+                    });
+           }, 3000);
+            
+        }
+        if (this.Role == "ZH") {
+            setTimeout(()=>{                           //<<<---using ()=> syntax
+                this.isProgressBarVisibile=true;
+                this._dashboardService
+                .getPersonalInfoByStatusAndRole(this.Role,"SHApproved")
+                    .subscribe((data) => {
+                        this.AllHeaderDetails = data;
+                        console.log(data)
+                        this.isProgressBarVisibile=false;
+                        this.LoadTableSource(this.AllHeaderDetails);
+                    });
+           }, 3000);
+            
+        }
+        if (this.Role == "SH") {
+            setTimeout(()=>{                           //<<<---using ()=> syntax
+                this.isProgressBarVisibile=true;
+            this._dashboardService
+            .getPersonalInfoByStatusAndRole(this.Role,"ASMApproved")
+                .subscribe((data) => {
+                    this.AllHeaderDetails = data;
+                    console.log(data)
+                    this.isProgressBarVisibile=false;
+                    this.LoadTableSource(this.AllHeaderDetails);
+                });
+           }, 3000);
+           
+        }
+        if (this.Role == "RAC") {
+            setTimeout(()=>{                           //<<<---using ()=> syntax
+                this.isProgressBarVisibile=true;
+                this._dashboardService
+                .getPersonalInfoByStatusAndRole(this.Role,"DHApproved")
+                    .subscribe((data) => {
+                        this.AllHeaderDetails = data;
+                        console.log(data)
+                        this.isProgressBarVisibile=false;
+                        this.LoadTableSource(this.AllHeaderDetails);
+                    });
+           }, 3000);
+           
+        }
     }
 
     GetEmployeewithOpenStatus(): void {
@@ -915,6 +968,7 @@ export class ApprovalscreenComponent implements OnInit {
     }
     LoadTableSource(DataArray: any[]) {
         this.employeesDataSource = new MatTableDataSource(DataArray);
+        console.log();
         this.employeesDataSource.paginator = this.paginator;
         this.employeesDataSource.sort = this.sort;
     }

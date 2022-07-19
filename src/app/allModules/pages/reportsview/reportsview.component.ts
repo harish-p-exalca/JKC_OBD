@@ -1,4 +1,6 @@
-// import { CustomerOnboarding } from './../../../models/master';
+
+import { BankDetailsView, CustomerOnboarding } from './../../../models/master';
+
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { CustomerOnboarding, CustomerOnboardingView1 } from './../../../models/master';
 // import { Component, OnInit } from "@angular/core";
@@ -24,6 +26,13 @@ export interface Element {
     Name: string;
     MobileNo: string;
     Emailid: string;
+}
+export interface BElement {
+    BankDetailNo: string;
+    BankName: string;
+    BankAddress: string;
+    IFSCCode: string;
+    BankAcNumber: string;
 }
 export interface AverageSource {
     White_Cement_Wall_Putty: string;
@@ -51,6 +60,15 @@ const datas: Element[] = [
         Name: "prasath",
         MobileNo: "9486740455",
         Emailid: "prasath@exalca.com",
+    },
+];
+const bdatas: BElement[] = [
+    {
+        BankDetailNo: "1",
+        BankName: "SBI",
+        BankAddress: "R.K.V, Layout",
+        IFSCCode: "SBIN0005943",
+        BankAcNumber: "1230456987456321",
     },
 ];
 const avgdatasource: AverageSource[] = [
@@ -122,6 +140,8 @@ export class ReportsviewComponent implements OnInit {
     BIform1!: FormGroup;
     contactDetailsColumns: string[] = ["Role", "Name", "MobileNo", "Emailid"];
     contactdataSource = datas;
+    bankdetailsdataSource = bdatas;
+    bankDetailsColumns: string[] = ["BankDetailNo", "BankName", "BankAddress", "IFSCCode","BankAcNumber"];
     averageSalesColumns: string[] = [
         "White_Cement_Wall_Putty",
         "WP_Avg_Month_Sales",
@@ -152,11 +172,17 @@ export class ReportsviewComponent implements OnInit {
     IdentityData: PersonIdentity[] = [];
     CustomerObdView: CustomerOnboardingView = new CustomerOnboardingView();
     transID: any;
+    bankInfoView: BankDetailsView = new BankDetailsView();
     MarketInfoView: MarketInformationView = new MarketInformationView();
     businessInfoView: BusinessInformationView = new BusinessInformationView();
     notificationSnackBarComponent: NotificationSnackBarComponent;
     Role: any;
-    isProgressBarVisibile: boolean;
+
+    isProgressBarVisibile:boolean;
+    DepositForm!: FormGroup;
+  BankForm!: FormGroup;
+  leaflist: string[] = ['DD', 'RTGS UTR', 'NEFT', 'IMPS', 'Cheque'];
+  isd2rs: boolean = false;
     constructor(
         private fb: FormBuilder,
         private _dashboardService: DashboardService, public snackBar: MatSnackBar, private _router: Router,
@@ -216,6 +242,15 @@ export class ReportsviewComponent implements OnInit {
                         console.log(err);
                     }
                 );
+                this._dashboardService.GetSecurityDetails(this.transID).subscribe(res => {
+                    console.log("view", res);
+                    this.bankInfoView = res;
+                    this.SetSecurityDepositDetailInfoView(this.bankInfoView);
+                    this.isProgressBarVisibile = false;
+                },
+                    err => {
+                        console.log(err);
+                    });  
         }
         this.MIform = this.fb.group({
             market: [""],
@@ -308,6 +343,20 @@ export class ReportsviewComponent implements OnInit {
             declare: [""],
             billing: [],
         });
+        this.DepositForm = this.fb.group({
+            leaf: ['', Validators.required],
+            Type: ['', Validators.required],
+            Date: ['', Validators.required],
+            Amount: ['', Validators.required],
+            nameofbank: ['', Validators.required],
+          });
+        this.BankForm = this.fb.group({
+          bankno: ['',Validators.required],
+          bankname: ['', Validators.required],
+          bankaddress: ['', Validators.required],
+          ifsccode: ['',[Validators.required,Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$')]],
+          bankacno: ['', Validators.required],
+        })
     }
     InitializeFormGroup() {
         this.PIform = this.fb.group({
@@ -351,6 +400,30 @@ export class ReportsviewComponent implements OnInit {
 
         // });
     }
+    GetBankDetails() {
+        this.isProgressBarVisibile = true;
+        this._dashboardService.GetSecurityDetails(this.currentTransaction).subscribe(res => {
+          console.log("view", res);
+          this.bankInfoView = res;
+          this.SetSecurityDepositDetailInfoView(this.bankInfoView);
+          this.isProgressBarVisibile = false;
+      },
+          err => {
+              console.log(err);
+          });
+      }
+      SetSecurityDepositDetailInfoView( bankInfoView: BankDetailsView = new BankDetailsView()) {
+        if (bankInfoView.SecurityDeposit.TransID != null) {
+          // businessinformation = businessInfoView.Businessinfo;
+          this.DepositForm.patchValue({
+            leaf: bankInfoView.SecurityDeposit.Leaf,
+            Type: bankInfoView.SecurityDeposit.Type,
+            Date: bankInfoView.SecurityDeposit.Date,
+            Amount: bankInfoView.SecurityDeposit.Amount,
+            nameofbank:bankInfoView.SecurityDeposit.BankName
+          });
+        }
+      }
     GetTransactionDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService
