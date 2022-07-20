@@ -648,7 +648,7 @@ export class InitiatorDashboardComponent implements OnInit {
         this.isProgressBarVisibile=false;
     });
     this._dashboardService
-    .getPersonalInfoByStatus("StokistApproved")
+    .getPersonalInfoByStatus("StockistApproved")
     .subscribe((data) => {
         this.AllApprovedDetails = data;
         this.isProgressBarVisibile=false;
@@ -758,7 +758,7 @@ export class InitiatorDashboardComponent implements OnInit {
     GetEmployeewithApprovesStatus(): void {
         this.isProgressBarVisibile=true;
         this._dashboardService
-            .getPersonalInfoByStatus("StokistApproved")
+            .getPersonalInfoByStatus("StockistApproved")
             .subscribe((data) => {
                 this.AllApprovedDetails = data;
                 this.LoadTableSource(this.AllApprovedDetails);

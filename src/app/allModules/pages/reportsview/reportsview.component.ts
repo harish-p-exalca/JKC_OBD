@@ -32,7 +32,6 @@ import {
 import { SnackBarStatus } from "app/notifications/snackbar-status-enum";
 import { Router } from "@angular/router";
 import { DomSanitizer } from "@angular/platform-browser";
-import { AttachmentDialogComponent } from "../attachment-dialog/attachment-dialog.component";
 import { saveAs } from "file-saver";
 
 export interface Element {
@@ -239,8 +238,8 @@ export class ReportsviewComponent implements OnInit {
         this.InitializeFormGroup();
         this.transID = localStorage.getItem("TransID");
         if (
-            localStorage.getItem("Approved") == "Approved" ||
-            localStorage.getItem("Rejected") == "Rejected"
+            localStorage.getItem("ActionStatus") == "Approved" ||
+            localStorage.getItem("ActionStatus") == "Rejected"
         ) {
             this.ApprovalButton = true;
         }
@@ -642,9 +641,9 @@ export class ReportsviewComponent implements OnInit {
                     }
                 );
         }
-        if (this.Role == "Stokist") {
+        if (this.Role == "Stockist") {
             var Cusotmer = new CustomerOnboardingView1();
-            Cusotmer.Status = "StokistApproved";
+            Cusotmer.Status = "StockistApproved";
             Cusotmer.TranID = this.transID;
             Cusotmer.UserID = this.authenticationDetails.UserID.toString();
             Cusotmer.PositionID = this.authenticationDetails.PositionID;
@@ -877,14 +876,14 @@ export class ReportsviewComponent implements OnInit {
             data: attachmentDetails,
             panelClass: "attachment-dialog",
         };
-        const dialogRef = this.dialog.open(
-            AttachmentDialogComponent,
-            dialogConfig
-        );
-        dialogRef.afterClosed().subscribe((result) => {
-            if (result) {
-            }
-        });
+        // const dialogRef = this.dialog.open(
+        //     AttachmentDialogComponent,
+        //     dialogConfig
+        // );
+        // dialogRef.afterClosed().subscribe((result) => {
+        //     if (result) {
+        //     }
+        // });
     }
     ngOnDestroy(): void {
         localStorage.removeItem("Approved");
