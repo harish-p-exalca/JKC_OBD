@@ -321,12 +321,15 @@
         </form>
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="" fxFlex="100" fxLayoutGap="4px" style="margin-top: 23px;background: white;">
+    <div fxLayout="row" fxLayoutAlign="end center" fxFlex="100" fxLayoutGap="4px" style="margin-top: 23px;background: white;">
       <div fxFlex="33"></div>
       <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px">
-        <button mat-flat-button class="previous" (click)="previousbtn()">
+        <button mat-flat-button class="previous" (click)="previousbtn()" fxLayout="row" fxLayoutGap="10px">
           <img class="previousimg" src="../../assets/images/previous.svg">
-          Previous</button>
+          <span class="prev_span">
+            Previous
+          </span>
+        </button>
       </div>
       <!-- <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px" style="margin-left:-20px">
         <button mat-flat-button class="next" (click)="nextbtn()">Next
@@ -334,9 +337,13 @@
         </button>
       </div> -->
       <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px">
-        <button mat-flat-button class="clear" (click)="ClearAll()"> Clear
-          <img class="clearimg" src="../../assets/images/clear.svg">
-        </button>
+        <button mat-flat-button class="clear" (click)="ClearAll()" fxLayout="row" fxLayoutGap="10px"
+        style="width: 100%;column-gap: 20px !important;">
+        <img class="clearimg" src="../../assets/images/clear.svg">
+        <span class="prev_span">
+          Clear
+        </span>
+      </button>
       </div>
       <!-- <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="5px" style="margin-left:-38px">
         <button mat-flat-button class="draft" (click)="ClearAll()"> Save as Draft

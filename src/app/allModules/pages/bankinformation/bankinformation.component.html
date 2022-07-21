@@ -191,36 +191,43 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
-                <button mat-flat-button class="add1" (click)="onAdd()">+</button>
+              <div fxLayout="column">
+                <button mat-flat-button style="margin-top: 34px;" (click)="onAdd()">+</button>
               </div>
+              <!-- <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                <button mat-flat-button class="add1" (click)="onAdd()">+</button>
+              </div> -->
 
 
             </div>
-            <div fxLayout="row">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Bank Detail No. </th>
-                    <th>Bank Name</th>
-                    <th>Bank Address</th>
-                    <th>IFSC Code</th>
-                    <th>Bank A/c Number</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of listData;let i = index">
-                    <td><span>{{i+1}}</span></td>
-                    <td><span>{{item?.BankName}}</span></td>
-                    <td><span>{{item?.BankAddress}}</span></td>
-                    <td><span>{{item?.IFSC}}</span></td>
-                    <td><span>{{item?.AccountNum}}</span></td>
-                    <!-- <td><button type="button" (click)="remove">Remove</button></td>
-                    <td><button type="button" (click)="additem()">Edit</button></td> -->
-                  </tr>
-                </tbody>
-              </table>
+            <div class="cement1">
+              <div fxLayout="row">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Bank Detail No. </th>
+                      <th>Bank Name</th>
+                      <th>Bank Address</th>
+                      <th>IFSC Code</th>
+                      <th>Bank A/c Number</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of listData even as isEven;let i = index" 
+                    [ngStyle]="{ background: isEven ? 'white' : '#f1f1f5'}">
+                      <td><span>{{i+1}}</span></td>
+                      <td><span>{{item?.BankName}}</span></td>
+                      <td><span>{{item?.BankAddress}}</span></td>
+                      <td><span>{{item?.IFSC}}</span></td>
+                      <td><span>{{item?.AccountNum}}</span></td>
+                      <!-- <td><button type="button" (click)="remove">Remove</button></td>
+                      <td><button type="button" (click)="additem()">Edit</button></td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+            
           </form>
         </mat-step>
         <!-- <mat-step [stepControl]="BIform">
@@ -606,7 +613,7 @@
       </mat-vertical-stepper>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100" fxLayoutGap="20px" style="margin-top: 23px;background: white;">
+  <div fxLayout="row" fxLayoutAlign="end center" fxFlex="100" fxLayoutGap="20px" style="margin-top: 23px;background: white;">
     <div fxFlex="33"></div>
     <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px">
       <button mat-flat-button class="previous" (click)="previousbtn()" fxLayout="row" fxLayoutGap="10px">

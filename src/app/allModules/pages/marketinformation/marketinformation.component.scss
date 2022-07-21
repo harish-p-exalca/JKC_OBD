@@ -586,32 +586,33 @@ td {
   overflow: visible;
 }
 
-.previousimg {
-  width: 13%;
-  cursor: pointer;
-  margin-bottom: 2px;
-
-}
-
-.previousimg:hover {
-  color: #00061C;
-}
-
 .previous {
-  margin-top: 35px;
-  ////font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
   cursor: pointer;
   background-color: white !important;
-  color: #8e8f92 !important;
-  margin-left: 42px;
-}
 
-.previous:hover {
-  color: #1434AA !important;
-  // background-color: #00061C !important;
-}
+  .prev_span {
+    color: #8e8f92 !important;
+    font-size: 14px;
+  }
 
+  .previousimg {
+    width: 13%;
+    cursor: pointer;
+    margin-bottom: 2px;
+  }
+
+  .previous:hover {
+    color: #1434AA !important;
+  }
+
+  .prev_span:hover {
+    color: #1434AA !important;
+  }
+
+  .previousimg:hover {
+    color: #00061C;
+  }
+}
 .next {
   margin-top: 35px;
   // //font-family: Arial, Helvetica, sans-serif;
@@ -635,18 +636,23 @@ td {
 }
 
 .clear {
-  margin-top: 35px;
-  // //font-family: Arial, Helvetica, sans-serif;
-  font-size: 17px;
+  font-size: 14px;
   cursor: pointer;
   background-color: white !important;
   color: #8e8f92 !important;
-  // margin-left: 35px;
+
+  .prev_span {
+    color: #8e8f92 !important;
+    font-size: 14px;
+  }
+
+  .prev_span:hover {
+    color: #1434AA !important;
+  }
 }
 
 .clear:hover {
   color: #1434AA !important;
-  // background-color: #00061C !important;
 }
 
 .draft {

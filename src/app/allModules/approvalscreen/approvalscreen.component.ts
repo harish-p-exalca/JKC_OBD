@@ -484,7 +484,7 @@ export class ApprovalscreenComponent implements OnInit {
                       }
                 );
         }
-        if (this.Role == "Stokist") {
+        if (this.Role == "Stockist") {
             // this.isProgressBarVisibile=true;
             // this._dashboardService
             // .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
@@ -674,7 +674,7 @@ export class ApprovalscreenComponent implements OnInit {
            }, 3000);
            
         }
-        if (this.Role == "Stokist") {
+        if (this.Role == "Stockist") {
             setTimeout(()=>{                           //<<<---using ()=> syntax
                 this.isProgressBarVisibile=true;
                 this._dashboardService
@@ -846,7 +846,7 @@ export class ApprovalscreenComponent implements OnInit {
         // }
     }
     GetEmployeewithApprovedStatus(): void {
-        localStorage.setItem("Approved", "Approved");
+        localStorage.setItem("ActionStatus", "Approved");
         this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString())
             .subscribe((data) => {
                 this.AllApprovedDetails = data;
@@ -956,7 +956,7 @@ export class ApprovalscreenComponent implements OnInit {
         //         // this.employeesDataSource.sort = this.sort;
         //         // this.employeesDataSource.paginator = this.paginator;
         //     });
-        localStorage.setItem("Rejected", "Rejected");
+        localStorage.setItem("ActionStatus", "Rejected");
         this._dashboardService.GetRejectedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString())
             .subscribe((data) => {
                 this.AllRejectedDetails = data;
@@ -979,9 +979,9 @@ export class ApprovalscreenComponent implements OnInit {
         localStorage.setItem("ActionStatus", "Draft");
         this._router.navigate(["pages/reportview"]);
     }
-    GotoPersonalInfoWithReview(TransID): void {
+    GotoPersonalInfoWithReview(TransID,a:string): void {
         localStorage.setItem("TransID", TransID);
-        localStorage.setItem("ActionStatus", "Responded");
+        localStorage.setItem("ActionStatus", a);
         this._router.navigate(["pages/reportview"]);
     }
 }
