@@ -681,7 +681,7 @@ export class InitiatorDashboardComponent implements OnInit {
        {
          this.GetEmployeewithDraft();
         }
-        if(this.tab==="Open")
+        if(this.tab==="Initiated")
        {
         this.GetEmployeewithRespodedStatus();
         }
@@ -796,6 +796,11 @@ export class InitiatorDashboardComponent implements OnInit {
     GotoPersonalInfoWithReview(TransID): void {
         localStorage.setItem("TransID", TransID);
         localStorage.setItem("ActionStatus", "Responded");
+        this._router.navigate(["pages/dashboard"]);
+    }
+    GotoPersonalDetailsWithReview(TransID): void {
+        localStorage.setItem("TransID", TransID);
+        localStorage.setItem("ActionStatus", "Pending");
         this._router.navigate(["pages/dashboard"]);
     }
 }

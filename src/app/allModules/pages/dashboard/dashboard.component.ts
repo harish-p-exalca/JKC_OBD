@@ -133,7 +133,7 @@ export class DashboardComponent implements OnInit {
             this.Role = true;
             this.SubmitValue = true;
         }
-
+       
         this.InitializeFormGroup();
         this.filteropt = this.PIform.get("State").valueChanges.pipe(
             startWith(""),
@@ -252,10 +252,19 @@ export class DashboardComponent implements OnInit {
             this.SubmitValue = true;
         }
         if (localStorage.getItem('ActionStatus') == "Responded") {
-            this.Responded = "Review";
+            this.Responded = "Responded";
+            this.SubmitValue = true;
+            // this.PIform.disable();
+
+            // this.firmForm.disable();
+
+        }
+        if(localStorage.getItem('ActionStatus') == "Pending")
+        {
+            this.SubmitValue = true;
             this.PIform.disable();
             this.firmForm.disable();
-
+            
         }
         this.selected = this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
         this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
@@ -307,8 +316,57 @@ export class DashboardComponent implements OnInit {
             this._commonService.ShowValidationErrors(this.PIform);
         }
     }
-    NextButtonClick() {
-        this._router.navigate(['/pages/businessinformation']);
+    NextButtonClick(isDraft: boolean = false) {
+        if (this.PIform.valid) {
+            if (this.IdentityData.length > 0) {
+                var cobView = new CustomerOnboardingView();
+                cobView.Transaction = new CustomerOnboarding();
+                cobView.Transaction.TranID =  Number(localStorage.getItem('TransID'));;
+                cobView.Transaction.Status = isDraft ? "InitiatorDraft" : "InitiatorReleased";
+                cobView.PersonalInfo = new PersonalInformationView();
+                cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+                cobView.PersonalInfo.Identities = this.IdentityData;
+                if(this.transID != null){
+                    cobView.Transaction.TranID=this.transID;
+                }
+                cobView.PositionID = this.authenticationDetails.PositionID;
+                cobView.UserID = this.authenticationDetails.UserID.toString();
+                console.log("cobView", cobView);
+                localStorage.setItem("category",this.PIform.get('category').value)
+                this.isProgressBarVisibile = true;
+                this._dashboardService.SaveCustomerPersonalDetails(cobView).subscribe(res => {
+                    console.log("From save api", res);
+                    this.isProgressBarVisibile = false;
+                    if (res.Status == 1) {
+                        this.notificationSnackBarComponent.openSnackBar(isDraft?"Draft saved successfully":"Details saved successfully",SnackBarStatus.success);
+                        this._router.navigate(['/pages/marketinformation']); 
+                    }
+                    else {
+                        this.notificationSnackBarComponent.openSnackBar(res.Error, SnackBarStatus.danger);
+                    }
+                    if(!isDraft){
+                        this.ClearAll();
+                    }
+                },
+                    err => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
+                    }
+                );
+            }
+            else {
+                this.notificationSnackBarComponent.openSnackBar("Please fill contact details", SnackBarStatus.warning);
+            }
+        }
+        else if(this.PIform.disabled)
+        {
+            localStorage.setItem("ActionStatus", "Pending");
+            this._router.navigate(['/pages/marketinformation']); 
+        }
+        else {
+            this._commonService.ShowValidationErrors(this.PIform);
+        }
+      
     }
     GetPersonalInfoFromForm(): PersonalInformation {
         var pi = new PersonalInformation();
@@ -454,6 +512,9 @@ export class DashboardComponent implements OnInit {
             this.PinCodes=res;
         });
     }
+    NxtButtonClick(){
+        this._router.navigate(['/pages/businessinformation']); 
+    }
     // GetEmployees(): void {
     //     this._dashboardService.getEmployee().subscribe(
     //         (data) => {
@@ -549,16 +610,17 @@ export class DashboardComponent implements OnInit {
         var identity = this.PIform.get('Status').value;
         var role = "";
         if (identity == "Proprietor") {
-            role = "Proprietor " + (this.IdentityData.length + 1).toString().replace(/^0+/, '');
+            //role = "Proprietor " + (this.IdentityData.length + 1).toString().replace(/^0+/, '');
+            role = "Proprietor " + (this.IdentityData.length + 1).toString();
         }
         else if (identity == "Partnership") {
-            role = "Partner " + this.IdentityData.length + 1;
+            role = "Partner " + (this.IdentityData.length + 1).toString();
         }
         else if (identity == "Huf") {
-            role = "Partner " + this.IdentityData.length + 1;
+            role = "Partner " + (this.IdentityData.length + 1).toString();
         }
         else {
-            role = "Director " + this.IdentityData.length + 1;
+            role = "Director " + (this.IdentityData.length + 1).toString();
         }
         return role;
     }
@@ -595,7 +657,7 @@ export class DashboardComponent implements OnInit {
         return true;
     }
     ngOnDestroy(): void {
-        localStorage.removeItem('ActionStatus');
-        localStorage.removeItem('TransID');
+        //localStorage.removeItem('ActionStatus');
+       // localStorage.removeItem('TransID');
     }
 }

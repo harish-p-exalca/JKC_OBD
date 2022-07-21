@@ -237,10 +237,10 @@ export class DashboardService {
         const formData: FormData = new FormData();
         if (selectedFiles && selectedFiles.length) {
             selectedFiles.forEach(x => {
-                formData.append(x.name, x, x.name);
+                formData.append(x.name, x,x.name);
             });
         }
-        // formData.append('DocumentTitle', header.DocumentTitle);
+        //formData.append('DocumentTitle', header.DocumentTitle);
         formData.append('TransID', TransID.toString());
 
 

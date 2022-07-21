@@ -73,6 +73,7 @@ export class MarketinformationComponent implements OnInit {
     SOption: States[] = [];
     isProgressBarVisibile:boolean;
     MarketInfoView: MarketInformationView = new MarketInformationView();
+    TransID:number;
     constructor(
         private fb: FormBuilder,
         private _router: Router,
@@ -109,6 +110,7 @@ export class MarketinformationComponent implements OnInit {
                 this.authenticationDetails.Token
             );
         }
+        this.TransID=parseInt(localStorage.getItem("TransID"));
         this.MIform = this.fb.group({
             market: [""],
             Population: [""],
@@ -137,6 +139,17 @@ export class MarketinformationComponent implements OnInit {
                 ],
             ],
             PartyBackground: ["", Validators.required],
+            
+        });
+        this.MIform.get("YearOfEstablished").valueChanges.subscribe((value) => {
+            if (value != "") {
+                if (value <= 1800 || value >= 3000) {
+                    value = 2022;
+                    this.MIform.get("YearOfEstablished").setValue(
+                        value
+                    );
+                }
+            }
         });
         this.BrandForm = this.fb.group({
             brand: ["", Validators.required],
@@ -152,11 +165,12 @@ export class MarketinformationComponent implements OnInit {
             },
             (err) => console.log(err)
         );
+       
     }
     GetMarketDetails() {
         this.isProgressBarVisibile=true;
         this._dashboardService
-            .GetMarketInformationView(this.currentTransaction)
+            .GetMarketInformationView(this.TransID)
             .subscribe(
                 (res) => {
                     console.log("view", res);
@@ -189,6 +203,10 @@ export class MarketinformationComponent implements OnInit {
                 Gst: MarketInfoView.MarketInformation.GstNo,
                 PartyBackground: MarketInfoView.MarketInformation.Background,
             });
+            if(localStorage.getItem('ActionStatus') == "Pending")
+            {
+                this.MIform.disable();
+            }
             // this.BrandForm.patchValue({
             //   sales: ['', Validators.required],
             //   date1: [''],
@@ -197,6 +215,7 @@ export class MarketinformationComponent implements OnInit {
         }
     }
     SubmitButtonClick(isDraft: boolean = false) {
+        console.log(this.MIform.disabled);
         if (this.MIform.valid) {
             var cobView = new MarketInformationView();
             cobView.MarketInformation = this.GetMarketInfoFromForm();
@@ -207,7 +226,7 @@ export class MarketinformationComponent implements OnInit {
                 (res) => {
                     console.log("From save api", res);
                     this.isProgressBarVisibile=false;
-                    this._router.navigate(["pages/bankinformation"]);
+                    this._router.navigate(["pages/businessinformation"]);
                     this.ClearAll();
                 },
                 (err) => {
@@ -217,7 +236,13 @@ export class MarketinformationComponent implements OnInit {
                     );
                 }
             );
-        } else {
+        } 
+        else if(this.MIform.disabled)
+        {
+            localStorage.setItem("ActionStatus", "Pending");
+            this._router.navigate(['/pages/businessinformation']); 
+        }
+        else {
             this._commonService.ShowValidationErrors(this.MIform);
         }
     }
@@ -237,14 +262,24 @@ export class MarketinformationComponent implements OnInit {
         marketInformation.PanNo = this.MIform.get("Pan").value;
         marketInformation.GstNo = this.MIform.get("Gst").value;
         marketInformation.Background = this.MIform.get("PartyBackground").value;
-        marketInformation.TransID = this.currentTransaction;
+        marketInformation.TransID = this.TransID;
         return marketInformation;
     }
     previousbtn(): void {
-        this._router.navigate(["pages/businessinformation"]);
+        this._router.navigate(["pages/dashboard"]);
     }
     nextbtn(): void {
         this._router.navigate(["pages/businessinformation"]);
+    }
+    keyPressNumbers(event) {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        // Only Numbers 0-9
+        if ((charCode < 48 || charCode > 57)) {
+            event.preventDefault();
+            return false;
+        } else {
+            return true;
+        }
     }
     IsGstValid() {
         let GST = this.MIform.controls["Gst"].value;

@@ -99,7 +99,7 @@
               <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
                
               
-                <input autocomplete="off" matInput   mode="YEAR" placeholder="Year of Establishment" formControlName="YearOfEstablished" [max]="2020" class="inputform " maxlength="4"
+                <input autocomplete="off" type="number" matInput mode="YEAR" placeholder="Year of Establishment" formControlName="YearOfEstablished" class="inputform " (keypress)="keyPressNumbers($event)"
                          required>
              
                   <mat-error class="errorn"
@@ -107,7 +107,7 @@
                     Year of Establishment is
                     required
                   </mat-error>
-               
+                
               </div>
             </div>
 
