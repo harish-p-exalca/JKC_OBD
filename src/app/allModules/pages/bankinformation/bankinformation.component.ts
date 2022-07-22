@@ -25,7 +25,7 @@ import { MatDialog, throwMatDialogContentAlreadyAttachedError } from '@angular/m
 import { map, startWith } from 'rxjs/operators';
 import { BankdialogComponent } from '../bankdialog/bankdialog.component';
 import { CommonService } from 'app/services/common.service';
-
+import { saveAs } from "file-saver";
 
 @Component({
   selector: 'app-bankinformation',
@@ -51,6 +51,14 @@ export class BankinformationComponent implements OnInit {
   FileName5:any;
   FileName6:any;
   FileName7:any;
+  Attach1: DocumentRequired;
+  Attach2: DocumentRequired;
+  Attach3: DocumentRequired;
+  Attach4: DocumentRequired;
+  Attach5: DocumentRequired;
+  Attach6: DocumentRequired;
+  Attach7: DocumentRequired;
+  Attach8: DocumentRequired;
   FileError:boolean=true;
   name: any = [];
   public listData: BankDetails[] = [];
@@ -66,7 +74,8 @@ export class BankinformationComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   btn_name: string;
   uploadbtn: boolean;
-  constructor(private fb: FormBuilder,private _commonService: CommonService, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, public dialog: MatDialog) {
+  AttachmentData: any;
+  constructor(private fb: FormBuilder,private sanitizer: DomSanitizer,private _commonService: CommonService, private _router: Router, private _dashboardService: DashboardService, public snackBar: MatSnackBar, public dialog: MatDialog) {
     this.isProgressBarVisibile = false;
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar), this.listData = [];
   }
@@ -89,6 +98,7 @@ export class BankinformationComponent implements OnInit {
   BIform!: FormGroup;
   BankForm!: FormGroup;
   selectedPersonalInfo: PersonalInfo = null;
+  
   ngOnInit(): void {
     const retrievedObject = localStorage.getItem('authorizationData');
     if (retrievedObject) {
@@ -117,6 +127,87 @@ export class BankinformationComponent implements OnInit {
     bankacno: ['', Validators.required],
    
   })
+
+  this._dashboardService
+                .GetAttachment(this.TransID, "PanCard")
+                .subscribe(
+                    (data) => {
+                        this.Attach1 = data as DocumentRequired;
+                    },
+                    (err) => {
+                        console.error(err);
+                    }
+                );
+        this._dashboardService
+                .GetAttachment(this.TransID, "GSTCertificate")
+                .subscribe(
+                    (data) => {
+                        this.Attach2 = data as DocumentRequired;
+                    },
+                    (err) => {
+                        console.error(err);
+                    }
+                );
+                this._dashboardService
+                .GetAttachment(this.TransID, "AadharCard")
+                .subscribe(
+                    (data) => {
+                        this.Attach3 = data as DocumentRequired;
+                    },
+                    (err) => {
+                        console.error(err);
+                    }
+                );
+                this._dashboardService
+                .GetAttachment(this.TransID, "CancelledCheque")
+                .subscribe(
+                    (data) => {
+                        this.Attach4 = data as DocumentRequired;  
+                    },
+                    (err) => {
+                        console.error(err);
+                    }
+                );
+                this._dashboardService
+                .GetAttachment(this.TransID, "PartnerPhoto")
+                .subscribe(
+                    (data) => {
+                        this.Attach5 = data as DocumentRequired;   
+                    },
+                    (err) => {
+                        console.error(err);
+                    }
+                );
+                this._dashboardService
+                .GetAttachment(this.TransID, "TDSDeclaration")
+                .subscribe(
+                    (data) => {
+                        this.Attach6 = data as DocumentRequired; 
+                    },
+                    (err) => {
+                        console.error(err);
+                    }
+                );
+                this._dashboardService
+                .GetAttachment(this.TransID, "AddressProof")
+                .subscribe(
+                    (data) => {
+                        this.Attach7 = data as DocumentRequired;   
+                    },
+                    (err) => {
+                        console.error(err);
+                    }
+                );
+                this._dashboardService
+                .GetAttachment(this.TransID, "SignedDocument")
+                .subscribe(
+                    (data) => {
+                        this.Attach8 = data as DocumentRequired;   
+                    },
+                    (err) => {
+                        console.error(err);
+                    }
+                );
     // if (retrievedvalue == 'ok') {
     //   this.isd2rs = true;
     //   this.BIform.get('leaf').disable();
@@ -147,6 +238,7 @@ export class BankinformationComponent implements OnInit {
       },
       (err) => console.log(err)
   );
+  
   }
   ClearAll(): void {
     this.BIform.reset();
@@ -154,7 +246,47 @@ export class BankinformationComponent implements OnInit {
   previousbtn(): void {
     this._router.navigate(['pages/businessinformation']);
   }
-
+  GetAttachment(fileName: string, file?: File): void {
+    // if (file && file.size) {
+    //     const blob = new Blob([file], { type: file.type });
+    //     this.OpenAttachmentDialog(fileName, blob);
+    // } else {
+    this.isProgressBarVisibile = true;
+    this._dashboardService
+        .DowloandAttachment(fileName, this.TransID)
+        .subscribe(
+            (data) => {
+                if (data) {
+                    let fileType = "image/jpg";
+                    fileType = fileName.toLowerCase().includes(".jpg")
+                        ? "image/jpg"
+                        : fileName.toLowerCase().includes(".jpeg")
+                        ? "image/jpeg"
+                        : fileName.toLowerCase().includes(".png")
+                        ? "image/png"
+                        : fileName.toLowerCase().includes(".gif")
+                        ? "image/gif"
+                        : fileName.toLowerCase().includes(".pdf")
+                        ? "application/pdf"
+                        : "";
+                    const blob = new Blob([data], { type: fileType });
+                    const fileURL = URL.createObjectURL(blob);
+                    this.AttachmentData =
+                        this.sanitizer.bypassSecurityTrustResourceUrl(
+                            fileURL
+                        );
+                    saveAs(blob, fileName);
+                    // this.OpenAttachmentDialog(fileName, blob);
+                }
+                this.isProgressBarVisibile = false;
+            },
+            (error) => {
+                console.error(error);
+                this.isProgressBarVisibile = false;
+            }
+        );
+    // }
+}
   GetBankDetails() {
     this.isProgressBarVisibile = true;
     this._dashboardService.GetSecurityDetails(this.TransID).subscribe(res => {
@@ -209,7 +341,7 @@ export class BankinformationComponent implements OnInit {
             (res) => {
                 console.log("From save api", res); 
                 this.isProgressBarVisibile = false;
-                this._dashboardService.AddDocumentRequiredAttachment(this.TransID,this.files).subscribe(
+                this._dashboardService.AddDocumentRequiredAttachment(this.TransID,this.files,this.Documentname).subscribe(
                   (res) => {
                     console.log("Attachment added",res);
                     this.isProgressBarVisibile = false;
@@ -408,7 +540,7 @@ GetSecurityInfoFromForm(): SecurityDepositDetail {
     // this.GetAttachment(fileInputEvent.target.files[0],"Address Proof");
   }
   csv7InputChange(event) {
-    this.handleFileInput(event,"SignedDosument");
+    this.handleFileInput(event,"SignedDocument");
     this.FileName7 = event.target.files[0].name;
     // console.log(fileInputEvent.target.files[0]);
     // this.GetAttachment(fileInputEvent.target.files[0],"Signed Digital Document");
@@ -416,7 +548,7 @@ GetSecurityInfoFromForm(): SecurityDepositDetail {
   nextbtn(): void {
     this._router.navigate(['pages/nextlogin'])
   }
-  public Documentname;
+  public Documentname = '';
   public PanCard;
   public GSTCertificate;
   public AadharCard;
@@ -436,43 +568,45 @@ GetSecurityInfoFromForm(): SecurityDepositDetail {
     if(Filename == "PanCard")
     {
       this.PanCard = Filename;
-      // this.Documentname = this.PanCard;
+       this.Documentname += [this.PanCard,''].join(', ');
     }
     if(Filename == "GSTCertificate")
     {
       this.GSTCertificate = Filename;
-      // this.Documentname = this.PanCard.concat(this.GSTCertificate.toString());
+      this.Documentname += [this.GSTCertificate,''].join(', ');
     }
     if(Filename == "AadharCard")
     {
       this.AadharCard = Filename;
-      // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard);
+      this.Documentname += [this.AadharCard,''].join(', ');
     }
     if(Filename == "CancelledCheque")
     {
       this.CancelledCheque = Filename;
-      // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque);
+      this.Documentname += [this.CancelledCheque,''].join(', ');
     }
     if(Filename == "PartnerPhoto")
     {
       this.PartnerPhoto = Filename;
-      // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto);
+      this.Documentname += [this.PartnerPhoto,''].join(', ');
     }
     if(Filename == "TDSDeclaration")
     {
       this.TDSDeclaration = Filename;
-      // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration);
+      this.Documentname += [this.TDSDeclaration,''].join(', ');
     }
     if(Filename == "AddressProof")
     {
       this.AddressProof = Filename;
-      // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof);
+      this.Documentname += [this.AddressProof,''].join(', ');
     }
     if(Filename == "SignedDocument")
     {
       this.SignedDocument = Filename;
-      // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument);
+      this.Documentname += [this.SignedDocument,''].join(', ');
     }
+   // this.Documentname += [this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument].join(', ');
+  // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument);
     console.log("Doc Name",this.Documentname);
     console.log(File);
     this.files.push(selectedFiles);

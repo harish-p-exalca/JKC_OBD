@@ -56,6 +56,10 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetAllPersoalDetailsByStatus?status=${status}`,)
             .pipe(catchError(this.errorHandler));
     }
+    GetAllRejectedPersonalStatusInfo(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetAllRejectedPersonalStatusInfo`)
+            .pipe(catchError(this.errorHandler));
+    }
     updateCustomerOnboardingStatus(CustomerOnboarding): Observable<any> {
         return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingStatus`, CustomerOnboarding, {
             headers: new HttpHeaders({
@@ -83,8 +87,8 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetRejectedCustomerOnBoardingByUser?UserID=${UserID}`,)
             .pipe(catchError(this.errorHandler));
     }
-    GetAttachment(TransID: number): Observable<DocumentRequired | string> {
-        return this._httpClient.get<DocumentRequired>(`${this.baseAddress}api/BankDetails/GetDocumentAttachment?TransID=${TransID}`)
+    GetAttachment(TransID: number,DocumentTitle:string): Observable<DocumentRequired | string> {
+        return this._httpClient.get<DocumentRequired>(`${this.baseAddress}api/BankDetails/GetDocumentAttachment?TransID=${TransID}&DocumentTitle=${DocumentTitle}`)
             .pipe(catchError(this.errorHandler));
     }
     DowloandAttachment(AttachmentName: string,TransID: number): Observable<Blob | string> {
@@ -233,14 +237,14 @@ export class DashboardService {
             })
         }).pipe(catchError(this.errorHandler));
     }
-    AddDocumentRequiredAttachment(TransID: number, selectedFiles: File[]): Observable<any> {
+    AddDocumentRequiredAttachment(TransID: number, selectedFiles: File[],DocumentTitle:string): Observable<any> {
         const formData: FormData = new FormData();
         if (selectedFiles && selectedFiles.length) {
             selectedFiles.forEach(x => {
                 formData.append(x.name, x,x.name);
             });
         }
-        //formData.append('DocumentTitle', header.DocumentTitle);
+         formData.append('DocumentTitle',DocumentTitle);
         formData.append('TransID', TransID.toString());
 
 

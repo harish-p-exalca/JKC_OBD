@@ -653,13 +653,13 @@
             <span fxFlex="30" class="marketsp">Copy of Pan Card*</span>
 
             <div fxLayout="column" fxFlex="50" class="">
-              <p style="margin-left:14%;" *ngIf="Attach?.AttachmentName"> {{Attach?.AttachmentName}}</p>
+              <p style="margin-left:14%;" *ngIf="Attach1?.AttachmentName"> {{Attach1?.AttachmentName}}</p>
               <!-- <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csvInputChange($event)"/>
               <button mat-raised-button class="uploadbtn" (click)="csvInput.click()" style="color: green;">Upload</button> -->
               
             </div>
             <div fxLayout="column" fxFlex="50" class="">
-              <button mat-raised-button download="file.txt" (click)="GetAttachment(Attach?.AttachmentName)" class="uploadbtn">Download</button>
+              <button mat-raised-button download="file.txt" (click)="GetAttachment(Attach1?.AttachmentName)" class="uploadbtn">Download</button>
             </div>
 
 
@@ -669,13 +669,13 @@
             <span fxFlex="30" class="marketsp">Copy of Gst Certificate</span>
 
             <div fxLayout="column" fxFlex="50" class="">
-              <p style="margin-left:14%;"></p>
+              <p style="margin-left:14%;" *ngIf="Attach2?.AttachmentName"> {{Attach2?.AttachmentName}}</p>
               <!-- <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv1InputChange($event)"/>
               <button mat-raised-button class="uploadbtn" (click)="csvInput1.click()" style="color: green;">Upload</button> -->
              
             </div>
             <div fxLayout="column" fxFlex="50" class="">
-              <button mat-raised-button class="uploadbtn">Download</button>
+              <button mat-raised-button class="uploadbtn" (click)="GetAttachment(Attach2?.AttachmentName)">Download</button>
             </div>
 
           </div>
@@ -684,13 +684,13 @@
             <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
 
             <div fxLayout="column" fxFlex="50" class="">
-              <p style="margin-left:14%;"></p>
+              <p style="margin-left:14%;" *ngIf="Attach3?.AttachmentName"> {{Attach3?.AttachmentName}}</p>
               <!-- <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv2InputChange($event)"/>
               <button mat-raised-button class="uploadbtn" (click)="csvInput2.click()" style="color: green;">Upload</button> -->
               
             </div>
             <div fxLayout="column" fxFlex="50" class="">
-              <button mat-raised-button class="uploadbtn">Download</button>
+              <button mat-raised-button (click)="GetAttachment(Attach3?.AttachmentName)" class="uploadbtn">Download</button>
             </div>
 
           </div>
@@ -700,14 +700,14 @@
             <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
 
             <div fxLayout="column" fxFlex="50" class="">
-              <p style="margin-left:14%;"></p>
+              <p style="margin-left:14%;" *ngIf="Attach4?.AttachmentName"> {{Attach4?.AttachmentName}}</p>
               <!-- <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv3InputChange($event)"/>
               <button mat-raised-button class="uploadbtn" (click)="csvInput3.click()" style="color: green;">Upload</button> -->
           
             </div>
 
             <div fxLayout="column" fxFlex="50" class="">
-              <button mat-raised-button class="uploadbtn">Download</button>
+              <button mat-raised-button (click)="GetAttachment(Attach4?.AttachmentName)" class="uploadbtn">Download</button>
             </div>
           </div>
 
@@ -716,13 +716,13 @@
             <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
 
             <div fxLayout="column" fxFlex="50" class="">
-              <p style="margin-left:14%;"></p>
+              <p style="margin-left:14%;" *ngIf="Attach5?.AttachmentName"> {{Attach5?.AttachmentName}}</p>
               <!-- <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv4InputChange($event)"/>
               <button mat-raised-button class="uploadbtn" (click)="csvInput4.click()" style="color: green;">Upload</button> -->
              
             </div>
             <div fxLayout="column" fxFlex="50" class="">
-              <button mat-raised-button class="uploadbtn">Download</button>
+              <button mat-raised-button (click)="GetAttachment(Attach5?.AttachmentName)" class="uploadbtn">Download</button>
             </div>
 
           </div>
@@ -732,13 +732,13 @@
             <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
 
             <div fxLayout="column" fxFlex="50" class="">
-              <p style="margin-left:14%;"></p>
+              <p style="margin-left:14%;" *ngIf="Attach6?.AttachmentName"> {{Attach6?.AttachmentName}}</p>
               <!-- <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv5InputChange($event)"/>
               <button mat-raised-button class="uploadbtn" (click)="csvInput5.click()" style="color: green;">Upload</button> -->
             
             </div>
             <div fxLayout="column" fxFlex="50" class="">
-              <button mat-raised-button class="uploadbtn">Download</button>
+              <button mat-raised-button (click)="GetAttachment(Attach6?.AttachmentName)" class="uploadbtn">Download</button>
             </div>
 
           </div>
@@ -748,13 +748,13 @@
             <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
 
             <div fxLayout="column" fxFlex="50" class="">
-              <p style="margin-left:14%;"></p>
+              <p style="margin-left:14%;" *ngIf="Attach7?.AttachmentName"> {{Attach7?.AttachmentName}}</p>
               <!-- <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv6InputChange($event)"/>
               <button mat-raised-button class="uploadbtn" (click)="csvInput6.click()" style="color: green;">Upload</button> -->
               
             </div>
             <div fxLayout="column" fxFlex="50" class="">
-              <button mat-raised-button class="uploadbtn">Download</button>
+              <button mat-raised-button (click)="GetAttachment(Attach7?.AttachmentName)" class="uploadbtn">Download</button>
             </div>
 
           </div>
@@ -763,13 +763,13 @@
             <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
 
             <div fxLayout="column" fxFlex="50" class="">
-              <p style="margin-left:14%;"></p>
+              <p style="margin-left:14%;" *ngIf="Attach8?.AttachmentName"> {{Attach8?.AttachmentName}}</p>
               <!-- <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv7InputChange($event)"/>
               <button mat-raised-button class="uploadbtn" (click)="csvInput7.click()" style="color: green;">Upload</button> -->
             </div>
 
             <div fxLayout="column" fxFlex="50" class="">
-              <button mat-raised-button class="uploadbtn">Download</button>
+              <button mat-raised-button (click)="GetAttachment(Attach8?.AttachmentName)" class="uploadbtn">Download</button>
             </div>
           </div>
 
