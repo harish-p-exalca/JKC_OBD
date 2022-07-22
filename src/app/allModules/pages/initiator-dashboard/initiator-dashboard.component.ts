@@ -654,7 +654,7 @@ export class InitiatorDashboardComponent implements OnInit {
         this.isProgressBarVisibile=false;
     });
     this._dashboardService
-    .getPersonalInfoByStatus("Rejected")
+    .GetAllRejectedPersonalStatusInfo()
     .subscribe((data) => {
         this.AllRejectedDetails = data;
         this.isProgressBarVisibile=false;
@@ -772,16 +772,12 @@ export class InitiatorDashboardComponent implements OnInit {
     GetEmployeewithRejectedStatus(): void {
         this.isProgressBarVisibile=true;
         this._dashboardService
-            .getPersonalInfoByStatus("Rejected")
-            .subscribe((data) => {
-                this.AllRejectedDetails = data;
-                this.LoadTableSource(this.AllRejectedDetails);
-                this.isProgressBarVisibile=false;
-                // this.employeesDataSource =
-                //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-                // this.employeesDataSource.sort = this.sort;
-                // this.employeesDataSource.paginator = this.paginator;
-            });
+        .GetAllRejectedPersonalStatusInfo()
+        .subscribe((data) => {
+            this.AllRejectedDetails = data;
+            this.LoadTableSource(this.AllRejectedDetails);
+            this.isProgressBarVisibile=false;
+        });
     }
     LoadTableSource(DataArray: any[]) {
         this.employeesDataSource = new MatTableDataSource(DataArray);
