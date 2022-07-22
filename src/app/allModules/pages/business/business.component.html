@@ -23,7 +23,7 @@
       <form [formGroup]="BIform" fxLayoutAlign="space-around start" class="form_div">
         <div fxLayout="column" class="form_div_I">
           <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-            <span fxFlex="35" class="marketsp">Total Turn Over of 3 years*</span>
+            <span fxFlex="35" class="marketsp">Total Turn Over of 3 years(In Crores)*</span>
             <div fxLayout="row" fxFlex="35" fxLayoutAlign="start start" class="inp_div" fxLayoutGap="10px">
               <div fxLayout="row" fxFlex="100" class="inner-inp_div" fxLayoutGap="20px">
                 <div fxLayout="column" fxFlex="38">
@@ -61,7 +61,7 @@
           </div>
 
           <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-            <span fxFlex="35" class="marketsp">Total Storage Capacity*</span>
+            <span fxFlex="35" class="marketsp">Total Storage Capacity(In Bags)*</span>
             <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
               <div fxLayout="column" fxFlex="100" class="inner-inp_div">
                 <input autocomplete="off" placeholder=" Enter the capacity" formControlName="storagecapacity"
@@ -77,7 +77,7 @@
           </div>
 
           <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-            <span fxFlex="35" class="marketsp">Working Capital to be Invested*</span>
+            <span fxFlex="35" class="marketsp">Working Capital to be Invested(In Rs)*</span>
             <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
               <div fxLayout="column" fxFlex="100" class="inner-inp_div">
                 <input autocomplete="off" placeholder=" Enter the working captial" formControlName="capitalinvest"
@@ -98,7 +98,7 @@
             <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
               <div fxLayout="column" fxFlex="100" class="inner-inp_div">
                 <input autocomplete="off" placeholder=" Enter No.of.Vehicle owned" formControlName="vehicle"
-                  class="inputform" required (keypress)="keyPressNumbers($event)">
+                  class="inputform" (keypress)="keyPressAlphaNumeric($event)" required>
                 <mat-error class="errorn"
                   *ngIf="BIform?.get('vehicle')?.touched && BIform?.get('vehicle')?.hasError('required')">
                   No of Vehicle Owned

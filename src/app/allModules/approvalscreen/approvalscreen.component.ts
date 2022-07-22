@@ -494,6 +494,16 @@ export class ApprovalscreenComponent implements OnInit {
             //         this.isProgressBarVisibile=false;
             //         this.LoadTableSource(this.AllHeaderDetails);
             //     });
+           this. employeesDisplayColumns = [
+                "No",
+                "Customer code",
+                "Name",
+                "Gmail",
+                "Type",
+                "Country",
+                "Status",
+                "Action",
+            ];
                 this._dashboardService.GetStokistPieData().subscribe(
                     x => {
                         this.chartOptions1.series = x;
@@ -675,6 +685,16 @@ export class ApprovalscreenComponent implements OnInit {
            
         }
         if (this.Role == "Stockist") {
+            this. employeesDisplayColumns = [
+                "No",
+                "Customercode",
+                "Name",
+                "Gmail",
+                "Type",
+                "Country",
+                "Status",
+                "Action",
+            ];
             setTimeout(()=>{                           //<<<---using ()=> syntax
                 this.isProgressBarVisibile=true;
                 this._dashboardService

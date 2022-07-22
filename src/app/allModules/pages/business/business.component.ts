@@ -61,6 +61,7 @@ export class BusinessComponent implements OnInit {
 
     currentTransaction: number;
     businessInfoView: BusinessInformationView = new BusinessInformationView();
+    TransID:number;
     constructor(
         private fb: FormBuilder,
         private _router: Router,
@@ -98,6 +99,8 @@ export class BusinessComponent implements OnInit {
                 this.authenticationDetails.Token
             );
         }
+        this.TransID=parseInt(localStorage.getItem("TransID"));
+        
         this.BIform = this.fb.group({
             NoOfYears: ["", Validators.required],
             NoOfYears1: ["", Validators.required],
@@ -147,7 +150,7 @@ export class BusinessComponent implements OnInit {
     GetBusinessDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService
-            .GetBusinessInformationView(this.currentTransaction)
+            .GetBusinessInformationView(this.TransID)
             .subscribe(
                 (res) => {
                     console.log("view", res);
@@ -174,6 +177,10 @@ export class BusinessComponent implements OnInit {
                 vehicle: businessInfoView.Businessinfo.NoVechicle,
                 Wholesale: businessInfoView.Businessinfo.Wholesale,
             });
+            if(localStorage.getItem('ActionStatus') == "Pending")
+            {
+                this.BIform.disable();
+            }
             this.SetSalesTargets(businessInfoView.SalesandTargets);
         }
     }
@@ -220,7 +227,7 @@ export class BusinessComponent implements OnInit {
                 (res) => {
                     console.log("From save api", res);
                     this.isProgressBarVisibile = false;
-                    this._router.navigate(["pages/marketinformation"]);
+                    this._router.navigate(["pages/bankinformation"]);
                     this.ClearAll();
                 },
                 (err) => {
@@ -230,7 +237,13 @@ export class BusinessComponent implements OnInit {
                     );
                 }
             );
-        } else {
+        }
+            else if(this.BIform.disabled)
+            {
+                localStorage.setItem("ActionStatus", "Pending");
+                this._router.navigate(['/pages/bankinformation']); 
+            }
+         else {
             this._commonService.ShowValidationErrors(this.BIform);
         }
     }
@@ -251,7 +264,7 @@ export class BusinessComponent implements OnInit {
         businessformvalues.Wholesale = parseInt(
             this.BIform.get("Wholesale").value
         );
-        businessformvalues.TransID = this.currentTransaction;
+        businessformvalues.TransID = this.TransID;
         return businessformvalues;
     }
     public saletableNumber: number = 0;
@@ -272,7 +285,17 @@ export class BusinessComponent implements OnInit {
             return true;
         }
     }
+    keyPressAlphaNumeric(event) {
 
+        var inp = String.fromCharCode(event.keyCode);
+    
+        if (/[a-zA-Z0-9]/.test(inp)) {
+          return true;
+        } else {
+          event.preventDefault();
+          return false;
+        }
+      }
     saveBusinessInfo(): void {
         // if (this.BIform.valid) {
         //     const businessformvalues: BusinessInformation =
@@ -361,15 +384,26 @@ export class BusinessComponent implements OnInit {
         }
         return true;
     }
+AlphaNumericOnly(event) {
+        // alert(e.keyCode);
+         var keyCode = event.keyCode == 0 ? event.charCode : event.keyCode;
+         if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <=
+122) || (keyCode == 32)){
+    return true;
+}
+        else{
+            return false;
+        }
+     }
     onAdd(): void {
         this.listData.push(this.BrandForm.value);
         this.BrandForm.reset();
     }
     RegistrationClicked(): void {
-        this._router.navigate(["pages/marketinformation"]);
+        this._router.navigate(["pages/bankinformation"]);
     }
     previousbtn(): void {
-        this._router.navigate(["pages/dashboard"]);
+        this._router.navigate(["pages/marketinformation"]);
     }
     nextbtn(): void {
         this._router.navigate(["pages/bankinformation"]);

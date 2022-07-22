@@ -85,7 +85,7 @@
               <mat-error class="errorn"
                 *ngIf="PIform?.get('Name')?.touched && !PIform?.get('Name')?.hasError('required') && PIform?.get('Name')?.hasError('pattern')">
                 Please enter a valid Name
-              </mat-error>
+              </mat-error> 
             </div>
 
           </div>
@@ -333,7 +333,7 @@
       </form>
     </div>
   </div>
-  <div *ngIf="Responded != 'Review'" fxLayout="row" fxLayoutAlign="end center" fxFlex="100" fxLayoutGap="4px"
+  <div  fxLayout="row" fxLayoutAlign="end center" fxFlex="100" fxLayoutGap="4px"
     style="margin-top: 23px;background: white;">
     <div fxFlex="48"></div>
 
@@ -352,7 +352,6 @@
   
       <button *ngIf="SubmitValue != true" mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Submit</button>
       <button *ngIf="SubmitValue == true" mat-raised-button class="savebtn" (click)="NextButtonClick()">Save & Next</button>
-   
   
 
   </div>
