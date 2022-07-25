@@ -1,4 +1,4 @@
-import { MarketInformationView, CustomerOnboarding, DocumentRequired } from './../models/master';
+import { MarketInformationView, CustomerOnboarding, DocumentRequired, CustomerOnboardingView } from './../models/master';
 import { Guid } from 'guid-typescript';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -6,7 +6,7 @@ import { Observable, throwError, Subject } from 'rxjs';
 import { _MatChipListMixinBase } from '@angular/material';
 import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
-import { BankDetailsView, BusinessInformation, BusinessInformationView, CustomerOnboardingView, PersonalInfo, SendMail } from 'app/models/master';
+import { BankDetailsView, BusinessInformation, BusinessInformationView, PersonalInfo, SendMail } from 'app/models/master';
 // import { BusinessInformation } from 'app/allModules/pages/business/business.component';
 
 @Injectable({
@@ -60,8 +60,15 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetAllRejectedPersonalStatusInfo`)
             .pipe(catchError(this.errorHandler));
     }
-    updateCustomerOnboardingStatus(CustomerOnboarding): Observable<any> {
-        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingStatus`, CustomerOnboarding, {
+    updateCustomerOnboardingStatus(CustomerOnboardingView:CustomerOnboardingView): Observable<any> {
+        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerRejectedOnboardingStatus`, CustomerOnboardingView ,{
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        }).pipe(catchError(this.errorHandler));
+    }
+    updateCustomerOnboardingRejectedStatus(CustomerOnboarding): Observable<any> {
+        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingStatus`, CustomerOnboarding ,{
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })

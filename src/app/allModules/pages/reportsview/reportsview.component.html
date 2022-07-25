@@ -183,7 +183,7 @@
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="MIform" fxLayoutAlign="space-around start" class="form_div">
           <div fxLayout="column" class="form_div_III">
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Name of Market</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -191,7 +191,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Population of Market</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -200,7 +200,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Market Potential of the area (in MT) *</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -209,7 +209,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">No of Existing Stockist in the Market</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -218,7 +218,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Distance of Nearest JK Stockist</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -236,7 +236,7 @@
                 </div>
               </div>
             </div> -->
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Name of Nearest JK Stockist</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -245,7 +245,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Select the Party Background</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -256,7 +256,7 @@
             </div>
           </div>
           <div fxLayout="column" class="form_div_IV">
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Year of Establishment *</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -265,7 +265,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Areas that Stockist will serve</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -274,7 +274,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Total Potential of the Party (In MT) *</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -283,7 +283,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Expected JK Avg.Monthly Sale (In MT) *</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
