@@ -61,14 +61,14 @@ export class DashboardService {
             .pipe(catchError(this.errorHandler));
     }
     updateCustomerOnboardingStatus(CustomerOnboardingView:CustomerOnboardingView): Observable<any> {
-        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerRejectedOnboardingStatus`, CustomerOnboardingView ,{
+        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingStatus`, CustomerOnboardingView ,{
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
         }).pipe(catchError(this.errorHandler));
     }
     updateCustomerOnboardingRejectedStatus(CustomerOnboarding): Observable<any> {
-        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingStatus`, CustomerOnboarding ,{
+        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingRejectedStatus`, CustomerOnboarding ,{
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
