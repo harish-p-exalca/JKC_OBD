@@ -192,7 +192,7 @@ export class NextloginComponent implements OnInit {
     if (this.MenuItems.indexOf('InitiatorDashboard') >= 0) {
       this.children.push(
         {
-          id: 'dashboard',
+          id: 'initiatorDashboard',
           title: 'Dashboard',
           translate: 'NAV.SAMPLE.TITLE',
           type: 'item',
@@ -205,7 +205,7 @@ export class NextloginComponent implements OnInit {
     if (this.MenuItems.indexOf('ApproverDashboard') >= 0) {
       this.children.push(
         {
-          id: 'dashboard',
+          id: 'approverDashboard',
           title: 'Dashboard',
           translate: 'NAV.SAMPLE.TITLE',
           type: 'item',
@@ -218,26 +218,13 @@ export class NextloginComponent implements OnInit {
     if (this.MenuItems.indexOf('Personal') >= 0) {
       this.children.push(
         {
-          id: 'dashboard',
+          id: 'personal',
           title: 'Initiate',
           translate: 'NAV.SAMPLE.TITLE',
           type: 'item',
           icon: 'person',
           isSvgIcon: false,
           url: '/pages/dashboard',
-        }
-      );
-    }
-    if (this.MenuItems.indexOf('Business') >= 0) {
-      this.children.push(
-        {
-          id: 'business',
-          title: 'Business',
-          translate: 'NAV.SAMPLE.TITLE',
-          type: 'item',
-          icon: 'business',
-          isSvgIcon: false,
-          url: '/pages/businessinformation',
         }
       );
     }
@@ -251,6 +238,19 @@ export class NextloginComponent implements OnInit {
           icon: 'gps_fixed',
           isSvgIcon: false,
           url: '/pages/marketinformation',
+        }
+      );
+    }
+    if (this.MenuItems.indexOf('Business') >= 0) {
+      this.children.push(
+        {
+          id: 'business',
+          title: 'Business',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'business',
+          isSvgIcon: false,
+          url: '/pages/businessinformation',
         }
       );
     }
