@@ -136,10 +136,16 @@ export class CustomerOnboardingView1 extends CommonClass {
     RoleName: string;
 }
 export class CustomerOnboardingView {
+    TranID: number;
+    Status: string;
     UserID: string;
     PositionID: string;
+    RoleName: string;
     Transaction: CustomerOnboarding;
     PersonalInfo: PersonalInformationView;
+    BusinessInfo: BusinessInformationView;
+    MarketInfo: MarketInformationView;
+    BankInfo: BankDetailsView;
 }
 export class BankDetails {
     ID: number;

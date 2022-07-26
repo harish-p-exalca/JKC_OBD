@@ -277,7 +277,7 @@ export class DashboardComponent implements OnInit {
             if (this.IdentityData.length > 0) {
                 var cobView = new CustomerOnboardingView();
                 cobView.Transaction = new CustomerOnboarding();
-                cobView.Transaction.TranID =  Number(localStorage.getItem('TransID'));;
+                cobView.Transaction.TranID =  null;
                 cobView.Transaction.Status = isDraft ? "InitiatorDraft" : "InitiatorReleased";
                 cobView.PersonalInfo = new PersonalInformationView();
                 cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
@@ -321,7 +321,7 @@ export class DashboardComponent implements OnInit {
             if (this.IdentityData.length > 0) {
                 var cobView = new CustomerOnboardingView();
                 cobView.Transaction = new CustomerOnboarding();
-                cobView.Transaction.TranID =  Number(localStorage.getItem('TransID'));;
+                cobView.Transaction.TranID =  null;
                 cobView.Transaction.Status = isDraft ? "InitiatorDraft" : "InitiatorReleased";
                 cobView.PersonalInfo = new PersonalInformationView();
                 cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
@@ -398,7 +398,10 @@ export class DashboardComponent implements OnInit {
         pi.Status = this.PIform.get('Status').value;
         pi.Latitude = this.PIform.get('latitude').value;
         pi.Logitude = this.PIform.get('longitude').value;
-        pi.TransID = Number(localStorage.getItem('TransID'));
+        if(this.transID!=null)
+        {
+            pi.TransID = Number(localStorage.getItem('TransID'));
+        }
         return pi;
     }
     OpenSuccessDialog() {
