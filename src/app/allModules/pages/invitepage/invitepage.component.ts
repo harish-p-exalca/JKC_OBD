@@ -223,19 +223,6 @@ export class InvitepageComponent implements OnInit {
         }
       );
     }
-    if (this.MenuItems.indexOf('Business') >= 0) {
-      this.children.push(
-        {
-          id: 'business',
-          title: 'Business',
-          translate: 'NAV.SAMPLE.TITLE',
-          type: 'item',
-          icon: 'business',
-          isSvgIcon: false,
-          url: '/pages/businessinformation',
-        }
-      );
-    }
     if (this.MenuItems.indexOf('Market') >= 0) {
       this.children.push(
         {
@@ -246,6 +233,19 @@ export class InvitepageComponent implements OnInit {
           icon: 'gps_fixed',
           isSvgIcon: false,
           url: '/pages/marketinformation',
+        }
+      );
+    }
+    if (this.MenuItems.indexOf('Business') >= 0) {
+      this.children.push(
+        {
+          id: 'business',
+          title: 'Business',
+          translate: 'NAV.SAMPLE.TITLE',
+          type: 'item',
+          icon: 'business',
+          isSvgIcon: false,
+          url: '/pages/businessinformation',
         }
       );
     }
