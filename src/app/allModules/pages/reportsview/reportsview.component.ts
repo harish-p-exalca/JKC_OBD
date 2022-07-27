@@ -1276,6 +1276,10 @@ export class ReportsviewComponent implements OnInit {
     csvInputChange(event) {
         this.handleFileInput(event,"PanCard");
          this.FileName = event.target.files[0].name;
+         if(this.Attach1.AttachmentName != null)
+         {
+            this.Attach1 = null;
+         }
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"PAN");
       }
@@ -1289,6 +1293,10 @@ export class ReportsviewComponent implements OnInit {
          this.FileName1 =event.target.files[0].name;
         // console.log(fileInputEvent.target.files[0]);
         this.handleFileInput(event,"GSTCertificate");
+        if(this.Attach2.AttachmentName != null)
+        {
+           this.Attach2 = null;
+        }
         // this.GetAttachment(fileInputEvent.target.files[0],"GST");
       }
       csv2InputChange(event) {
@@ -1296,34 +1304,58 @@ export class ReportsviewComponent implements OnInit {
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"AADHAR CARD");
         this.handleFileInput(event,"AadharCard");
+        if(this.Attach3.AttachmentName != null)
+        {
+           this.Attach3 = null;
+        }
       }
       csv3InputChange(event) {
          this.FileName3 = event.target.files[0].name;
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Cancelled Cheque");
         this.handleFileInput(event,"CancelledCheque");
+        if(this.Attach4.AttachmentName != null)
+        {
+           this.Attach4 = null;
+        }
       }
       csv4InputChange(event) {
         this.handleFileInput(event,"PartnerPhoto");
          this.FileName4 = event.target.files[0].name;
+         if(this.Attach5.AttachmentName != null)
+         {
+            this.Attach5 = null;
+         }
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Photograph");
       }
       csv5InputChange(event) {
         this.handleFileInput(event,"TDSDeclaration");
          this.FileName5 = event.target.files[0].name;
+         if(this.Attach6.AttachmentName != null)
+         {
+            this.Attach6 = null;
+         }
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"TDS");
       }
       csv6InputChange(event) {
         this.handleFileInput(event,"AddressProof");
         this.FileName6 = event.target.files[0].name;
+        if(this.Attach7.AttachmentName != null)
+        {
+           this.Attach7 = null;
+        }
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Address Proof");
       }
       csv7InputChange(event) {
         this.handleFileInput(event,"SignedDocument");
         this.FileName7 = event.target.files[0].name;
+        if(this.Attach8.AttachmentName != null)
+        {
+           this.Attach8 = null;
+        }
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Signed Digital Document");
       }
@@ -1437,12 +1469,15 @@ export class ReportsviewComponent implements OnInit {
             Customer.RoleName = this.authenticationDetails.UserRole;
             Customer.PersonalInfo = new PersonalInformationView();
             Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+            Customer.PersonalInfo.Identities = this.IdentityData;
             Customer.MarketInfo = new MarketInformationView();
             Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
+            Customer.MarketInfo.AverageSale = this.AvgData;
             Customer.BusinessInfo = new BusinessInformationView();
             Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
             Customer.BankInfo = new BankDetailsView();
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
+            Customer.BankInfo.BankDetailInfo = this.BankData;
             this.isProgressBarVisibile = true;
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
@@ -1494,11 +1529,6 @@ export class ReportsviewComponent implements OnInit {
                 .subscribe(
                     (data) => {
                         console.log(data);
-                        this._dashboardService.AddDocumentRequiredAttachment(this.transID,this.files,this.Documentname).subscribe(
-                            (res) => {
-                              console.log("Attachment added",res);
-                            }
-                          );
                         this.isProgressBarVisibile = false;
                         this.notificationSnackBarComponent.openSnackBar(
                             "Approved successfully",
@@ -1544,11 +1574,6 @@ export class ReportsviewComponent implements OnInit {
                 .subscribe(
                     (data) => {
                         console.log(data);
-                        this._dashboardService.AddDocumentRequiredAttachment(this.transID,this.files,this.Documentname).subscribe(
-                            (res) => {
-                              console.log("Attachment added",res);
-                            }
-                          );
                         this.isProgressBarVisibile = false;
                         this.notificationSnackBarComponent.openSnackBar(
                             "Approved successfully",
@@ -1594,11 +1619,6 @@ export class ReportsviewComponent implements OnInit {
                 .subscribe(
                     (data) => {
                         console.log(data);
-                        this._dashboardService.AddDocumentRequiredAttachment(this.transID,this.files,this.Documentname).subscribe(
-                            (res) => {
-                              console.log("Attachment added",res);
-                            }
-                          );
                         this.isProgressBarVisibile = false;
                         this.notificationSnackBarComponent.openSnackBar(
                             "Approved successfully",
@@ -1619,9 +1639,8 @@ export class ReportsviewComponent implements OnInit {
         }
     }
     Reject(): void {
-        if (this.Role == "ASM") {
         var Cusotmer = new CustomerOnboardingView1();
-        Cusotmer.Status = "ASMRejected";
+        Cusotmer.Status = "Rejected";
         Cusotmer.TranID = this.transID;
         Cusotmer.UserID = this.authenticationDetails.UserID.toString();
         Cusotmer.PositionID = this.authenticationDetails.PositionID;
@@ -1647,152 +1666,180 @@ export class ReportsviewComponent implements OnInit {
                     );
                 }
             );
-        }
-        if (this.Role == "SH") {
-            var Cusotmer = new CustomerOnboardingView1();
-            Cusotmer.Status = "SHRejected";
-            Cusotmer.TranID = this.transID;
-            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-            Cusotmer.PositionID = this.authenticationDetails.PositionID;
-            Cusotmer.RoleName = this.authenticationDetails.UserRole;
-            this.isProgressBarVisibile = true;
-            this._dashboardService
-                .updateCustomerOnboardingRejectedStatus(Cusotmer)
-                .subscribe(
-                    (data) => {
-                        console.log(data);
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            "Rejected successfully",
-                            SnackBarStatus.success
-                        );
-                        this._router.navigate(["/pages/approvalinformation"]);
-                    },
-                    (err) => {
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            err instanceof Object ? "Something went wrong" : err,
-                            SnackBarStatus.danger
-                        );
-                    }
-                );
-            }
-            if (this.Role == "ZH") {
-                var Cusotmer = new CustomerOnboardingView1();
-                Cusotmer.Status = "ZHRejected";
-                Cusotmer.TranID = this.transID;
-                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-                Cusotmer.PositionID = this.authenticationDetails.PositionID;
-                Cusotmer.RoleName = this.authenticationDetails.UserRole;
-                this.isProgressBarVisibile = true;
-                this._dashboardService
-                    .updateCustomerOnboardingRejectedStatus(Cusotmer)
-                    .subscribe(
-                        (data) => {
-                            console.log(data);
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                "Rejected successfully",
-                                SnackBarStatus.success
-                            );
-                            this._router.navigate(["/pages/approvalinformation"]);
-                        },
-                        (err) => {
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                err instanceof Object ? "Something went wrong" : err,
-                                SnackBarStatus.danger
-                            );
-                        }
-                    );
-                }
-                if (this.Role == "DH") {
-                    var Cusotmer = new CustomerOnboardingView1();
-                    Cusotmer.Status = "DHRejected";
-                    Cusotmer.TranID = this.transID;
-                    Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-                    Cusotmer.PositionID = this.authenticationDetails.PositionID;
-                    Cusotmer.RoleName = this.authenticationDetails.UserRole;
-                    this.isProgressBarVisibile = true;
-                    this._dashboardService
-                        .updateCustomerOnboardingRejectedStatus(Cusotmer)
-                        .subscribe(
-                            (data) => {
-                                console.log(data);
-                                this.isProgressBarVisibile = false;
-                                this.notificationSnackBarComponent.openSnackBar(
-                                    "Rejected successfully",
-                                    SnackBarStatus.success
-                                );
-                                this._router.navigate(["/pages/approvalinformation"]);
-                            },
-                            (err) => {
-                                this.isProgressBarVisibile = false;
-                                this.notificationSnackBarComponent.openSnackBar(
-                                    err instanceof Object ? "Something went wrong" : err,
-                                    SnackBarStatus.danger
-                                );
-                            }
-                        );
-                    }
-                    if (this.Role == "RAC") {
-                        var Cusotmer = new CustomerOnboardingView1();
-                        Cusotmer.Status = "RACRejected";
-                        Cusotmer.TranID = this.transID;
-                        Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-                        Cusotmer.PositionID = this.authenticationDetails.PositionID;
-                        Cusotmer.RoleName = this.authenticationDetails.UserRole;
-                        this.isProgressBarVisibile = true;
-                        this._dashboardService
-                            .updateCustomerOnboardingRejectedStatus(Cusotmer)
-                            .subscribe(
-                                (data) => {
-                                    console.log(data);
-                                    this.isProgressBarVisibile = false;
-                                    this.notificationSnackBarComponent.openSnackBar(
-                                        "Rejected successfully",
-                                        SnackBarStatus.success
-                                    );
-                                    this._router.navigate(["/pages/approvalinformation"]);
-                                },
-                                (err) => {
-                                    this.isProgressBarVisibile = false;
-                                    this.notificationSnackBarComponent.openSnackBar(
-                                        err instanceof Object ? "Something went wrong" : err,
-                                        SnackBarStatus.danger
-                                    );
-                                }
-                            );
-                        }
-                        if (this.Role == "Stockist") {
-                            var Cusotmer = new CustomerOnboardingView1();
-                            Cusotmer.Status = "StockistRejected";
-                            Cusotmer.TranID = this.transID;
-                            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-                            Cusotmer.PositionID = this.authenticationDetails.PositionID;
-                            Cusotmer.RoleName = this.authenticationDetails.UserRole;
-                            this.isProgressBarVisibile = true;
-                            this._dashboardService
-                                .updateCustomerOnboardingRejectedStatus(Cusotmer)
-                                .subscribe(
-                                    (data) => {
-                                        console.log(data);
-                                        this.isProgressBarVisibile = false;
-                                        this.notificationSnackBarComponent.openSnackBar(
-                                            "Rejected successfully",
-                                            SnackBarStatus.success
-                                        );
-                                        this._router.navigate(["/pages/approvalinformation"]);
-                                    },
-                                    (err) => {
-                                        this.isProgressBarVisibile = false;
-                                        this.notificationSnackBarComponent.openSnackBar(
-                                            err instanceof Object ? "Something went wrong" : err,
-                                            SnackBarStatus.danger
-                                        );
-                                    }
-                                );
-                            }
+        // if (this.Role == "ASM") {
+        // var Cusotmer = new CustomerOnboardingView1();
+        // Cusotmer.Status = "ASMRejected";
+        // Cusotmer.TranID = this.transID;
+        // Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+        // Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        // Cusotmer.RoleName = this.authenticationDetails.UserRole;
+        // this.isProgressBarVisibile = true;
+        // this._dashboardService
+        //     .updateCustomerOnboardingRejectedStatus(Cusotmer)
+        //     .subscribe(
+        //         (data) => {
+        //             console.log(data);
+        //             this.isProgressBarVisibile = false;
+        //             this.notificationSnackBarComponent.openSnackBar(
+        //                 "Rejected successfully",
+        //                 SnackBarStatus.success
+        //             );
+        //             this._router.navigate(["/pages/approvalinformation"]);
+        //         },
+        //         (err) => {
+        //             this.isProgressBarVisibile = false;
+        //             this.notificationSnackBarComponent.openSnackBar(
+        //                 err instanceof Object ? "Something went wrong" : err,
+        //                 SnackBarStatus.danger
+        //             );
+        //         }
+        //     );
+        // }
+        // if (this.Role == "SH") {
+        //     var Cusotmer = new CustomerOnboardingView1();
+        //     Cusotmer.Status = "SHRejected";
+        //     Cusotmer.TranID = this.transID;
+        //     Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+        //     Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        //     Cusotmer.RoleName = this.authenticationDetails.UserRole;
+        //     this.isProgressBarVisibile = true;
+        //     this._dashboardService
+        //         .updateCustomerOnboardingRejectedStatus(Cusotmer)
+        //         .subscribe(
+        //             (data) => {
+        //                 console.log(data);
+        //                 this.isProgressBarVisibile = false;
+        //                 this.notificationSnackBarComponent.openSnackBar(
+        //                     "Rejected successfully",
+        //                     SnackBarStatus.success
+        //                 );
+        //                 this._router.navigate(["/pages/approvalinformation"]);
+        //             },
+        //             (err) => {
+        //                 this.isProgressBarVisibile = false;
+        //                 this.notificationSnackBarComponent.openSnackBar(
+        //                     err instanceof Object ? "Something went wrong" : err,
+        //                     SnackBarStatus.danger
+        //                 );
+        //             }
+        //         );
+        //     }
+        //     if (this.Role == "ZH") {
+        //         var Cusotmer = new CustomerOnboardingView1();
+        //         Cusotmer.Status = "ZHRejected";
+        //         Cusotmer.TranID = this.transID;
+        //         Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+        //         Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        //         Cusotmer.RoleName = this.authenticationDetails.UserRole;
+        //         this.isProgressBarVisibile = true;
+        //         this._dashboardService
+        //             .updateCustomerOnboardingRejectedStatus(Cusotmer)
+        //             .subscribe(
+        //                 (data) => {
+        //                     console.log(data);
+        //                     this.isProgressBarVisibile = false;
+        //                     this.notificationSnackBarComponent.openSnackBar(
+        //                         "Rejected successfully",
+        //                         SnackBarStatus.success
+        //                     );
+        //                     this._router.navigate(["/pages/approvalinformation"]);
+        //                 },
+        //                 (err) => {
+        //                     this.isProgressBarVisibile = false;
+        //                     this.notificationSnackBarComponent.openSnackBar(
+        //                         err instanceof Object ? "Something went wrong" : err,
+        //                         SnackBarStatus.danger
+        //                     );
+        //                 }
+        //             );
+        //         }
+        //         if (this.Role == "DH") {
+        //             var Cusotmer = new CustomerOnboardingView1();
+        //             Cusotmer.Status = "DHRejected";
+        //             Cusotmer.TranID = this.transID;
+        //             Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+        //             Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        //             Cusotmer.RoleName = this.authenticationDetails.UserRole;
+        //             this.isProgressBarVisibile = true;
+        //             this._dashboardService
+        //                 .updateCustomerOnboardingRejectedStatus(Cusotmer)
+        //                 .subscribe(
+        //                     (data) => {
+        //                         console.log(data);
+        //                         this.isProgressBarVisibile = false;
+        //                         this.notificationSnackBarComponent.openSnackBar(
+        //                             "Rejected successfully",
+        //                             SnackBarStatus.success
+        //                         );
+        //                         this._router.navigate(["/pages/approvalinformation"]);
+        //                     },
+        //                     (err) => {
+        //                         this.isProgressBarVisibile = false;
+        //                         this.notificationSnackBarComponent.openSnackBar(
+        //                             err instanceof Object ? "Something went wrong" : err,
+        //                             SnackBarStatus.danger
+        //                         );
+        //                     }
+        //                 );
+        //             }
+        //             if (this.Role == "RAC") {
+        //                 var Cusotmer = new CustomerOnboardingView1();
+        //                 Cusotmer.Status = "RACRejected";
+        //                 Cusotmer.TranID = this.transID;
+        //                 Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+        //                 Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        //                 Cusotmer.RoleName = this.authenticationDetails.UserRole;
+        //                 this.isProgressBarVisibile = true;
+        //                 this._dashboardService
+        //                     .updateCustomerOnboardingRejectedStatus(Cusotmer)
+        //                     .subscribe(
+        //                         (data) => {
+        //                             console.log(data);
+        //                             this.isProgressBarVisibile = false;
+        //                             this.notificationSnackBarComponent.openSnackBar(
+        //                                 "Rejected successfully",
+        //                                 SnackBarStatus.success
+        //                             );
+        //                             this._router.navigate(["/pages/approvalinformation"]);
+        //                         },
+        //                         (err) => {
+        //                             this.isProgressBarVisibile = false;
+        //                             this.notificationSnackBarComponent.openSnackBar(
+        //                                 err instanceof Object ? "Something went wrong" : err,
+        //                                 SnackBarStatus.danger
+        //                             );
+        //                         }
+        //                     );
+        //                 }
+        //                 if (this.Role == "Stockist") {
+        //                     var Cusotmer = new CustomerOnboardingView1();
+        //                     Cusotmer.Status = "StockistRejected";
+        //                     Cusotmer.TranID = this.transID;
+        //                     Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+        //                     Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        //                     Cusotmer.RoleName = this.authenticationDetails.UserRole;
+        //                     this.isProgressBarVisibile = true;
+        //                     this._dashboardService
+        //                         .updateCustomerOnboardingRejectedStatus(Cusotmer)
+        //                         .subscribe(
+        //                             (data) => {
+        //                                 console.log(data);
+        //                                 this.isProgressBarVisibile = false;
+        //                                 this.notificationSnackBarComponent.openSnackBar(
+        //                                     "Rejected successfully",
+        //                                     SnackBarStatus.success
+        //                                 );
+        //                                 this._router.navigate(["/pages/approvalinformation"]);
+        //                             },
+        //                             (err) => {
+        //                                 this.isProgressBarVisibile = false;
+        //                                 this.notificationSnackBarComponent.openSnackBar(
+        //                                     err instanceof Object ? "Something went wrong" : err,
+        //                                     SnackBarStatus.danger
+        //                                 );
+        //                             }
+        //                         );
+        //                     }
     }
     GetAttachment(fileName: string, file?: File): void {
         // if (file && file.size) {

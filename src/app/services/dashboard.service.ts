@@ -86,8 +86,8 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetOpenCustomerOnBoardingByPosition?PositionID=${PositionID}`,)
             .pipe(catchError(this.errorHandler));
     }
-    GetApprovedCustomerOnBoardingByUser(UserID: string): Observable<any> {
-        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetApprovedCustomerOnBoardingByUser?UserID=${UserID}`,)
+    GetApprovedCustomerOnBoardingByUser(UserID: string,status: string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetApprovedCustomerOnBoardingByUser?UserID=${UserID}&status=${status}`,)
             .pipe(catchError(this.errorHandler));
     }
     GetRejectedCustomerOnBoardingByUser(UserID: string): Observable<any> {
