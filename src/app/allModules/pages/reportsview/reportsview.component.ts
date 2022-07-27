@@ -240,6 +240,7 @@ export class ReportsviewComponent implements OnInit {
     Noview:boolean = false;
     public listData: any;
     public BankData: BankDetails[] = [];
+    public AttachmentView:boolean=false;
     constructor(
         private fb: FormBuilder,
         private sanitizer: DomSanitizer,
@@ -456,6 +457,10 @@ export class ReportsviewComponent implements OnInit {
             ],
             PartyBackground: ["", Validators.required],
         });
+        if(this.Role == "ASM" || this.Role == "Stockist")
+        {
+            this.AttachmentView = true;
+        }
         this.BrandForm = this.fb.group({
             brand: ["", Validators.required],
             wpMonth: [""],
@@ -582,7 +587,7 @@ export class ReportsviewComponent implements OnInit {
         // });
     }
     bankAddClicked() {
-        // if (this.BIform.valid) {
+         if (this.BankForm.valid) {
             var identity = new BankDetails();
             identity.AccountNum = this.BankForm.get("bankacno").value;
             identity.BankAddress = this.BankForm.get("bankaddress").value;
@@ -592,7 +597,8 @@ export class ReportsviewComponent implements OnInit {
             this.BankData.push(identity);
             // this.listData[this.listData.length - 1].id = this.listData.length.toString();
             // this.BIform.reset();
-        // } else {
+        } 
+        //else {
         //     this._commonService.ShowValidationErrors(this.BIform);
         // }
     }
@@ -631,7 +637,7 @@ export class ReportsviewComponent implements OnInit {
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
             this.BankData = bankInfoView.BankDetailInfo;
         }
-       if(this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "RAC")
+       if(this.Role == "SH" || this.Role == "ZH" || this.Role == "DH")
        {
         if (bankInfoView.SecurityDeposit.TransID != null) {
             // businessinformation = businessInfoView.Businessinfo;
@@ -646,6 +652,25 @@ export class ReportsviewComponent implements OnInit {
         this.bankdetails = bankInfoView.BankDetailInfo;
         this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
         this.BankData = bankInfoView.BankDetailInfo;
+        this.DepositForm.disable();
+        this.BankForm.disable();
+       }
+       if(this.Role == "RAC")
+       {
+        if (bankInfoView.SecurityDeposit.TransID != null) {
+            // businessinformation = businessInfoView.Businessinfo;
+            this.DepositForm.patchValue({
+                leaf: bankInfoView.SecurityDeposit.Leaf,
+                Type: bankInfoView.SecurityDeposit.Type,
+                Date: bankInfoView.SecurityDeposit.Date,
+                Amount: bankInfoView.SecurityDeposit.Amount,
+                nameofbank: bankInfoView.SecurityDeposit.BankName,
+            });
+        }
+        this.bankdetails = bankInfoView.BankDetailInfo;
+        this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
+        this.BankData = bankInfoView.BankDetailInfo;
+        this.DepositForm.disable();
        }
     }
     GetTransactionDetails() {
@@ -799,7 +824,7 @@ export class ReportsviewComponent implements OnInit {
             this.contactdataSource = new MatTableDataSource(this.Contactdetails);
             this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
         }
-        if(this.Role == "SM" || this.Role == "ZH" || this.Role == "DH" || this.Role == "RAC")
+        if(this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "RAC")
         {
             var products = null;
         if (
@@ -847,6 +872,7 @@ export class ReportsviewComponent implements OnInit {
         this.contactdataSource = new MatTableDataSource(this.Contactdetails);
         this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
         this.PIform.disable();
+        this.firmForm.disable();
         }
        if(this.Role == "Stockist")
        {
