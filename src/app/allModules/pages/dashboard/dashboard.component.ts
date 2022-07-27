@@ -132,6 +132,7 @@ export class DashboardComponent implements OnInit {
         if (this.authenticationDetails.UserRole == "Customer") {
             this.Role = true;
             this.SubmitValue = true;
+            
         }
        
         this.InitializeFormGroup();
@@ -264,6 +265,22 @@ export class DashboardComponent implements OnInit {
             this.SubmitValue = true;
             this.PIform.disable();
             this.firmForm.disable();
+            
+        }
+        if (this.authenticationDetails.UserRole == "Customer")
+        {
+            this.PIform.get("category").disable();
+            this.PIform.get("product").disable();
+            this.PIform.get("Name").disable();
+            this.PIform.get("Address").disable();
+            this.PIform.get("latitude").disable();
+            this.PIform.get("longitude").disable();
+            this.PIform.get("District").disable();
+            this.PIform.get("City").disable();
+            this.PIform.get("Taluka").disable();
+            this.PIform.get("Tehsil").disable();
+            this.PIform.get("State").disable();
+            this.PIform.get("Pincode").disable();
             
         }
         this.selected = this.CustomerObdView.PersonalInfo.PersonalInformation.Status;

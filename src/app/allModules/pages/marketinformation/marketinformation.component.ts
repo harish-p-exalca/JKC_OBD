@@ -74,6 +74,7 @@ export class MarketinformationComponent implements OnInit {
     isProgressBarVisibile:boolean;
     MarketInfoView: MarketInformationView = new MarketInformationView();
     TransID:number;
+    CustmerView:boolean = true;
     constructor(
         private fb: FormBuilder,
         private _router: Router,
@@ -109,6 +110,10 @@ export class MarketinformationComponent implements OnInit {
             this.currentTransaction = parseInt(
                 this.authenticationDetails.Token
             );
+        }
+        if (this.authenticationDetails.UserRole == "Customer")
+        {
+            this.CustmerView = false;
         }
         this.TransID=parseInt(localStorage.getItem("TransID"));
         this.MIform = this.fb.group({

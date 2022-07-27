@@ -24,7 +24,7 @@
       <div fxFlex="70">
         <form [formGroup]="MIform" style="margin-top: 37px;">
           <div fxLayout="column" fxLayoutAlign="space-around center">
-            <div fxLayout="row" fxLayoutAlign="" class="marketinfo" fxFlex="100">
+            <div *ngIf="CustmerView" fxLayout="row" fxLayoutAlign="" class="marketinfo" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Name of Market</span>
               <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
@@ -35,7 +35,7 @@
             
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div *ngIf="CustmerView" fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Population of Market</span>
               
@@ -48,7 +48,7 @@
             
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div *ngIf="CustmerView" fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Market Potential of the area (in MT) *</span>
               <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
@@ -63,7 +63,7 @@
             
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div *ngIf="CustmerView" fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">No of Existing Stockist in the Market</span>
               <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
@@ -73,7 +73,7 @@
               </div>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div *ngIf="CustmerView" fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Distance of Nearest JK Stockist</span>
               <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
@@ -83,7 +83,7 @@
               </div>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div *ngIf="CustmerView" fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Name of Nearest JK Stockist</span>
               <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
@@ -93,7 +93,7 @@
               </div>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div *ngIf="CustmerView" fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Year of Establishment *</span>
               <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
@@ -111,7 +111,7 @@
               </div>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div *ngIf="CustmerView" fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Areas that Stockist will serve</span>
               <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
@@ -123,7 +123,7 @@
               </div>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div *ngIf="CustmerView" fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Total Potential of the Party (In MT) *</span>
              
@@ -141,7 +141,7 @@
               </div>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div *ngIf="CustmerView" fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
               <span fxFlex="30" class="marketsp">Expected JK Avg.Monthly Sale (In MT) *</span>
               <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
@@ -321,7 +321,7 @@
         </form>
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="end center" fxFlex="100" fxLayoutGap="4px" style="margin-top: 23px;background: white;">
+    <div fxLayout="row" fxLayoutAlign="end end" fxFlex="100" fxLayoutGap="4px" style="margin-top: 23px;background: white;">
       <div fxFlex="33"></div>
       <div fxLayout="row" fxLayoutAlign="start start" fxFlex="10" fxLayoutGap="0px">
         <button mat-flat-button class="previous" (click)="previousbtn()" fxLayout="row" fxLayoutGap="10px">
