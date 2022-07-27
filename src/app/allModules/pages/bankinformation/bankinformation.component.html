@@ -450,8 +450,8 @@
                 <div fxLayout="column" fxFlex="50" class="">
                   
                   <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg" (change)="csvInputChange($event)"/>
-                  <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput.click()" style="color: green;">Upload</button>
-                  <p style="color: #f44336;font-size: 12px;" *ngIf="FileError">Attachement is required</p>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput.click()" style="color: green;">Upload</button>
+                  <!-- <p style="color: #f44336;font-size: 12px;" *ngIf="FileError">Attachement is required</p> -->
                 </div>
                 <div fxLayout="column" fxFlex="50" class="">
                   <p style="margin-left:14%;">{{FileName}}</p>
@@ -460,12 +460,12 @@
               </div>
               <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                 <!-- <div fxFlex="2"></div> -->
-                <span fxFlex="30" class="marketsp">Copy of Gst Certificate</span>
+                <span fxFlex="30" class="marketsp">Copy of Gst Certificate*</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
                 
                   <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg" (change)="csv1InputChange($event)"/>
-                  <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput1.click()" style="color: green;">Upload</button>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput1.click()" style="color: green;">Upload</button>
                  
                 </div>
                 <div fxLayout="column" fxFlex="50" class="">
@@ -475,12 +475,12 @@
               </div>
               <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                 <!-- <div fxFlex="2"></div> -->
-                <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
+                <span fxFlex="30" class="marketsp">Copy of Aadhar Card*</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
                  
                   <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv2InputChange($event)"/>
-                  <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput2.click()" style="color: green;">Upload</button>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput2.click()" style="color: green;">Upload</button>
                   
                 </div>
                 <div fxLayout="column" fxFlex="50" class="">
@@ -491,12 +491,12 @@
 
               <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                 <!-- <div fxFlex="2"></div> -->
-                <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
+                <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque*</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
                 
                   <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv3InputChange($event)"/>
-                  <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput3.click()" style="color: green;">Upload</button>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput3.click()" style="color: green;">Upload</button>
               
                 </div>
 
@@ -507,12 +507,12 @@
 
               <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                 <!-- <div fxFlex="2"></div> -->
-                <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
+                <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner*</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
                 
                   <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv4InputChange($event)"/>
-                  <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput4.click()" style="color: green;">Upload</button>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput4.click()" style="color: green;">Upload</button>
                  
                 </div>
                 <div fxLayout="column" fxFlex="50" class="">
@@ -523,12 +523,12 @@
 
               <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                 <!-- <div fxFlex="2"></div> -->
-                <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
+                <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head*</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
                  
                   <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv5InputChange($event)"/>
-                  <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput5.click()" style="color: green;">Upload</button>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput5.click()" style="color: green;">Upload</button>
                 
                 </div>
                 <div fxLayout="column" fxFlex="50" class="">
@@ -539,12 +539,12 @@
 
               <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                 <!-- <div fxFlex="2"></div> -->
-                <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
+                <span fxFlex="30" class="marketsp">Address Proof of stockist premises*</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
                  
                   <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv6InputChange($event)"/>
-                  <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput6.click()" style="color: green;">Upload</button>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput6.click()" style="color: green;">Upload</button>
                   
                 </div>
                 <div fxLayout="column" fxFlex="50" class="">
@@ -554,12 +554,12 @@
               </div>
               <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                 <!-- <div fxFlex="2"></div> -->
-                <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
+                <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper*</span>
 
                 <div fxLayout="column" fxFlex="50" class="">
                  
                   <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv7InputChange($event)"/>
-                  <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput7.click()" style="color: green;">Upload</button>
+                  <button mat-raised-button class="uploadbtn" (click)="csvInput7.click()" style="color: green;">Upload</button>
                 </div>
                 <div fxLayout="column" fxFlex="50" class="">
                   <p style="margin-left:14%;">{{FileName7}}</p>
@@ -648,7 +648,7 @@
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Copy of Gst Certificate</span>
+              <span fxFlex="30" class="marketsp">Copy of Gst Certificate*</span>
   
               <div fxLayout="column" fxFlex="50" class="">
                 <p style="margin-left:14%;" *ngIf="Attach2?.AttachmentName"> {{Attach2?.AttachmentName}}</p>
@@ -663,7 +663,7 @@
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
+              <span fxFlex="30" class="marketsp">Copy of Aadhar Card*</span>
   
               <div fxLayout="column" fxFlex="50" class="">
                 <p style="margin-left:14%;" *ngIf="Attach3?.AttachmentName"> {{Attach3?.AttachmentName}}</p>
@@ -679,7 +679,7 @@
   
             <div fxLayout="row" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
+              <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque*</span>
   
               <div fxLayout="column" fxFlex="50" class="">
                 <p style="margin-left:14%;" *ngIf="Attach4?.AttachmentName"> {{Attach4?.AttachmentName}}</p>
@@ -695,7 +695,7 @@
   
             <div fxLayout="row" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
+              <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner*</span>
   
               <div fxLayout="column" fxFlex="50" class="">
                 <p style="margin-left:14%;" *ngIf="Attach5?.AttachmentName"> {{Attach5?.AttachmentName}}</p>
@@ -711,7 +711,7 @@
   
             <div fxLayout="row" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
+              <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head*</span>
   
               <div fxLayout="column" fxFlex="50" class="">
                 <p style="margin-left:14%;" *ngIf="Attach6?.AttachmentName"> {{Attach6?.AttachmentName}}</p>
@@ -727,7 +727,7 @@
   
             <div fxLayout="row" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
+              <span fxFlex="30" class="marketsp">Address Proof of stockist premises*</span>
   
               <div fxLayout="column" fxFlex="50" class="">
                 <p style="margin-left:14%;" *ngIf="Attach7?.AttachmentName"> {{Attach7?.AttachmentName}}</p>
@@ -742,7 +742,7 @@
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100">
               <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
+              <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper*</span>
   
               <div fxLayout="column" fxFlex="50" class="">
                 <p style="margin-left:14%;" *ngIf="Attach8?.AttachmentName"> {{Attach8?.AttachmentName}}</p>
