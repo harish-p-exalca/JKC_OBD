@@ -115,7 +115,9 @@ export class MarketinformationComponent implements OnInit {
         {
             this.CustmerView = false;
         }
-        this.TransID=parseInt(localStorage.getItem("TransID"));
+        else{
+        this.currentTransaction=parseInt(localStorage.getItem("TransID")); 
+        }
         this.MIform = this.fb.group({
             market: [""],
             Population: [""],
@@ -131,7 +133,7 @@ export class MarketinformationComponent implements OnInit {
                 "",
                 [
                     Validators.required,
-                    Validators.pattern(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/),
+                    Validators.pattern(/^[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}$/),
                 ],
             ],
             Gst: [
@@ -139,23 +141,24 @@ export class MarketinformationComponent implements OnInit {
                 [
                     Validators.required,
                     Validators.pattern(
-                        /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/
+                        /^[0-9]{2}[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}Z[0-9A-Za-z]{1}$/
                     ),
                 ],
             ],
             PartyBackground: ["", Validators.required],
             
         });
-        this.MIform.get("YearOfEstablished").valueChanges.subscribe((value) => {
-            if (value != "") {
-                if (value <= 1800 || value >= 3000) {
-                    value = 2022;
-                    this.MIform.get("YearOfEstablished").setValue(
-                        value
-                    );
-                }
-            }
-        });
+        // this.MIform.get("YearOfEstablished").valueChanges.subscribe((value) => {
+        //     if (value != "" && value!=null) {
+        //         if(value<new Date().getFullYear && value>1900){
+        //             this.MIform.get("YearOfEstablished").setValue(value);
+        //         }
+        //         else if(value>2022){
+        //             this.MIform.get("YearOfEstablished").setValue(null);
+        //             this.notificationSnackBarComponent.openSnackBar("Please enter valid year",SnackBarStatus.danger);
+        //         }
+        //     }
+        // });
         this.BrandForm = this.fb.group({
             brand: ["", Validators.required],
             wpMonth: [""],
@@ -175,7 +178,7 @@ export class MarketinformationComponent implements OnInit {
     GetMarketDetails() {
         this.isProgressBarVisibile=true;
         this._dashboardService
-            .GetMarketInformationView(this.TransID)
+            .GetMarketInformationView(this.currentTransaction)
             .subscribe(
                 (res) => {
                     console.log("view", res);
@@ -267,7 +270,7 @@ export class MarketinformationComponent implements OnInit {
         marketInformation.PanNo = this.MIform.get("Pan").value;
         marketInformation.GstNo = this.MIform.get("Gst").value;
         marketInformation.Background = this.MIform.get("PartyBackground").value;
-        marketInformation.TransID = this.TransID;
+        marketInformation.TransID = this.currentTransaction;
         return marketInformation;
     }
     previousbtn(): void {
@@ -289,7 +292,7 @@ export class MarketinformationComponent implements OnInit {
     IsGstValid() {
         let GST = this.MIform.controls["Gst"].value;
         if (
-            /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/.test(
+            /^[0-9]{2}[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}Z[0-9A-Za-z]{1}$/.test(
                 GST
             )
         ) {
@@ -302,7 +305,7 @@ export class MarketinformationComponent implements OnInit {
     }
     IsPanValid() {
         let Pan = this.MIform.controls["Pan"].value;
-        if (/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(Pan)) {
+        if (/^[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}$/.test(Pan)) {
             console.log("true");
             this.ispan = true;
         } else {
@@ -355,9 +358,21 @@ export class MarketinformationComponent implements OnInit {
         }
     }
     onAdd(): void {
-        this.listData.push(this.BrandForm.value);
-        this.IdentityAddClicked();
-        this.BrandForm.reset();
+        var val=this.BrandForm.value;
+        var avgSale=this.listData.find(t=>t.brand==val.brand);
+        if(this.listData.length==0){
+            this.listData.push(this.BrandForm.value);
+            this.IdentityAddClicked();
+            this.BrandForm.reset();
+        }
+        else if(avgSale!=undefined){
+            this.notificationSnackBarComponent.openSnackBar("Record already exists!!",SnackBarStatus.danger);
+        }
+        else{
+            this.listData.push(this.BrandForm.value);
+            this.IdentityAddClicked();
+            this.BrandForm.reset();
+        }
     }
 
     // nextbtn():void{

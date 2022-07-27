@@ -226,7 +226,7 @@ export class SecurityDepositDetail {
     TransID: number;
     Type: string;
     Leaf: string;
-    Date: Date | string;
+    Date: Date | string |null;
     Amount: number;
     BankName: string;
     AdvBillingParty: boolean;
