@@ -867,101 +867,138 @@ export class ApprovalscreenComponent implements OnInit {
     }
     GetEmployeewithApprovedStatus(): void {
         localStorage.setItem("ActionStatus", "Approved");
-        this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString())
+        // this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString(),)
+        //     .subscribe((data) => {
+        //         this.AllApprovedDetails = data;
+        //         this.isProgressBarVisibile = false;
+        //         this.LoadTableSource(this.AllApprovedDetails);
+        //         // this.employeesDataSource =
+        //         //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+        //         // this.employeesDataSource.sort = this.sort;
+        //         // this.employeesDataSource.paginator = this.paginator;
+        //     });
+
+        if (this.Role == "ASM") {
+            this.isProgressBarVisibile = true;
+            this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString(),"ASMApproved")
             .subscribe((data) => {
                 this.AllApprovedDetails = data;
                 this.isProgressBarVisibile = false;
                 this.LoadTableSource(this.AllApprovedDetails);
-                // this.employeesDataSource =
-                //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-                // this.employeesDataSource.sort = this.sort;
-                // this.employeesDataSource.paginator = this.paginator;
             });
 
-        // if (this.Role == "ASM") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatus("ASMApproved")
-        //         .subscribe((data) => {
-        //             this.AllApprovedDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllApprovedDetails);
-        //             // this.employeesDataSource =
-        //             //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-        //             // this.employeesDataSource.sort = this.sort;
-        //             // this.employeesDataSource.paginator = this.paginator;
-        //         });
-        // }
-        // if (this.Role == "Stokist") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatus("Stokist")
-        //         .subscribe((data) => {
-        //             this.AllApprovedDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllApprovedDetails);
-        //             // this.employeesDataSource =
-        //             //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-        //             // this.employeesDataSource.sort = this.sort;
-        //             // this.employeesDataSource.paginator = this.paginator;
-        //         });
-        // }
-        // if (this.Role == "DH") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatus("DHApproved")
-        //         .subscribe((data) => {
-        //             this.AllApprovedDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllApprovedDetails);
-        //             // this.employeesDataSource =
-        //             //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-        //             // this.employeesDataSource.sort = this.sort;
-        //             // this.employeesDataSource.paginator = this.paginator;
-        //         });
-        // }
-        // if (this.Role == "ZH") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatus("ZHApproved")
-        //         .subscribe((data) => {
-        //             this.AllApprovedDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllApprovedDetails);
-        //             // this.employeesDataSource =
-        //             //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-        //             // this.employeesDataSource.sort = this.sort;
-        //             // this.employeesDataSource.paginator = this.paginator;
-        //         });
-        // }
-        // if (this.Role == "SH") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatus("SHApproved")
-        //         .subscribe((data) => {
-        //             this.AllApprovedDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllApprovedDetails);
-        //             // this.employeesDataSource =
-        //             //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-        //             // this.employeesDataSource.sort = this.sort;
-        //             // this.employeesDataSource.paginator = this.paginator;
-        //         });
-        // }
-        // if (this.Role == "RAC") {
-        //     this.isProgressBarVisibile = true;
-        //     this._dashboardService
-        //         .getPersonalInfoByStatus("RACApproved")
-        //         .subscribe((data) => {
-        //             this.AllApprovedDetails = data;
-        //             this.isProgressBarVisibile = false;
-        //             this.LoadTableSource(this.AllApprovedDetails);
-        //             // this.employeesDataSource =
-        //             //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
-        //             // this.employeesDataSource.sort = this.sort;
-        //             // this.employeesDataSource.paginator = this.paginator;
-        //         });
-        // }
+            // this._dashboardService
+            //     .getPersonalInfoByStatus("ASMApproved")
+            //     .subscribe((data) => {
+            //         this.AllApprovedDetails = data;
+            //         this.isProgressBarVisibile = false;
+            //         this.LoadTableSource(this.AllApprovedDetails);
+            //         // this.employeesDataSource =
+            //         //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+            //         // this.employeesDataSource.sort = this.sort;
+            //         // this.employeesDataSource.paginator = this.paginator;
+            //     });
+        }
+        if (this.Role == "Stockist") {
+            this.isProgressBarVisibile = true;
+            this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString(),"StockistApproved")
+            .subscribe((data) => {
+                this.AllApprovedDetails = data;
+                this.isProgressBarVisibile = false;
+                this.LoadTableSource(this.AllApprovedDetails);
+            });
+            // this._dashboardService
+            //     .getPersonalInfoByStatus("Stockist")
+            //     .subscribe((data) => {
+            //         this.AllApprovedDetails = data;
+            //         this.isProgressBarVisibile = false;
+            //         this.LoadTableSource(this.AllApprovedDetails);
+            //         // this.employeesDataSource =
+            //         //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+            //         // this.employeesDataSource.sort = this.sort;
+            //         // this.employeesDataSource.paginator = this.paginator;
+            //     });
+        }
+        if (this.Role == "DH") {
+            this.isProgressBarVisibile = true;
+            this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString(),"DHApproved")
+            .subscribe((data) => {
+                this.AllApprovedDetails = data;
+                this.isProgressBarVisibile = false;
+                this.LoadTableSource(this.AllApprovedDetails);
+            });
+            // this._dashboardService
+            //     .getPersonalInfoByStatus("DHApproved")
+            //     .subscribe((data) => {
+            //         this.AllApprovedDetails = data;
+            //         this.isProgressBarVisibile = false;
+            //         this.LoadTableSource(this.AllApprovedDetails);
+            //         // this.employeesDataSource =
+            //         //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+            //         // this.employeesDataSource.sort = this.sort;
+            //         // this.employeesDataSource.paginator = this.paginator;
+            //     });
+        }
+        if (this.Role == "ZH") {
+            this.isProgressBarVisibile = true;
+            this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString(),"ZHApproved")
+            .subscribe((data) => {
+                this.AllApprovedDetails = data;
+                this.isProgressBarVisibile = false;
+                this.LoadTableSource(this.AllApprovedDetails);
+            });
+            // this._dashboardService
+            //     .getPersonalInfoByStatus("ZHApproved")
+            //     .subscribe((data) => {
+            //         this.AllApprovedDetails = data;
+            //         this.isProgressBarVisibile = false;
+            //         this.LoadTableSource(this.AllApprovedDetails);
+            //         // this.employeesDataSource =
+            //         //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+            //         // this.employeesDataSource.sort = this.sort;
+            //         // this.employeesDataSource.paginator = this.paginator;
+            //     });
+        }
+        if (this.Role == "SH") {
+            this.isProgressBarVisibile = true;
+            this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString(),"SHApproved")
+            .subscribe((data) => {
+                this.AllApprovedDetails = data;
+                this.isProgressBarVisibile = false;
+                this.LoadTableSource(this.AllApprovedDetails);
+            });
+            // this._dashboardService
+            //     .getPersonalInfoByStatus("SHApproved")
+            //     .subscribe((data) => {
+            //         this.AllApprovedDetails = data;
+            //         this.isProgressBarVisibile = false;
+            //         this.LoadTableSource(this.AllApprovedDetails);
+            //         // this.employeesDataSource =
+            //         //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+            //         // this.employeesDataSource.sort = this.sort;
+            //         // this.employeesDataSource.paginator = this.paginator;
+            //     });
+        }
+        if (this.Role == "RAC") {
+            this.isProgressBarVisibile = true;
+            this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString(),"RACApproved")
+            .subscribe((data) => {
+                this.AllApprovedDetails = data;
+                this.isProgressBarVisibile = false;
+                this.LoadTableSource(this.AllApprovedDetails);
+            });
+            // this._dashboardService
+            //     .getPersonalInfoByStatus("RACApproved")
+            //     .subscribe((data) => {
+            //         this.AllApprovedDetails = data;
+            //         this.isProgressBarVisibile = false;
+            //         this.LoadTableSource(this.AllApprovedDetails);
+            //         // this.employeesDataSource =
+            //         //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+            //         // this.employeesDataSource.sort = this.sort;
+            //         // this.employeesDataSource.paginator = this.paginator;
+            //     });
+        }
     }
     GetEmployeewithRejectedStatus(): void {
         // this.isProgressBarVisibile = true;

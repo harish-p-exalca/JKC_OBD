@@ -109,7 +109,7 @@
               </div>
               <div *ngIf="Tickmark" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" class="checkbox">
                 <div >
-                  <mat-checkbox class="example-margin" [checked]="isd2rs" (click)="CheckBox()"></mat-checkbox>
+                  <mat-checkbox class="example-margin" [checked]="isd2rs" (change)="CheckBox($event)"></mat-checkbox>
                 </div>
                 <div>Advance Billing Party</div>
               </div>

@@ -8,7 +8,8 @@ import {
   MatPaginator,
   MatSort,
   MatTabChangeEvent,
-  MatAccordion
+  MatAccordion,
+  MatCheckboxChange
 } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -299,11 +300,16 @@ export class BankinformationComponent implements OnInit {
           console.log(err);
       });
   }
-  CheckBox(){
-    if(this.isd2rs == true)
+  CheckBox(event:MatCheckboxChange){
+    if(event.checked == true)
     {
       this.BIform.disable();
     }
+    else{
+      this.BIform.enable();
+    }
+   console.log("CheckBox",event.checked);
+   
   }
   SetSecurityDepositDetailInfoView( bankInfoView: BankDetailsView = new BankDetailsView()) {
     if (bankInfoView.SecurityDeposit.TransID != null) {
