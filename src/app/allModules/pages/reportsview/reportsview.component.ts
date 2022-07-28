@@ -237,10 +237,10 @@ export class ReportsviewComponent implements OnInit {
     isd2rs: boolean = false;
     fileUrl;
     AttachmentData: any;
-    Noview:boolean = false;
+    Noview: boolean = false;
     public listData: any;
     public BankData: BankDetails[] = [];
-    public AttachmentView:boolean=false;
+    public AttachmentView: boolean = false;
     constructor(
         private fb: FormBuilder,
         private sanitizer: DomSanitizer,
@@ -340,94 +340,94 @@ export class ReportsviewComponent implements OnInit {
                 );
         }
         this._dashboardService
-                .GetAttachment(this.transID, "GSTCertificate")
-                .subscribe(
-                    (data) => {
-                        this.Attach2 = data as DocumentRequired;
-                    },
-                    (err) => {
-                        console.error(err);
-                    }
-                );
-                this._dashboardService
-                .GetAttachment(this.transID, "AadharCard")
-                .subscribe(
-                    (data) => {
-                        this.Attach3 = data as DocumentRequired;
-                    },
-                    (err) => {
-                        console.error(err);
-                    }
-                );
-                this._dashboardService
-                .GetAttachment(this.transID, "CancelledCheque")
-                .subscribe(
-                    (data) => {
-                        this.Attach4 = data as DocumentRequired;  
-                    },
-                    (err) => {
-                        console.error(err);
-                    }
-                );
-                this._dashboardService
-                .GetAttachment(this.transID, "PartnerPhoto")
-                .subscribe(
-                    (data) => {
-                        this.Attach5 = data as DocumentRequired;   
-                    },
-                    (err) => {
-                        console.error(err);
-                    }
-                );
-                this._dashboardService
-                .GetAttachment(this.transID, "TDSDeclaration")
-                .subscribe(
-                    (data) => {
-                        this.Attach6 = data as DocumentRequired; 
-                    },
-                    (err) => {
-                        console.error(err);
-                    }
-                );
-                this._dashboardService
-                .GetAttachment(this.transID, "AddressProof")
-                .subscribe(
-                    (data) => {
-                        this.Attach7 = data as DocumentRequired;   
-                    },
-                    (err) => {
-                        console.error(err);
-                    }
-                );
-                this._dashboardService
-                .GetAttachment(this.transID, "SignedDocument")
-                .subscribe(
-                    (data) => {
-                        this.Attach8 = data as DocumentRequired;   
-                    },
-                    (err) => {
-                        console.error(err);
-                    }
-                );
-                this.firmForm = this.fb.group({
+            .GetAttachment(this.transID, "GSTCertificate")
+            .subscribe(
+                (data) => {
+                    this.Attach2 = data as DocumentRequired;
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
+        this._dashboardService
+            .GetAttachment(this.transID, "AadharCard")
+            .subscribe(
+                (data) => {
+                    this.Attach3 = data as DocumentRequired;
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
+        this._dashboardService
+            .GetAttachment(this.transID, "CancelledCheque")
+            .subscribe(
+                (data) => {
+                    this.Attach4 = data as DocumentRequired;
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
+        this._dashboardService
+            .GetAttachment(this.transID, "PartnerPhoto")
+            .subscribe(
+                (data) => {
+                    this.Attach5 = data as DocumentRequired;
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
+        this._dashboardService
+            .GetAttachment(this.transID, "TDSDeclaration")
+            .subscribe(
+                (data) => {
+                    this.Attach6 = data as DocumentRequired;
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
+        this._dashboardService
+            .GetAttachment(this.transID, "AddressProof")
+            .subscribe(
+                (data) => {
+                    this.Attach7 = data as DocumentRequired;
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
+        this._dashboardService
+            .GetAttachment(this.transID, "SignedDocument")
+            .subscribe(
+                (data) => {
+                    this.Attach8 = data as DocumentRequired;
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
+        this.firmForm = this.fb.group({
 
-                    Status: [""],
-                    Name1: ["", Validators.required],
-                    Mobile1: [
-                        "",
-                        [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)],
-                    ],
-                    email1: [
-                        "",
-                        [
-                            Validators.required,
-                            Validators.pattern(
-                                /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-                            ),
-                        ],
-                    ],
-        
-                });
+            Status: [""],
+            Name1: ["", Validators.required],
+            Mobile1: [
+                "",
+                [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)],
+            ],
+            email1: [
+                "",
+                [
+                    Validators.required,
+                    Validators.pattern(
+                        /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+                    ),
+                ],
+            ],
+
+        });
         this.MIform = this.fb.group({
             market: [""],
             Population: [""],
@@ -457,8 +457,7 @@ export class ReportsviewComponent implements OnInit {
             ],
             PartyBackground: ["", Validators.required],
         });
-        if(this.Role == "ASM" || this.Role == "Stockist")
-        {
+        if (this.Role == "ASM" || this.Role == "Stockist") {
             this.AttachmentView = true;
         }
         this.BrandForm = this.fb.group({
@@ -587,7 +586,7 @@ export class ReportsviewComponent implements OnInit {
         // });
     }
     bankAddClicked() {
-         if (this.BankForm.valid) {
+        if (this.BankForm.valid) {
             var identity = new BankDetails();
             identity.AccountNum = this.BankForm.get("bankacno").value;
             identity.BankAddress = this.BankForm.get("bankaddress").value;
@@ -597,7 +596,7 @@ export class ReportsviewComponent implements OnInit {
             this.BankData.push(identity);
             // this.listData[this.listData.length - 1].id = this.listData.length.toString();
             // this.BIform.reset();
-        } 
+        }
         //else {
         //     this._commonService.ShowValidationErrors(this.BIform);
         // }
@@ -621,8 +620,7 @@ export class ReportsviewComponent implements OnInit {
     SetSecurityDepositDetailInfoView(
         bankInfoView: BankDetailsView = new BankDetailsView()
     ) {
-        if(this.Role == "ASM" || this.Role == "Stockist")
-        {
+        if (this.Role == "ASM" || this.Role == "Stockist") {
             if (bankInfoView.SecurityDeposit.TransID != null) {
                 // businessinformation = businessInfoView.Businessinfo;
                 this.DepositForm.patchValue({
@@ -637,41 +635,39 @@ export class ReportsviewComponent implements OnInit {
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
             this.BankData = bankInfoView.BankDetailInfo;
         }
-       if(this.Role == "SH" || this.Role == "ZH" || this.Role == "DH")
-       {
-        if (bankInfoView.SecurityDeposit.TransID != null) {
-            // businessinformation = businessInfoView.Businessinfo;
-            this.DepositForm.patchValue({
-                leaf: bankInfoView.SecurityDeposit.Leaf,
-                Type: bankInfoView.SecurityDeposit.Type,
-                Date: bankInfoView.SecurityDeposit.Date,
-                Amount: bankInfoView.SecurityDeposit.Amount,
-                nameofbank: bankInfoView.SecurityDeposit.BankName,
-            });
+        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH") {
+            if (bankInfoView.SecurityDeposit.TransID != null) {
+                // businessinformation = businessInfoView.Businessinfo;
+                this.DepositForm.patchValue({
+                    leaf: bankInfoView.SecurityDeposit.Leaf,
+                    Type: bankInfoView.SecurityDeposit.Type,
+                    Date: bankInfoView.SecurityDeposit.Date,
+                    Amount: bankInfoView.SecurityDeposit.Amount,
+                    nameofbank: bankInfoView.SecurityDeposit.BankName,
+                });
+            }
+            this.bankdetails = bankInfoView.BankDetailInfo;
+            this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
+            this.BankData = bankInfoView.BankDetailInfo;
+            this.DepositForm.disable();
+            this.BankForm.disable();
         }
-        this.bankdetails = bankInfoView.BankDetailInfo;
-        this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
-        this.BankData = bankInfoView.BankDetailInfo;
-        this.DepositForm.disable();
-        this.BankForm.disable();
-       }
-       if(this.Role == "RAC")
-       {
-        if (bankInfoView.SecurityDeposit.TransID != null) {
-            // businessinformation = businessInfoView.Businessinfo;
-            this.DepositForm.patchValue({
-                leaf: bankInfoView.SecurityDeposit.Leaf,
-                Type: bankInfoView.SecurityDeposit.Type,
-                Date: bankInfoView.SecurityDeposit.Date,
-                Amount: bankInfoView.SecurityDeposit.Amount,
-                nameofbank: bankInfoView.SecurityDeposit.BankName,
-            });
+        if (this.Role == "RAC") {
+            if (bankInfoView.SecurityDeposit.TransID != null) {
+                // businessinformation = businessInfoView.Businessinfo;
+                this.DepositForm.patchValue({
+                    leaf: bankInfoView.SecurityDeposit.Leaf,
+                    Type: bankInfoView.SecurityDeposit.Type,
+                    Date: bankInfoView.SecurityDeposit.Date,
+                    Amount: bankInfoView.SecurityDeposit.Amount,
+                    nameofbank: bankInfoView.SecurityDeposit.BankName,
+                });
+            }
+            this.bankdetails = bankInfoView.BankDetailInfo;
+            this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
+            this.BankData = bankInfoView.BankDetailInfo;
+            this.DepositForm.disable();
         }
-        this.bankdetails = bankInfoView.BankDetailInfo;
-        this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
-        this.BankData = bankInfoView.BankDetailInfo;
-        this.DepositForm.disable();
-       }
     }
     GetTransactionDetails() {
         this.isProgressBarVisibile = true;
@@ -719,8 +715,7 @@ export class ReportsviewComponent implements OnInit {
         pi.Status = this.PIform.get('Status').value;
         pi.Latitude = this.PIform.get('latitude').value;
         pi.Logitude = this.PIform.get('longitude').value;
-        if(this.transID!=null)
-        {
+        if (this.transID != null) {
             pi.TransID = Number(localStorage.getItem('TransID'));
         }
         return pi;
@@ -766,18 +761,17 @@ export class ReportsviewComponent implements OnInit {
     }
     GetSecurityInfoFromForm(): SecurityDepositDetail {
         const personalinformation: SecurityDepositDetail = new SecurityDepositDetail();
-          personalinformation.Leaf = this.DepositForm.get('leaf').value;
-          personalinformation.Type = this.DepositForm.get('Type').value;
-          personalinformation.Date = this.DepositForm.get('Date').value.toString();
-          personalinformation.Amount = this.DepositForm.get('Amount').value;
-          personalinformation.BankName = this.DepositForm.get('nameofbank').value;
-          personalinformation.TransID = this.transID;
+        personalinformation.Leaf = this.DepositForm.get('leaf').value;
+        personalinformation.Type = this.DepositForm.get('Type').value;
+        personalinformation.Date = this.DepositForm.get('Date').value.toString();
+        personalinformation.Amount = this.DepositForm.get('Amount').value;
+        personalinformation.BankName = this.DepositForm.get('nameofbank').value;
+        personalinformation.TransID = this.transID;
         return personalinformation;
-      }
+    }
     SetPersonalInfoValues() {
-        
-        if(this.Role == "ASM")
-        {
+
+        if (this.Role == "ASM") {
             var products = null;
             if (
                 this.CustomerObdView.PersonalInfo.PersonalInformation.product !=
@@ -824,59 +818,57 @@ export class ReportsviewComponent implements OnInit {
             this.contactdataSource = new MatTableDataSource(this.Contactdetails);
             this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
         }
-        if(this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "RAC")
-        {
+        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "RAC") {
             var products = null;
-        if (
-            this.CustomerObdView.PersonalInfo.PersonalInformation.product !=
-            null
-        ) {
-            products =
-                this.CustomerObdView.PersonalInfo.PersonalInformation.product.split(
-                    ","
-                );
+            if (
+                this.CustomerObdView.PersonalInfo.PersonalInformation.product !=
+                null
+            ) {
+                products =
+                    this.CustomerObdView.PersonalInfo.PersonalInformation.product.split(
+                        ","
+                    );
+            }
+            var state = new States();
+            state.StateName =
+                this.CustomerObdView.PersonalInfo.PersonalInformation.State;
+            this.SOption.push(state);
+            var city = new Cities();
+            city.City = this.CustomerObdView.PersonalInfo.PersonalInformation.City;
+            this.City.push(city);
+            this.PIform.patchValue({
+                category:
+                    this.CustomerObdView.PersonalInfo.PersonalInformation.category,
+                product: products,
+                Address:
+                    this.CustomerObdView.PersonalInfo.PersonalInformation.Address,
+                Name: this.CustomerObdView.PersonalInfo.PersonalInformation.Name,
+                latitude:
+                    this.CustomerObdView.PersonalInfo.PersonalInformation.Latitude,
+                longitude:
+                    this.CustomerObdView.PersonalInfo.PersonalInformation.Logitude,
+                District:
+                    this.CustomerObdView.PersonalInfo.PersonalInformation.District,
+                City: this.CustomerObdView.PersonalInfo.PersonalInformation.City,
+                Taluka: this.CustomerObdView.PersonalInfo.PersonalInformation.Taluk,
+                Tehsil: this.CustomerObdView.PersonalInfo.PersonalInformation
+                    .Tehsil,
+                State: this.CustomerObdView.PersonalInfo.PersonalInformation.State,
+                Pincode:
+                    this.CustomerObdView.PersonalInfo.PersonalInformation.Pincode,
+                Status: this.CustomerObdView.PersonalInfo.PersonalInformation
+                    .Status,
+            });
+            this.selected =
+                this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
+            this.Contactdetails = this.CustomerObdView.PersonalInfo.Identities;
+            this.contactdataSource = new MatTableDataSource(this.Contactdetails);
+            this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
+            this.PIform.disable();
+            this.firmForm.disable();
         }
-        var state = new States();
-        state.StateName =
-            this.CustomerObdView.PersonalInfo.PersonalInformation.State;
-        this.SOption.push(state);
-        var city = new Cities();
-        city.City = this.CustomerObdView.PersonalInfo.PersonalInformation.City;
-        this.City.push(city);
-        this.PIform.patchValue({
-            category:
-                this.CustomerObdView.PersonalInfo.PersonalInformation.category,
-            product: products,
-            Address:
-                this.CustomerObdView.PersonalInfo.PersonalInformation.Address,
-            Name: this.CustomerObdView.PersonalInfo.PersonalInformation.Name,
-            latitude:
-                this.CustomerObdView.PersonalInfo.PersonalInformation.Latitude,
-            longitude:
-                this.CustomerObdView.PersonalInfo.PersonalInformation.Logitude,
-            District:
-                this.CustomerObdView.PersonalInfo.PersonalInformation.District,
-            City: this.CustomerObdView.PersonalInfo.PersonalInformation.City,
-            Taluka: this.CustomerObdView.PersonalInfo.PersonalInformation.Taluk,
-            Tehsil: this.CustomerObdView.PersonalInfo.PersonalInformation
-                .Tehsil,
-            State: this.CustomerObdView.PersonalInfo.PersonalInformation.State,
-            Pincode:
-                this.CustomerObdView.PersonalInfo.PersonalInformation.Pincode,
-            Status: this.CustomerObdView.PersonalInfo.PersonalInformation
-                .Status,
-        });
-        this.selected =
-            this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
-        this.Contactdetails = this.CustomerObdView.PersonalInfo.Identities;
-        this.contactdataSource = new MatTableDataSource(this.Contactdetails);
-        this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
-        this.PIform.disable();
-        this.firmForm.disable();
-        }
-       if(this.Role == "Stockist")
-       {
-        var products = null;
+        if (this.Role == "Stockist") {
+            var products = null;
             if (
                 this.CustomerObdView.PersonalInfo.PersonalInformation.product !=
                 null
@@ -934,7 +926,7 @@ export class ReportsviewComponent implements OnInit {
             this.PIform.get('State').disable();
             this.PIform.get('Pincode').disable();
 
-       }
+        }
     }
     AvgData: AverageSale[] = [];
     AvgAddClicked() {
@@ -949,7 +941,7 @@ export class ReportsviewComponent implements OnInit {
             this._commonService.ShowValidationErrors(this.BrandForm);
         }
     }
-   
+
     onAdd(): void {
         this.AvgAddClicked();
     }
@@ -960,8 +952,7 @@ export class ReportsviewComponent implements OnInit {
     SetMarketInfoDetails(
         MarketInfoView: MarketInformationView = new MarketInformationView()
     ) {
-        if(this.Role == "ASM")
-        {
+        if (this.Role == "ASM") {
             if (MarketInfoView.MarketInformation.TransID != null) {
                 this.MIform.patchValue({
                     market: MarketInfoView.MarketInformation.MarketName,
@@ -986,8 +977,7 @@ export class ReportsviewComponent implements OnInit {
                 this.AvgData = MarketInfoView.AverageSale;
             }
         }
-        if(this.Role == "SH")
-        {
+        if (this.Role == "SH") {
             if (MarketInfoView.MarketInformation.TransID != null) {
                 // businessinformation = businessInfoView.Businessinfo;
                 this.MIform.patchValue({
@@ -1009,18 +999,17 @@ export class ReportsviewComponent implements OnInit {
                 this.averageSalesDetails = MarketInfoView.AverageSale;
                 this.averageSalesDataSource = new MatTableDataSource(
                     this.averageSalesDetails
-                    
+
                 );
-               this.MIform.get('YearOfEstablished').disable();
-               this.MIform.get('TotalPotential').disable();
-               this.MIform.get('JKAvg').disable();
-               this.MIform.get('Pan').disable();
-               this.MIform.get('Gst').disable();
-               this.MIform.get('PartyBackground').disable();
+                this.MIform.get('YearOfEstablished').disable();
+                this.MIform.get('TotalPotential').disable();
+                this.MIform.get('JKAvg').disable();
+                this.MIform.get('Pan').disable();
+                this.MIform.get('Gst').disable();
+                this.MIform.get('PartyBackground').disable();
             }
         }
-        if(this.Role == "ZH" || this.Role == "DH")
-        {
+        if (this.Role == "ZH" || this.Role == "DH") {
             if (MarketInfoView.MarketInformation.TransID != null) {
                 this.MIform.patchValue({
                     market: MarketInfoView.MarketInformation.MarketName,
@@ -1043,10 +1032,9 @@ export class ReportsviewComponent implements OnInit {
                     this.averageSalesDetails
                 );
                 this.MIform.disable();
-            } 
+            }
         }
-        if(this.Role == "RAC")
-        {
+        if (this.Role == "RAC") {
             if (MarketInfoView.MarketInformation.TransID != null) {
                 this.MIform.patchValue({
                     market: MarketInfoView.MarketInformation.MarketName,
@@ -1081,8 +1069,7 @@ export class ReportsviewComponent implements OnInit {
                 this.MIform.get('PartyBackground').disable();
             }
         }
-        if(this.Role == "Stockist")
-        {
+        if (this.Role == "Stockist") {
             if (MarketInfoView.MarketInformation.TransID != null) {
                 // businessinformation = businessInfoView.Businessinfo;
                 this.MIform.patchValue({
@@ -1105,15 +1092,14 @@ export class ReportsviewComponent implements OnInit {
                 this.averageSalesDataSource = new MatTableDataSource(
                     this.averageSalesDetails
                 );
-             this.Noview = true;
+                this.Noview = true;
             }
         }
     }
     SetBusinessInfoDetails(
         businessInfoView: BusinessInformationView = new BusinessInformationView()
     ) {
-        if(this.Role == "ASM" || this.Role == "Stockist")
-        {
+        if (this.Role == "ASM" || this.Role == "Stockist") {
             if (businessInfoView.Businessinfo.TransID != null) {
                 // businessinformation = businessInfoView.Businessinfo;
                 this.BIform.patchValue({
@@ -1128,8 +1114,7 @@ export class ReportsviewComponent implements OnInit {
                 });
             }
         }
-        if(this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "RAC")
-        {
+        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "RAC") {
             if (businessInfoView.Businessinfo.TransID != null) {
                 // businessinformation = businessInfoView.Businessinfo;
                 this.BIform.patchValue({
@@ -1142,10 +1127,10 @@ export class ReportsviewComponent implements OnInit {
                     vehicle: businessInfoView.Businessinfo.NoVechicle,
                     Wholesale: businessInfoView.Businessinfo.Wholesale,
                 });
-               this.BIform.disable();
+                this.BIform.disable();
             }
         }
-      
+
     }
     AlphabetsonlyOnly(event): boolean {
         const charCode = (event.which) ? event.which : event.keyCode;
@@ -1201,172 +1186,155 @@ export class ReportsviewComponent implements OnInit {
         return role;
     }
     public Documentname = '';
-  public PanCard;
-  public GSTCertificate;
-  public AadharCard;
-  public CancelledCheque;
-  public PartnerPhoto;
-  public TDSDeclaration;
-  public AddressProof;
-  public SignedDocument;
-  files:File[] = [];
-  handleFileInput(event,Filename:string): DocumentRequired {
-    const File = new DocumentRequired();
-    File.AttachmentName = event.target.files[0].name;
-    File.ContentType = event.target.files[0].type;
-    File.ContentLength = event.target.files[0].size;
-    const selectedFiles = event.target.files[0];
-    File.AttachmentFile = selectedFiles;
-    File.DocumentTitle = Filename;
-    if(Filename == "PanCard")
-    {
-      this.PanCard = Filename;
-       this.Documentname += [this.PanCard,''].join(', ');
+    public PanCard;
+    public GSTCertificate;
+    public AadharCard;
+    public CancelledCheque;
+    public PartnerPhoto;
+    public TDSDeclaration;
+    public AddressProof;
+    public SignedDocument;
+    files: File[] = [];
+    handleFileInput(event, Filename: string): DocumentRequired {
+        const File = new DocumentRequired();
+        File.AttachmentName = event.target.files[0].name;
+        File.ContentType = event.target.files[0].type;
+        File.ContentLength = event.target.files[0].size;
+        const selectedFiles = event.target.files[0];
+        File.AttachmentFile = selectedFiles;
+        File.DocumentTitle = Filename;
+        if (Filename == "PanCard") {
+            this.PanCard = Filename;
+            this.Documentname += [this.PanCard, ''].join(', ');
+        }
+        if (Filename == "GSTCertificate") {
+            this.GSTCertificate = Filename;
+            this.Documentname += [this.GSTCertificate, ''].join(', ');
+        }
+        if (Filename == "AadharCard") {
+            this.AadharCard = Filename;
+            this.Documentname += [this.AadharCard, ''].join(', ');
+        }
+        if (Filename == "CancelledCheque") {
+            this.CancelledCheque = Filename;
+            this.Documentname += [this.CancelledCheque, ''].join(', ');
+        }
+        if (Filename == "PartnerPhoto") {
+            this.PartnerPhoto = Filename;
+            this.Documentname += [this.PartnerPhoto, ''].join(', ');
+        }
+        if (Filename == "TDSDeclaration") {
+            this.TDSDeclaration = Filename;
+            this.Documentname += [this.TDSDeclaration, ''].join(', ');
+        }
+        if (Filename == "AddressProof") {
+            this.AddressProof = Filename;
+            this.Documentname += [this.AddressProof, ''].join(', ');
+        }
+        if (Filename == "SignedDocument") {
+            this.SignedDocument = Filename;
+            this.Documentname += [this.SignedDocument, ''].join(', ');
+        }
+        // this.Documentname += [this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument].join(', ');
+        // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument);
+        console.log("Doc Name", this.Documentname);
+        console.log(File);
+        this.files.push(selectedFiles);
+        return File;
     }
-    if(Filename == "GSTCertificate")
-    {
-      this.GSTCertificate = Filename;
-      this.Documentname += [this.GSTCertificate,''].join(', ');
-    }
-    if(Filename == "AadharCard")
-    {
-      this.AadharCard = Filename;
-      this.Documentname += [this.AadharCard,''].join(', ');
-    }
-    if(Filename == "CancelledCheque")
-    {
-      this.CancelledCheque = Filename;
-      this.Documentname += [this.CancelledCheque,''].join(', ');
-    }
-    if(Filename == "PartnerPhoto")
-    {
-      this.PartnerPhoto = Filename;
-      this.Documentname += [this.PartnerPhoto,''].join(', ');
-    }
-    if(Filename == "TDSDeclaration")
-    {
-      this.TDSDeclaration = Filename;
-      this.Documentname += [this.TDSDeclaration,''].join(', ');
-    }
-    if(Filename == "AddressProof")
-    {
-      this.AddressProof = Filename;
-      this.Documentname += [this.AddressProof,''].join(', ');
-    }
-    if(Filename == "SignedDocument")
-    {
-      this.SignedDocument = Filename;
-      this.Documentname += [this.SignedDocument,''].join(', ');
-    }
-   // this.Documentname += [this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument].join(', ');
-  // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument);
-    console.log("Doc Name",this.Documentname);
-    console.log(File);
-    this.files.push(selectedFiles);
-    return File;
-  }
-  FileName:any;
-  FileName1:any;
-  FileName2:any;
-  FileName3:any;
-  FileName4:any;
-  FileName5:any;
-  FileName6:any;
-  FileName7:any;
+    FileName: any;
+    FileName1: any;
+    FileName2: any;
+    FileName3: any;
+    FileName4: any;
+    FileName5: any;
+    FileName6: any;
+    FileName7: any;
     csvInputChange(event) {
-        this.handleFileInput(event,"PanCard");
-         this.FileName = event.target.files[0].name;
-         if(this.Attach1.AttachmentName != null)
-         {
+        this.handleFileInput(event, "PanCard");
+        this.FileName = event.target.files[0].name;
+        if (this.Attach1.AttachmentName != null) {
             this.Attach1 = null;
-         }
+        }
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"PAN");
-      }
-      onSelect(event) {
-        this.files[0]=event.addedFiles[0];
+    }
+    onSelect(event) {
+        this.files[0] = event.addedFiles[0];
         // this.SelectedFileName=this.files[0].name;
         // this.File  Error=false;
-      }
-      csv1InputChange(event) {
-      
-         this.FileName1 =event.target.files[0].name;
+    }
+    csv1InputChange(event) {
+
+        this.FileName1 = event.target.files[0].name;
         // console.log(fileInputEvent.target.files[0]);
-        this.handleFileInput(event,"GSTCertificate");
-        if(this.Attach2.AttachmentName != null)
-        {
-           this.Attach2 = null;
+        this.handleFileInput(event, "GSTCertificate");
+        if (this.Attach2.AttachmentName != null) {
+            this.Attach2 = null;
         }
         // this.GetAttachment(fileInputEvent.target.files[0],"GST");
-      }
-      csv2InputChange(event) {
+    }
+    csv2InputChange(event) {
         this.FileName2 = event.target.files[0].name;
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"AADHAR CARD");
-        this.handleFileInput(event,"AadharCard");
-        if(this.Attach3.AttachmentName != null)
-        {
-           this.Attach3 = null;
+        this.handleFileInput(event, "AadharCard");
+        if (this.Attach3.AttachmentName != null) {
+            this.Attach3 = null;
         }
-      }
-      csv3InputChange(event) {
-         this.FileName3 = event.target.files[0].name;
+    }
+    csv3InputChange(event) {
+        this.FileName3 = event.target.files[0].name;
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Cancelled Cheque");
-        this.handleFileInput(event,"CancelledCheque");
-        if(this.Attach4.AttachmentName != null)
-        {
-           this.Attach4 = null;
+        this.handleFileInput(event, "CancelledCheque");
+        if (this.Attach4.AttachmentName != null) {
+            this.Attach4 = null;
         }
-      }
-      csv4InputChange(event) {
-        this.handleFileInput(event,"PartnerPhoto");
-         this.FileName4 = event.target.files[0].name;
-         if(this.Attach5.AttachmentName != null)
-         {
+    }
+    csv4InputChange(event) {
+        this.handleFileInput(event, "PartnerPhoto");
+        this.FileName4 = event.target.files[0].name;
+        if (this.Attach5.AttachmentName != null) {
             this.Attach5 = null;
-         }
+        }
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Photograph");
-      }
-      csv5InputChange(event) {
-        this.handleFileInput(event,"TDSDeclaration");
-         this.FileName5 = event.target.files[0].name;
-         if(this.Attach6.AttachmentName != null)
-         {
+    }
+    csv5InputChange(event) {
+        this.handleFileInput(event, "TDSDeclaration");
+        this.FileName5 = event.target.files[0].name;
+        if (this.Attach6.AttachmentName != null) {
             this.Attach6 = null;
-         }
+        }
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"TDS");
-      }
-      csv6InputChange(event) {
-        this.handleFileInput(event,"AddressProof");
+    }
+    csv6InputChange(event) {
+        this.handleFileInput(event, "AddressProof");
         this.FileName6 = event.target.files[0].name;
-        if(this.Attach7.AttachmentName != null)
-        {
-           this.Attach7 = null;
+        if (this.Attach7.AttachmentName != null) {
+            this.Attach7 = null;
         }
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Address Proof");
-      }
-      csv7InputChange(event) {
-        this.handleFileInput(event,"SignedDocument");
+    }
+    csv7InputChange(event) {
+        this.handleFileInput(event, "SignedDocument");
         this.FileName7 = event.target.files[0].name;
-        if(this.Attach8.AttachmentName != null)
-        {
-           this.Attach8 = null;
+        if (this.Attach8.AttachmentName != null) {
+            this.Attach8 = null;
         }
         // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Signed Digital Document");
-      }
+    }
     Approve(): void {
         if (this.Role == "ASM") {
-<<<<<<< HEAD
-            var Customer =  new CustomerOnboardingView();
+            var Customer = new CustomerOnboardingView();
             Customer.Status = "ASMApproved";
             Customer.TranID = this.transID;
             Customer.UserID = this.authenticationDetails.UserID.toString();
-            Customer.PositionID = this.authenticationDetails.PositionID;
+            Customer.PositionCode = this.authenticationDetails.PositionCode;
             Customer.RoleName = this.authenticationDetails.UserRole;
             Customer.PersonalInfo = new PersonalInformationView();
             Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
@@ -1379,28 +1347,26 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo = new BankDetailsView();
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
-            console.log("Approve",Customer);
-=======
+            console.log("Approve", Customer);
             var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "ASMApproved";
             Cusotmer.TranID = this.transID;
             Cusotmer.UserID = this.authenticationDetails.UserID.toString();
             Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
->>>>>>> 1032891 (UserCode updated)
             this.isProgressBarVisibile = true;
-            
-            
+
+
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
                     (data) => {
                         console.log(data);
-                        this._dashboardService.AddDocumentRequiredAttachment(this.transID,this.files,this.Documentname).subscribe(
+                        this._dashboardService.AddDocumentRequiredAttachment(this.transID, this.files, this.Documentname).subscribe(
                             (res) => {
-                              console.log("Attachment added",res);
+                                console.log("Attachment added", res);
                             }
-                          );
+                        );
                         this.isProgressBarVisibile = false;
                         this.notificationSnackBarComponent.openSnackBar(
                             "Approved successfully",
@@ -1419,13 +1385,12 @@ export class ReportsviewComponent implements OnInit {
                     }
                 );
         }
-<<<<<<< HEAD
         if (this.Role == "Stockist") {
-            var Customer =  new CustomerOnboardingView();
+            var Customer = new CustomerOnboardingView();
             Customer.Status = "StockistApproved";
             Customer.TranID = this.transID;
             Customer.UserID = this.authenticationDetails.UserID.toString();
-            Customer.PositionID = this.authenticationDetails.PositionID;
+            Customer.PositionCode = this.authenticationDetails.PositionCode;
             Customer.RoleName = this.authenticationDetails.UserRole;
             Customer.PersonalInfo = new PersonalInformationView();
             Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
@@ -1438,259 +1403,246 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo = new BankDetailsView();
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
-            console.log("Approve",Customer);
-=======
-        if (this.Role == "Stokist") {
-            var Cusotmer = new CustomerOnboardingView1();
-            Cusotmer.Status = "StokistApproved";
-            Cusotmer.TranID = this.transID;
-            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
-            Cusotmer.RoleName = this.authenticationDetails.UserRole;
->>>>>>> 1032891 (UserCode updated)
-            this.isProgressBarVisibile = true;
-            
-            
-            this._dashboardService
-                .updateCustomerOnboardingStatus(Customer)
-                .subscribe(
-                    (data) => {
-                        console.log(data);
-                        this._dashboardService.AddDocumentRequiredAttachment(this.transID,this.files,this.Documentname).subscribe(
-                            (res) => {
-                              console.log("Attachment added",res);
-                            }
-                          );
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            "Approved successfully",
-                            SnackBarStatus.success
-                        );
-                        this._router.navigate(["/pages/approvalinformation"]);
-                    },
-                    (err) => {
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            err instanceof Object
-                                ? "Something went wrong"
-                                : err,
-                            SnackBarStatus.danger
-                        );
-                    }
-                );
-        }
-        if (this.Role == "DH") {
-<<<<<<< HEAD
-            var Customer =  new CustomerOnboardingView();
-            Customer.Status = "DHApproved";
-            Customer.TranID = this.transID;
-            Customer.UserID = this.authenticationDetails.UserID.toString();
-            Customer.PositionID = this.authenticationDetails.PositionID;
-            Customer.RoleName = this.authenticationDetails.UserRole;
-            Customer.PersonalInfo = new PersonalInformationView();
-            Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
-            Customer.PersonalInfo.Identities = this.IdentityData;
-            Customer.MarketInfo = new MarketInformationView();
-            Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
-            Customer.MarketInfo.AverageSale = this.AvgData;
-            Customer.BusinessInfo = new BusinessInformationView();
-            Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
-            Customer.BankInfo = new BankDetailsView();
-            Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
-            Customer.BankInfo.BankDetailInfo = this.BankData;
-=======
-            var Cusotmer = new CustomerOnboardingView1();
-            Cusotmer.Status = "DHApproved";
-            Cusotmer.TranID = this.transID;
-            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
-            Cusotmer.RoleName = this.authenticationDetails.UserRole;
->>>>>>> 1032891 (UserCode updated)
-            this.isProgressBarVisibile = true;
-            this._dashboardService
-                .updateCustomerOnboardingStatus(Customer)
-                .subscribe(
-                    (data) => {
-                        console.log(data);
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            "Approved successfully",
-                            SnackBarStatus.success
-                        );
-                        this._router.navigate(["/pages/approvalinformation"]);
-                    },
-                    (err) => {
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            err instanceof Object
-                                ? "Something went wrong"
-                                : err,
-                            SnackBarStatus.danger
-                        );
-                    }
-                );
-        }
-        if (this.Role == "ZH") {
-<<<<<<< HEAD
-            var Customer =  new CustomerOnboardingView();
-            Customer.Status = "ZHApproved";
-            Customer.TranID = this.transID;
-            Customer.UserID = this.authenticationDetails.UserID.toString();
-            Customer.PositionID = this.authenticationDetails.PositionID;
-            Customer.RoleName = this.authenticationDetails.UserRole;
-            Customer.PersonalInfo = new PersonalInformationView();
-            Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
-            Customer.PersonalInfo.Identities = this.IdentityData;
-            Customer.MarketInfo = new MarketInformationView();
-            Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
-            Customer.MarketInfo.AverageSale = this.AvgData;
-            Customer.BusinessInfo = new BusinessInformationView();
-            Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
-            Customer.BankInfo = new BankDetailsView();
-            Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
-            Customer.BankInfo.BankDetailInfo = this.BankData;
-            console.log("Approve",Customer);
-=======
-            var Cusotmer = new CustomerOnboardingView1();
-            Cusotmer.Status = "ZHApproved";
-            Cusotmer.TranID = this.transID;
-            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
-            Cusotmer.RoleName = this.authenticationDetails.UserRole;
->>>>>>> 1032891 (UserCode updated)
-            this.isProgressBarVisibile = true;
-            
-            
-            this._dashboardService
-                .updateCustomerOnboardingStatus(Customer)
-                .subscribe(
-                    (data) => {
-                        console.log(data);
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            "Approved successfully",
-                            SnackBarStatus.success
-                        );
-                        this._router.navigate(["/pages/approvalinformation"]);
-                    },
-                    (err) => {
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            err instanceof Object
-                                ? "Something went wrong"
-                                : err,
-                            SnackBarStatus.danger
-                        );
-                    }
-                );
-        }
-        if (this.Role == "SH") {
-<<<<<<< HEAD
-            var Customer =  new CustomerOnboardingView();
-            Customer.Status = "SHApproved";
-            Customer.TranID = this.transID;
-            Customer.UserID = this.authenticationDetails.UserID.toString();
-            Customer.PositionID = this.authenticationDetails.PositionID;
-            Customer.RoleName = this.authenticationDetails.UserRole;
-            Customer.PersonalInfo = new PersonalInformationView();
-            Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
-            Customer.PersonalInfo.Identities = this.IdentityData;
-            Customer.MarketInfo = new MarketInformationView();
-            Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
-            Customer.MarketInfo.AverageSale = this.AvgData;
-            Customer.BusinessInfo = new BusinessInformationView();
-            Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
-            Customer.BankInfo = new BankDetailsView();
-            Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
-            Customer.BankInfo.BankDetailInfo = this.BankData;
-            console.log("Approve",Customer);
-=======
-            var Cusotmer = new CustomerOnboardingView1();
-            Cusotmer.Status = "SHApproved";
-            Cusotmer.TranID = this.transID;
-            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
-            Cusotmer.RoleName = this.authenticationDetails.UserRole;
->>>>>>> 1032891 (UserCode updated)
-            this.isProgressBarVisibile = true;
-            
-            
-            this._dashboardService
-                .updateCustomerOnboardingStatus(Customer)
-                .subscribe(
-                    (data) => {
-                        console.log(data);
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            "Approved successfully",
-                            SnackBarStatus.success
-                        );
-                        this._router.navigate(["/pages/approvalinformation"]);
-                    },
-                    (err) => {
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            err instanceof Object
-                                ? "Something went wrong"
-                                : err,
-                            SnackBarStatus.danger
-                        );
-                    }
-                );
-        }
-        if (this.Role == "RAC") {
-<<<<<<< HEAD
-            var Customer =  new CustomerOnboardingView();
-            Customer.Status = "RACApproved";
-            Customer.TranID = this.transID;
-            Customer.UserID = this.authenticationDetails.UserID.toString();
-            Customer.PositionID = this.authenticationDetails.PositionID;
-            Customer.RoleName = this.authenticationDetails.UserRole;
-            Customer.PersonalInfo = new PersonalInformationView();
-            Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
-            Customer.PersonalInfo.Identities = this.IdentityData;
-            Customer.MarketInfo = new MarketInformationView();
-            Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
-            Customer.MarketInfo.AverageSale = this.AvgData;
-            Customer.BusinessInfo = new BusinessInformationView();
-            Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
-            Customer.BankInfo = new BankDetailsView();
-            Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
-            Customer.BankInfo.BankDetailInfo = this.BankData;
-            console.log("Approve",Customer);
-=======
-            var Cusotmer = new CustomerOnboardingView1();
-            Cusotmer.Status = "RACApproved";
-            Cusotmer.TranID = this.transID;
-            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
-            Cusotmer.RoleName = this.authenticationDetails.UserRole;
->>>>>>> 1032891 (UserCode updated)
-            this.isProgressBarVisibile = true;
-            
-            
-            this._dashboardService
-                .updateCustomerOnboardingStatus(Customer)
-                .subscribe(
-                    (data) => {
-                        console.log(data);
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            "Approved successfully",
-                            SnackBarStatus.success
-                        );
-                        this._router.navigate(["/pages/approvalinformation"]);
-                    },
-                    (err) => {
-                        this.isProgressBarVisibile = false;
-                        this.notificationSnackBarComponent.openSnackBar(
-                            err instanceof Object
-                                ? "Something went wrong"
-                                : err,
-                            SnackBarStatus.danger
-                        );
-                    }
-                );
+            console.log("Approve", Customer);
+            if (this.Role == "Stokist") {
+                var Cusotmer = new CustomerOnboardingView1();
+                Cusotmer.Status = "StokistApproved";
+                Cusotmer.TranID = this.transID;
+                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+                Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+                Cusotmer.RoleName = this.authenticationDetails.UserRole;
+                this.isProgressBarVisibile = true;
+
+
+                this._dashboardService
+                    .updateCustomerOnboardingStatus(Customer)
+                    .subscribe(
+                        (data) => {
+                            console.log(data);
+                            this._dashboardService.AddDocumentRequiredAttachment(this.transID, this.files, this.Documentname).subscribe(
+                                (res) => {
+                                    console.log("Attachment added", res);
+                                }
+                            );
+                            this.isProgressBarVisibile = false;
+                            this.notificationSnackBarComponent.openSnackBar(
+                                "Approved successfully",
+                                SnackBarStatus.success
+                            );
+                            this._router.navigate(["/pages/approvalinformation"]);
+                        },
+                        (err) => {
+                            this.isProgressBarVisibile = false;
+                            this.notificationSnackBarComponent.openSnackBar(
+                                err instanceof Object
+                                    ? "Something went wrong"
+                                    : err,
+                                SnackBarStatus.danger
+                            );
+                        }
+                    );
+            }
+            if (this.Role == "DH") {
+                var Customer = new CustomerOnboardingView();
+                Customer.Status = "DHApproved";
+                Customer.TranID = this.transID;
+                Customer.UserID = this.authenticationDetails.UserID.toString();
+                Customer.PositionCode = this.authenticationDetails.PositionCode;
+                Customer.RoleName = this.authenticationDetails.UserRole;
+                Customer.PersonalInfo = new PersonalInformationView();
+                Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+                Customer.PersonalInfo.Identities = this.IdentityData;
+                Customer.MarketInfo = new MarketInformationView();
+                Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
+                Customer.MarketInfo.AverageSale = this.AvgData;
+                Customer.BusinessInfo = new BusinessInformationView();
+                Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
+                Customer.BankInfo = new BankDetailsView();
+                Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
+                Customer.BankInfo.BankDetailInfo = this.BankData;
+                var Cusotmer = new CustomerOnboardingView1();
+                Cusotmer.Status = "DHApproved";
+                Cusotmer.TranID = this.transID;
+                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+                Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+                Cusotmer.RoleName = this.authenticationDetails.UserRole;
+                this.isProgressBarVisibile = true;
+                this._dashboardService
+                    .updateCustomerOnboardingStatus(Customer)
+                    .subscribe(
+                        (data) => {
+                            console.log(data);
+                            this.isProgressBarVisibile = false;
+                            this.notificationSnackBarComponent.openSnackBar(
+                                "Approved successfully",
+                                SnackBarStatus.success
+                            );
+                            this._router.navigate(["/pages/approvalinformation"]);
+                        },
+                        (err) => {
+                            this.isProgressBarVisibile = false;
+                            this.notificationSnackBarComponent.openSnackBar(
+                                err instanceof Object
+                                    ? "Something went wrong"
+                                    : err,
+                                SnackBarStatus.danger
+                            );
+                        }
+                    );
+            }
+            if (this.Role == "ZH") {
+                var Customer = new CustomerOnboardingView();
+                Customer.Status = "ZHApproved";
+                Customer.TranID = this.transID;
+                Customer.UserID = this.authenticationDetails.UserID.toString();
+                Customer.PositionCode = this.authenticationDetails.PositionCode;
+                Customer.RoleName = this.authenticationDetails.UserRole;
+                Customer.PersonalInfo = new PersonalInformationView();
+                Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+                Customer.PersonalInfo.Identities = this.IdentityData;
+                Customer.MarketInfo = new MarketInformationView();
+                Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
+                Customer.MarketInfo.AverageSale = this.AvgData;
+                Customer.BusinessInfo = new BusinessInformationView();
+                Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
+                Customer.BankInfo = new BankDetailsView();
+                Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
+                Customer.BankInfo.BankDetailInfo = this.BankData;
+                console.log("Approve", Customer);
+                var Cusotmer = new CustomerOnboardingView1();
+                Cusotmer.Status = "ZHApproved";
+                Cusotmer.TranID = this.transID;
+                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+                Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+                Cusotmer.RoleName = this.authenticationDetails.UserRole;
+                this.isProgressBarVisibile = true;
+
+
+                this._dashboardService
+                    .updateCustomerOnboardingStatus(Customer)
+                    .subscribe(
+                        (data) => {
+                            console.log(data);
+                            this.isProgressBarVisibile = false;
+                            this.notificationSnackBarComponent.openSnackBar(
+                                "Approved successfully",
+                                SnackBarStatus.success
+                            );
+                            this._router.navigate(["/pages/approvalinformation"]);
+                        },
+                        (err) => {
+                            this.isProgressBarVisibile = false;
+                            this.notificationSnackBarComponent.openSnackBar(
+                                err instanceof Object
+                                    ? "Something went wrong"
+                                    : err,
+                                SnackBarStatus.danger
+                            );
+                        }
+                    );
+            }
+            if (this.Role == "SH") {
+                var Customer = new CustomerOnboardingView();
+                Customer.Status = "SHApproved";
+                Customer.TranID = this.transID;
+                Customer.UserID = this.authenticationDetails.UserID.toString();
+                Customer.PositionCode = this.authenticationDetails.PositionCode;
+                Customer.RoleName = this.authenticationDetails.UserRole;
+                Customer.PersonalInfo = new PersonalInformationView();
+                Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+                Customer.PersonalInfo.Identities = this.IdentityData;
+                Customer.MarketInfo = new MarketInformationView();
+                Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
+                Customer.MarketInfo.AverageSale = this.AvgData;
+                Customer.BusinessInfo = new BusinessInformationView();
+                Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
+                Customer.BankInfo = new BankDetailsView();
+                Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
+                Customer.BankInfo.BankDetailInfo = this.BankData;
+                console.log("Approve", Customer);
+                var Cusotmer = new CustomerOnboardingView1();
+                Cusotmer.Status = "SHApproved";
+                Cusotmer.TranID = this.transID;
+                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+                Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+                Cusotmer.RoleName = this.authenticationDetails.UserRole;
+                this.isProgressBarVisibile = true;
+
+
+                this._dashboardService
+                    .updateCustomerOnboardingStatus(Customer)
+                    .subscribe(
+                        (data) => {
+                            console.log(data);
+                            this.isProgressBarVisibile = false;
+                            this.notificationSnackBarComponent.openSnackBar(
+                                "Approved successfully",
+                                SnackBarStatus.success
+                            );
+                            this._router.navigate(["/pages/approvalinformation"]);
+                        },
+                        (err) => {
+                            this.isProgressBarVisibile = false;
+                            this.notificationSnackBarComponent.openSnackBar(
+                                err instanceof Object
+                                    ? "Something went wrong"
+                                    : err,
+                                SnackBarStatus.danger
+                            );
+                        }
+                    );
+            }
+            if (this.Role == "RAC") {
+                var Customer = new CustomerOnboardingView();
+                Customer.Status = "RACApproved";
+                Customer.TranID = this.transID;
+                Customer.UserID = this.authenticationDetails.UserID.toString();
+                Customer.PositionCode = this.authenticationDetails.PositionCode;
+                Customer.RoleName = this.authenticationDetails.UserRole;
+                Customer.PersonalInfo = new PersonalInformationView();
+                Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+                Customer.PersonalInfo.Identities = this.IdentityData;
+                Customer.MarketInfo = new MarketInformationView();
+                Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
+                Customer.MarketInfo.AverageSale = this.AvgData;
+                Customer.BusinessInfo = new BusinessInformationView();
+                Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
+                Customer.BankInfo = new BankDetailsView();
+                Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
+                Customer.BankInfo.BankDetailInfo = this.BankData;
+                console.log("Approve", Customer);
+                var Cusotmer = new CustomerOnboardingView1();
+                Cusotmer.Status = "RACApproved";
+                Cusotmer.TranID = this.transID;
+                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+                Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+                Cusotmer.RoleName = this.authenticationDetails.UserRole;
+                this.isProgressBarVisibile = true;
+
+
+                this._dashboardService
+                    .updateCustomerOnboardingStatus(Customer)
+                    .subscribe(
+                        (data) => {
+                            console.log(data);
+                            this.isProgressBarVisibile = false;
+                            this.notificationSnackBarComponent.openSnackBar(
+                                "Approved successfully",
+                                SnackBarStatus.success
+                            );
+                            this._router.navigate(["/pages/approvalinformation"]);
+                        },
+                        (err) => {
+                            this.isProgressBarVisibile = false;
+                            this.notificationSnackBarComponent.openSnackBar(
+                                err instanceof Object
+                                    ? "Something went wrong"
+                                    : err,
+                                SnackBarStatus.danger
+                            );
+                        }
+                    );
+            }
         }
     }
     Reject(): void {
@@ -1911,14 +1863,14 @@ export class ReportsviewComponent implements OnInit {
                         fileType = fileName.toLowerCase().includes(".jpg")
                             ? "image/jpg"
                             : fileName.toLowerCase().includes(".jpeg")
-                            ? "image/jpeg"
-                            : fileName.toLowerCase().includes(".png")
-                            ? "image/png"
-                            : fileName.toLowerCase().includes(".gif")
-                            ? "image/gif"
-                            : fileName.toLowerCase().includes(".pdf")
-                            ? "application/pdf"
-                            : "";
+                                ? "image/jpeg"
+                                : fileName.toLowerCase().includes(".png")
+                                    ? "image/png"
+                                    : fileName.toLowerCase().includes(".gif")
+                                        ? "image/gif"
+                                        : fileName.toLowerCase().includes(".pdf")
+                                            ? "application/pdf"
+                                            : "";
                         const blob = new Blob([data], { type: fileType });
                         const fileURL = URL.createObjectURL(blob);
                         this.AttachmentData =

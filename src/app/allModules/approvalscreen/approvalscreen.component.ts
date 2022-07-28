@@ -669,7 +669,6 @@ export class ApprovalscreenComponent implements OnInit {
         }
     }
     GetEmployees(): void {
-<<<<<<< HEAD
              
         if (this.Role == "ASM") {
             this.isProgressBarVisibile=true;
@@ -765,7 +764,6 @@ export class ApprovalscreenComponent implements OnInit {
            }, 3000);
            
         }
-=======
         // if (this.Role == "ASM") {
         //     this.isProgressBarVisibile = true;
         //     this._dashboardService
@@ -836,7 +834,6 @@ export class ApprovalscreenComponent implements OnInit {
                 // this.employeesDataSource.sort = this.sort;
                 // this.employeesDataSource.paginator = this.paginator;
             });
->>>>>>> 1032891 (UserCode updated)
     }
 
     GetEmployeewithOpenStatus(): void {

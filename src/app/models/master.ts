@@ -139,12 +139,9 @@ export class CustomerOnboardingView {
     TranID: number;
     Status: string;
     UserID: string;
-<<<<<<< HEAD
     PositionID: string;
     RoleName: string;
-=======
     PositionCode: string;
->>>>>>> 1032891 (UserCode updated)
     Transaction: CustomerOnboarding;
     PersonalInfo: PersonalInformationView;
     BusinessInfo: BusinessInformationView;
