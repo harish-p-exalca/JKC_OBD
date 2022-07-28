@@ -122,7 +122,7 @@ export class InvitepageComponent implements OnInit {
       this.otpEl6.nativeElement.focus();
     }
   }
-  
+
   GetIdentity(transID: number) {
     this._dashboardService.GetIdentityByTransID(transID).subscribe(res => {
       console.log("identity", res);
@@ -132,7 +132,7 @@ export class InvitepageComponent implements OnInit {
     },
       err => {
         this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
-    });
+      });
   }
   LoginClicked(): void {
     this.IsProgressBarVisibile = true;
@@ -142,6 +142,7 @@ export class InvitepageComponent implements OnInit {
         console.log(res);
         const dat = res as AuthenticationDetails;
         this.saveUserDetails(dat);
+        localStorage.setItem('TransID', this.TransID.toString());
       },
       (err) => {
         this.IsProgressBarVisibile = false;
@@ -160,7 +161,7 @@ export class InvitepageComponent implements OnInit {
     //   // var OTPNo = this.OTP.join();
     //   // var status = OTPNo.replace(/,/g, '').toString();
     //   // console.log("otp",parseInt(status));
-      
+
     // } else {
     //   Object.keys(this.InviteForm.controls).forEach(key => {
     //     const abstractControl = this.InviteForm.get(key);
@@ -168,7 +169,7 @@ export class InvitepageComponent implements OnInit {
     //   });
     // }
   }
-  otp:string;
+  otp: string;
   onOtpChange(otp) {
     this.otp = otp;
     console.log(this.otp);

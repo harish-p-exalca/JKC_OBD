@@ -441,7 +441,7 @@
                                         <span class="thtitle"> TransID </span>
                                     </th>
                                     <td mat-cell *matCellDef="let element;" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.TransID}}
+                                        {{element.PersonalInfo?.PersonalInformation?.TransID}}
                                     </td>
                                 </ng-container>
             
@@ -459,7 +459,7 @@
                                         <span class="thauthor"> Name </span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.Name}}
+                                        {{element.PersonalInfo?.PersonalInformation?.Name}}
                                     </td>
                                 </ng-container>
             
@@ -468,7 +468,7 @@
                                         <span class="thdate">State</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.State}}
+                                        {{element.PersonalInfo?.PersonalInformation?.State}}
                                     </td>
                                 </ng-container>
             
@@ -477,7 +477,7 @@
                                         <span class="thdate">District</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.District}}
+                                        {{element.PersonalInfo?.PersonalInformation?.District}}
                                     </td>
                                 </ng-container>
                                 <ng-container matColumnDef="Type">
@@ -485,7 +485,7 @@
                                         <span class="thdate">City</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.City}}
+                                        {{element.PersonalInfo?.PersonalInformation?.City}}
                                     </td>
                                 </ng-container>
                                 <!-- <ng-container matColumnDef="MobileNo">
@@ -501,7 +501,7 @@
                                         <span class="thdate">Status</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.Transaction.Status}}
+                                        {{ element.Transaction?.Status}}
                                         <div>
           
                                         </div>
@@ -515,7 +515,7 @@
                                     <td mat-cell *matCellDef="let element" class="table_data">
                                         <!-- {{ element.Action }} -->
                                         <div style="text-align-last: center;">
-                                            <button mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.PersonalInfo.PersonalInformation.TransID,'Responded')">Review</button>
+                                            <button mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.PersonalInfo?.PersonalInformation?.TransID,'Responded')">Review</button>
                                             <!-- <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button> -->
                                         </div>
                                     </td>
@@ -540,7 +540,7 @@
                                         <span class="thtitle"> TransID</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element;" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.TransID}}
+                                        {{element.PersonalInfo?.PersonalInformation?.TransID}}
                                     </td>
                                 </ng-container>
             
@@ -558,7 +558,7 @@
                                         <span class="thauthor"> Name </span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.Name}}
+                                        {{element.PersonalInfo?.PersonalInformation?.Name}}
                                     </td>
                                 </ng-container>
             
@@ -567,7 +567,7 @@
                                         <span class="thdate">State</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.State}}
+                                        {{element.PersonalInfo?.PersonalInformation?.State}}
                                     </td>
                                 </ng-container>
             
@@ -576,7 +576,7 @@
                                         <span class="thdate">District</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.District}}
+                                        {{element.PersonalInfo?.PersonalInformation?.District}}
                                     </td>
                                 </ng-container>
                                 <ng-container matColumnDef="Type">
@@ -584,7 +584,7 @@
                                         <span class="thdate">City</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.City}}
+                                        {{element.PersonalInfo?.PersonalInformation?.City}}
                                     </td>
                                 </ng-container>
                                 <!-- <ng-container matColumnDef="MobileNo">
@@ -600,7 +600,7 @@
                                         <span class="thdate">Status</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.Transaction.Status}}
+                                        {{ element.Transaction?.Status}}
                                         <div>
           
                                         </div>
@@ -614,7 +614,7 @@
                                     <td mat-cell *matCellDef="let element" class="table_data">
                                         <!-- {{ element.Action }} -->
                                         <div style="text-align-last: center;">
-                                            <button mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.PersonalInfo.PersonalInformation.TransID,'Approved')">Review</button>
+                                            <button mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.PersonalInfo?.PersonalInformation?.TransID,'Approved')">Review</button>
                                             <!-- <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button> -->
                                         </div>
                                     </td>
@@ -639,7 +639,7 @@
                                         <span class="thtitle"> TransID</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element;" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.TransID}}
+                                        {{element.PersonalInfo?.PersonalInformation?.TransID}}
                                     </td>
                                 </ng-container>
 
@@ -657,7 +657,7 @@
                                         <span class="thauthor"> Name </span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.Name}}
+                                        {{element.PersonalInfo?.PersonalInformation?.Name}}
                                     </td>
                                 </ng-container>
             
@@ -666,7 +666,7 @@
                                         <span class="thdate">State</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.State}}
+                                        {{element.PersonalInfo?.PersonalInformation?.State}}
                                     </td>
                                 </ng-container>
             
@@ -675,7 +675,7 @@
                                         <span class="thdate">District</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.District}}
+                                        {{element.PersonalInfo?.PersonalInformation?.District}}
                                     </td>
                                 </ng-container>
                                 <ng-container matColumnDef="Type">
@@ -683,7 +683,7 @@
                                         <span class="thdate">City</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{element.PersonalInfo.PersonalInformation.City}}
+                                        {{element.PersonalInfo?.PersonalInformation?.City}}
                                     </td>
                                 </ng-container>
                                 <!-- <ng-container matColumnDef="MobileNo">
@@ -699,7 +699,7 @@
                                         <span class="thdate">Status</span>
                                     </th>
                                     <td mat-cell *matCellDef="let element" class="table_data">
-                                        {{ element.Transaction.Status}}
+                                        {{ element.Transaction?.Status}}
                                         <div>
           
                                         </div>
@@ -713,7 +713,7 @@
                                     <td mat-cell *matCellDef="let element" class="table_data">
                                         <!-- {{ element.Action }} -->
                                         <div style="text-align-last: center;">
-                                            <button mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.PersonalInfo.PersonalInformation.TransID,'Rejected')">Review</button>
+                                            <button mat-flat-button class="tble_btn" (click)="GotoPersonalInfoWithReview(element.PersonalInfo?.PersonalInformation?.TransID,'Rejected')">Review</button>
                                             <!-- <button *ngIf="element.Status == 'InitiatorDraft'" mat-flat-button class="tble_btn" (click)="GotoPersonalInfo(element.TransID)">Edit</button> -->
                                         </div>
                                     </td>

@@ -346,8 +346,8 @@ export class DashboardComponent implements OnInit {
                 if(this.transID != null){
                     cobView.Transaction.TranID=this.transID;
                 }
-                cobView.PositionID = this.authenticationDetails.PositionID;
-                cobView.UserID = this.authenticationDetails.UserID.toString();
+                cobView.PositionCode = this.authenticationDetails.PositionCode;
+                cobView.UserID = this.authenticationDetails.UserID;
                 console.log("cobView", cobView);
                 localStorage.setItem("category",this.PIform.get('category').value)
                 this.isProgressBarVisibile = true;

@@ -71,10 +71,10 @@ export class MarketinformationComponent implements OnInit {
     authenticationDetails: AuthenticationDetails;
     currentTransaction: number;
     SOption: States[] = [];
-    isProgressBarVisibile:boolean;
+    isProgressBarVisibile: boolean;
     MarketInfoView: MarketInformationView = new MarketInformationView();
-    TransID:number;
-    CustmerView:boolean = true;
+    TransID: number;
+    CustmerView: boolean = true;
     constructor(
         private fb: FormBuilder,
         private _router: Router,
@@ -82,7 +82,7 @@ export class MarketinformationComponent implements OnInit {
         private _dashboardService: DashboardService,
         private _commonService: CommonService
     ) {
-        this.isProgressBarVisibile=false;
+        this.isProgressBarVisibile = false;
         this.notificationSnackBarComponent = new NotificationSnackBarComponent(
             this.snackBar
         );
@@ -111,12 +111,11 @@ export class MarketinformationComponent implements OnInit {
                 this.authenticationDetails.Token
             );
         }
-        if (this.authenticationDetails.UserRole == "Customer")
-        {
-            this.CustmerView = false;
+        if (this.authenticationDetails.UserRole == "Customer") {
+            this.CustmerView = true;
         }
-        else{
-        this.currentTransaction=parseInt(localStorage.getItem("TransID")); 
+        else {
+            this.currentTransaction = parseInt(localStorage.getItem("TransID"));
         }
         this.MIform = this.fb.group({
             market: [""],
@@ -146,7 +145,7 @@ export class MarketinformationComponent implements OnInit {
                 ],
             ],
             PartyBackground: ["", Validators.required],
-            
+
         });
         // this.MIform.get("YearOfEstablished").valueChanges.subscribe((value) => {
         //     if (value != "" && value!=null) {
@@ -164,19 +163,19 @@ export class MarketinformationComponent implements OnInit {
             wpMonth: [""],
             wcMonth: [""],
         });
-        this.isProgressBarVisibile=true;
+        this.isProgressBarVisibile = true;
         this._dashboardService.GetAllStates().subscribe(
             (data) => {
                 this.SOption = data;
                 this.GetMarketDetails();
-                this.isProgressBarVisibile=false;
+                this.isProgressBarVisibile = false;
             },
             (err) => console.log(err)
         );
-       
+
     }
     GetMarketDetails() {
-        this.isProgressBarVisibile=true;
+        this.isProgressBarVisibile = true;
         this._dashboardService
             .GetMarketInformationView(this.currentTransaction)
             .subscribe(
@@ -184,7 +183,7 @@ export class MarketinformationComponent implements OnInit {
                     console.log("view", res);
                     this.MarketInfoView = res;
                     this.SetMarketInfoDetails(this.MarketInfoView);
-                    this.isProgressBarVisibile=false;
+                    this.isProgressBarVisibile = false;
                 },
                 (err) => {
                     console.log(err);
@@ -194,7 +193,7 @@ export class MarketinformationComponent implements OnInit {
     SetMarketInfoDetails(
         MarketInfoView: MarketInformationView = new MarketInformationView()
     ) {
-        if (MarketInfoView.MarketInformation.TransID != null) {
+        if (MarketInfoView.MarketInformation && MarketInfoView.MarketInformation.TransID != null) {
             // businessinformation = businessInfoView.Businessinfo;
             this.MIform.patchValue({
                 market: MarketInfoView.MarketInformation.MarketName,
@@ -211,8 +210,7 @@ export class MarketinformationComponent implements OnInit {
                 Gst: MarketInfoView.MarketInformation.GstNo,
                 PartyBackground: MarketInfoView.MarketInformation.Background,
             });
-            if(localStorage.getItem('ActionStatus') == "Pending")
-            {
+            if (localStorage.getItem('ActionStatus') == "Pending") {
                 this.MIform.disable();
             }
             // this.BrandForm.patchValue({
@@ -229,11 +227,11 @@ export class MarketinformationComponent implements OnInit {
             cobView.MarketInformation = this.GetMarketInfoFromForm();
             cobView.AverageSale = this.IdentityData;
             console.log("cobView", cobView);
-            this.isProgressBarVisibile=true;
+            this.isProgressBarVisibile = true;
             this._dashboardService.SaveMarketInfoView(cobView).subscribe(
                 (res) => {
                     console.log("From save api", res);
-                    this.isProgressBarVisibile=false;
+                    this.isProgressBarVisibile = false;
                     this._router.navigate(["pages/businessinformation"]);
                     this.ClearAll();
                 },
@@ -244,11 +242,10 @@ export class MarketinformationComponent implements OnInit {
                     );
                 }
             );
-        } 
-        else if(this.MIform.disabled)
-        {
+        }
+        else if (this.MIform.disabled) {
             localStorage.setItem("ActionStatus", "Pending");
-            this._router.navigate(['/pages/businessinformation']); 
+            this._router.navigate(['/pages/businessinformation']);
         }
         else {
             this._commonService.ShowValidationErrors(this.MIform);
@@ -358,17 +355,17 @@ export class MarketinformationComponent implements OnInit {
         }
     }
     onAdd(): void {
-        var val=this.BrandForm.value;
-        var avgSale=this.listData.find(t=>t.brand==val.brand);
-        if(this.listData.length==0){
+        var val = this.BrandForm.value;
+        var avgSale = this.listData.find(t => t.brand == val.brand);
+        if (this.listData.length == 0) {
             this.listData.push(this.BrandForm.value);
             this.IdentityAddClicked();
             this.BrandForm.reset();
         }
-        else if(avgSale!=undefined){
-            this.notificationSnackBarComponent.openSnackBar("Record already exists!!",SnackBarStatus.danger);
+        else if (avgSale != undefined) {
+            this.notificationSnackBarComponent.openSnackBar("Record already exists!!", SnackBarStatus.danger);
         }
-        else{
+        else {
             this.listData.push(this.BrandForm.value);
             this.IdentityAddClicked();
             this.BrandForm.reset();
