@@ -1404,246 +1404,240 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
             console.log("Approve", Customer);
-            if (this.Role == "Stokist") {
-                var Cusotmer = new CustomerOnboardingView1();
-                Cusotmer.Status = "StokistApproved";
-                Cusotmer.TranID = this.transID;
-                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-                Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
-                Cusotmer.RoleName = this.authenticationDetails.UserRole;
-                this.isProgressBarVisibile = true;
+
+            this.isProgressBarVisibile = true;
 
 
-                this._dashboardService
-                    .updateCustomerOnboardingStatus(Customer)
-                    .subscribe(
-                        (data) => {
-                            console.log(data);
-                            this._dashboardService.AddDocumentRequiredAttachment(this.transID, this.files, this.Documentname).subscribe(
-                                (res) => {
-                                    console.log("Attachment added", res);
-                                }
-                            );
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                "Approved successfully",
-                                SnackBarStatus.success
-                            );
-                            this._router.navigate(["/pages/approvalinformation"]);
-                        },
-                        (err) => {
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                err instanceof Object
-                                    ? "Something went wrong"
-                                    : err,
-                                SnackBarStatus.danger
-                            );
-                        }
-                    );
-            }
-            if (this.Role == "DH") {
-                var Customer = new CustomerOnboardingView();
-                Customer.Status = "DHApproved";
-                Customer.TranID = this.transID;
-                Customer.UserID = this.authenticationDetails.UserID.toString();
-                Customer.PositionCode = this.authenticationDetails.PositionCode;
-                Customer.RoleName = this.authenticationDetails.UserRole;
-                Customer.PersonalInfo = new PersonalInformationView();
-                Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
-                Customer.PersonalInfo.Identities = this.IdentityData;
-                Customer.MarketInfo = new MarketInformationView();
-                Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
-                Customer.MarketInfo.AverageSale = this.AvgData;
-                Customer.BusinessInfo = new BusinessInformationView();
-                Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
-                Customer.BankInfo = new BankDetailsView();
-                Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
-                Customer.BankInfo.BankDetailInfo = this.BankData;
-                var Cusotmer = new CustomerOnboardingView1();
-                Cusotmer.Status = "DHApproved";
-                Cusotmer.TranID = this.transID;
-                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-                Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
-                Cusotmer.RoleName = this.authenticationDetails.UserRole;
-                this.isProgressBarVisibile = true;
-                this._dashboardService
-                    .updateCustomerOnboardingStatus(Customer)
-                    .subscribe(
-                        (data) => {
-                            console.log(data);
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                "Approved successfully",
-                                SnackBarStatus.success
-                            );
-                            this._router.navigate(["/pages/approvalinformation"]);
-                        },
-                        (err) => {
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                err instanceof Object
-                                    ? "Something went wrong"
-                                    : err,
-                                SnackBarStatus.danger
-                            );
-                        }
-                    );
-            }
-            if (this.Role == "ZH") {
-                var Customer = new CustomerOnboardingView();
-                Customer.Status = "ZHApproved";
-                Customer.TranID = this.transID;
-                Customer.UserID = this.authenticationDetails.UserID.toString();
-                Customer.PositionCode = this.authenticationDetails.PositionCode;
-                Customer.RoleName = this.authenticationDetails.UserRole;
-                Customer.PersonalInfo = new PersonalInformationView();
-                Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
-                Customer.PersonalInfo.Identities = this.IdentityData;
-                Customer.MarketInfo = new MarketInformationView();
-                Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
-                Customer.MarketInfo.AverageSale = this.AvgData;
-                Customer.BusinessInfo = new BusinessInformationView();
-                Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
-                Customer.BankInfo = new BankDetailsView();
-                Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
-                Customer.BankInfo.BankDetailInfo = this.BankData;
-                console.log("Approve", Customer);
-                var Cusotmer = new CustomerOnboardingView1();
-                Cusotmer.Status = "ZHApproved";
-                Cusotmer.TranID = this.transID;
-                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-                Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
-                Cusotmer.RoleName = this.authenticationDetails.UserRole;
-                this.isProgressBarVisibile = true;
-
-
-                this._dashboardService
-                    .updateCustomerOnboardingStatus(Customer)
-                    .subscribe(
-                        (data) => {
-                            console.log(data);
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                "Approved successfully",
-                                SnackBarStatus.success
-                            );
-                            this._router.navigate(["/pages/approvalinformation"]);
-                        },
-                        (err) => {
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                err instanceof Object
-                                    ? "Something went wrong"
-                                    : err,
-                                SnackBarStatus.danger
-                            );
-                        }
-                    );
-            }
-            if (this.Role == "SH") {
-                var Customer = new CustomerOnboardingView();
-                Customer.Status = "SHApproved";
-                Customer.TranID = this.transID;
-                Customer.UserID = this.authenticationDetails.UserID.toString();
-                Customer.PositionCode = this.authenticationDetails.PositionCode;
-                Customer.RoleName = this.authenticationDetails.UserRole;
-                Customer.PersonalInfo = new PersonalInformationView();
-                Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
-                Customer.PersonalInfo.Identities = this.IdentityData;
-                Customer.MarketInfo = new MarketInformationView();
-                Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
-                Customer.MarketInfo.AverageSale = this.AvgData;
-                Customer.BusinessInfo = new BusinessInformationView();
-                Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
-                Customer.BankInfo = new BankDetailsView();
-                Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
-                Customer.BankInfo.BankDetailInfo = this.BankData;
-                console.log("Approve", Customer);
-                var Cusotmer = new CustomerOnboardingView1();
-                Cusotmer.Status = "SHApproved";
-                Cusotmer.TranID = this.transID;
-                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-                Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
-                Cusotmer.RoleName = this.authenticationDetails.UserRole;
-                this.isProgressBarVisibile = true;
-
-
-                this._dashboardService
-                    .updateCustomerOnboardingStatus(Customer)
-                    .subscribe(
-                        (data) => {
-                            console.log(data);
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                "Approved successfully",
-                                SnackBarStatus.success
-                            );
-                            this._router.navigate(["/pages/approvalinformation"]);
-                        },
-                        (err) => {
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                err instanceof Object
-                                    ? "Something went wrong"
-                                    : err,
-                                SnackBarStatus.danger
-                            );
-                        }
-                    );
-            }
-            if (this.Role == "RAC") {
-                var Customer = new CustomerOnboardingView();
-                Customer.Status = "RACApproved";
-                Customer.TranID = this.transID;
-                Customer.UserID = this.authenticationDetails.UserID.toString();
-                Customer.PositionCode = this.authenticationDetails.PositionCode;
-                Customer.RoleName = this.authenticationDetails.UserRole;
-                Customer.PersonalInfo = new PersonalInformationView();
-                Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
-                Customer.PersonalInfo.Identities = this.IdentityData;
-                Customer.MarketInfo = new MarketInformationView();
-                Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
-                Customer.MarketInfo.AverageSale = this.AvgData;
-                Customer.BusinessInfo = new BusinessInformationView();
-                Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
-                Customer.BankInfo = new BankDetailsView();
-                Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
-                Customer.BankInfo.BankDetailInfo = this.BankData;
-                console.log("Approve", Customer);
-                var Cusotmer = new CustomerOnboardingView1();
-                Cusotmer.Status = "RACApproved";
-                Cusotmer.TranID = this.transID;
-                Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-                Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
-                Cusotmer.RoleName = this.authenticationDetails.UserRole;
-                this.isProgressBarVisibile = true;
-
-
-                this._dashboardService
-                    .updateCustomerOnboardingStatus(Customer)
-                    .subscribe(
-                        (data) => {
-                            console.log(data);
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                "Approved successfully",
-                                SnackBarStatus.success
-                            );
-                            this._router.navigate(["/pages/approvalinformation"]);
-                        },
-                        (err) => {
-                            this.isProgressBarVisibile = false;
-                            this.notificationSnackBarComponent.openSnackBar(
-                                err instanceof Object
-                                    ? "Something went wrong"
-                                    : err,
-                                SnackBarStatus.danger
-                            );
-                        }
-                    );
-            }
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Customer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this._dashboardService.AddDocumentRequiredAttachment(this.transID, this.files, this.Documentname).subscribe(
+                            (res) => {
+                                console.log("Attachment added", res);
+                            }
+                        );
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
         }
+        if (this.Role == "DH") {
+            var Customer = new CustomerOnboardingView();
+            Customer.Status = "DHApproved";
+            Customer.TranID = this.transID;
+            Customer.UserID = this.authenticationDetails.UserID.toString();
+            Customer.PositionCode = this.authenticationDetails.PositionCode;
+            Customer.RoleName = this.authenticationDetails.UserRole;
+            Customer.PersonalInfo = new PersonalInformationView();
+            Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+            Customer.PersonalInfo.Identities = this.IdentityData;
+            Customer.MarketInfo = new MarketInformationView();
+            Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
+            Customer.MarketInfo.AverageSale = this.AvgData;
+            Customer.BusinessInfo = new BusinessInformationView();
+            Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
+            Customer.BankInfo = new BankDetailsView();
+            Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
+            Customer.BankInfo.BankDetailInfo = this.BankData;
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "DHApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Customer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
+        }
+        if (this.Role == "ZH") {
+            var Customer = new CustomerOnboardingView();
+            Customer.Status = "ZHApproved";
+            Customer.TranID = this.transID;
+            Customer.UserID = this.authenticationDetails.UserID.toString();
+            Customer.PositionCode = this.authenticationDetails.PositionCode;
+            Customer.RoleName = this.authenticationDetails.UserRole;
+            Customer.PersonalInfo = new PersonalInformationView();
+            Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+            Customer.PersonalInfo.Identities = this.IdentityData;
+            Customer.MarketInfo = new MarketInformationView();
+            Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
+            Customer.MarketInfo.AverageSale = this.AvgData;
+            Customer.BusinessInfo = new BusinessInformationView();
+            Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
+            Customer.BankInfo = new BankDetailsView();
+            Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
+            Customer.BankInfo.BankDetailInfo = this.BankData;
+            console.log("Approve", Customer);
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "ZHApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
+
+
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Customer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
+        }
+        if (this.Role == "SH") {
+            var Customer = new CustomerOnboardingView();
+            Customer.Status = "SHApproved";
+            Customer.TranID = this.transID;
+            Customer.UserID = this.authenticationDetails.UserID.toString();
+            Customer.PositionCode = this.authenticationDetails.PositionCode;
+            Customer.RoleName = this.authenticationDetails.UserRole;
+            Customer.PersonalInfo = new PersonalInformationView();
+            Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+            Customer.PersonalInfo.Identities = this.IdentityData;
+            Customer.MarketInfo = new MarketInformationView();
+            Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
+            Customer.MarketInfo.AverageSale = this.AvgData;
+            Customer.BusinessInfo = new BusinessInformationView();
+            Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
+            Customer.BankInfo = new BankDetailsView();
+            Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
+            Customer.BankInfo.BankDetailInfo = this.BankData;
+            console.log("Approve", Customer);
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "SHApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
+
+
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Customer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
+        }
+        if (this.Role == "RAC") {
+            var Customer = new CustomerOnboardingView();
+            Customer.Status = "RACApproved";
+            Customer.TranID = this.transID;
+            Customer.UserID = this.authenticationDetails.UserID.toString();
+            Customer.PositionCode = this.authenticationDetails.PositionCode;
+            Customer.RoleName = this.authenticationDetails.UserRole;
+            Customer.PersonalInfo = new PersonalInformationView();
+            Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+            Customer.PersonalInfo.Identities = this.IdentityData;
+            Customer.MarketInfo = new MarketInformationView();
+            Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
+            Customer.MarketInfo.AverageSale = this.AvgData;
+            Customer.BusinessInfo = new BusinessInformationView();
+            Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
+            Customer.BankInfo = new BankDetailsView();
+            Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
+            Customer.BankInfo.BankDetailInfo = this.BankData;
+            console.log("Approve", Customer);
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "RACApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
+
+
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Customer)
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
+        }
+
     }
     Reject(): void {
         var Cusotmer = new CustomerOnboardingView1();
@@ -1678,7 +1672,7 @@ export class ReportsviewComponent implements OnInit {
         // Cusotmer.Status = "ASMRejected";
         // Cusotmer.TranID = this.transID;
         // Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-        // Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        // Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
         // Cusotmer.RoleName = this.authenticationDetails.UserRole;
         // this.isProgressBarVisibile = true;
         // this._dashboardService
@@ -1707,7 +1701,7 @@ export class ReportsviewComponent implements OnInit {
         //     Cusotmer.Status = "SHRejected";
         //     Cusotmer.TranID = this.transID;
         //     Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-        //     Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        //     Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
         //     Cusotmer.RoleName = this.authenticationDetails.UserRole;
         //     this.isProgressBarVisibile = true;
         //     this._dashboardService
@@ -1736,7 +1730,7 @@ export class ReportsviewComponent implements OnInit {
         //         Cusotmer.Status = "ZHRejected";
         //         Cusotmer.TranID = this.transID;
         //         Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-        //         Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        //         Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
         //         Cusotmer.RoleName = this.authenticationDetails.UserRole;
         //         this.isProgressBarVisibile = true;
         //         this._dashboardService
@@ -1765,7 +1759,7 @@ export class ReportsviewComponent implements OnInit {
         //             Cusotmer.Status = "DHRejected";
         //             Cusotmer.TranID = this.transID;
         //             Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-        //             Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        //             Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
         //             Cusotmer.RoleName = this.authenticationDetails.UserRole;
         //             this.isProgressBarVisibile = true;
         //             this._dashboardService
@@ -1794,7 +1788,7 @@ export class ReportsviewComponent implements OnInit {
         //                 Cusotmer.Status = "RACRejected";
         //                 Cusotmer.TranID = this.transID;
         //                 Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-        //                 Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        //                 Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
         //                 Cusotmer.RoleName = this.authenticationDetails.UserRole;
         //                 this.isProgressBarVisibile = true;
         //                 this._dashboardService
@@ -1823,7 +1817,7 @@ export class ReportsviewComponent implements OnInit {
         //                     Cusotmer.Status = "StockistRejected";
         //                     Cusotmer.TranID = this.transID;
         //                     Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-        //                     Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        //                     Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
         //                     Cusotmer.RoleName = this.authenticationDetails.UserRole;
         //                     this.isProgressBarVisibile = true;
         //                     this._dashboardService

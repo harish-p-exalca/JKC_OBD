@@ -139,7 +139,7 @@ export class CustomerOnboardingView {
     TranID: number;
     Status: string;
     UserID: string;
-    PositionID: string;
+    //PositionCode: string;
     RoleName: string;
     PositionCode: string;
     Transaction: CustomerOnboarding;
