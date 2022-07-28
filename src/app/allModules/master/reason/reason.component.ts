@@ -21,7 +21,7 @@ export class ReasonComponent implements OnInit {
   MenuItems: string[];
   authenticationDetails: AuthenticationDetails;
   CurrentUserName: string;
-  CurrentUserID: Guid;
+  CurrentUserID: string;
   CurrentUserRole: string;
   notificationSnackBarComponent: NotificationSnackBarComponent;
   IsProgressBarVisibile: boolean;

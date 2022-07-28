@@ -669,6 +669,7 @@ export class ApprovalscreenComponent implements OnInit {
         }
     }
     GetEmployees(): void {
+<<<<<<< HEAD
              
         if (this.Role == "ASM") {
             this.isProgressBarVisibile=true;
@@ -764,11 +765,83 @@ export class ApprovalscreenComponent implements OnInit {
            }, 3000);
            
         }
+=======
+        // if (this.Role == "ASM") {
+        //     this.isProgressBarVisibile = true;
+        //     this._dashboardService
+        //         .getPersonalInfoByStatusAndRole(this.Role, "CustomerReleased")
+        //         .subscribe((data) => {
+        //             this.AllHeaderDetails = data;
+        //             this.isProgressBarVisibile = false;
+        //             this.LoadTableSource(this.AllHeaderDetails);
+        //         });
+        // }
+        // if (this.Role == "Stokist") {
+        //     this.isProgressBarVisibile = true;
+        //     this._dashboardService
+        //         .getPersonalInfoByStatusAndRole(this.Role, "RACApproved")
+        //         .subscribe((data) => {
+        //             this.AllHeaderDetails = data;
+        //             this.isProgressBarVisibile = false;
+        //             this.LoadTableSource(this.AllHeaderDetails);
+        //         });
+        // }
+        // if (this.Role == "DH") {
+        //     this.isProgressBarVisibile = true;
+        //     this._dashboardService
+        //         .getPersonalInfoByStatusAndRole(this.Role, "ZHApproved")
+        //         .subscribe((data) => {
+        //             this.AllHeaderDetails = data;
+        //             this.isProgressBarVisibile = false;
+        //             this.LoadTableSource(this.AllHeaderDetails);
+        //         });
+        // }
+        // if (this.Role == "ZH") {
+        //     this.isProgressBarVisibile = true;
+        //     this._dashboardService
+        //         .getPersonalInfoByStatusAndRole(this.Role, "SHApproved")
+        //         .subscribe((data) => {
+        //             this.AllHeaderDetails = data;
+        //             this.isProgressBarVisibile = false;
+        //             this.LoadTableSource(this.AllHeaderDetails);
+        //         });
+        // }
+        // if (this.Role == "SH") {
+        //     this.isProgressBarVisibile = true;
+        //     this._dashboardService
+        //         .getPersonalInfoByStatusAndRole(this.Role, "ASMApproved")
+        //         .subscribe((data) => {
+        //             this.AllHeaderDetails = data;
+        //             this.isProgressBarVisibile = false;
+        //             this.LoadTableSource(this.AllHeaderDetails);
+        //         });
+        // }
+        // if (this.Role == "RAC") {
+        //     this.isProgressBarVisibile = true;
+        //     this._dashboardService
+        //         .getPersonalInfoByStatusAndRole(this.Role, "DHApproved")
+        //         .subscribe((data) => {
+        //             this.AllHeaderDetails = data;
+        //             this.isProgressBarVisibile = false;
+        //             this.LoadTableSource(this.AllHeaderDetails);
+        //         });
+        // }
+        this._dashboardService.GetOpenCustomerOnBoardingByPosition(this.authenticationDetails.PositionCode,this.authenticationDetails.UserID)
+            .subscribe((data) => {
+                this.AllOpenDetails = data;
+                this.isProgressBarVisibile = false;
+                this.LoadTableSource(this.AllOpenDetails);
+                // this.employeesDataSource =
+                //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+                // this.employeesDataSource.sort = this.sort;
+                // this.employeesDataSource.paginator = this.paginator;
+            });
+>>>>>>> 1032891 (UserCode updated)
     }
 
     GetEmployeewithOpenStatus(): void {
 
-        this._dashboardService.GetOpenCustomerOnBoardingByPosition(this.authenticationDetails.PositionID)
+        this._dashboardService.GetOpenCustomerOnBoardingByPosition(this.authenticationDetails.PositionCode,this.authenticationDetails.UserID)
             .subscribe((data) => {
                 this.AllOpenDetails = data;
                 this.isProgressBarVisibile = false;

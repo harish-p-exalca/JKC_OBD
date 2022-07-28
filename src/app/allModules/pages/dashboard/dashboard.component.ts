@@ -302,7 +302,7 @@ export class DashboardComponent implements OnInit {
                 if(this.transID != null){
                     cobView.Transaction.TranID=this.transID;
                 }
-                cobView.PositionID = this.authenticationDetails.PositionID;
+                cobView.PositionCode = this.authenticationDetails.PositionCode;
                 cobView.UserID = this.authenticationDetails.UserID.toString();
                 console.log("cobView", cobView);
                 this.isProgressBarVisibile = true;

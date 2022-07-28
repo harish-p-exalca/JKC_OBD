@@ -1361,6 +1361,7 @@ export class ReportsviewComponent implements OnInit {
       }
     Approve(): void {
         if (this.Role == "ASM") {
+<<<<<<< HEAD
             var Customer =  new CustomerOnboardingView();
             Customer.Status = "ASMApproved";
             Customer.TranID = this.transID;
@@ -1379,6 +1380,14 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
             console.log("Approve",Customer);
+=======
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "ASMApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+>>>>>>> 1032891 (UserCode updated)
             this.isProgressBarVisibile = true;
             
             
@@ -1410,6 +1419,7 @@ export class ReportsviewComponent implements OnInit {
                     }
                 );
         }
+<<<<<<< HEAD
         if (this.Role == "Stockist") {
             var Customer =  new CustomerOnboardingView();
             Customer.Status = "StockistApproved";
@@ -1429,6 +1439,15 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
             console.log("Approve",Customer);
+=======
+        if (this.Role == "Stokist") {
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "StokistApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+>>>>>>> 1032891 (UserCode updated)
             this.isProgressBarVisibile = true;
             
             
@@ -1461,6 +1480,7 @@ export class ReportsviewComponent implements OnInit {
                 );
         }
         if (this.Role == "DH") {
+<<<<<<< HEAD
             var Customer =  new CustomerOnboardingView();
             Customer.Status = "DHApproved";
             Customer.TranID = this.transID;
@@ -1478,6 +1498,14 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo = new BankDetailsView();
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
+=======
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "DHApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+>>>>>>> 1032891 (UserCode updated)
             this.isProgressBarVisibile = true;
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
@@ -1503,6 +1531,7 @@ export class ReportsviewComponent implements OnInit {
                 );
         }
         if (this.Role == "ZH") {
+<<<<<<< HEAD
             var Customer =  new CustomerOnboardingView();
             Customer.Status = "ZHApproved";
             Customer.TranID = this.transID;
@@ -1521,6 +1550,14 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
             console.log("Approve",Customer);
+=======
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "ZHApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+>>>>>>> 1032891 (UserCode updated)
             this.isProgressBarVisibile = true;
             
             
@@ -1548,6 +1585,7 @@ export class ReportsviewComponent implements OnInit {
                 );
         }
         if (this.Role == "SH") {
+<<<<<<< HEAD
             var Customer =  new CustomerOnboardingView();
             Customer.Status = "SHApproved";
             Customer.TranID = this.transID;
@@ -1566,6 +1604,14 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
             console.log("Approve",Customer);
+=======
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "SHApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+>>>>>>> 1032891 (UserCode updated)
             this.isProgressBarVisibile = true;
             
             
@@ -1593,6 +1639,7 @@ export class ReportsviewComponent implements OnInit {
                 );
         }
         if (this.Role == "RAC") {
+<<<<<<< HEAD
             var Customer =  new CustomerOnboardingView();
             Customer.Status = "RACApproved";
             Customer.TranID = this.transID;
@@ -1611,6 +1658,14 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
             console.log("Approve",Customer);
+=======
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "RACApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+>>>>>>> 1032891 (UserCode updated)
             this.isProgressBarVisibile = true;
             
             
@@ -1643,7 +1698,7 @@ export class ReportsviewComponent implements OnInit {
         Cusotmer.Status = "Rejected";
         Cusotmer.TranID = this.transID;
         Cusotmer.UserID = this.authenticationDetails.UserID.toString();
-        Cusotmer.PositionID = this.authenticationDetails.PositionID;
+        Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
         Cusotmer.RoleName = this.authenticationDetails.UserRole;
         this.isProgressBarVisibile = true;
         this._dashboardService

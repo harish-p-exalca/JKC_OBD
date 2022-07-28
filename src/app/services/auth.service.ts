@@ -71,7 +71,7 @@ export class AuthService {
   }
 
 
-  SignOut(UserID: Guid): Observable<any> {
+  SignOut(UserID: string): Observable<any> {
     return this._httpClient.get<any>(`${this.baseAddress}api/Master/SignOut?UserID=${UserID}`,
     ).pipe(catchError(this.errorHandler1));
   }
