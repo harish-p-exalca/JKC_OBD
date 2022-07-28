@@ -16,12 +16,27 @@
     </div>
   </mat-card> -->
   <div fxFlex="100" class="total_div">
-    <div fxLayout="column" fxFlex="90" fxLayoutAlign="center start" class="inner_total_div">
+    <div fxLayout="column" fxFlex="20" fxLayoutAlign="start start" class="inner_total_div"
+      style="border-right: 1px solid #f4f2fa;">
+      <mat-card fxLayout="row" fxLayoutAlign="center center" class="card_css">
+        <p style="font-size:13px;">Personal Information</p>
+      </mat-card>
+      <mat-card fxLayout="row" fxLayoutAlign="center center" class="card_css">
+        <p style="font-size:13px;">Market Information</p>
+      </mat-card>
+      <mat-card fxLayout="row" fxLayoutAlign="center center" class="card_css">
+        <p style="font-size:13px;">Business Information</p>
+      </mat-card>
+      <mat-card fxLayout="row" fxLayoutAlign="center center" class="card_css">
+        <p style="font-size:13px;">Bank Information</p>
+      </mat-card>
+    </div>
+    <div fxLayout="column" fxFlex="80" fxLayoutAlign="center start" class="inner_total_div">
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="PIform" fxLayoutAlign="space-around start" class="form_div">
           <div fxLayout="column" class="form_div_I">
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Type of category</span>
+              <span fxFlex="40" class="marketsp">Type of Category</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                   <input fxFlex matInput placeholder="Select the type of Catagory" formControlName="category"
@@ -67,13 +82,13 @@
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                   <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected"
-                  (selectionChange)="FirmStatusChange()" formControlName="Status">
-                  <mat-option value="Proprietor">Proprietor</mat-option>
-                  <mat-option value="Partnership">Partnership</mat-option>
-                  <mat-option value="Huf">Huf</mat-option>
-                  <mat-option value="Pvt Ltd">Pvt Ltd</mat-option>
-                  <mat-option value="Limited">Limited</mat-option>
-                </mat-select>
+                    (selectionChange)="FirmStatusChange()" formControlName="Status">
+                    <mat-option value="Proprietor">Proprietor</mat-option>
+                    <mat-option value="Partnership">Partnership</mat-option>
+                    <mat-option value="Huf">Huf</mat-option>
+                    <mat-option value="Pvt Ltd">Pvt Ltd</mat-option>
+                    <mat-option value="Limited">Limited</mat-option>
+                  </mat-select>
                 </div>
               </div>
             </div>
@@ -143,9 +158,9 @@
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="firmForm" class="firmForm" *ngIf="selected">
 
-          <div fxLayout="column" style="width:86%;margin-left: 10%;">
+          <div fxLayout="column" style="width:86%;margin-left: 5.5%;">
             <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px" style="margin-top: 3%;">
-  
+
               <div fxLayout="column" fxFlex="60">
                 <div fxLayout="row">
                   <mat-label style="margin-bottom: 10px;font-weight: 500;font-size: 13px;">Name</mat-label>
@@ -176,8 +191,8 @@
                     Please enter valid mobile number
                   </mat-error>
                 </div>
-  
-  
+
+
               </div>
               <div fxLayout="column" fxFlex="60">
                 <div fxLayout="row">
@@ -361,7 +376,8 @@
               <span fxFlex="50" class="marketsp">Select the Party Background</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-select  [(value)]="selected" placeholder="Select the Party Background" formControlName="PartyBackground" style="height: 40px;" class="inputform2">
+                  <mat-select [(value)]="selected" placeholder="Select the Party Background"
+                    formControlName="PartyBackground" style="height: 40px;" class="inputform2">
                     <mat-option value="1">Paint</mat-option>
                     <mat-option value="2">Grey Cement</mat-option>
                     <mat-option value="3">Hardware</mat-option>
@@ -434,55 +450,56 @@
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="BrandForm" *ngIf="selected=='4' || selected=='5'">
           <div fxLayout="column" style="width:60%;margin-left: 10%;">
-            
+
             <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px" style="margin-top: 3%;">
               <div fxLayout="column" fxFlex="60">
                 <div fxLayout="row">
-              <mat-label style="margin-bottom: 10px;font-size: 13px;font-weight: 500;">Brand Name</mat-label>
-              </div>
-              <div fxLayout="row" fxFlex="60"  class="">
-              
-              
+                  <mat-label style="margin-bottom: 10px;font-size: 13px;font-weight: 500;">Brand Name</mat-label>
+                </div>
+                <div fxLayout="row" fxFlex="60" class="">
 
-                  <mat-select placeholder="Select the Brand Name" formControlName="brand"  class="" style="width: 200px;">
+
+
+                  <mat-select placeholder="Select the Brand Name" formControlName="brand" class=""
+                    style="width: 200px;">
                     <mat-option *ngFor="let brand of brandName" [value]="brand">{{brand}}</mat-option>
                   </mat-select>
                   <mat-error class="errorn"
                     *ngIf="MIform?.get('brand')?.touched && MIform?.get('brand')?.hasError('required')">
-                    Brand Name 
+                    Brand Name
                     is
                     required
                   </mat-error>
-             
-              </div>
-            </div>
-            <div fxLayout="column" fxFlex="60">
-              <div fxLayout="row">
-            <mat-label style="margin-bottom: 10px;font-weight: 500;">White Cement</mat-label>
-            </div>
-            <div fxLayout="row" fxFlex="60"  class="">
-                <input autocomplete="off" matInput placeholder="Please Enter WC Avg sale" style="width: 200px;" formControlName="wcMonth" class="inputform"
-                      type="number"   required>
-               
-              </div>
+
+                </div>
               </div>
               <div fxLayout="column" fxFlex="60">
                 <div fxLayout="row">
-              <mat-label style="margin-bottom: 10px;font-weight: 500;">Wall Putty</mat-label>
+                  <mat-label style="margin-bottom: 10px;font-weight: 500;">White Cement</mat-label>
+                </div>
+                <div fxLayout="row" fxFlex="60" class="">
+                  <input autocomplete="off" matInput placeholder="Please Enter WC Avg sale" style="width: 200px;"
+                    formControlName="wcMonth" class="inputform" type="number" required>
+
+                </div>
               </div>
-              <div fxLayout="row" fxFlex="60" class="">
-                <input autocomplete="off" matInput placeholder="Please Enter WP Avg sale" style="width: 200px;" formControlName="wpMonth" class="inputform"
-                type="number" required>
-               
-              </div>
+              <div fxLayout="column" fxFlex="60">
+                <div fxLayout="row">
+                  <mat-label style="margin-bottom: 10px;font-weight: 500;">Wall Putty</mat-label>
+                </div>
+                <div fxLayout="row" fxFlex="60" class="">
+                  <input autocomplete="off" matInput placeholder="Please Enter WP Avg sale" style="width: 200px;"
+                    formControlName="wpMonth" class="inputform" type="number" required>
+
+                </div>
               </div>
               <div fxLayout="column">
                 <button mat-flat-button style="margin-top: 34px;" (click)="onAdd()">+</button>
-                 </div>
+              </div>
             </div>
-          
-               
-                <!-- <table>
+
+
+            <!-- <table>
                   <thead>
                     <tr>
                       <th>If Selling White Cement/Wall Putty </th>
@@ -500,10 +517,10 @@
                 </tr>
                   </tbody>
                 </table> -->
-             
+
           </div>
-       
-      </form> 
+
+        </form>
       </div>
       <div fxLayout="column" fxLayoutAlign="start start" fxFlex class="average_sales" fxLayoutGap="20px">
         <div class="contact_heading">
@@ -519,13 +536,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor = "let item of AvgData even as isEven"
-              [ngStyle]="{ background: isEven ? 'white' : '#f1f1f5'}">
-            <td><span>{{item?.Brand}}</span></td>
-            <td><span>{{item?.AvgSale}}</span></td>
-            <td><span>{{item?.AvgSale}}</span></td>
-           
-          </tr>
+              <tr *ngFor="let item of AvgData even as isEven" [ngStyle]="{ background: isEven ? 'white' : '#f1f1f5'}">
+                <td><span>{{item?.Brand}}</span></td>
+                <td><span>{{item?.AvgSale}}</span></td>
+                <td><span>{{item?.AvgSale}}</span></td>
+
+              </tr>
             </tbody>
           </table>
           <!-- <table mat-table [dataSource]="averageSalesDataSource" class="table-css">
@@ -746,180 +762,177 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
-        <mat-vertical-stepper style="margin-top:5%;width: 100%;"  #stepper>
+        <mat-vertical-stepper style="margin-top:5%;width: 100%;" #stepper>
           <mat-step [stepControl]="DepositForm" class="temp">
-          
-        <form [formGroup]="DepositForm" fxLayoutAlign="space-around start" class="form_div">
-          <ng-template matStepLabel>Details of security deposit</ng-template>
-          <div fxLayout="column" class="form_div_III">
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="35" class="marketsp">Select Deposit Type*</span>
-              <div fxLayout="row" fxLayoutAlign="start start" class="inp_div" fxLayoutGap="10px">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Select Deposit Type" formControlName="Type"
-                    class="inputform2">
+
+            <form [formGroup]="DepositForm" fxLayoutAlign="space-around start" class="form_div">
+              <ng-template matStepLabel>Details of security deposit</ng-template>
+              <div fxLayout="column" class="form_div_III">
+                <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                  <span fxFlex="35" class="marketsp">Select Deposit Type*</span>
+                  <div fxLayout="row" fxLayoutAlign="start start" class="inp_div" fxLayoutGap="10px">
+                    <div fxLayout="row" fxFlex="100" class="inner-inp_div">
+                      <input fxFlex matInput placeholder="Select Deposit Type" formControlName="Type"
+                        class="inputform2">
+                    </div>
+                  </div>
+                </div>
+                <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                  <span fxFlex="35" class="marketsp">Number</span>
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                    <div fxLayout="row" fxFlex="100" class="inner-inp_div">
+                      <input fxFlex matInput placeholder=" Enter Number" formControlName="leaf" class="inputform2">
+                    </div>
+                  </div>
+                </div>
+                <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                  <span fxFlex="35" class="marketsp">Date*</span>
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                    <div fxLayout="row" fxFlex="100" class="inner-inp_div">
+                      <input fxFlex matInput placeholder="Enter the Date" formControlName="Date" class="inputform2">
+                    </div>
+                  </div>
+                </div>
+                <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                  <span fxFlex="35" class="marketsp">Amount(In lakhs)*</span>
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                    <div fxLayout="row" fxFlex="100" class="inner-inp_div">
+                      <input fxFlex matInput placeholder="Enter the Amount" formControlName="Amount" class="inputform2">
+                    </div>
+                  </div>
+                </div>
+                <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                  <span fxFlex="35" class="marketsp">Enter Name of Bank</span>
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                    <div fxLayout="row" fxFlex="100" class="inner-inp_div">
+                      <input fxFlex matInput placeholder="Enter Name of Bank" formControlName="nameofbank"
+                        class="inputform2">
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center"
-              >
-              <span fxFlex="35" class="marketsp">Number</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder=" Enter Number" formControlName="leaf"
-                    class="inputform2">
-                </div>
-              </div>
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center"
-              >
-              <span fxFlex="35" class="marketsp">Date*</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter the Date" formControlName="Date" class="inputform2">
-                </div>
-              </div>
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center"
-              >
-              <span fxFlex="35" class="marketsp">Amount(In lakhs)*</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter the Amount" formControlName="Amount" class="inputform2">
-                </div>
-              </div>
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center"
-              >
-              <span fxFlex="35" class="marketsp">Enter Name of Bank</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Name of Bank" formControlName="nameofbank" class="inputform2">
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step [stepControl]="BIform">
-        <ng-template matStepLabel>Bank Details of Firm/Party</ng-template>
-        <div fxLayout="column" fxLayoutAlign="start start" fxFlex class="contact-div" fxLayoutGap="20px">
-          <!-- <div class="contact_heading">
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="BIform">
+            <ng-template matStepLabel>Bank Details of Firm/Party</ng-template>
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex class="Bank-div" fxLayoutGap="20px">
+              <!-- <div class="contact_heading">
             Bank Details
           </div> -->
-          <div class="table_div" style="width: 100%;">
-            <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
-              <form [formGroup]="BankForm">
-                <ng-template matStepLabel>Bank Details of Firm/Party</ng-template>
-                <div fxLayout="row" fxLayoutGap="10px">
-                  <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
-                    <span class="leafspan">Bank Name*</span>
-    
-                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
-                      <mat-form-field appearance="" class="formleaf">
-                        <input matInput placeholder="Enter Bank Name" (keypress)="AlphabetsonlyOnly($event)" formControlName="bankname" style="width: 100%;"
-                          class="inputformm">
-                        <mat-error class="errorn"
-                          *ngIf="BankForm?.get('bankname')?.touched && BankForm?.get('bankname')?.hasError('required')">
-                          Bank Name
-                          is
-                          required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
-                    <span class="leafnospan">Bank Address*</span>
-    
-                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
-                      <mat-form-field appearance="" class="formleaf">
-                        <input matInput placeholder="Enter Bank Address" class="inputformm" formControlName="bankaddress"
-                          style="width: 100%;">
-                        <mat-error class="errorn"
-                          *ngIf="BankForm?.get('bankaddress')?.touched && BankForm?.get('bankaddress')?.hasError('required')">
-                          Bank Address
-                          is
-                          required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
-                    <span class="leafnospan">IFSC Code*</span>
-    
-                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
-                      <mat-form-field appearance="" class="formleaf">
-                        <input matInput placeholder=" Enter IFSC Code" formControlName="ifsccode" style="width: 100%;"
-                          class="inputformm">
-                        <mat-error class="errorn"
-                          *ngIf="BankForm?.get('ifsccode')?.touched && BankForm?.get('ifsccode')?.hasError('required')">
-                          IFSC Code
-                          is
-                          required
-                        </mat-error>
-                        <mat-error class="errorn" *ngIf=" BankForm?.get('ifsccode')?.hasError('pattern')">
-                          Enter a valid IFSC Code
-                        </mat-error>
-                      
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
-                    <span class="leafnospan">Bank A/c Number*</span>
-    
-    
-                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
-                      <mat-form-field appearance="" class="formleaf">
-                        <input matInput placeholder="Enter Bank A/c Numberter" formControlName="bankacno" (keypress)="keyPressNumbers($event)"
-                          style="width: 100%;" class="inputformm"  minLength="14" maxLength="16">
-                        <mat-error class="errorn"
-                          *ngIf="BankForm?.get('bankacno')?.touched && BankForm?.get('bankacno')?.hasError('required')">
-                          Bank A/c Number
-                          is
-                          required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div fxLayout="column">
-                    <button mat-flat-button style="margin-top: 34px;" (click)="bankAddClicked()">+</button>
-                  </div>
-                  <!-- <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+              <div class="table_div" style="width: 100%;">
+                <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
+                  <form [formGroup]="BankForm">
+                    <ng-template matStepLabel>Bank Details of Firm/Party</ng-template>
+                    <div fxLayout="row" fxLayoutGap="10px">
+                      <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                        <span class="leafspan">Bank Name*</span>
+
+                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+                          <mat-form-field appearance="" class="formleaf">
+                            <input matInput placeholder="Enter Bank Name" (keypress)="AlphabetsonlyOnly($event)"
+                              formControlName="bankname" style="width: 100%;" class="inputformm">
+                            <mat-error class="errorn"
+                              *ngIf="BankForm?.get('bankname')?.touched && BankForm?.get('bankname')?.hasError('required')">
+                              Bank Name
+                              is
+                              required
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                        <span class="leafnospan">Bank Address*</span>
+
+                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+                          <mat-form-field appearance="" class="formleaf">
+                            <input matInput placeholder="Enter Bank Address" class="inputformm"
+                              formControlName="bankaddress" style="width: 100%;">
+                            <mat-error class="errorn"
+                              *ngIf="BankForm?.get('bankaddress')?.touched && BankForm?.get('bankaddress')?.hasError('required')">
+                              Bank Address
+                              is
+                              required
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                        <span class="leafnospan">IFSC Code*</span>
+
+                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+                          <mat-form-field appearance="" class="formleaf">
+                            <input matInput placeholder=" Enter IFSC Code" formControlName="ifsccode"
+                              style="width: 100%;" class="inputformm">
+                            <mat-error class="errorn"
+                              *ngIf="BankForm?.get('ifsccode')?.touched && BankForm?.get('ifsccode')?.hasError('required')">
+                              IFSC Code
+                              is
+                              required
+                            </mat-error>
+                            <mat-error class="errorn" *ngIf=" BankForm?.get('ifsccode')?.hasError('pattern')">
+                              Enter a valid IFSC Code
+                            </mat-error>
+
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                        <span class="leafnospan">Bank A/c Number*</span>
+
+
+                        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+                          <mat-form-field appearance="" class="formleaf">
+                            <input matInput placeholder="Enter Bank A/c Numberter" formControlName="bankacno"
+                              (keypress)="keyPressNumbers($event)" style="width: 100%;" class="inputformm"
+                              minLength="14" maxLength="16">
+                            <mat-error class="errorn"
+                              *ngIf="BankForm?.get('bankacno')?.touched && BankForm?.get('bankacno')?.hasError('required')">
+                              Bank A/c Number
+                              is
+                              required
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div fxLayout="column">
+                        <button mat-flat-button style="margin-top: 34px;" (click)="bankAddClicked()">+</button>
+                      </div>
+                      <!-- <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
                     <button mat-flat-button class="add1" (click)="onAdd()">+</button>
                   </div> -->
-    
-    
+
+
+                    </div>
+                    <div class="cement1">
+                      <div fxLayout="row">
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>Bank Detail No. </th>
+                              <th>Bank Name</th>
+                              <th>Bank Address</th>
+                              <th>IFSC Code</th>
+                              <th>Bank A/c Number</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of BankData even as isEven;let i = index"
+                              [ngStyle]="{ background: isEven ? 'white' : '#f1f1f5'}">
+                              <td><span>{{i+1}}</span></td>
+                              <td><span>{{item?.BankName}}</span></td>
+                              <td><span>{{item?.BankAddress}}</span></td>
+                              <td><span>{{item?.IFSC}}</span></td>
+                              <td><span>{{item?.AccountNum}}</span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                  </form>
                 </div>
-                <div class="cement1">
-                  <div fxLayout="row">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Bank Detail No. </th>
-                          <th>Bank Name</th>
-                          <th>Bank Address</th>
-                          <th>IFSC Code</th>
-                          <th>Bank A/c Number</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let item of BankData even as isEven;let i = index" 
-                        [ngStyle]="{ background: isEven ? 'white' : '#f1f1f5'}">
-                          <td><span>{{i+1}}</span></td>
-                          <td><span>{{item?.BankName}}</span></td>
-                          <td><span>{{item?.BankAddress}}</span></td>
-                          <td><span>{{item?.IFSC}}</span></td>
-                          <td><span>{{item?.AccountNum}}</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                
-              </form>
-            </div>
-           
-            <!-- <table mat-table [dataSource]="bankdetailsdataSource" class="table-css">
+
+                <!-- <table mat-table [dataSource]="bankdetailsdataSource" class="table-css">
               <ng-container matColumnDef="BankDetailNo">
                 <th mat-header-cell *matHeaderCellDef class="header_table-class">
                   <span class="thtitle"> Bank Detail No. </span>
@@ -964,147 +977,163 @@
               <tr mat-header-row *matHeaderRowDef="bankDetailsColumns;" class="header-row-css"></tr>
               <tr mat-row *matRowDef="let row; columns: bankDetailsColumns" class="row-table"></tr>
             </table> -->
-          </div>
-        </div>
-      </mat-step>
-      <mat-step [stepControl]="BIform">
-        <!-- <ng-template matStepLabel>Documents Required (Attachments)</ng-template> -->
-        <form [formGroup]="BIform">
-          <ng-template matStepLabel>Documents Required (Attachments)</ng-template>
-          <div *ngIf="AttachmentView" fxLayout="column" fxLayoutAlign="start space-evenly">
-
-            <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
-              <!-- <div fxFlex="2"></div> -->
-              <span fxFlex="30" class="marketsp">Copy of Pan Card*</span>
-
-              <div fxLayout="column" fxFlex="50" class="">
-                
-                <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg" (change)="csvInputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput.click()" style="color: green;">Upload</button>
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;">{{FileName}}</p>
-                <p style="margin-left:14%;" *ngIf="Attach1?.AttachmentName"> {{Attach1?.AttachmentName}}</p>
-              </div>
-
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
-              <!-- <div fxFlex="2"></div> -->
-              <span fxFlex="30" class="marketsp">Copy of Gst Certificate</span>
-
-              <div fxLayout="column" fxFlex="50" class="">
-              
-                <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg" (change)="csv1InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput1.click()" style="color: green;">Upload</button>
-               
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;">{{FileName1}}</p>
-                <p style="margin-left:14%;" *ngIf="Attach2?.AttachmentName"> {{Attach2?.AttachmentName}}</p>
-              </div>
-
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
-              <!-- <div fxFlex="2"></div> -->
-              <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
-
-              <div fxLayout="column" fxFlex="50" class="">
-               
-                <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv2InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput2.click()" style="color: green;">Upload</button>
-                
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;">{{FileName2}}</p>
-                <p style="margin-left:14%;" *ngIf="Attach3?.AttachmentName"> {{Attach3?.AttachmentName}}</p>
-              </div>
-
-            </div>
-
-            <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
-              <!-- <div fxFlex="2"></div> -->
-              <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
-
-              <div fxLayout="column" fxFlex="50" class="">
-              
-                <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv3InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput3.click()" style="color: green;">Upload</button>
-            
-              </div>
-
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;">{{FileName3}}</p>
-                <p style="margin-left:14%;" *ngIf="Attach4?.AttachmentName"> {{Attach4?.AttachmentName}}</p>
               </div>
             </div>
+          </mat-step>
+          <mat-step [stepControl]="BIform">
+            <!-- <ng-template matStepLabel>Documents Required (Attachments)</ng-template> -->
+            <form [formGroup]="BIform">
+              <ng-template matStepLabel>Documents Required (Attachments)</ng-template>
+              <div *ngIf="AttachmentView" fxLayout="column" fxLayoutAlign="start space-evenly">
 
-            <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
-              <!-- <div fxFlex="2"></div> -->
-              <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
+                <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <!-- <div fxFlex="2"></div> -->
+                  <span fxFlex="30" class="marketsp">Copy of Pan Card*</span>
 
-              <div fxLayout="column" fxFlex="50" class="">
-              
-                <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv4InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput4.click()" style="color: green;">Upload</button>
-               
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;">{{FileName4}}</p>
-                <p style="margin-left:14%;" *ngIf="Attach5?.AttachmentName"> {{Attach5?.AttachmentName}}</p>
-              </div>
+                  <div fxLayout="column" fxFlex="50" class="">
 
-            </div>
+                    <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
+                      accept="application/pdf,image/png, image/jpg" (change)="csvInputChange($event)" />
+                    <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput.click()"
+                      style="color: green;">Upload</button>
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;">{{FileName}}</p>
+                    <p style="margin-left:14%;" *ngIf="Attach1?.AttachmentName"> {{Attach1?.AttachmentName}}</p>
+                  </div>
 
-            <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
-              <!-- <div fxFlex="2"></div> -->
-              <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
+                </div>
+                <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <!-- <div fxFlex="2"></div> -->
+                  <span fxFlex="30" class="marketsp">Copy of Gst Certificate</span>
 
-              <div fxLayout="column" fxFlex="50" class="">
-               
-                <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv5InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput5.click()" style="color: green;">Upload</button>
-              
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;">{{FileName5}}</p>
-                <p style="margin-left:14%;" *ngIf="Attach6?.AttachmentName"> {{Attach6?.AttachmentName}}</p>
-              </div>
+                  <div fxLayout="column" fxFlex="50" class="">
 
-            </div>
+                    <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
+                      accept="application/pdf,image/png, image/jpg" (change)="csv1InputChange($event)" />
+                    <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput1.click()"
+                      style="color: green;">Upload</button>
 
-            <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
-              <!-- <div fxFlex="2"></div> -->
-              <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;">{{FileName1}}</p>
+                    <p style="margin-left:14%;" *ngIf="Attach2?.AttachmentName"> {{Attach2?.AttachmentName}}</p>
+                  </div>
 
-              <div fxLayout="column" fxFlex="50" class="">
-               
-                <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv6InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput6.click()" style="color: green;">Upload</button>
-                
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;">{{FileName6}}</p>
-                <p style="margin-left:14%;" *ngIf="Attach7?.AttachmentName"> {{Attach7?.AttachmentName}}</p>
-              </div>
+                </div>
+                <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <!-- <div fxFlex="2"></div> -->
+                  <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
 
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
-              <!-- <div fxFlex="2"></div> -->
-              <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
+                  <div fxLayout="column" fxFlex="50" class="">
 
-              <div fxLayout="column" fxFlex="50" class="">
-               
-                <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv7InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput7.click()" style="color: green;">Upload</button>
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;">{{FileName7}}</p>
-                <p style="margin-left:14%;" *ngIf="Attach8?.AttachmentName"> {{Attach8?.AttachmentName}}</p>
-              </div>
+                    <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
+                      accept="application/pdf,image/png, image/jpg" (change)="csv2InputChange($event)" />
+                    <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput2.click()"
+                      style="color: green;">Upload</button>
 
-            </div>
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;">{{FileName2}}</p>
+                    <p style="margin-left:14%;" *ngIf="Attach3?.AttachmentName"> {{Attach3?.AttachmentName}}</p>
+                  </div>
 
-            <!-- <mat-checkbox formControlName="declare" style="
+                </div>
+
+                <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <!-- <div fxFlex="2"></div> -->
+                  <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+
+                    <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
+                      accept="application/pdf,image/png, image/jpg" (change)="csv3InputChange($event)" />
+                    <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput3.click()"
+                      style="color: green;">Upload</button>
+
+                  </div>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;">{{FileName3}}</p>
+                    <p style="margin-left:14%;" *ngIf="Attach4?.AttachmentName"> {{Attach4?.AttachmentName}}</p>
+                  </div>
+                </div>
+
+                <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <!-- <div fxFlex="2"></div> -->
+                  <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+
+                    <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
+                      accept="application/pdf,image/png, image/jpg" (change)="csv4InputChange($event)" />
+                    <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput4.click()"
+                      style="color: green;">Upload</button>
+
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;">{{FileName4}}</p>
+                    <p style="margin-left:14%;" *ngIf="Attach5?.AttachmentName"> {{Attach5?.AttachmentName}}</p>
+                  </div>
+
+                </div>
+
+                <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <!-- <div fxFlex="2"></div> -->
+                  <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+
+                    <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
+                      accept="application/pdf,image/png, image/jpg" (change)="csv5InputChange($event)" />
+                    <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput5.click()"
+                      style="color: green;">Upload</button>
+
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;">{{FileName5}}</p>
+                    <p style="margin-left:14%;" *ngIf="Attach6?.AttachmentName"> {{Attach6?.AttachmentName}}</p>
+                  </div>
+
+                </div>
+
+                <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <!-- <div fxFlex="2"></div> -->
+                  <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+
+                    <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
+                      accept="application/pdf,image/png, image/jpg" (change)="csv6InputChange($event)" />
+                    <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput6.click()"
+                      style="color: green;">Upload</button>
+
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;">{{FileName6}}</p>
+                    <p style="margin-left:14%;" *ngIf="Attach7?.AttachmentName"> {{Attach7?.AttachmentName}}</p>
+                  </div>
+
+                </div>
+                <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <!-- <div fxFlex="2"></div> -->
+                  <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+
+                    <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
+                      accept="application/pdf,image/png, image/jpg" (change)="csv7InputChange($event)" />
+                    <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled" (click)="csvInput7.click()"
+                      style="color: green;">Upload</button>
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;">{{FileName7}}</p>
+                    <p style="margin-left:14%;" *ngIf="Attach8?.AttachmentName"> {{Attach8?.AttachmentName}}</p>
+                  </div>
+
+                </div>
+
+                <!-- <mat-checkbox formControlName="declare" style="
                           margin-top: 4%;margin-right: 10%;">
               <div fxLayout="column">
                 <p style="margin-left: 13px;">I / We declare that above information is true and correct to the best of
@@ -1113,140 +1142,148 @@
               </div>
 
             </mat-checkbox> -->
-          </div>
-          <div *ngIf="!AttachmentView" fxLayout="column" fxLayoutAlign="space-evenly center">
-  
-            <div fxLayout="row" class="populationclass" fxFlex="100">
-              <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Copy of Pan Card*</span>
-  
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;" *ngIf="Attach1?.AttachmentName"> {{Attach1?.AttachmentName}}</p>
-                <!-- <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csvInputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" (click)="csvInput.click()" style="color: green;">Upload</button> -->
-                
               </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <button mat-raised-button download="file.txt" (click)="GetAttachment(Attach1?.AttachmentName)" class="uploadbtn">Download</button>
-              </div>
-  
-  
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100">
-              <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Copy of Gst Certificate</span>
-  
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;" *ngIf="Attach2?.AttachmentName"> {{Attach2?.AttachmentName}}</p>
-                <!-- <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv1InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" (click)="csvInput1.click()" style="color: green;">Upload</button> -->
-               
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <button mat-raised-button class="uploadbtn" (click)="GetAttachment(Attach2?.AttachmentName)">Download</button>
-              </div>
-  
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100">
-              <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
-  
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;" *ngIf="Attach3?.AttachmentName"> {{Attach3?.AttachmentName}}</p>
-                <!-- <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv2InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" (click)="csvInput2.click()" style="color: green;">Upload</button> -->
-                
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <button mat-raised-button (click)="GetAttachment(Attach3?.AttachmentName)" class="uploadbtn">Download</button>
-              </div>
-  
-            </div>
-  
-            <div fxLayout="row" class="populationclass" fxFlex="100">
-              <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
-  
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;" *ngIf="Attach4?.AttachmentName"> {{Attach4?.AttachmentName}}</p>
-                <!-- <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv3InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" (click)="csvInput3.click()" style="color: green;">Upload</button> -->
-            
-              </div>
-  
-              <div fxLayout="column" fxFlex="50" class="">
-                <button mat-raised-button (click)="GetAttachment(Attach4?.AttachmentName)" class="uploadbtn">Download</button>
-              </div>
-            </div>
-  
-            <div fxLayout="row" class="populationclass" fxFlex="100">
-              <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
-  
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;" *ngIf="Attach5?.AttachmentName"> {{Attach5?.AttachmentName}}</p>
-                <!-- <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv4InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" (click)="csvInput4.click()" style="color: green;">Upload</button> -->
-               
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <button mat-raised-button (click)="GetAttachment(Attach5?.AttachmentName)" class="uploadbtn">Download</button>
-              </div>
-  
-            </div>
-  
-            <div fxLayout="row" class="populationclass" fxFlex="100">
-              <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
-  
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;" *ngIf="Attach6?.AttachmentName"> {{Attach6?.AttachmentName}}</p>
-                <!-- <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv5InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" (click)="csvInput5.click()" style="color: green;">Upload</button> -->
-              
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <button mat-raised-button (click)="GetAttachment(Attach6?.AttachmentName)" class="uploadbtn">Download</button>
-              </div>
-  
-            </div>
-  
-            <div fxLayout="row" class="populationclass" fxFlex="100">
-              <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
-  
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;" *ngIf="Attach7?.AttachmentName"> {{Attach7?.AttachmentName}}</p>
-                <!-- <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv6InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" (click)="csvInput6.click()" style="color: green;">Upload</button> -->
-                
-              </div>
-              <div fxLayout="column" fxFlex="50" class="">
-                <button mat-raised-button (click)="GetAttachment(Attach7?.AttachmentName)" class="uploadbtn">Download</button>
-              </div>
-  
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100">
-              <div fxFlex="10"></div>
-              <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
-  
-              <div fxLayout="column" fxFlex="50" class="">
-                <p style="margin-left:14%;" *ngIf="Attach8?.AttachmentName"> {{Attach8?.AttachmentName}}</p>
-                <!-- <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv7InputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" (click)="csvInput7.click()" style="color: green;">Upload</button> -->
-              </div>
-  
-              <div fxLayout="column" fxFlex="50" class="">
-                <button mat-raised-button (click)="GetAttachment(Attach8?.AttachmentName)" class="uploadbtn">Download</button>
-              </div>
-            </div>
-  
-          </div>
+              <div *ngIf="!AttachmentView" fxLayout="column" fxLayoutAlign="space-evenly center">
 
-        </form>
-      
-      </mat-step>
-      </mat-vertical-stepper>
+                <div fxLayout="row" class="populationclass" fxFlex="100">
+                  <div fxFlex="10"></div>
+                  <span fxFlex="30" class="marketsp">Copy of Pan Card*</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;" *ngIf="Attach1?.AttachmentName"> {{Attach1?.AttachmentName}}</p>
+                    <!-- <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csvInputChange($event)"/>
+                <button mat-raised-button class="uploadbtn" (click)="csvInput.click()" style="color: green;">Upload</button> -->
+
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <button mat-raised-button download="file.txt" (click)="GetAttachment(Attach1?.AttachmentName)"
+                      class="uploadbtn">Download</button>
+                  </div>
+
+
+                </div>
+                <div fxLayout="row" class="populationclass" fxFlex="100">
+                  <div fxFlex="10"></div>
+                  <span fxFlex="30" class="marketsp">Copy of Gst Certificate</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;" *ngIf="Attach2?.AttachmentName"> {{Attach2?.AttachmentName}}</p>
+                    <!-- <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv1InputChange($event)"/>
+                <button mat-raised-button class="uploadbtn" (click)="csvInput1.click()" style="color: green;">Upload</button> -->
+
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <button mat-raised-button class="uploadbtn"
+                      (click)="GetAttachment(Attach2?.AttachmentName)">Download</button>
+                  </div>
+
+                </div>
+                <div fxLayout="row" class="populationclass" fxFlex="100">
+                  <div fxFlex="10"></div>
+                  <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;" *ngIf="Attach3?.AttachmentName"> {{Attach3?.AttachmentName}}</p>
+                    <!-- <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv2InputChange($event)"/>
+                <button mat-raised-button class="uploadbtn" (click)="csvInput2.click()" style="color: green;">Upload</button> -->
+
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <button mat-raised-button (click)="GetAttachment(Attach3?.AttachmentName)"
+                      class="uploadbtn">Download</button>
+                  </div>
+
+                </div>
+
+                <div fxLayout="row" class="populationclass" fxFlex="100">
+                  <div fxFlex="10"></div>
+                  <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;" *ngIf="Attach4?.AttachmentName"> {{Attach4?.AttachmentName}}</p>
+                    <!-- <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv3InputChange($event)"/>
+                <button mat-raised-button class="uploadbtn" (click)="csvInput3.click()" style="color: green;">Upload</button> -->
+
+                  </div>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <button mat-raised-button (click)="GetAttachment(Attach4?.AttachmentName)"
+                      class="uploadbtn">Download</button>
+                  </div>
+                </div>
+
+                <div fxLayout="row" class="populationclass" fxFlex="100">
+                  <div fxFlex="10"></div>
+                  <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;" *ngIf="Attach5?.AttachmentName"> {{Attach5?.AttachmentName}}</p>
+                    <!-- <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv4InputChange($event)"/>
+                <button mat-raised-button class="uploadbtn" (click)="csvInput4.click()" style="color: green;">Upload</button> -->
+
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <button mat-raised-button (click)="GetAttachment(Attach5?.AttachmentName)"
+                      class="uploadbtn">Download</button>
+                  </div>
+
+                </div>
+
+                <div fxLayout="row" class="populationclass" fxFlex="100">
+                  <div fxFlex="10"></div>
+                  <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;" *ngIf="Attach6?.AttachmentName"> {{Attach6?.AttachmentName}}</p>
+                    <!-- <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv5InputChange($event)"/>
+                <button mat-raised-button class="uploadbtn" (click)="csvInput5.click()" style="color: green;">Upload</button> -->
+
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <button mat-raised-button (click)="GetAttachment(Attach6?.AttachmentName)"
+                      class="uploadbtn">Download</button>
+                  </div>
+
+                </div>
+
+                <div fxLayout="row" class="populationclass" fxFlex="100">
+                  <div fxFlex="10"></div>
+                  <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;" *ngIf="Attach7?.AttachmentName"> {{Attach7?.AttachmentName}}</p>
+                    <!-- <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv6InputChange($event)"/>
+                <button mat-raised-button class="uploadbtn" (click)="csvInput6.click()" style="color: green;">Upload</button> -->
+
+                  </div>
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <button mat-raised-button (click)="GetAttachment(Attach7?.AttachmentName)"
+                      class="uploadbtn">Download</button>
+                  </div>
+
+                </div>
+                <div fxLayout="row" class="populationclass" fxFlex="100">
+                  <div fxFlex="10"></div>
+                  <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <p style="margin-left:14%;" *ngIf="Attach8?.AttachmentName"> {{Attach8?.AttachmentName}}</p>
+                    <!-- <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv7InputChange($event)"/>
+                <button mat-raised-button class="uploadbtn" (click)="csvInput7.click()" style="color: green;">Upload</button> -->
+                  </div>
+
+                  <div fxLayout="column" fxFlex="50" class="">
+                    <button mat-raised-button (click)="GetAttachment(Attach8?.AttachmentName)"
+                      class="uploadbtn">Download</button>
+                  </div>
+                </div>
+
+              </div>
+
+            </form>
+
+          </mat-step>
+        </mat-vertical-stepper>
       </div>
     </div>
   </div>
