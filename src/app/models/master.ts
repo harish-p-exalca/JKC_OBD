@@ -10,10 +10,10 @@ export class CommonClass {
 
 
 export class UserWithRole {
-    UserID: Guid;
+    UserID: string;
     RoleID: Guid;
-    PositionID: string;
-    ReportingTo: string;
+    PositionCode: string;
+    ManagerID: string;
     UserName: string;
     Plant: string;
     Email: string;
@@ -55,10 +55,10 @@ export class Reason {
 }
 export class AuthenticationDetails {
     isAuth: boolean;
-    UserID: Guid;
+    UserID: string;
     UserName: string;
-    PositionID: string;
-    ReportingTo: string;
+    PositionCode: string;
+    ManagerID: string;
     DisplayName: string;
     EmailAddress: string;
     UserRole: string;
@@ -71,7 +71,7 @@ export class AuthenticationDetails {
     Token: string;
 }
 export class ChangePassword {
-    UserID: Guid;
+    UserID: string;
     UserName: string;
     CurrentPassword: string;
     NewPassword: string;
@@ -81,7 +81,7 @@ export class EMailModel {
     PortalAddress: string;
 }
 export class ForgotPassword {
-    UserID: Guid;
+    UserID: string;
     EmailAddress: string;
     NewPassword: string;
     Token: string;
@@ -132,7 +132,7 @@ export class CustomerOnboardingView1 extends CommonClass {
     TranID: number;
     Status: string;
     UserID: string;
-    PositionID: string;
+    PositionCode: string;
     RoleName: string;
 }
 export class CustomerOnboardingView {
@@ -141,6 +141,7 @@ export class CustomerOnboardingView {
     UserID: string;
     PositionID: string;
     RoleName: string;
+    PositionCode: string;
     Transaction: CustomerOnboarding;
     PersonalInfo: PersonalInformationView;
     BusinessInfo: BusinessInformationView;
@@ -315,8 +316,8 @@ export class LineChartData {
 export class CustomerOnboardingApprovalMatrix extends CommonClass {
     ID: number;
     TranID: number;
-    InitialApproverPositionID: string;
-    LastApproverPositionID: string;
+    InitialApproverPositionCode: string;
+    LastApproverPositionCode: string;
     IsASMApproved: boolean;
     ASMApprovedOn: Date | string | null;
     ASMApprover: string;
@@ -337,4 +338,52 @@ export class CustomerOnboardingApprovalMatrix extends CommonClass {
     RejectededOn: Date | string | null;
     RejectedBy: string;
 
+}
+
+
+
+export class User {
+    //ID: number;
+    UserID: string;
+    //PositionCode: string;
+    ManagerID: string;
+    UserName: string;
+    Email: string;
+    Password: string;
+    Pass1: string;
+    Pass2: string;
+    Pass3: string;
+    Pass4: string;
+    Pass5: string;
+    LastChangedPassword: string;
+    IsLocked: boolean;
+    IsLockDuration: Date | string | null;
+    Attempts: number;
+    ContactNumber: string;
+    IsActive: boolean;
+    ExpiryDate: Date | string | null;
+    CreatedOn: Date | string;
+    CreatedBy: string;
+    ModifiedOn: Date | string | null;
+    ModifiedBy: string;
+}
+export class Position {
+    //ID: number;
+    PositionCode: string;
+    IsActive: boolean;
+    CreatedOn: Date | string;
+    CreatedBy: string;
+    ModifiedOn: Date | string | null;
+    ModifiedBy: string;
+
+}
+
+export class UserPositionMap {
+    UserID: string;
+    PositionCode: string;
+    IsActive: boolean;
+    CreatedOn: Date | string;
+    CreatedBy: string;
+    ModifiedOn: Date | string | null;
+    ModifiedBy: string;
 }

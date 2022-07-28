@@ -78,12 +78,12 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetPersonalInfoByStatusAndRole?Role=${Role}&status=${status}`,)
             .pipe(catchError(this.errorHandler));
     }
-    GetAllCustomerOnBoardingByUserPosition(PositionID: string,UserID: string): Observable<any> {
-        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetAllCustomerOnBoardingByUserPosition?PositionID=${PositionID}&UserID=${UserID}`,)
+    GetAllCustomerOnBoardingByUserPosition(PositionCode: string,UserID: string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetAllCustomerOnBoardingByUserPosition?PositionCode=${PositionCode}&UserID=${UserID}`,)
             .pipe(catchError(this.errorHandler));
     }
-    GetOpenCustomerOnBoardingByPosition(PositionID: string): Observable<any> {
-        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetOpenCustomerOnBoardingByPosition?PositionID=${PositionID}`,)
+    GetOpenCustomerOnBoardingByPosition(PositionCode: string,UserID: string): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetOpenCustomerOnBoardingByPosition?PositionCode=${PositionCode}&UserID=${UserID}`,)
             .pipe(catchError(this.errorHandler));
     }
     GetApprovedCustomerOnBoardingByUser(UserID: string,status: string): Observable<any> {
