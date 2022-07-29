@@ -111,11 +111,11 @@ export class MarketinformationComponent implements OnInit {
                 this.authenticationDetails.Token
             );
         }
-        if (this.authenticationDetails.UserRole == "Customer") {
-            this.CustmerView = true;
-        }
         else {
             this.currentTransaction = parseInt(localStorage.getItem("TransID"));
+        }
+        if (this.authenticationDetails.UserRole == "Customer") {
+            this.CustmerView = false;
         }
         this.MIform = this.fb.group({
             market: [""],
