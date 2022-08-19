@@ -226,6 +226,93 @@
               </mat-error>
             </div>
           </div>
+
+          <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div fxFlex="10"></div>
+            <span fxFlex="30" class="marketsp">Account Group*</span>
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
+              <mat-select placeholder="Select the Account Group" formControlName="AccountGroup" required class="inputform2">
+                <!-- (selectionChange)="SelectCity($event.value)" -->
+                <mat-option *ngFor="let state of AllAccountGroupMasters" [value]="state.AccountGroup">
+                  {{state.AccountGroup}}</mat-option>
+              </mat-select>
+              <mat-error class="errorn"
+                *ngIf=" PIform?.get('AccountGroup')?.touched && PIform?.get('AccountGroup')?.hasError('required')">Account Group is
+                required
+              </mat-error>
+
+            </div>
+          </div>
+
+
+          <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div fxFlex="10"></div>
+            <span fxFlex="30" class="marketsp">Distribution Channel*</span>
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
+              <mat-select placeholder="Select the Distribution Channel" formControlName="DistributionChannel" required class="inputform2">
+                <!-- (selectionChange)="SelectCity($event.value)" -->
+                <mat-option *ngFor="let state of AllDistributionChannelMasters" [value]="state.DistributionChannel">
+                  {{state.DistributionChannel}}</mat-option>
+              </mat-select>
+              <mat-error class="errorn"
+                *ngIf=" PIform?.get('DistributionChannel')?.touched && PIform?.get('DistributionChannel')?.hasError('required')">Distribution Channel is
+                required
+              </mat-error>
+
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div fxFlex="10"></div>
+            <span fxFlex="30" class="marketsp">Division*</span>
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
+              <mat-select placeholder="Select the Division" formControlName="Division" required class="inputform2">
+                <!-- (selectionChange)="SelectCity($event.value)" -->
+                <mat-option *ngFor="let state of AllDivisionMasters" [value]="state.Division">
+                  {{state.Division}}</mat-option>
+              </mat-select>
+              <mat-error class="errorn"
+                *ngIf=" PIform?.get('Division')?.touched && PIform?.get('Division')?.hasError('required')">Division is
+                required
+              </mat-error>
+
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div fxFlex="10"></div>
+            <span fxFlex="30" class="marketsp">Sales Org*</span>
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
+              <mat-select placeholder="Select the Sales Org" formControlName="SalesOrg" required class="inputform2">
+                <!-- (selectionChange)="SelectCity($event.value)" -->
+                <mat-option *ngFor="let state of AllSalesOrgMasters" [value]="state.SalesOrg">
+                  {{state.SalesOrg}}</mat-option>
+              </mat-select>
+              <mat-error class="errorn"
+                *ngIf=" PIform?.get('SalesOrg')?.touched && PIform?.get('SalesOrg')?.hasError('required')">Sales Org is
+                required
+              </mat-error>
+
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div fxFlex="10"></div>
+            <span fxFlex="30" class="marketsp">Region*</span>
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
+              <mat-select placeholder="Select the Region" formControlName="Region" required class="inputform2">
+                <!-- (selectionChange)="SelectCity($event.value)" -->
+                <mat-option *ngFor="let state of AllRegionMasters" [value]="state.Region">
+                  {{state.Region}}</mat-option>
+              </mat-select>
+              <mat-error class="errorn"
+                *ngIf=" PIform?.get('Region')?.touched && PIform?.get('Region')?.hasError('required')">Region is
+                required
+              </mat-error>
+
+            </div>
+          </div>
+
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Status of the Firm</span>

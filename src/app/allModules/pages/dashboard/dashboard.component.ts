@@ -12,7 +12,7 @@ import { Observable } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NotificationSnackBarComponent } from "app/notifications/notification-snack-bar/notification-snack-bar.component";
 import { SnackBarStatus } from "app/notifications/notification-snack-bar/notification-snackbar-status-enum";
-import { AuthenticationDetails, Cities, CustomerOnboardingView, CustomerOnboarding, PersonIdentity, States, PersonalInformation, PersonalInformationView } from "app/models/master";
+import { AuthenticationDetails, Cities, CustomerOnboardingView, CustomerOnboarding, PersonIdentity, States, PersonalInformation, PersonalInformationView, AccountGroupMaster, DistributionChannelMaster, DivisionMaster, SalesOrgMaster, RegionMaster, OrganisationInput } from "app/models/master";
 import { fuseAnimations } from "@fuse/animations";
 import { DashboardService } from "app/services/dashboard.service";
 import { ShareParameterService } from "app/services/share-parameters.service";
@@ -29,6 +29,7 @@ import { dialogComponent } from "./dialog.component";
 import { map, startWith } from "rxjs/operators";
 import { forEach } from 'lodash';
 import { CommonService } from "app/services/common.service";
+import { MasterService } from "app/services/master.service";
 export interface DialogData {
     Firmname: string;
 }
@@ -96,12 +97,18 @@ export class DashboardComponent implements OnInit {
     UserRole: string;
     Responded: string;
     CustomerObdView: CustomerOnboardingView = new CustomerOnboardingView();
-    Districts:string[]=[];
-    Talukas:string[]=[];
-    PinCodes:string[]=[];
+    Districts: string[] = [];
+    Talukas: string[] = [];
+    PinCodes: string[] = [];
+    AllAccountGroupMasters: AccountGroupMaster[] = [];
+    AllDistributionChannelMasters: DistributionChannelMaster[] = [];
+    AllDivisionMasters: DivisionMaster[] = [];
+    AllSalesOrgMasters: SalesOrgMaster[] = [];
+    AllRegionMasters: RegionMaster[] = [];
     constructor(
         private _router: Router,
         private route: ActivatedRoute,
+        private _masterService: MasterService,
         private _dashboardService: DashboardService,
         private _shareParameterService: ShareParameterService,
         public snackBar: MatSnackBar,
@@ -132,23 +139,27 @@ export class DashboardComponent implements OnInit {
         if (this.authenticationDetails.UserRole == "Customer") {
             this.Role = true;
             this.SubmitValue = true;
-            
+
         }
-       
+        this.GetAllAccountGroupMasters();
+        this.GetAllDistributionChannelMasters();
+        this.GetAllDivisionMasters();
+        this.GetAllSalesOrgMasters();
+        this.GetAllRegionMasters();
         this.InitializeFormGroup();
         this.filteropt = this.PIform.get("State").valueChanges.pipe(
             startWith(""),
             map((value) => this._filterstate(value))
         );
         this.transID = localStorage.getItem('TransID');
-        if(this.transID != null || this.transID!=NaN)
-        {
-        // if (this.transID != null) {
+        if (this.transID != null || this.transID != NaN) {
+            // if (this.transID != null) {
             this.isProgressBarVisibile = true;
             this._dashboardService.GetCustomerOnboardingView(this.transID).subscribe(res => {
                 console.log("view", res);
                 this.CustomerObdView = res;
                 this.SetPersonalInfoValues();
+
                 this.isProgressBarVisibile = false;
             },
                 err => {
@@ -156,7 +167,7 @@ export class DashboardComponent implements OnInit {
                     this.isProgressBarVisibile = false;
                 });
         }
-        
+
         this.isProgressBarVisibile = true;
         this._dashboardService.GetAllStates().subscribe(
             (data) => {
@@ -189,6 +200,11 @@ export class DashboardComponent implements OnInit {
                     Validators.pattern(/^(\d{6}|\d{7}|\d{8}|\d{9}|\d{10})$/),
                 ],
             ],
+            AccountGroup: ["", Validators.required],
+            DistributionChannel: ["", Validators.required],
+            Division: ["", Validators.required],
+            SalesOrg: ["", Validators.required],
+            Region: ["", Validators.required],
             Status: ["", Validators.required]
         });
         this.firmForm = this.fb.group({
@@ -211,6 +227,52 @@ export class DashboardComponent implements OnInit {
 
         });
     }
+
+    GetAllAccountGroupMasters(): void {
+        this._masterService.GetAllAccountGroupMasters().subscribe(res => {
+            this.AllAccountGroupMasters = res as AccountGroupMaster[];
+        },
+            err => {
+                console.log(err);
+            });
+    }
+
+    GetAllDistributionChannelMasters(): void {
+        this._masterService.GetAllDistributionChannelMasters().subscribe(res => {
+            this.AllDistributionChannelMasters = res as DistributionChannelMaster[];
+        },
+            err => {
+                console.log(err);
+            });
+    }
+
+    GetAllDivisionMasters(): void {
+        this._masterService.GetAllDivisionMasters().subscribe(res => {
+            this.AllDivisionMasters = res as DivisionMaster[];
+        },
+            err => {
+                console.log(err);
+            });
+    }
+
+    GetAllSalesOrgMasters(): void {
+        this._masterService.GetAllSalesOrgMasters().subscribe(res => {
+            this.AllSalesOrgMasters = res as SalesOrgMaster[];
+        },
+            err => {
+                console.log(err);
+            });
+    }
+
+    GetAllRegionMasters(): void {
+        this._masterService.GetAllRegionMasters().subscribe(res => {
+            this.AllRegionMasters = res as RegionMaster[];
+        },
+            err => {
+                console.log(err);
+            });
+    }
+
     GetTransactionDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService.GetCustomerOnboardingView(this.currentTransaction).subscribe(res => {
@@ -249,6 +311,15 @@ export class DashboardComponent implements OnInit {
             Pincode: this.CustomerObdView.PersonalInfo.PersonalInformation.Pincode,
             Status: this.CustomerObdView.PersonalInfo.PersonalInformation.Status,
         });
+        if(this.CustomerObdView.organisationInput){
+            this.PIform.patchValue({
+                AccountGroup:this.CustomerObdView.organisationInput.AccountGroup,
+                DistributionChannel:this.CustomerObdView.organisationInput.DistributionChannel,
+                Division:this.CustomerObdView.organisationInput.Division,
+                SalesOrg:this.CustomerObdView.organisationInput.SalesOrg,
+                Region:this.CustomerObdView.organisationInput.Region
+            }); 
+        }
         if (localStorage.getItem('ActionStatus') == "Draft" && this.UserRole == "Customer") {
             this.SubmitValue = true;
         }
@@ -260,15 +331,13 @@ export class DashboardComponent implements OnInit {
             // this.firmForm.disable();
 
         }
-        if(localStorage.getItem('ActionStatus') == "Pending")
-        {
+        if (localStorage.getItem('ActionStatus') == "Pending") {
             this.SubmitValue = true;
             this.PIform.disable();
             this.firmForm.disable();
-            
+
         }
-        if (this.authenticationDetails.UserRole == "Customer")
-        {
+        if (this.authenticationDetails.UserRole == "Customer") {
             this.PIform.get("category").disable();
             this.PIform.get("product").disable();
             this.PIform.get("Name").disable();
@@ -281,7 +350,7 @@ export class DashboardComponent implements OnInit {
             this.PIform.get("Tehsil").disable();
             this.PIform.get("State").disable();
             this.PIform.get("Pincode").disable();
-            
+
         }
         this.selected = this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
         this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
@@ -299,8 +368,9 @@ export class DashboardComponent implements OnInit {
                 cobView.PersonalInfo = new PersonalInformationView();
                 cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
                 cobView.PersonalInfo.Identities = this.IdentityData;
-                if(this.transID != null){
-                    cobView.Transaction.TranID=this.transID;
+                cobView.organisationInput = this.GetOrganisationInputValues();
+                if (this.transID != null) {
+                    cobView.Transaction.TranID = this.transID;
                 }
                 cobView.PositionCode = this.authenticationDetails.PositionCode;
                 cobView.UserID = this.authenticationDetails.UserID.toString();
@@ -310,12 +380,12 @@ export class DashboardComponent implements OnInit {
                     console.log("From save api", res);
                     this.isProgressBarVisibile = false;
                     if (res.Status == 1) {
-                        this.notificationSnackBarComponent.openSnackBar(isDraft?"Draft saved successfully":"Details submitted successfully",SnackBarStatus.success);
+                        this.notificationSnackBarComponent.openSnackBar(isDraft ? "Draft saved successfully" : "Details submitted successfully", SnackBarStatus.success);
                     }
                     else {
                         this.notificationSnackBarComponent.openSnackBar(res.Error, SnackBarStatus.danger);
                     }
-                    if(!isDraft){
+                    if (!isDraft) {
                         this.ClearAll();
                     }
                 },
@@ -338,30 +408,31 @@ export class DashboardComponent implements OnInit {
             if (this.IdentityData.length > 0) {
                 var cobView = new CustomerOnboardingView();
                 cobView.Transaction = new CustomerOnboarding();
-                cobView.Transaction.TranID =  null;
+                cobView.Transaction.TranID = null;
                 cobView.Transaction.Status = isDraft ? "InitiatorDraft" : "InitiatorReleased";
                 cobView.PersonalInfo = new PersonalInformationView();
                 cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
                 cobView.PersonalInfo.Identities = this.IdentityData;
-                if(this.transID != null){
-                    cobView.Transaction.TranID=this.transID;
+                cobView.organisationInput = this.GetOrganisationInputValues();
+                if (this.transID != null) {
+                    cobView.Transaction.TranID = this.transID;
                 }
                 cobView.PositionCode = this.authenticationDetails.PositionCode;
                 cobView.UserID = this.authenticationDetails.UserID;
                 console.log("cobView", cobView);
-                localStorage.setItem("category",this.PIform.get('category').value)
+                localStorage.setItem("category", this.PIform.get('category').value)
                 this.isProgressBarVisibile = true;
                 this._dashboardService.SaveCustomerPersonalDetails(cobView).subscribe(res => {
                     console.log("From save api", res);
                     this.isProgressBarVisibile = false;
                     if (res.Status == 1) {
-                        this.notificationSnackBarComponent.openSnackBar(isDraft?"Draft saved successfully":"Details saved successfully",SnackBarStatus.success);
-                        this._router.navigate(['/pages/marketinformation']); 
+                        this.notificationSnackBarComponent.openSnackBar(isDraft ? "Draft saved successfully" : "Details saved successfully", SnackBarStatus.success);
+                        this._router.navigate(['/pages/marketinformation']);
                     }
                     else {
                         this.notificationSnackBarComponent.openSnackBar(res.Error, SnackBarStatus.danger);
                     }
-                    if(!isDraft){
+                    if (!isDraft) {
                         this.ClearAll();
                     }
                 },
@@ -375,15 +446,14 @@ export class DashboardComponent implements OnInit {
                 this.notificationSnackBarComponent.openSnackBar("Please fill contact details", SnackBarStatus.warning);
             }
         }
-        else if(this.PIform.disabled)
-        {
+        else if (this.PIform.disabled) {
             localStorage.setItem("ActionStatus", "Pending");
-            this._router.navigate(['/pages/marketinformation']); 
+            this._router.navigate(['/pages/marketinformation']);
         }
         else {
             this._commonService.ShowValidationErrors(this.PIform);
         }
-      
+
     }
     GetPersonalInfoFromForm(): PersonalInformation {
         var pi = new PersonalInformation();
@@ -415,11 +485,21 @@ export class DashboardComponent implements OnInit {
         pi.Status = this.PIform.get('Status').value;
         pi.Latitude = this.PIform.get('latitude').value;
         pi.Logitude = this.PIform.get('longitude').value;
-        if(this.transID!=null)
-        {
+        if (this.transID != null) {
             pi.TransID = Number(localStorage.getItem('TransID'));
         }
         return pi;
+    }
+
+    GetOrganisationInputValues(): OrganisationInput {
+        var org = new OrganisationInput();
+        org.AccountGroup = this.PIform.get('AccountGroup').value;
+        org.DistributionChannel = this.PIform.get('DistributionChannel').value;
+        org.Division = this.PIform.get('Division').value;
+        org.SalesOrg = this.PIform.get('SalesOrg').value;
+        org.Region = this.PIform.get('Region').value;
+
+        return org;
     }
     OpenSuccessDialog() {
         const dialogRef = this.dialog.open(dialogComponent, {
@@ -518,22 +598,22 @@ export class DashboardComponent implements OnInit {
                 this.isProgressBarVisibile = false;
             }
         );
-        this._dashboardService.GetGeoLocationMasters("district",event.StateName).subscribe(res=>{
-            this.Districts=res;
+        this._dashboardService.GetGeoLocationMasters("district", event.StateName).subscribe(res => {
+            this.Districts = res;
         });
     }
-    districtSelected($event){
-        this._dashboardService.GetGeoLocationMasters("taluka",$event.option.value).subscribe(res=>{
-            this.Talukas=res;
+    districtSelected($event) {
+        this._dashboardService.GetGeoLocationMasters("taluka", $event.option.value).subscribe(res => {
+            this.Talukas = res;
         });
     }
-    talukaSelected($event){
-        this._dashboardService.GetGeoLocationMasters("pincode",$event.option.value).subscribe(res=>{
-            this.PinCodes=res;
+    talukaSelected($event) {
+        this._dashboardService.GetGeoLocationMasters("pincode", $event.option.value).subscribe(res => {
+            this.PinCodes = res;
         });
     }
-    NxtButtonClick(){
-        this._router.navigate(['/pages/businessinformation']); 
+    NxtButtonClick() {
+        this._router.navigate(['/pages/businessinformation']);
     }
     // GetEmployees(): void {
     //     this._dashboardService.getEmployee().subscribe(
@@ -678,6 +758,6 @@ export class DashboardComponent implements OnInit {
     }
     ngOnDestroy(): void {
         //localStorage.removeItem('ActionStatus');
-       // localStorage.removeItem('TransID');
+        // localStorage.removeItem('TransID');
     }
 }
