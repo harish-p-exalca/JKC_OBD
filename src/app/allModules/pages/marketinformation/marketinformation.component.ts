@@ -115,7 +115,7 @@ export class MarketinformationComponent implements OnInit {
             this.currentTransaction = parseInt(localStorage.getItem("TransID"));
         }
         if (this.authenticationDetails.UserRole == "Customer") {
-            this.CustmerView = false;
+            this.CustmerView = true;
         }
         this.MIform = this.fb.group({
             market: [""],

@@ -4,7 +4,7 @@ import { Observable, throwError, Subject } from 'rxjs';
 import { _MatChipListMixinBase } from '@angular/material';
 import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
-import { MenuApp, RoleWithApp, UserWithRole, UserNotification, Reason } from 'app/models/master';
+import { MenuApp, RoleWithApp, UserWithRole, UserNotification, Reason, AccountGroupMaster, DistributionChannelMaster, DivisionMaster, SalesOrgMaster, RegionMaster } from 'app/models/master';
 
 @Injectable({
   providedIn: 'root'
@@ -272,5 +272,202 @@ export class MasterService {
     })
       .pipe(catchError(this.errorHandler));
   }
+
+
+
+// AccountGroupMaster
+CreateAccountGroupMaster(accountGroup: AccountGroupMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/CreateAccountGroupMaster`,
+  accountGroup,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+GetAllAccountGroupMasters(): Observable<AccountGroupMaster[] | string> {
+  return this._httpClient.get<AccountGroupMaster[]>(`${this.baseAddress}api/Master/GetAllAccountGroupMasters`)
+    .pipe(catchError(this.errorHandler));
+}
+
+UpdateAccountGroupMaster(accountGroup: AccountGroupMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/UpdateAccountGroupMaster`,
+    accountGroup,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+DeleteAccountGroupMaster(accountGroup: AccountGroupMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/DeleteAccountGroupMaster`,
+    accountGroup,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+// DistributionChannelMaster
+CreateDistributionChannelMaster(DistributionChannel: DistributionChannelMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/CreateDistributionChannelMaster`,
+  DistributionChannel,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+GetAllDistributionChannelMasters(): Observable<DistributionChannelMaster[] | string> {
+  return this._httpClient.get<DistributionChannelMaster[]>(`${this.baseAddress}api/Master/GetAllDistributionChannelMasters`)
+    .pipe(catchError(this.errorHandler));
+}
+
+UpdateDistributionChannelMaster(DistributionChannel: DistributionChannelMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/UpdateDistributionChannelMaster`,
+    DistributionChannel,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+DeleteDistributionChannelMaster(DistributionChannel: DistributionChannelMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/DeleteDistributionChannelMaster`,
+    DistributionChannel,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+// DivisionMaster
+CreateDivisionMaster(Division: DivisionMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/CreateDivisionMaster`,
+  Division,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+GetAllDivisionMasters(): Observable<DivisionMaster[] | string> {
+  return this._httpClient.get<DivisionMaster[]>(`${this.baseAddress}api/Master/GetAllDivisionMasters`)
+    .pipe(catchError(this.errorHandler));
+}
+
+UpdateDivisionMaster(Division: DivisionMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/UpdateDivisionMaster`,
+    Division,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+DeleteDivisionMaster(Division: DivisionMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/DeleteDivisionMaster`,
+    Division,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+// SalesOrgMaster
+CreateSalesOrgMaster(SalesOrg: SalesOrgMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/CreateSalesOrgMaster`,
+  SalesOrg,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+GetAllSalesOrgMasters(): Observable<SalesOrgMaster[] | string> {
+  return this._httpClient.get<SalesOrgMaster[]>(`${this.baseAddress}api/Master/GetAllSalesOrgMasters`)
+    .pipe(catchError(this.errorHandler));
+}
+
+UpdateSalesOrgMaster(SalesOrg: SalesOrgMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/UpdateSalesOrgMaster`,
+    SalesOrg,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+DeleteSalesOrgMaster(SalesOrg: SalesOrgMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/DeleteSalesOrgMaster`,
+    SalesOrg,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+// RegionMaster
+CreateRegionMaster(Region: RegionMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/CreateRegionMaster`,
+  Region,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+GetAllRegionMasters(): Observable<RegionMaster[] | string> {
+  return this._httpClient.get<RegionMaster[]>(`${this.baseAddress}api/Master/GetAllRegionMasters`)
+    .pipe(catchError(this.errorHandler));
+}
+
+UpdateRegionMaster(Region: RegionMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/UpdateRegionMaster`,
+    Region,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
+
+DeleteRegionMaster(Region: RegionMaster): Observable<any> {
+  return this._httpClient.post<any>(`${this.baseAddress}api/Master/DeleteRegionMaster`,
+    Region,
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.errorHandler));
+}
 
 }

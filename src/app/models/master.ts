@@ -144,9 +144,13 @@ export class CustomerOnboardingView {
     PositionCode: string;
     Transaction: CustomerOnboarding;
     PersonalInfo: PersonalInformationView;
+    organisationInput: OrganisationInput;
     BusinessInfo: BusinessInformationView;
     MarketInfo: MarketInformationView;
     BankInfo: BankDetailsView;
+    constructor() {
+        this.organisationInput = new OrganisationInput();
+    }
 }
 export class BankDetails {
     ID: number;
@@ -227,7 +231,7 @@ export class SecurityDepositDetail {
     TransID: number;
     Type: string;
     Leaf: string;
-    Date: Date | string |null;
+    Date: Date | string | null;
     Amount: number;
     BankName: string;
     AdvBillingParty: boolean;
@@ -267,7 +271,7 @@ export class BusinessInformation {
 export class SalesAndTarget {
     ID: number;
     TransID: number;
-    Product:string;
+    Product: string;
     Month: string;
     Value: number;
 }
@@ -386,4 +390,46 @@ export class UserPositionMap {
     CreatedBy: string;
     ModifiedOn: Date | string | null;
     ModifiedBy: string;
+}
+
+
+
+
+
+export class OrganisationInput extends CommonClass {
+    ID: number;
+    TransID: number;
+    AccountGroup: string;
+    DistributionChannel: string;
+    Division: string;
+    SalesOrg: string;
+    Region: string;
+}
+
+export class AccountGroupMaster extends CommonClass {
+    ID: number;
+    AccountGroup: string;
+    Description: string;
+}
+
+export class DistributionChannelMaster extends CommonClass {
+    ID: number;
+    DistributionChannel: string;
+    Description: string;
+}
+
+export class DivisionMaster extends CommonClass {
+    ID: number;
+    Division: string;
+    Description: string;
+}
+export class SalesOrgMaster extends CommonClass {
+    ID: number;
+    SalesOrg: string;
+    Description: string;
+}
+export class RegionMaster extends CommonClass {
+    ID: number;
+    Region: string;
+    Description: string;
 }

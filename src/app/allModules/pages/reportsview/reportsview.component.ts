@@ -563,6 +563,11 @@ export class ReportsviewComponent implements OnInit {
                     Validators.pattern(/^(\d{6}|\d{7}|\d{8}|\d{9}|\d{10})$/),
                 ],
             ],
+            AccountGroup: ["", Validators.required],
+            DistributionChannel: ["", Validators.required],
+            Division: ["", Validators.required],
+            SalesOrg: ["", Validators.required],
+            Region: ["", Validators.required],
             Status: ["", Validators.required],
         });
         // this.firmForm = this.fb.group({
@@ -812,6 +817,15 @@ export class ReportsviewComponent implements OnInit {
                 Status: this.CustomerObdView.PersonalInfo.PersonalInformation
                     .Status,
             });
+            if(this.CustomerObdView.organisationInput){
+                this.PIform.patchValue({
+                    AccountGroup:this.CustomerObdView.organisationInput.AccountGroup,
+                    DistributionChannel:this.CustomerObdView.organisationInput.DistributionChannel,
+                    Division:this.CustomerObdView.organisationInput.Division,
+                    SalesOrg:this.CustomerObdView.organisationInput.SalesOrg,
+                    Region:this.CustomerObdView.organisationInput.Region
+                }); 
+            }
             this.selected =
                 this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
             this.Contactdetails = this.CustomerObdView.PersonalInfo.Identities;
@@ -859,6 +873,15 @@ export class ReportsviewComponent implements OnInit {
                 Status: this.CustomerObdView.PersonalInfo.PersonalInformation
                     .Status,
             });
+            if(this.CustomerObdView.organisationInput){
+                this.PIform.patchValue({
+                    AccountGroup:this.CustomerObdView.organisationInput.AccountGroup,
+                    DistributionChannel:this.CustomerObdView.organisationInput.DistributionChannel,
+                    Division:this.CustomerObdView.organisationInput.Division,
+                    SalesOrg:this.CustomerObdView.organisationInput.SalesOrg,
+                    Region:this.CustomerObdView.organisationInput.Region
+                }); 
+            }
             this.selected =
                 this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
             this.Contactdetails = this.CustomerObdView.PersonalInfo.Identities;
@@ -908,6 +931,15 @@ export class ReportsviewComponent implements OnInit {
                 Status: this.CustomerObdView.PersonalInfo.PersonalInformation
                     .Status,
             });
+            if(this.CustomerObdView.organisationInput){
+                this.PIform.patchValue({
+                    AccountGroup:this.CustomerObdView.organisationInput.AccountGroup,
+                    DistributionChannel:this.CustomerObdView.organisationInput.DistributionChannel,
+                    Division:this.CustomerObdView.organisationInput.Division,
+                    SalesOrg:this.CustomerObdView.organisationInput.SalesOrg,
+                    Region:this.CustomerObdView.organisationInput.Region
+                }); 
+            }
             this.selected =
                 this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
             this.Contactdetails = this.CustomerObdView.PersonalInfo.Identities;
