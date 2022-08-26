@@ -12,14 +12,18 @@ import { environment } from 'environments/environment';
 })
 export class AuthService {
   baseAddress: string;
+  attestrAddress: string;
+  attestrToken: string;
   clientId: string;
   private emitChangeSource = new Subject<any>();
   changeEmitted$ = this.emitChangeSource.asObservable();
   isLoggedin(change: boolean) {
     this.emitChangeSource.next(change);
-}
+  }
   constructor(private _httpClient: HttpClient) {
     this.baseAddress = environment.baseAddress;
+    this.attestrAddress = environment.attestrAddress;
+    this.attestrToken = environment.attestrToken;
     this.clientId = environment.clientId;
   }
 
@@ -36,22 +40,22 @@ export class AuthService {
     // tslint:disable-next-line:prefer-const
     // let data = `grant_type=password&username=${userName}&password=${password}&client_id=${this.clientId}`;
     const loginModel: LoginModel = {
-        UserName: userName,
-        Password: password,
-        clientId: this.clientId,
+      UserName: userName,
+      Password: password,
+      clientId: this.clientId,
     };
     return this._httpClient
-        .post<any>(
-            `${this.baseAddress}api/Auth/token`,
-            loginModel
-            // {
-            //   headers: new HttpHeaders({
-            //     'Content-Type': 'application/json'
-            //   })
-            // }
-        )
-        .pipe(catchError(this.errorHandler));
-}
+      .post<any>(
+        `${this.baseAddress}api/Auth/token`,
+        loginModel
+        // {
+        //   headers: new HttpHeaders({
+        //     'Content-Type': 'application/json'
+        //   })
+        // }
+      )
+      .pipe(catchError(this.errorHandler));
+  }
   // login(userName: string, password: string): Observable<any> {
   //   // tslint:disable-next-line:prefer-const
   //   let data = `grant_type=password&username=${userName}&password=${password}&client_id=${this.clientId}`;
@@ -62,7 +66,7 @@ export class AuthService {
   //   }).pipe(catchError(this.errorHandler));
   // }
 
-  GetIPAddress():  Observable<any> {
+  GetIPAddress(): Observable<any> {
     return this._httpClient
       .get<any>('https://freegeoip.net/json/?callback').pipe(
         map(response => response || {}),

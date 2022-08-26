@@ -433,3 +433,80 @@ export class RegionMaster extends CommonClass {
     Region: string;
     Description: string;
 }
+
+
+export class PANResult {
+    valid: boolean;
+    category: string;
+    name: string;
+    title: any;
+    firstName: any;
+    middleName: any;
+    lastName: any;
+    updated: any;
+    aadhaarLinked: any;
+    message: string;
+}
+
+export class AadharResult {
+    valid: boolean;
+    message: any;
+    address: string;
+    ageBand: string;
+    gender: string;
+    maskedMobile: string;
+}
+
+export class Address {
+    type: string;
+    building: string;
+    buildingName: string;
+    floor: string;
+    street: string;
+    locality: string;
+    district: string;
+    city: string;
+    state: string;
+    zip: string;
+    latitude: string;
+    longitude: string;
+    nature: string;
+}
+
+export class GSTResult {
+    valid: boolean;
+    active: boolean;
+    legalName: string;
+    tradeName: string;
+    pan: string;
+    constitution: string;
+    nature: string[];
+    type: string;
+    registered: string;
+    updated: string;
+    expiry: any;
+    state: string;
+    stateCode: string;
+    center: string;
+    centerCode: string;
+    message: string;
+    addresses: Address[];
+    constructor() {
+        this.addresses = [];
+    }
+}
+
+export class BankAccountResult {
+    valid: boolean;
+    name: string;
+    ifsc: any;
+    status: string;
+    message: string;
+}
+
+export class ErrorResult {
+    httpStatusCode: number;
+    code: number;
+    message: string;
+    appError: boolean;
+}
