@@ -1,6 +1,8 @@
 import {
     AverageSale,
+    GSTResult,
     MarketInformationView,
+    PANResult,
     States,
 } from "./../../../models/master";
 import { Component, OnInit } from "@angular/core";
@@ -288,27 +290,62 @@ export class MarketinformationComponent implements OnInit {
     }
     IsGstValid() {
         let GST = this.MIform.controls["Gst"].value;
-        if (
-            /^[0-9]{2}[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}Z[0-9A-Za-z]{1}$/.test(
-                GST
-            )
-        ) {
-            console.log("true");
-            this.isgst = true;
-        } else {
-            console.log("false");
+        this._dashboardService.ValidateGST(GST).subscribe(data => {
+            let res = data as GSTResult;
+            if (res) {
+                if (res.valid) {
+                    this.isgst = true;
+                } else {
+                    this.isgst = false;
+                    this.notificationSnackBarComponent.openSnackBar(`${res.message}`, SnackBarStatus.danger);
+                }
+            } else {
+                this.isgst = false;
+            }
+        }, (err) => {
+            console.error(err);
             this.isgst = false;
-        }
+        });
+        // if (
+        //     /^[0-9]{2}[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}Z[0-9A-Za-z]{1}$/.test(
+        //         GST
+        //     )
+        // ) {
+        //     console.log("true");
+        //     this.isgst = true;
+        // } else {
+        //     console.log("false");
+        //     this.isgst = false;
+        // }
     }
     IsPanValid() {
         let Pan = this.MIform.controls["Pan"].value;
-        if (/^[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}$/.test(Pan)) {
-            console.log("true");
-            this.ispan = true;
-        } else {
-            console.log("false");
+
+        this._dashboardService.ValidatePAN(Pan).subscribe(data => {
+            let res = data as PANResult;
+            if (res) {
+                if (res.valid) {
+                    this.ispan = true;
+                } else {
+                    this.ispan = false;
+                    this.notificationSnackBarComponent.openSnackBar(`${res.message}`, SnackBarStatus.danger);
+                }
+            } else {
+                this.ispan = false;
+            }
+
+        }, (err) => {
+            console.error(err);
             this.ispan = false;
-        }
+        });
+
+        // if (/^[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}$/.test(Pan)) {
+        //     //console.log("true");
+        //     this.ispan = true;
+        // } else {
+        //     //console.log("false");
+        //     this.ispan = false;
+        // }
     }
     saveInfo(): void {
         if (this.MIform.valid) {

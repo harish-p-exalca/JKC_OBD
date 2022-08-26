@@ -216,16 +216,16 @@ export class BusinessComponent implements OnInit {
                 }
             }
         }
-        console.log("saleTargets", sts);
+        //console.log("saleTargets", sts);
         if (this.BIform.valid) {
             var cobView = new BusinessInformationView();
             cobView.Businessinfo = this.GetBusinessInfoFromForm();
             cobView.SalesandTargets = sts;
-            console.log("cobView", cobView);
+            //console.log("cobView", cobView);
             this.isProgressBarVisibile = true;
             this._dashboardService.SaveBusinessInfoView(cobView).subscribe(
                 (res) => {
-                    console.log("From save api", res);
+                    //console.log("From save api", res);
                     this.isProgressBarVisibile = false;
                     this._router.navigate(["pages/bankinformation"]);
                     this.ClearAll();
@@ -264,7 +264,10 @@ export class BusinessComponent implements OnInit {
         businessformvalues.Wholesale = parseInt(
             this.BIform.get("Wholesale").value
         );
-        businessformvalues.TransID = this.TransID;
+        
+        if (this.TransID && this.TransID != null && !isNaN(this.TransID)) {
+            businessformvalues.TransID = this.TransID;
+        }
         return businessformvalues;
     }
     public saletableNumber: number = 0;

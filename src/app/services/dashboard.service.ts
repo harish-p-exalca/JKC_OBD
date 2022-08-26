@@ -1,4 +1,4 @@
-import { MarketInformationView, CustomerOnboarding, DocumentRequired, CustomerOnboardingView } from './../models/master';
+import { MarketInformationView, CustomerOnboarding, DocumentRequired, CustomerOnboardingView, PANResult, AadharResult, GSTResult, BankAccountResult } from './../models/master';
 import { Guid } from 'guid-typescript';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -14,6 +14,8 @@ import { BankDetailsView, BusinessInformation, BusinessInformationView, Personal
 })
 export class DashboardService {
     baseAddress: string;
+    attestrAddress: string;
+    attestrToken: string;
     NotificationEvent: Subject<any>;
     sample = new Subject();
     personalInfo: PersonalInfo = null;
@@ -37,6 +39,8 @@ export class DashboardService {
         private _authService: AuthService
     ) {
         this.baseAddress = _authService.baseAddress;
+        this.attestrAddress = _authService.attestrAddress;
+        this.attestrToken = _authService.attestrToken;
         this.NotificationEvent = new Subject();
     }
     // Error Handler
@@ -60,15 +64,15 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetAllRejectedPersonalStatusInfo`)
             .pipe(catchError(this.errorHandler));
     }
-    updateCustomerOnboardingStatus(CustomerOnboardingView:CustomerOnboardingView): Observable<any> {
-        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingStatus`, CustomerOnboardingView ,{
+    updateCustomerOnboardingStatus(CustomerOnboardingView: CustomerOnboardingView): Observable<any> {
+        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingStatus`, CustomerOnboardingView, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
         }).pipe(catchError(this.errorHandler));
     }
     updateCustomerOnboardingRejectedStatus(CustomerOnboarding): Observable<any> {
-        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingRejectedStatus`, CustomerOnboarding ,{
+        return this._httpClient.post<CustomerOnboarding>(`${this.baseAddress}api/PersonalInfo/UpdateCustomerOnboardingRejectedStatus`, CustomerOnboarding, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
@@ -78,15 +82,15 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetPersonalInfoByStatusAndRole?Role=${Role}&status=${status}`,)
             .pipe(catchError(this.errorHandler));
     }
-    GetAllCustomerOnBoardingByUserPosition(PositionCode: string,UserID: string): Observable<any> {
+    GetAllCustomerOnBoardingByUserPosition(PositionCode: string, UserID: string): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetAllCustomerOnBoardingByUserPosition?PositionCode=${PositionCode}&UserID=${UserID}`,)
             .pipe(catchError(this.errorHandler));
     }
-    GetOpenCustomerOnBoardingByPosition(PositionCode: string,UserID: string): Observable<any> {
+    GetOpenCustomerOnBoardingByPosition(PositionCode: string, UserID: string): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetOpenCustomerOnBoardingByPosition?PositionCode=${PositionCode}&UserID=${UserID}`,)
             .pipe(catchError(this.errorHandler));
     }
-    GetApprovedCustomerOnBoardingByUser(UserID: string,status: string): Observable<any> {
+    GetApprovedCustomerOnBoardingByUser(UserID: string, status: string): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetApprovedCustomerOnBoardingByUser?UserID=${UserID}&status=${status}`,)
             .pipe(catchError(this.errorHandler));
     }
@@ -94,17 +98,17 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetRejectedCustomerOnBoardingByUser?UserID=${UserID}`,)
             .pipe(catchError(this.errorHandler));
     }
-    GetAttachment(TransID: number,DocumentTitle:string): Observable<DocumentRequired | string> {
+    GetAttachment(TransID: number, DocumentTitle: string): Observable<DocumentRequired | string> {
         return this._httpClient.get<DocumentRequired>(`${this.baseAddress}api/BankDetails/GetDocumentAttachment?TransID=${TransID}&DocumentTitle=${DocumentTitle}`)
             .pipe(catchError(this.errorHandler));
     }
-    DowloandAttachment(AttachmentName: string,TransID: number): Observable<Blob | string> {
+    DowloandAttachment(AttachmentName: string, TransID: number): Observable<Blob | string> {
         return this._httpClient.get(`${this.baseAddress}api/BankDetails/DowloandDocumentAttachment?AttachmentName=${AttachmentName}&TransID=${TransID}`, {
-          responseType: 'blob',
-          headers: new HttpHeaders().append('Content-Type', 'application/json')
+            responseType: 'blob',
+            headers: new HttpHeaders().append('Content-Type', 'application/json')
         })
-          .pipe(catchError(this.errorHandler));
-      }
+            .pipe(catchError(this.errorHandler));
+    }
     // AddEmployee(personalHistory: PersonalInformation): Observable<PersonalInformation | string> {
     //     return this._httpClient.post<PersonalInformation>('http://10.43.13.9:80/api/PersonalInfo/CreatePersonalInfo', personalHistory, {
     //         headers: new HttpHeaders({
@@ -244,14 +248,14 @@ export class DashboardService {
             })
         }).pipe(catchError(this.errorHandler));
     }
-    AddDocumentRequiredAttachment(TransID: number, selectedFiles: File[],DocumentTitle:string): Observable<any> {
+    AddDocumentRequiredAttachment(TransID: number, selectedFiles: File[], DocumentTitle: string): Observable<any> {
         const formData: FormData = new FormData();
         if (selectedFiles && selectedFiles.length) {
             selectedFiles.forEach(x => {
-                formData.append(x.name, x,x.name);
+                formData.append(x.name, x, x.name);
             });
         }
-         formData.append('DocumentTitle',DocumentTitle);
+        formData.append('DocumentTitle', DocumentTitle);
         formData.append('TransID', TransID.toString());
 
 
@@ -283,9 +287,9 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/BankDetails/GetBankViewDetails?transID=${transID}`)
             .pipe(catchError(this.errorHandler));
     }
-    GetGeoLocationMasters(column: string,key:string): Observable<any> {
+    GetGeoLocationMasters(column: string, key: string): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetGeoLocationMasters?column=${column}&key=${key}`)
-        .pipe(catchError(this.errorHandler));
+            .pipe(catchError(this.errorHandler));
     }
     GetInitiatorApprovedPieData(): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetInitiatorPieData`)
@@ -353,6 +357,50 @@ export class DashboardService {
     }
     GetCustomerRACApprovedBarData(): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/CustomerRegistration/GetCustomerRACApprovedBarData`)
+            .pipe(catchError(this.errorHandler));
+    }
+
+    ValidatePAN(panNumber: string): Observable<PANResult | string> {
+        return this._httpClient.post<PANResult>(`${this.attestrAddress}api/v1/public/checkx/pan`, { 'pan': `${panNumber}` }, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Basic ${this.attestrToken}`
+            })
+        })
+            .pipe(catchError(this.errorHandler));
+    }
+
+    ValidateAadhar(aadharNumber: string): Observable<AadharResult | string> {
+        return this._httpClient.post<AadharResult>(`${this.attestrAddress}api/v1/public/checkx/uidai-basic`, { 'uuid': `${aadharNumber}` }, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Basic ${this.attestrToken}`
+            })
+        })
+            .pipe(catchError(this.errorHandler));
+    }
+
+    ValidateGST(gstNumber: string): Observable<GSTResult | string> {
+        return this._httpClient.post<GSTResult>(`${this.attestrAddress}api/v1/public/corpx/gstin`,
+            { 'gstin': `${gstNumber}`, 'fetchFilings': false },
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Authorization': `Basic ${this.attestrToken}`
+                })
+            })
+            .pipe(catchError(this.errorHandler));
+    }
+
+    ValidateBankAccount(accNumber: string, IFSCCode: string): Observable<BankAccountResult | string> {
+        return this._httpClient.post<BankAccountResult>(`${this.attestrAddress}api/v1/public/finanx/acc`,
+            { 'acc': `${accNumber}`, 'ifsc': `${IFSCCode}` },
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Authorization': `Basic ${this.attestrToken}`
+                })
+            })
             .pipe(catchError(this.errorHandler));
     }
 

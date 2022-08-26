@@ -152,14 +152,14 @@ export class DashboardComponent implements OnInit {
             map((value) => this._filterstate(value))
         );
         this.transID = localStorage.getItem('TransID');
-        if (this.transID != null || this.transID != NaN) {
+        if (this.transID && this.transID != null && !isNaN(this.transID)) {
             // if (this.transID != null) {
             this.isProgressBarVisibile = true;
             this._dashboardService.GetCustomerOnboardingView(this.transID).subscribe(res => {
-                console.log("view", res);
+                //console.log("view", res);
                 this.CustomerObdView = res;
                 this.SetPersonalInfoValues();
-
+                localStorage.setItem('TransID', null);
                 this.isProgressBarVisibile = false;
             },
                 err => {
@@ -276,7 +276,8 @@ export class DashboardComponent implements OnInit {
     GetTransactionDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService.GetCustomerOnboardingView(this.currentTransaction).subscribe(res => {
-            console.log("view", res);
+            //console.log("view", res);
+            this.transID=this.currentTransaction;
             this.CustomerObdView = res;
             this.SetPersonalInfoValues();
             this.isProgressBarVisibile = false;
@@ -311,14 +312,14 @@ export class DashboardComponent implements OnInit {
             Pincode: this.CustomerObdView.PersonalInfo.PersonalInformation.Pincode,
             Status: this.CustomerObdView.PersonalInfo.PersonalInformation.Status,
         });
-        if(this.CustomerObdView.organisationInput){
+        if (this.CustomerObdView.organisationInput) {
             this.PIform.patchValue({
-                AccountGroup:this.CustomerObdView.organisationInput.AccountGroup,
-                DistributionChannel:this.CustomerObdView.organisationInput.DistributionChannel,
-                Division:this.CustomerObdView.organisationInput.Division,
-                SalesOrg:this.CustomerObdView.organisationInput.SalesOrg,
-                Region:this.CustomerObdView.organisationInput.Region
-            }); 
+                AccountGroup: this.CustomerObdView.organisationInput.AccountGroup,
+                DistributionChannel: this.CustomerObdView.organisationInput.DistributionChannel,
+                Division: this.CustomerObdView.organisationInput.Division,
+                SalesOrg: this.CustomerObdView.organisationInput.SalesOrg,
+                Region: this.CustomerObdView.organisationInput.Region
+            });
         }
         if (localStorage.getItem('ActionStatus') == "Draft" && this.UserRole == "Customer") {
             this.SubmitValue = true;
@@ -369,15 +370,15 @@ export class DashboardComponent implements OnInit {
                 cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
                 cobView.PersonalInfo.Identities = this.IdentityData;
                 cobView.organisationInput = this.GetOrganisationInputValues();
-                if (this.transID != null) {
-                    cobView.Transaction.TranID = this.transID;
+                if (this.transID && this.transID != null && !isNaN(this.transID)) {
+                    cobView.Transaction.TranID = + this.transID;
                 }
                 cobView.PositionCode = this.authenticationDetails.PositionCode;
                 cobView.UserID = this.authenticationDetails.UserID.toString();
-                console.log("cobView", cobView);
+                //console.log("cobView", cobView);
                 this.isProgressBarVisibile = true;
                 this._dashboardService.SaveCustomerPersonalDetails(cobView).subscribe(res => {
-                    console.log("From save api", res);
+                    //console.log("From save api", res);
                     this.isProgressBarVisibile = false;
                     if (res.Status == 1) {
                         this.notificationSnackBarComponent.openSnackBar(isDraft ? "Draft saved successfully" : "Details submitted successfully", SnackBarStatus.success);
@@ -414,16 +415,17 @@ export class DashboardComponent implements OnInit {
                 cobView.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
                 cobView.PersonalInfo.Identities = this.IdentityData;
                 cobView.organisationInput = this.GetOrganisationInputValues();
-                if (this.transID != null) {
+                if (this.transID && this.transID != null && !isNaN(this.transID)) {
                     cobView.Transaction.TranID = this.transID;
                 }
                 cobView.PositionCode = this.authenticationDetails.PositionCode;
                 cobView.UserID = this.authenticationDetails.UserID;
-                console.log("cobView", cobView);
-                localStorage.setItem("category", this.PIform.get('category').value)
+                //console.log("cobView", cobView);
+                localStorage.setItem("category", this.PIform.get('category').value);
+                localStorage.setItem('TransID', this.transID);
                 this.isProgressBarVisibile = true;
                 this._dashboardService.SaveCustomerPersonalDetails(cobView).subscribe(res => {
-                    console.log("From save api", res);
+                    //console.log("From save api", res);
                     this.isProgressBarVisibile = false;
                     if (res.Status == 1) {
                         this.notificationSnackBarComponent.openSnackBar(isDraft ? "Draft saved successfully" : "Details saved successfully", SnackBarStatus.success);
@@ -485,8 +487,11 @@ export class DashboardComponent implements OnInit {
         pi.Status = this.PIform.get('Status').value;
         pi.Latitude = this.PIform.get('latitude').value;
         pi.Logitude = this.PIform.get('longitude').value;
-        if (this.transID != null) {
-            pi.TransID = Number(localStorage.getItem('TransID'));
+        // if (this.transID != null) {
+        //     pi.TransID = Number(localStorage.getItem('TransID'));
+        // }
+        if (this.transID && this.transID != null && !isNaN(this.transID)) {
+            pi.TransID = + this.transID;
         }
         return pi;
     }

@@ -1,4 +1,4 @@
-import { DocumentRequired } from './../../../models/master';
+import { BankAccountResult, DocumentRequired } from './../../../models/master';
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
@@ -89,7 +89,22 @@ export class BankinformationComponent implements OnInit {
     identity.BankName = this.BankForm.get("bankname").value;
     identity.IFSC = this.BankForm.get("ifsccode").value;
     identity.TransID = this.TransID;
-    this.listData.push(identity);
+
+    this._dashboardService.ValidateBankAccount(identity.AccountNum,identity.IFSC).subscribe(data => {
+      let res = data as BankAccountResult;
+      if (res) {
+          if (res.valid) {
+            this.listData.push(identity);
+          } else {
+              this.notificationSnackBarComponent.openSnackBar(`${res.message}`, SnackBarStatus.danger);
+          }
+      } else {
+      }
+  }, (err) => {
+      console.error(err);
+      this.notificationSnackBarComponent.openSnackBar(`Invalid Account Number or IFSC Code`, SnackBarStatus.danger);
+  });
+
     // this.listData[this.listData.length - 1].id = this.listData.length.toString();
     // this.BIform.reset();
     // } else {
@@ -336,18 +351,18 @@ export class BankinformationComponent implements OnInit {
     if (!this.isd2rs) {
       var cobView = new BankDetailsView();
       cobView.SecurityDeposit = this.GetSecurityInfoFromForm();
-      cobView.SecurityDeposit.Amount=0;
+      cobView.SecurityDeposit.Amount = 0;
       cobView.BankDetailInfo = this.listData;
       console.log("cobView", cobView);
-      if(this.listData.length==0){
-        this.notificationSnackBarComponent.openSnackBar("Atleast one bank detail is required",SnackBarStatus.danger);
+      if (this.listData.length == 0) {
+        this.notificationSnackBarComponent.openSnackBar("Atleast one bank detail is required", SnackBarStatus.danger);
         return;
       }
-      if(this.files.length<8){
-        this.notificationSnackBarComponent.openSnackBar("Please attach required documents!",SnackBarStatus.danger);
+      if (this.files.length < 8) {
+        this.notificationSnackBarComponent.openSnackBar("Please attach required documents!", SnackBarStatus.danger);
         return;
       }
-      
+
       this.isProgressBarVisibile = true;
       this._dashboardService.SaveBankInfoView(cobView).subscribe(
         (res) => {
@@ -433,6 +448,8 @@ export class BankinformationComponent implements OnInit {
     // {
 
     //this.listData.push(this.BIform.value);
+
+
     this.IdentityAddClicked();
     // this.BIform.reset();
     //this.listData[this.listData.length - 1].id = this.listData.length.toString();
