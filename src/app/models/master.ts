@@ -510,3 +510,50 @@ export class ErrorResult {
     message: string;
     appError: boolean;
 }
+
+export class ImageResult {
+    _id: string;
+    originalName: string;
+    mimeType: string;
+}
+
+export class PANOCRData {
+    pan: string;
+    birthDate: string;
+    incorporationDate: any;
+    name: string;
+    father: string;
+    category: string;
+}
+
+export class PANOCRResult {
+    valid: boolean;
+    message: any;
+    data: PANOCRData;
+}
+
+
+export class GSTOCRData {
+    gstin: string;
+    legalName: string;
+    tradeName: string;
+    constitution: string;
+    address: string;
+    type: string;
+    registered: string;
+    expiry: any;
+    issued: string;
+    approvingAuthority: string;
+    jurisdiction: string;
+    provisional: boolean;
+    pan: any;
+    tin: any;
+    slr: any;
+}
+
+export class GSTOCRResult {
+    valid: boolean;
+    message: any;
+    data: GSTOCRData;
+}
+

@@ -525,6 +525,21 @@ export class ApprovalscreenComponent implements OnInit {
                       }
                 );
         }
+        if (this.Role == "Accounts") {
+            // this.isProgressBarVisibile=true;
+            // this._dashboardService
+            // .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
+            //     .subscribe((data) => {
+            //         this.AllHeaderDetails = data;
+            //         this.isProgressBarVisibile=false;
+            //         this.LoadTableSource(this.AllHeaderDetails);
+            //     });
+                this._dashboardService.GetAccountsPieData().subscribe(
+                    x => {
+                        this.chartOptions1.series = x;
+                      }
+                );
+        }
         if (this.Role == "ZH") {
             // this.isProgressBarVisibile=true;
             // this._dashboardService
@@ -709,6 +724,20 @@ export class ApprovalscreenComponent implements OnInit {
            
         }
         if (this.Role == "DH") {
+            setTimeout(()=>{                           //<<<---using ()=> syntax
+                this.isProgressBarVisibile=true;
+                this._dashboardService
+                .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
+                    .subscribe((data) => {
+                        this.AllHeaderDetails = data;
+                        console.log(data)
+                        this.isProgressBarVisibile=false;
+                        this.LoadTableSource(this.AllHeaderDetails);
+                    });
+           }, 3000);
+            
+        }
+        if (this.Role == "Accounts") {
             setTimeout(()=>{                           //<<<---using ()=> syntax
                 this.isProgressBarVisibile=true;
                 this._dashboardService
@@ -979,6 +1008,26 @@ export class ApprovalscreenComponent implements OnInit {
             });
             // this._dashboardService
             //     .getPersonalInfoByStatus("Stockist")
+            //     .subscribe((data) => {
+            //         this.AllApprovedDetails = data;
+            //         this.isProgressBarVisibile = false;
+            //         this.LoadTableSource(this.AllApprovedDetails);
+            //         // this.employeesDataSource =
+            //         //     new MatTableDataSource<PersonalInfoStatusView>(data); //pass the array you want in the table
+            //         // this.employeesDataSource.sort = this.sort;
+            //         // this.employeesDataSource.paginator = this.paginator;
+            //     });
+        }
+        if (this.Role == "Accounts") {
+            this.isProgressBarVisibile = true;
+            this._dashboardService.GetApprovedCustomerOnBoardingByUser(this.authenticationDetails.UserID.toString(),"AccountsApproved")
+            .subscribe((data) => {
+                this.AllApprovedDetails = data;
+                this.isProgressBarVisibile = false;
+                this.LoadTableSource(this.AllApprovedDetails);
+            });
+            // this._dashboardService
+            //     .getPersonalInfoByStatus("DHApproved")
             //     .subscribe((data) => {
             //         this.AllApprovedDetails = data;
             //         this.isProgressBarVisibile = false;

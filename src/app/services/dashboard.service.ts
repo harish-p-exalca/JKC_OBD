@@ -1,4 +1,4 @@
-import { MarketInformationView, CustomerOnboarding, DocumentRequired, CustomerOnboardingView, PANResult, AadharResult, GSTResult, BankAccountResult } from './../models/master';
+import { MarketInformationView, CustomerOnboarding, DocumentRequired, CustomerOnboardingView, PANResult, AadharResult, GSTResult, BankAccountResult, ImageResult, PANOCRResult, GSTOCRResult } from './../models/master';
 import { Guid } from 'guid-typescript';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -311,6 +311,10 @@ export class DashboardService {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetDHPieData`)
             .pipe(catchError(this.errorHandler));
     }
+    GetAccountsPieData(): Observable<any> {
+        return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetAccountsPieData`)
+            .pipe(catchError(this.errorHandler));
+    }
     GetRACPieData(): Observable<any> {
         return this._httpClient.get<any>(`${this.baseAddress}api/PersonalInfo/GetRACPieData`)
             .pipe(catchError(this.errorHandler));
@@ -395,6 +399,43 @@ export class DashboardService {
     ValidateBankAccount(accNumber: string, IFSCCode: string): Observable<BankAccountResult | string> {
         return this._httpClient.post<BankAccountResult>(`${this.attestrAddress}api/v1/public/finanx/acc`,
             { 'acc': `${accNumber}`, 'ifsc': `${IFSCCode}` },
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Authorization': `Basic ${this.attestrToken}`
+                })
+            })
+            .pipe(catchError(this.errorHandler));
+    }
+
+    UploadImage(selectedFile: File): Observable<ImageResult | string> {
+        const formData: FormData = new FormData();
+        formData.append('file', selectedFile);
+        return this._httpClient.post<ImageResult>(`${this.attestrAddress}api/v1/public/media/image/multipart`,
+            formData,
+            {
+                headers: new HttpHeaders({
+                    'Authorization': `Basic ${this.attestrToken}`
+                })
+            })
+            .pipe(catchError(this.errorHandler));
+    }
+
+    ExtractPANDetails(src: string): Observable<PANOCRResult | string> {
+        return this._httpClient.post<PANOCRResult>(`${this.attestrAddress}api/v1/public/xtract`,
+            { 'src': `${src}`, 'additional': null,'type':'PAN' },
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Authorization': `Basic ${this.attestrToken}`
+                })
+            })
+            .pipe(catchError(this.errorHandler));
+    }
+
+    ExtractGSTDetails(src: string): Observable<GSTOCRResult | string> {
+        return this._httpClient.post<GSTOCRResult>(`${this.attestrAddress}api/v1/public/xtract`,
+        { 'src': `${src}`, 'additional': null,'type':'GST' },
             {
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json',

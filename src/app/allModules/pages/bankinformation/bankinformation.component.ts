@@ -1,4 +1,4 @@
-import { BankAccountResult, DocumentRequired } from './../../../models/master';
+import { BankAccountResult, DocumentRequired, GSTOCRResult, ImageResult, PANOCRResult } from './../../../models/master';
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
@@ -90,20 +90,20 @@ export class BankinformationComponent implements OnInit {
     identity.IFSC = this.BankForm.get("ifsccode").value;
     identity.TransID = this.TransID;
 
-    this._dashboardService.ValidateBankAccount(identity.AccountNum,identity.IFSC).subscribe(data => {
+    this._dashboardService.ValidateBankAccount(identity.AccountNum, identity.IFSC).subscribe(data => {
       let res = data as BankAccountResult;
       if (res) {
-          if (res.valid) {
-            this.listData.push(identity);
-          } else {
-              this.notificationSnackBarComponent.openSnackBar(`${res.message}`, SnackBarStatus.danger);
-          }
+        if (res.valid) {
+          this.listData.push(identity);
+        } else {
+          this.notificationSnackBarComponent.openSnackBar(`${res.message}`, SnackBarStatus.danger);
+        }
       } else {
       }
-  }, (err) => {
+    }, (err) => {
       console.error(err);
       this.notificationSnackBarComponent.openSnackBar(`Invalid Account Number or IFSC Code`, SnackBarStatus.danger);
-  });
+    });
 
     // this.listData[this.listData.length - 1].id = this.listData.length.toString();
     // this.BIform.reset();
@@ -547,9 +547,44 @@ export class BankinformationComponent implements OnInit {
   // }
 
   csvInputChange(event) {
-    this.handleFileInput(event, "PanCard");
-    this.FileName = event.target.files[0].name;
-    this.FileError = false;
+
+    if (event.target && event.target.files && event.target.files.length) {
+      // const reader = new FileReader();
+      // reader.readAsDataURL(event.target.files[0]);
+      // reader.onload = () => {
+      //    console.log(reader.result);
+
+         this._dashboardService.UploadImage(event.target.files[0]).subscribe(
+          data => {
+            let res = data as ImageResult;
+            if (res) {
+              this._dashboardService.ExtractPANDetails(res._id).subscribe(
+                data1 => {
+                  let res1 = data1 as PANOCRResult;
+                  if (res1.valid) {
+                    this.handleFileInput(event, "PanCard");
+                    this.FileName = event.target.files[0].name;
+                    this.FileError = false;
+                  } else {
+                    this.notificationSnackBarComponent.openSnackBar(`${res1.message}`, SnackBarStatus.danger);
+                  }
+                },
+                err1 => {
+                  console.error(err1);
+                }
+              )
+            }
+          },
+          err => {
+            console.error(err);
+          }
+        )
+
+      // };
+      // this.handleFileInput(event, "PanCard");
+      // this.FileName = event.target.files[0].name;
+      // this.FileError = false;
+    }
     // console.log(fileInputEvent.target.files[0]);
     // this.GetAttachment(fileInputEvent.target.files[0],"PAN");
   }
@@ -560,9 +595,38 @@ export class BankinformationComponent implements OnInit {
   }
   csv1InputChange(event) {
 
-    this.FileName1 = event.target.files[0].name;
-    // console.log(fileInputEvent.target.files[0]);
-    this.handleFileInput(event, "GSTCertificate");
+    if (event.target && event.target.files && event.target.files.length) {
+      this._dashboardService.UploadImage(event.target.files[0]).subscribe(
+        data => {
+          let res = data as ImageResult;
+          if (res) {
+            this._dashboardService.ExtractGSTDetails(res._id).subscribe(
+              data1 => {
+                let res1 = data1 as GSTOCRResult;
+                if (res1.valid) {
+                  this.FileName1 = event.target.files[0].name;
+                  // console.log(fileInputEvent.target.files[0]);
+                  this.handleFileInput(event, "GSTCertificate");
+                } else {
+                  this.notificationSnackBarComponent.openSnackBar(`${res1.message}`, SnackBarStatus.danger);
+                }
+              },
+              err1 => {
+                console.error(err1);
+              }
+            )
+          }
+        },
+        err => {
+          console.error(err);
+        }
+      )
+      // this.FileName1 = event.target.files[0].name;
+      // // console.log(fileInputEvent.target.files[0]);
+      // this.handleFileInput(event, "GSTCertificate");
+    }
+
+
     // this.GetAttachment(fileInputEvent.target.files[0],"GST");
   }
   csv2InputChange(event) {
