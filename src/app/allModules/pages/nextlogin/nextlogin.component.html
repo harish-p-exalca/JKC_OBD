@@ -35,7 +35,7 @@
                   <input matInput placeholder="Enter User name" formControlName="userName" class="nameinput">
                 </div>
                 <mat-error
-                  *ngIf=" signinForm?.get('userName')?.touched && signinForm?.get('userName')?.hasError('required')">
+                  *ngIf="signinForm?.get('userName')?.touched && signinForm?.get('userName')?.hasError('required')">
                   User name is required
                 </mat-error>
               </mat-form-field>
