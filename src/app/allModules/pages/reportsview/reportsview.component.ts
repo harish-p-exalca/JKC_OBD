@@ -648,7 +648,7 @@ export class ReportsviewComponent implements OnInit {
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
             this.BankData = bankInfoView.BankDetailInfo;
         }
-        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH") {
+        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts") {
             if (bankInfoView.SecurityDeposit.TransID != null) {
                 // businessinformation = businessInfoView.Businessinfo;
                 this.DepositForm.patchValue({
@@ -706,7 +706,7 @@ export class ReportsviewComponent implements OnInit {
         pi.District = this.PIform.get('District').value;
         var products = "";
         var productList = this.PIform.get('product').value;
-        if (productList != null) {
+        if (productList && productList != null && productList.length) {
             productList.forEach((reason, i) => {
                 if (i < productList.length - 1) {
                     products += reason + ",";
@@ -840,7 +840,7 @@ export class ReportsviewComponent implements OnInit {
             this.contactdataSource = new MatTableDataSource(this.Contactdetails);
             this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
         }
-        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "RAC") {
+        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts" || this.Role == "RAC") {
             var products = null;
             if (
                 this.CustomerObdView.PersonalInfo.PersonalInformation.product !=
@@ -1049,7 +1049,7 @@ export class ReportsviewComponent implements OnInit {
                 this.MIform.get('PartyBackground').disable();
             }
         }
-        if (this.Role == "ZH" || this.Role == "DH") {
+        if (this.Role == "ZH" || this.Role == "DH"|| this.Role == "Accounts") {
             if (MarketInfoView.MarketInformation.TransID != null) {
                 this.MIform.patchValue({
                     market: MarketInfoView.MarketInformation.MarketName,
@@ -1154,7 +1154,7 @@ export class ReportsviewComponent implements OnInit {
                 });
             }
         }
-        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "RAC") {
+        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH"|| this.Role == "Accounts" || this.Role == "RAC") {
             if (businessInfoView.Businessinfo.TransID != null) {
                 // businessinformation = businessInfoView.Businessinfo;
                 this.BIform.patchValue({

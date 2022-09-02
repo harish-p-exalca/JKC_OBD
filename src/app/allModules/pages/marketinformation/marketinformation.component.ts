@@ -177,6 +177,20 @@ export class MarketinformationComponent implements OnInit {
         );
 
     }
+
+    decimalOnly(event): boolean {
+        const charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode === 8 || charCode === 9 || charCode === 13 || charCode === 46
+            || charCode === 37 || charCode === 39 || charCode === 123 || charCode === 190) {
+            return true;
+        }
+        else if (charCode < 48 || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+
+
     GetMarketDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService
