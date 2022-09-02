@@ -125,7 +125,7 @@ export class InvitepageComponent implements OnInit {
 
   GetIdentity(transID: number) {
     this._dashboardService.GetIdentityByTransID(transID).subscribe(res => {
-      console.log("identity", res);
+      // console.log("identity", res);
       this.Identity = res;
       this.InviteForm.get('userName').setValue(res.Name);
       this.InviteForm.get('userName').disable();
@@ -139,7 +139,7 @@ export class InvitepageComponent implements OnInit {
     this._dashboardService.AuthenticateCustomerWithOTP(parseInt(this.otp), this.TransID).subscribe(
       (res) => {
         this.IsProgressBarVisibile = false;
-        console.log(res);
+        // console.log(res);
         const dat = res as AuthenticationDetails;
         this.saveUserDetails(dat);
         localStorage.setItem('TransID', this.TransID.toString());
@@ -160,7 +160,7 @@ export class InvitepageComponent implements OnInit {
     //   // this.OTP[5] = (this.InviteForm.get('OTP6').value);
     //   // var OTPNo = this.OTP.join();
     //   // var status = OTPNo.replace(/,/g, '').toString();
-    //   // console.log("otp",parseInt(status));
+    //   // // console.log("otp",parseInt(status));
 
     // } else {
     //   Object.keys(this.InviteForm.controls).forEach(key => {
@@ -172,22 +172,22 @@ export class InvitepageComponent implements OnInit {
   otp: string;
   onOtpChange(otp) {
     this.otp = otp;
-    console.log(this.otp);
+    // console.log(this.otp);
   }
   saveUserDetails(data: any): void {
-    console.log(data);
+    // console.log(data);
     localStorage.setItem('authorizationData', JSON.stringify(data));
     this.UpdateMenu();
     this.notificationSnackBarComponent.openSnackBar('Logged in successfully', SnackBarStatus.success);
     this._router.navigate(['pages/dashboard']);
   }
   CreateOTP(): void {
-    console.log("otp requested");
+    // console.log("otp requested");
     this.IsProgressBarVisibile = true;
     this._dashboardService.GenerateOTPForCustomer(this.TransID).subscribe(
       (res) => {
         this.IsProgressBarVisibile = false;
-        console.log(res);
+        // console.log(res);
         if (res.Status == 1) {
           this.notificationSnackBarComponent.openSnackBar('OTP Generated Successfully', SnackBarStatus.success);
         }
@@ -208,7 +208,7 @@ export class InvitepageComponent implements OnInit {
     if (retrievedObject) {
       this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
       this.MenuItems = this.authenticationDetails.MenuItemNames.split(',');
-      console.log(this.MenuItems);
+      // console.log(this.MenuItems);
     } else {
     }
     if (this.MenuItems.indexOf('Personal') >= 0) {

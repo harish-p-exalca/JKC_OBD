@@ -11,7 +11,7 @@ export class CommonService {
   ShowValidationErrors(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach(key => {
       if (!formGroup.get(key).valid) {
-        // console.log(key);
+        // // console.log(key);
       }
       formGroup.get(key).markAsTouched();
       formGroup.get(key).markAsDirty();
@@ -24,7 +24,7 @@ export class CommonService {
               FormGroupControls.get(key2).markAsTouched();
               FormGroupControls.get(key2).markAsDirty();
               if (!FormGroupControls.get(key2).valid) {
-                // console.log(key2);
+                // // console.log(key2);
               }
             });
           } else {

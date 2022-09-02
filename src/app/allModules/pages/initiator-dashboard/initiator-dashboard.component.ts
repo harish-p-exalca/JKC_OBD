@@ -672,7 +672,7 @@ export class InitiatorDashboardComponent implements OnInit {
       }
     tabClick(event: MatTabChangeEvent):void{
       this.tab = event.tab.textLabel;
-      console.log(this.tab);
+      // console.log(this.tab);
       if(this.tab==="All")
        {
        this.GetEmployees();

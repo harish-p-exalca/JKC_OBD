@@ -172,23 +172,38 @@ export class MarketinformationComponent implements OnInit {
                 this.GetMarketDetails();
                 this.isProgressBarVisibile = false;
             },
-            (err) => console.log(err)
+            (err) => {// console.log(err)
+            }
         );
 
     }
+
+    decimalOnly(event): boolean {
+        const charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode === 8 || charCode === 9 || charCode === 13 || charCode === 46
+            || charCode === 37 || charCode === 39 || charCode === 123 || charCode === 190) {
+            return true;
+        }
+        else if (charCode < 48 || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+
+
     GetMarketDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService
             .GetMarketInformationView(this.currentTransaction)
             .subscribe(
                 (res) => {
-                    console.log("view", res);
+                    // console.log("view", res);
                     this.MarketInfoView = res;
                     this.SetMarketInfoDetails(this.MarketInfoView);
                     this.isProgressBarVisibile = false;
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                 }
             );
     }
@@ -223,16 +238,16 @@ export class MarketinformationComponent implements OnInit {
         }
     }
     SubmitButtonClick(isDraft: boolean = false) {
-        console.log(this.MIform.disabled);
+        // console.log(this.MIform.disabled);
         if (this.MIform.valid) {
             var cobView = new MarketInformationView();
             cobView.MarketInformation = this.GetMarketInfoFromForm();
             cobView.AverageSale = this.IdentityData;
-            console.log("cobView", cobView);
+            // console.log("cobView", cobView);
             this.isProgressBarVisibile = true;
             this._dashboardService.SaveMarketInfoView(cobView).subscribe(
                 (res) => {
-                    console.log("From save api", res);
+                    // console.log("From save api", res);
                     this.isProgressBarVisibile = false;
                     this._router.navigate(["pages/businessinformation"]);
                     this.ClearAll();
@@ -311,10 +326,10 @@ export class MarketinformationComponent implements OnInit {
         //         GST
         //     )
         // ) {
-        //     console.log("true");
+        //     // console.log("true");
         //     this.isgst = true;
         // } else {
-        //     console.log("false");
+        //     // console.log("false");
         //     this.isgst = false;
         // }
     }
@@ -340,10 +355,10 @@ export class MarketinformationComponent implements OnInit {
         });
 
         // if (/^[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}$/.test(Pan)) {
-        //     //console.log("true");
+        //     //// console.log("true");
         //     this.ispan = true;
         // } else {
-        //     //console.log("false");
+        //     //// console.log("false");
         //     this.ispan = false;
         // }
     }
@@ -372,7 +387,7 @@ export class MarketinformationComponent implements OnInit {
 
             // this._dashboardService.AddMArketInfo(personalinformation).subscribe(
             //     (data) => {
-            //         console.log(data);
+            //         // console.log(data);
             //         this.notificationSnackBarComponent.openSnackBar(
             //             "Saved successfully",
             //             SnackBarStatus.success

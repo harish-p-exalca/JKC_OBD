@@ -490,7 +490,7 @@ export class ApprovalscreenComponent implements OnInit {
             // .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
             //     .subscribe((data) => {
             //         this.AllHeaderDetails = data;
-            //         console.log(data);
+            //         // console.log(data);
             //         this.isProgressBarVisibile=false;
             //         this.LoadTableSource(this.AllHeaderDetails);
             //     });
@@ -585,7 +585,7 @@ export class ApprovalscreenComponent implements OnInit {
                       }
                 );
         }
-        console.log(this.Role);
+        // console.log(this.Role);
         this._dashboardService
             .getPersonalInfoByStatus("Rejected")
             .subscribe((data) => {
@@ -669,7 +669,7 @@ export class ApprovalscreenComponent implements OnInit {
    
     tabClick(event: MatTabChangeEvent): void {
         this.tab = event.tab.textLabel;
-        console.log(this.tab);
+        // console.log(this.tab);
         if (this.tab === "All") {
             this.GetEmployees();
         }
@@ -692,7 +692,7 @@ export class ApprovalscreenComponent implements OnInit {
                 .getPersonalInfoByStatusAndRole(this.Role,"CustomerReleased")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
-                    console.log(data)
+                    // console.log(data)
                     this.isProgressBarVisibile=false;
                     this.LoadTableSource(this.AllHeaderDetails);
                 });
@@ -716,7 +716,7 @@ export class ApprovalscreenComponent implements OnInit {
                 .getPersonalInfoByStatusAndRole(this.Role,"RACApproved")
                     .subscribe((data) => {
                         this.AllHeaderDetails = data;
-                        console.log(data)
+                        // console.log(data)
                         this.isProgressBarVisibile=false;
                         this.LoadTableSource(this.AllHeaderDetails);
                     });    
@@ -730,7 +730,7 @@ export class ApprovalscreenComponent implements OnInit {
                 .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
                     .subscribe((data) => {
                         this.AllHeaderDetails = data;
-                        console.log(data)
+                        // console.log(data)
                         this.isProgressBarVisibile=false;
                         this.LoadTableSource(this.AllHeaderDetails);
                     });
@@ -744,7 +744,7 @@ export class ApprovalscreenComponent implements OnInit {
                 .getPersonalInfoByStatusAndRole(this.Role,"ZHApproved")
                     .subscribe((data) => {
                         this.AllHeaderDetails = data;
-                        console.log(data)
+                        // console.log(data)
                         this.isProgressBarVisibile=false;
                         this.LoadTableSource(this.AllHeaderDetails);
                     });
@@ -758,7 +758,7 @@ export class ApprovalscreenComponent implements OnInit {
                 .getPersonalInfoByStatusAndRole(this.Role,"SHApproved")
                     .subscribe((data) => {
                         this.AllHeaderDetails = data;
-                        console.log(data)
+                        // console.log(data)
                         this.isProgressBarVisibile=false;
                         this.LoadTableSource(this.AllHeaderDetails);
                     });
@@ -772,7 +772,7 @@ export class ApprovalscreenComponent implements OnInit {
             .getPersonalInfoByStatusAndRole(this.Role,"ASMApproved")
                 .subscribe((data) => {
                     this.AllHeaderDetails = data;
-                    console.log(data)
+                    // console.log(data)
                     this.isProgressBarVisibile=false;
                     this.LoadTableSource(this.AllHeaderDetails);
                 });
@@ -786,7 +786,7 @@ export class ApprovalscreenComponent implements OnInit {
                 .getPersonalInfoByStatusAndRole(this.Role,"DHApproved")
                     .subscribe((data) => {
                         this.AllHeaderDetails = data;
-                        console.log(data)
+                        // console.log(data)
                         this.isProgressBarVisibile=false;
                         this.LoadTableSource(this.AllHeaderDetails);
                     });
@@ -1146,7 +1146,7 @@ export class ApprovalscreenComponent implements OnInit {
     }
     LoadTableSource(DataArray: any[]) {
         this.employeesDataSource = new MatTableDataSource(DataArray);
-        console.log();
+        // console.log();
         this.employeesDataSource.paginator = this.paginator;
         this.employeesDataSource.sort = this.sort;
     }

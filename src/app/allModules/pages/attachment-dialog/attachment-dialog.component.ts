@@ -24,7 +24,7 @@ export class AttachmentDialogComponent implements OnInit {
     const fileURL = URL.createObjectURL(this.attachmentDetails.blob);
     this.AttachmentData = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
     // this.AttachmentData = fileURL;
-    // console.log(this.AttachmentData);
+    // // console.log(this.AttachmentData);
   }
 
   CloseClicked(): void {

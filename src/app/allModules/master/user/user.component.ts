@@ -50,7 +50,7 @@ export class UserComponent implements OnInit {
       (data) => {
         this.AllUsers = <UserWithRole[]>data;
         this.IsProgressBarVisibile = false;
-        // console.log(this.AllUsers);
+        // // console.log(this.AllUsers);
       },
       (err) => {
         console.error(err);
@@ -59,7 +59,7 @@ export class UserComponent implements OnInit {
     );
   }
   OnUserSelectionChanged(selectedUser: UserWithRole): void {
-    // console.log(selectedMenuApp);
+    // // console.log(selectedMenuApp);
     this.SelectedUser = selectedUser;
   }
   OnShowProgressBarEvent(status: string): void {
@@ -72,7 +72,7 @@ export class UserComponent implements OnInit {
   }
 
   RefreshAllUsers(msg: string): void {
-    // console.log(msg);
+    // // console.log(msg);
     this.GetAllUsers();
   }
 

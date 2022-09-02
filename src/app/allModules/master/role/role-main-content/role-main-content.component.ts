@@ -53,10 +53,10 @@ export class RoleMainContentComponent implements OnInit, OnChanges {
             this.AppIDListAllID = xy.AppID;
           }
         }
-        // console.log(this.AllMenuApps);
+        // // console.log(this.AllMenuApps);
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }
@@ -102,7 +102,7 @@ export class RoleMainContentComponent implements OnInit, OnChanges {
 
               this._masterService.UpdateRole(this.role).subscribe(
                 (data) => {
-                  // console.log(data);
+                  // // console.log(data);
                   this.ResetControl();
                   this.notificationSnackBarComponent.openSnackBar('Role updated successfully', SnackBarStatus.success);
                   this.SaveSucceed.emit('success');
@@ -135,7 +135,7 @@ export class RoleMainContentComponent implements OnInit, OnChanges {
               this.role.CreatedBy = this.authenticationDetails.UserID.toString();
               this._masterService.CreateRole(this.role).subscribe(
                 (data) => {
-                  // console.log(data);
+                  // // console.log(data);
                   this.ResetControl();
                   this.notificationSnackBarComponent.openSnackBar('Role created successfully', SnackBarStatus.success);
                   this.SaveSucceed.emit('success');
@@ -180,7 +180,7 @@ export class RoleMainContentComponent implements OnInit, OnChanges {
 
               this._masterService.DeleteRole(this.role).subscribe(
                 (data) => {
-                  // console.log(data);
+                  // // console.log(data);
                   this.ResetControl();
                   this.notificationSnackBarComponent.openSnackBar('Role deleted successfully', SnackBarStatus.success);
                   this.SaveSucceed.emit('success');
@@ -223,14 +223,14 @@ export class RoleMainContentComponent implements OnInit, OnChanges {
   }
 
   OnAppNameChanged(): void {
-    // console.log('changed');
+    // // console.log('changed');
     const SelectedValues = this.roleMainFormGroup.get('appIDList').value as number[];
     if (SelectedValues.includes(this.AppIDListAllID)) {
       this.roleMainFormGroup.get('appIDList').patchValue([this.AppIDListAllID]);
       this.notificationSnackBarComponent.openSnackBar('All have all the menu items, please uncheck All if you want to select specific menu', SnackBarStatus.info, 4000);
 
     }
-    // console.log(this.roleMainFormGroup.get('appIDList').value);
+    // // console.log(this.roleMainFormGroup.get('appIDList').value);
   }
 
 }
@@ -266,7 +266,7 @@ export class RoleMainContentComponent implements OnInit, OnChanges {
 //             return { 'appIDRequired': true };
 //           }
 //         } else {
-//           console.log('entered');
+//           // console.log('entered');
 //           return { 'appIDRequired': true };
 //         }
 //       }

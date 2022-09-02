@@ -86,7 +86,7 @@ export class ChangePasswordComponent implements OnInit {
       // control.setErrors(null);
       // this.menuAppMainFormGroup.get(key).markAsUntouched();
       // this.menuAppMainFormGroup.get(key).updateValueAndValidity();
-      // console.log(this.menuAppMainFormGroup.get(key).setErrors(Validators.required)
+      // // console.log(this.menuAppMainFormGroup.get(key).setErrors(Validators.required)
     });
 
   }

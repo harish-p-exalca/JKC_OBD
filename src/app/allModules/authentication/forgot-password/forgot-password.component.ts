@@ -48,8 +48,8 @@ export class ForgotPasswordComponent implements OnInit {
         }
       }
     };
-    // console.log(this._activatedRoute.snapshot.queryParamMap.get('Id'));
-    // console.log(this._activatedRoute.snapshot.queryParamMap.get('token'));
+    // // console.log(this._activatedRoute.snapshot.queryParamMap.get('Id'));
+    // // console.log(this._activatedRoute.snapshot.queryParamMap.get('token'));
     this.notificationSnackBarComponent = new NotificationSnackBarComponent(this.snackBar);
     this.IsProgressBarVisibile = false;
   }
@@ -72,7 +72,7 @@ export class ForgotPasswordComponent implements OnInit {
       // control.setErrors(null);
       // this.menuAppMainFormGroup.get(key).markAsUntouched();
       // this.menuAppMainFormGroup.get(key).updateValueAndValidity();
-      // console.log(this.menuAppMainFormGroup.get(key).setErrors(Validators.required)
+      // // console.log(this.menuAppMainFormGroup.get(key).setErrors(Validators.required)
     });
 
   }

@@ -50,7 +50,7 @@ export class RoleComponent implements OnInit {
       (data) => {
         this.AllRoles = <RoleWithApp[]>data;
         this.IsProgressBarVisibile = false;
-        // console.log(this.AllMenuApps);
+        // // console.log(this.AllMenuApps);
       },
       (err) => {
         console.error(err);
@@ -60,7 +60,7 @@ export class RoleComponent implements OnInit {
     );
   }
   OnRoleSelectionChanged(selectedRole: RoleWithApp): void {
-    // console.log(selectedMenuApp);
+    // // console.log(selectedMenuApp);
     this.SelectedRole = selectedRole;
   }
 
@@ -74,7 +74,7 @@ export class RoleComponent implements OnInit {
   }
 
   RefreshAllRoles(msg: string): void {
-    // console.log(msg);
+    // // console.log(msg);
     this.GetAllRoles();
   }
 

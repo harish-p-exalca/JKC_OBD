@@ -41,7 +41,7 @@
 
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input autocomplete="off" matInput placeholder="Population of  Market" formControlName="Population"
-                class="inputform " required>
+                class="inputform " required (keypress)="decimalOnly($event)">
 
             </div>
 
@@ -53,7 +53,7 @@
             <span fxFlex="30" class="marketsp">Market Potential of the area (in MT) *</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input autocomplete="off" matInput placeholder="Market Potential of the area (in MT)"
-                formControlName="Potential" class="inputform " required>
+                formControlName="Potential" class="inputform " required (keypress)="decimalOnly($event)">
               <mat-error class="errorn"
                 *ngIf=" MIform?.get('Potential')?.touched && MIform?.get('Potential')?.hasError('required')">Market
                 Potential is
@@ -68,7 +68,7 @@
             <span fxFlex="30" class="marketsp">No of Existing Stockist in the Market</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input autocomplete="off" matInput placeholder="No of Existing Stockist in the Market"
-                formControlName="Stockist" class="inputform " required>
+                formControlName="Stockist" class="inputform " required (keypress)="decimalOnly($event)">
 
             </div>
           </div>
@@ -78,7 +78,7 @@
             <span fxFlex="30" class="marketsp">Distance of Nearest JK Stockist</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input autocomplete="off" matInput placeholder="Distance of Nearest JK Stockist"
-                formControlName="Distance" class="inputform " required>
+                formControlName="Distance" class="inputform " required (keypress)="decimalOnly($event)">
 
             </div>
           </div>
@@ -116,7 +116,7 @@
             <span fxFlex="30" class="marketsp">Areas that Stockist will serve</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input autocomplete="off" matInput placeholder="Areas that Stockist will serve"
-                formControlName="AreasStockist" class="inputform " required>
+                formControlName="AreasStockist" class="inputform " required (keypress)="decimalOnly($event)">
 
 
 
@@ -129,7 +129,7 @@
 
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input autocomplete="off" type="number" matInput placeholder="Total Potential of the Party (In MT)"
-                formControlName="TotalPotential" class="inputform " required>
+                formControlName="TotalPotential" class="inputform " required (keypress)="decimalOnly($event)">
 
 
               <mat-error class="errorn"
@@ -146,7 +146,7 @@
             <span fxFlex="30" class="marketsp">Expected JK Avg.Monthly Sale (In MT) *</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input autocomplete="off" type="number" matInput placeholder="Expected JK Avg.Monthly Sale (In MT)"
-                formControlName="JKAvg" class="inputform " required>
+                formControlName="JKAvg" class="inputform " required (keypress)="decimalOnly($event)">
 
               <mat-error class="errorn"
                 *ngIf=" MIform?.get('JKAvg')?.touched && MIform?.get('JKAvg')?.hasError('required')">Expected JK
@@ -317,11 +317,6 @@
               </table>
             </div>
 
-
-
-
-
-
           </mat-card>
         </div>
 
@@ -359,7 +354,7 @@
         </button>
       </div> -->
     <!-- [disabled]="MIform.required.invalid" -->
-    <button mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Save & Next</button>
+    <button mat-raised-button class="savebtn mr-48" (click)="SubmitButtonClick()">Save & Next</button>
   </div>
   <br>
   <mat-progress-spinner *ngIf=" isProgressBarVisibile" class="progressBarPostion" mode="determinate" value="40">

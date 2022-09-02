@@ -28,7 +28,7 @@ export class RoleSideBarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log(this.currentSelectedMenuApp);
+    // // console.log(this.currentSelectedMenuApp);
     if (this.AllRoles.length > 0) {
       this.selectID = this.AllRoles[0].RoleID;
       this.loadSelectedRole(this.AllRoles[0]);
@@ -38,7 +38,7 @@ export class RoleSideBarComponent implements OnInit, OnChanges {
   loadSelectedRole(SelectedRole: RoleWithApp): void {
     this.selectID = SelectedRole.RoleID;
     this.RoleSelectionChanged.emit(SelectedRole);
-    // console.log(SelectedMenuApp);
+    // // console.log(SelectedMenuApp);
   }
 
   clearRole(): void {

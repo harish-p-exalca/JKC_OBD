@@ -126,7 +126,7 @@ export class BankinformationComponent implements OnInit {
     }
     this.TransID = parseInt(localStorage.getItem("TransID"));
     // const retrievedvalue = localStorage.getItem('retail_D2RS');
-    // console.log(retrievedvalue);
+    // // console.log(retrievedvalue);
     this.BIform = this.fb.group({
       leaf: ['', Validators.required],
       Type: ['', Validators.required],
@@ -240,7 +240,7 @@ export class BankinformationComponent implements OnInit {
     //   this.isd2rs = false;
     // }
     // this.selectedPersonalInfo = this._dashboardService.GetPersonalInfo();
-    // console.log(this.selectedPersonalInfo.Name);
+    // // console.log(this.selectedPersonalInfo.Name);
     // this.name = this.selectedPersonalInfo.Name;
     this.isProgressBarVisibile = true;
     this._dashboardService.SetPersonalInfo(null);
@@ -251,7 +251,9 @@ export class BankinformationComponent implements OnInit {
         this.GetBankDetails();
         this.isProgressBarVisibile = false;
       },
-      (err) => console.log(err)
+      (err) => {
+      // console.log(err)
+      }
     );
 
   }
@@ -305,13 +307,13 @@ export class BankinformationComponent implements OnInit {
   GetBankDetails() {
     this.isProgressBarVisibile = true;
     this._dashboardService.GetSecurityDetails(this.TransID).subscribe(res => {
-      console.log("view", res);
+      // console.log("view", res);
       this.bankInfoView = res;
       this.SetSecurityDepositDetailInfoView(this.bankInfoView);
       this.isProgressBarVisibile = false;
     },
       err => {
-        console.log(err);
+        // console.log(err);
       });
   }
   CheckBox(event: MatCheckboxChange) {
@@ -321,7 +323,7 @@ export class BankinformationComponent implements OnInit {
     else {
       this.BIform.enable();
     }
-    console.log("CheckBox", event.checked);
+    // console.log("CheckBox", event.checked);
 
   }
   SetSecurityDepositDetailInfoView(bankInfoView: BankDetailsView = new BankDetailsView()) {
@@ -353,7 +355,7 @@ export class BankinformationComponent implements OnInit {
       cobView.SecurityDeposit = this.GetSecurityInfoFromForm();
       cobView.SecurityDeposit.Amount = 0;
       cobView.BankDetailInfo = this.listData;
-      console.log("cobView", cobView);
+      // console.log("cobView", cobView);
       if (this.listData.length == 0) {
         this.notificationSnackBarComponent.openSnackBar("Atleast one bank detail is required", SnackBarStatus.danger);
         return;
@@ -366,11 +368,11 @@ export class BankinformationComponent implements OnInit {
       this.isProgressBarVisibile = true;
       this._dashboardService.SaveBankInfoView(cobView).subscribe(
         (res) => {
-          console.log("From save api", res);
+          // console.log("From save api", res);
           this.isProgressBarVisibile = false;
           this._dashboardService.AddDocumentRequiredAttachment(this.TransID, this.files, this.Documentname).subscribe(
             (res) => {
-              console.log("Attachment added", res);
+              // console.log("Attachment added", res);
               this.isProgressBarVisibile = false;
               this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
               this._router.navigate(["pages/nextlogin"]);
@@ -392,15 +394,15 @@ export class BankinformationComponent implements OnInit {
         var cobView = new BankDetailsView();
         cobView.SecurityDeposit = this.GetSecurityInfoFromForm();
         cobView.BankDetailInfo = this.listData;
-        console.log("cobView", cobView);
+        // console.log("cobView", cobView);
         this.isProgressBarVisibile = true;
         this._dashboardService.SaveBankInfoView(cobView).subscribe(
           (res) => {
-            console.log("From save api", res);
+            // console.log("From save api", res);
             this.isProgressBarVisibile = false;
             this._dashboardService.AddDocumentRequiredAttachment(this.TransID, this.files, this.Documentname).subscribe(
               (res) => {
-                console.log("Attachment added", res);
+                // console.log("Attachment added", res);
                 this.isProgressBarVisibile = false;
                 this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
                 this._router.navigate(["pages/nextlogin"]);
@@ -460,7 +462,7 @@ export class BankinformationComponent implements OnInit {
     // personalinformation.AccountNum = this.BIform.get('bankacno').value;
     // this._dashboardService.AddBankDetInfo(personalinformation).subscribe(
     //   (data) => {
-    //     console.log(data);
+    //     // console.log(data);
     //     this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
     //     // this._router.navigate(['pages/nextlogin']);
     //   },
@@ -495,7 +497,7 @@ export class BankinformationComponent implements OnInit {
 
   //   });
   //   dialogRef.afterClosed().subscribe((result) => {
-  //     console.log(`Dialog result: ${result}`);
+  //     // console.log(`Dialog result: ${result}`);
   //   });
   //   const personalinformation: BankInformation = new BankInformation();
   //   personalinformation.Leaf = this.BIform.get('leaf').value;
@@ -506,7 +508,7 @@ export class BankinformationComponent implements OnInit {
 
   //   this._dashboardService.AddBankInfo(personalinformation).subscribe(
   //     (data) => {
-  //       console.log(data);
+  //       // console.log(data);
   //       // this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
   //       this._router.navigate(['pages/businessinformation']);
   //     },
@@ -526,7 +528,7 @@ export class BankinformationComponent implements OnInit {
 
   //   this._dashboardService.AddconnectionInfo(personalinformation1).subscribe(
   //     (data) => {
-  //       console.log(data);
+  //       // console.log(data);
   //       // this.notificationSnackBarComponent.openSnackBar('Saved successfully', SnackBarStatus.success);
   //       this._router.navigate(['pages/businessinformation']);
   //     },
@@ -552,7 +554,7 @@ export class BankinformationComponent implements OnInit {
       // const reader = new FileReader();
       // reader.readAsDataURL(event.target.files[0]);
       // reader.onload = () => {
-      //    console.log(reader.result);
+      //    // console.log(reader.result);
 
          this._dashboardService.UploadImage(event.target.files[0]).subscribe(
           data => {
@@ -585,7 +587,7 @@ export class BankinformationComponent implements OnInit {
       // this.FileName = event.target.files[0].name;
       // this.FileError = false;
     }
-    // console.log(fileInputEvent.target.files[0]);
+    // // console.log(fileInputEvent.target.files[0]);
     // this.GetAttachment(fileInputEvent.target.files[0],"PAN");
   }
   onSelect(event) {
@@ -605,7 +607,7 @@ export class BankinformationComponent implements OnInit {
                 let res1 = data1 as GSTOCRResult;
                 if (res1.valid) {
                   this.FileName1 = event.target.files[0].name;
-                  // console.log(fileInputEvent.target.files[0]);
+                  // // console.log(fileInputEvent.target.files[0]);
                   this.handleFileInput(event, "GSTCertificate");
                 } else {
                   this.notificationSnackBarComponent.openSnackBar(`${res1.message}`, SnackBarStatus.danger);
@@ -622,7 +624,7 @@ export class BankinformationComponent implements OnInit {
         }
       )
       // this.FileName1 = event.target.files[0].name;
-      // // console.log(fileInputEvent.target.files[0]);
+      // // // console.log(fileInputEvent.target.files[0]);
       // this.handleFileInput(event, "GSTCertificate");
     }
 
@@ -631,38 +633,38 @@ export class BankinformationComponent implements OnInit {
   }
   csv2InputChange(event) {
     this.FileName2 = event.target.files[0].name;
-    // console.log(fileInputEvent.target.files[0]);
+    // // console.log(fileInputEvent.target.files[0]);
     // this.GetAttachment(fileInputEvent.target.files[0],"AADHAR CARD");
     this.handleFileInput(event, "AadharCard");
   }
   csv3InputChange(event) {
     this.FileName3 = event.target.files[0].name;
-    // console.log(fileInputEvent.target.files[0]);
+    // // console.log(fileInputEvent.target.files[0]);
     // this.GetAttachment(fileInputEvent.target.files[0],"Cancelled Cheque");
     this.handleFileInput(event, "CancelledCheque");
   }
   csv4InputChange(event) {
     this.handleFileInput(event, "PartnerPhoto");
     this.FileName4 = event.target.files[0].name;
-    // console.log(fileInputEvent.target.files[0]);
+    // // console.log(fileInputEvent.target.files[0]);
     // this.GetAttachment(fileInputEvent.target.files[0],"Photograph");
   }
   csv5InputChange(event) {
     this.handleFileInput(event, "TDSDeclaration");
     this.FileName5 = event.target.files[0].name;
-    // console.log(fileInputEvent.target.files[0]);
+    // // console.log(fileInputEvent.target.files[0]);
     // this.GetAttachment(fileInputEvent.target.files[0],"TDS");
   }
   csv6InputChange(event) {
     this.handleFileInput(event, "AddressProof");
     this.FileName6 = event.target.files[0].name;
-    // console.log(fileInputEvent.target.files[0]);
+    // // console.log(fileInputEvent.target.files[0]);
     // this.GetAttachment(fileInputEvent.target.files[0],"Address Proof");
   }
   csv7InputChange(event) {
     this.handleFileInput(event, "SignedDocument");
     this.FileName7 = event.target.files[0].name;
-    // console.log(fileInputEvent.target.files[0]);
+    // // console.log(fileInputEvent.target.files[0]);
     // this.GetAttachment(fileInputEvent.target.files[0],"Signed Digital Document");
   }
   nextbtn(): void {
@@ -719,8 +721,8 @@ export class BankinformationComponent implements OnInit {
     }
     // this.Documentname += [this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument].join(', ');
     // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument);
-    console.log("Doc Name", this.Documentname);
-    console.log(File);
+    // console.log("Doc Name", this.Documentname);
+    // console.log(File);
     this.files.push(selectedFiles);
     return File;
   }

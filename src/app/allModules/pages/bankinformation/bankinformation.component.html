@@ -449,7 +449,7 @@
 
                 <div fxLayout="column" fxFlex="50" class="">
                   
-                  <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg" (change)="csvInputChange($event)"/>
+                  <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg , image/jpeg" (change)="csvInputChange($event)"/>
                   <button mat-raised-button class="uploadbtn" (click)="csvInput.click()" style="color: green;">Upload</button>
                   <!-- <p style="color: #f44336;font-size: 12px;" *ngIf="FileError">Attachement is required</p> -->
                 </div>
@@ -464,7 +464,7 @@
 
                 <div fxLayout="column" fxFlex="50" class="">
                 
-                  <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg" (change)="csv1InputChange($event)"/>
+                  <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg , image/jpeg" (change)="csv1InputChange($event)"/>
                   <button mat-raised-button class="uploadbtn" (click)="csvInput1.click()" style="color: green;">Upload</button>
                  
                 </div>
@@ -479,7 +479,7 @@
 
                 <div fxLayout="column" fxFlex="50" class="">
                  
-                  <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv2InputChange($event)"/>
+                  <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg , image/jpeg"  (change)="csv2InputChange($event)"/>
                   <button mat-raised-button class="uploadbtn" (click)="csvInput2.click()" style="color: green;">Upload</button>
                   
                 </div>
@@ -495,7 +495,7 @@
 
                 <div fxLayout="column" fxFlex="50" class="">
                 
-                  <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv3InputChange($event)"/>
+                  <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg , image/jpeg"  (change)="csv3InputChange($event)"/>
                   <button mat-raised-button class="uploadbtn" (click)="csvInput3.click()" style="color: green;">Upload</button>
               
                 </div>
@@ -511,7 +511,7 @@
 
                 <div fxLayout="column" fxFlex="50" class="">
                 
-                  <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv4InputChange($event)"/>
+                  <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg , image/jpeg"  (change)="csv4InputChange($event)"/>
                   <button mat-raised-button class="uploadbtn" (click)="csvInput4.click()" style="color: green;">Upload</button>
                  
                 </div>
@@ -527,7 +527,7 @@
 
                 <div fxLayout="column" fxFlex="50" class="">
                  
-                  <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv5InputChange($event)"/>
+                  <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg , image/jpeg"  (change)="csv5InputChange($event)"/>
                   <button mat-raised-button class="uploadbtn" (click)="csvInput5.click()" style="color: green;">Upload</button>
                 
                 </div>
@@ -543,7 +543,7 @@
 
                 <div fxLayout="column" fxFlex="50" class="">
                  
-                  <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv6InputChange($event)"/>
+                  <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg , image/jpeg"  (change)="csv6InputChange($event)"/>
                   <button mat-raised-button class="uploadbtn" (click)="csvInput6.click()" style="color: green;">Upload</button>
                   
                 </div>
@@ -558,7 +558,7 @@
 
                 <div fxLayout="column" fxFlex="50" class="">
                  
-                  <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg"  (change)="csv7InputChange($event)"/>
+                  <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" accept="application/pdf,image/png, image/jpg , image/jpeg"  (change)="csv7InputChange($event)"/>
                   <button mat-raised-button class="uploadbtn" (click)="csvInput7.click()" style="color: green;">Upload</button>
                 </div>
                 <div fxLayout="column" fxFlex="50" class="">
@@ -643,7 +643,6 @@
               <div fxLayout="column" fxFlex="50" class="">
                 <button mat-raised-button download="file.txt" (click)="GetAttachment(Attach1?.AttachmentName)" class="uploadbtn">Download</button>
               </div>
-  
   
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100">
