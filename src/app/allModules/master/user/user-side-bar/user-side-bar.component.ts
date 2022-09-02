@@ -27,7 +27,7 @@ export class UserSideBarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log(this.currentSelectedMenuApp);
+    // // console.log(this.currentSelectedMenuApp);
     if (this.AllUsers.length > 0) {
       this.selectID = this.AllUsers[0].UserID;
       this.loadSelectedUser(this.AllUsers[0]);
@@ -37,7 +37,7 @@ export class UserSideBarComponent implements OnInit, OnChanges {
   loadSelectedUser(SelectedUser: UserWithRole): void {
     this.selectID = SelectedUser.UserID;
     this.UserSelectionChanged.emit(SelectedUser);
-    // console.log(SelectedMenuApp);
+    // // console.log(SelectedMenuApp);
   }
 
   clearUser(): void {

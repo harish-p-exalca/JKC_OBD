@@ -61,7 +61,7 @@ export class ForgetPasswordLinkDialogComponent implements OnInit {
   }
 
   CloseClicked(): void {
-    // console.log('Called');
+    // // console.log('Called');
     this.matDialogRef.close(null);
   }
 

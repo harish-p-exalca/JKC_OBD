@@ -282,50 +282,50 @@ export class ReportsviewComponent implements OnInit {
                 .GetCustomerOnboardingView(this.transID)
                 .subscribe(
                     (res) => {
-                        console.log("view", res);
+                        // console.log("view", res);
                         this.CustomerObdView = res;
                         this.SetPersonalInfoValues();
                         this.isProgressBarVisibile = false;
                     },
                     (err) => {
-                        console.log(err);
+                        // console.log(err);
                     }
                 );
             this._dashboardService
                 .GetMarketInformationView(this.transID)
                 .subscribe(
                     (res) => {
-                        console.log("view", res);
+                        // console.log("view", res);
                         this.MarketInfoView = res;
                         this.SetMarketInfoDetails(this.MarketInfoView);
                         this.isProgressBarVisibile = false;
                     },
                     (err) => {
-                        console.log(err);
+                        // console.log(err);
                     }
                 );
             this._dashboardService
                 .GetBusinessInformationView(this.transID)
                 .subscribe(
                     (res) => {
-                        console.log("view", res);
+                        // console.log("view", res);
                         this.businessInfoView = res;
                         this.SetBusinessInfoDetails(this.businessInfoView);
                         this.isProgressBarVisibile = false;
                     },
                     (err) => {
-                        console.log(err);
+                        // console.log(err);
                     }
                 );
             this._dashboardService.GetSecurityDetails(this.transID).subscribe(
                 (res) => {
-                    console.log("view", res);
+                    // console.log("view", res);
                     this.bankInfoView = res;
                     this.SetSecurityDepositDetailInfoView(this.bankInfoView);
                     this.isProgressBarVisibile = false;
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                 }
             );
 
@@ -620,13 +620,13 @@ export class ReportsviewComponent implements OnInit {
             .GetSecurityDetails(this.currentTransaction)
             .subscribe(
                 (res) => {
-                    console.log("view", res);
+                    // console.log("view", res);
                     this.bankInfoView = res;
                     this.SetSecurityDepositDetailInfoView(this.bankInfoView);
                     this.isProgressBarVisibile = false;
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                 }
             );
     }
@@ -688,13 +688,13 @@ export class ReportsviewComponent implements OnInit {
             .GetCustomerOnboardingView(this.currentTransaction)
             .subscribe(
                 (res) => {
-                    console.log("view", res);
+                    // console.log("view", res);
                     this.CustomerObdView = res;
                     this.SetPersonalInfoValues();
                     this.isProgressBarVisibile = false;
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                 }
             );
     }
@@ -1277,8 +1277,8 @@ export class ReportsviewComponent implements OnInit {
         }
         // this.Documentname += [this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument].join(', ');
         // this.Documentname = this.Documentname.concat(this.PanCard,this.GSTCertificate,this.AadharCard,this.CancelledCheque,this.PartnerPhoto,this.TDSDeclaration,this.AddressProof,this.SignedDocument);
-        console.log("Doc Name", this.Documentname);
-        console.log(File);
+        // console.log("Doc Name", this.Documentname);
+        // console.log(File);
         this.files.push(selectedFiles);
         return File;
     }
@@ -1296,7 +1296,7 @@ export class ReportsviewComponent implements OnInit {
         if (this.Attach1.AttachmentName != null) {
             this.Attach1 = null;
         }
-        // console.log(fileInputEvent.target.files[0]);
+        // // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"PAN");
     }
     onSelect(event) {
@@ -1307,7 +1307,7 @@ export class ReportsviewComponent implements OnInit {
     csv1InputChange(event) {
 
         this.FileName1 = event.target.files[0].name;
-        // console.log(fileInputEvent.target.files[0]);
+        // // console.log(fileInputEvent.target.files[0]);
         this.handleFileInput(event, "GSTCertificate");
         if (this.Attach2.AttachmentName != null) {
             this.Attach2 = null;
@@ -1316,7 +1316,7 @@ export class ReportsviewComponent implements OnInit {
     }
     csv2InputChange(event) {
         this.FileName2 = event.target.files[0].name;
-        // console.log(fileInputEvent.target.files[0]);
+        // // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"AADHAR CARD");
         this.handleFileInput(event, "AadharCard");
         if (this.Attach3.AttachmentName != null) {
@@ -1325,7 +1325,7 @@ export class ReportsviewComponent implements OnInit {
     }
     csv3InputChange(event) {
         this.FileName3 = event.target.files[0].name;
-        // console.log(fileInputEvent.target.files[0]);
+        // // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Cancelled Cheque");
         this.handleFileInput(event, "CancelledCheque");
         if (this.Attach4.AttachmentName != null) {
@@ -1338,7 +1338,7 @@ export class ReportsviewComponent implements OnInit {
         if (this.Attach5.AttachmentName != null) {
             this.Attach5 = null;
         }
-        // console.log(fileInputEvent.target.files[0]);
+        // // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Photograph");
     }
     csv5InputChange(event) {
@@ -1347,7 +1347,7 @@ export class ReportsviewComponent implements OnInit {
         if (this.Attach6.AttachmentName != null) {
             this.Attach6 = null;
         }
-        // console.log(fileInputEvent.target.files[0]);
+        // // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"TDS");
     }
     csv6InputChange(event) {
@@ -1356,7 +1356,7 @@ export class ReportsviewComponent implements OnInit {
         if (this.Attach7.AttachmentName != null) {
             this.Attach7 = null;
         }
-        // console.log(fileInputEvent.target.files[0]);
+        // // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Address Proof");
     }
     csv7InputChange(event) {
@@ -1365,7 +1365,7 @@ export class ReportsviewComponent implements OnInit {
         if (this.Attach8.AttachmentName != null) {
             this.Attach8 = null;
         }
-        // console.log(fileInputEvent.target.files[0]);
+        // // console.log(fileInputEvent.target.files[0]);
         // this.GetAttachment(fileInputEvent.target.files[0],"Signed Digital Document");
     }
     Approve(): void {
@@ -1387,7 +1387,7 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo = new BankDetailsView();
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
-            console.log("Approve", Customer);
+            // console.log("Approve", Customer);
             var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "ASMApproved";
             Cusotmer.TranID = this.transID;
@@ -1401,10 +1401,10 @@ export class ReportsviewComponent implements OnInit {
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
                     (data) => {
-                        console.log(data);
+                        // console.log(data);
                         this._dashboardService.AddDocumentRequiredAttachment(this.transID, this.files, this.Documentname).subscribe(
                             (res) => {
-                                console.log("Attachment added", res);
+                                // console.log("Attachment added", res);
                             }
                         );
                         this.isProgressBarVisibile = false;
@@ -1443,7 +1443,7 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo = new BankDetailsView();
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
-            console.log("Approve", Customer);
+            // console.log("Approve", Customer);
 
             this.isProgressBarVisibile = true;
 
@@ -1452,10 +1452,10 @@ export class ReportsviewComponent implements OnInit {
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
                     (data) => {
-                        console.log(data);
+                        // console.log(data);
                         this._dashboardService.AddDocumentRequiredAttachment(this.transID, this.files, this.Documentname).subscribe(
                             (res) => {
-                                console.log("Attachment added", res);
+                                // console.log("Attachment added", res);
                             }
                         );
                         this.isProgressBarVisibile = false;
@@ -1505,7 +1505,55 @@ export class ReportsviewComponent implements OnInit {
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
                     (data) => {
-                        console.log(data);
+                        // console.log(data);
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            "Approved successfully",
+                            SnackBarStatus.success
+                        );
+                        this._router.navigate(["/pages/approvalinformation"]);
+                    },
+                    (err) => {
+                        this.isProgressBarVisibile = false;
+                        this.notificationSnackBarComponent.openSnackBar(
+                            err instanceof Object
+                                ? "Something went wrong"
+                                : err,
+                            SnackBarStatus.danger
+                        );
+                    }
+                );
+        }
+        if (this.Role == "Accounts") {
+            var Customer = new CustomerOnboardingView();
+            Customer.Status = "AccountsApproved";
+            Customer.TranID = this.transID;
+            Customer.UserID = this.authenticationDetails.UserID.toString();
+            Customer.PositionCode = this.authenticationDetails.PositionCode;
+            Customer.RoleName = this.authenticationDetails.UserRole;
+            Customer.PersonalInfo = new PersonalInformationView();
+            Customer.PersonalInfo.PersonalInformation = this.GetPersonalInfoFromForm();
+            Customer.PersonalInfo.Identities = this.IdentityData;
+            Customer.MarketInfo = new MarketInformationView();
+            Customer.MarketInfo.MarketInformation = this.GetMarketInfoFromForm();
+            Customer.MarketInfo.AverageSale = this.AvgData;
+            Customer.BusinessInfo = new BusinessInformationView();
+            Customer.BusinessInfo.Businessinfo = this.GetBusinessInfoFromForm();
+            Customer.BankInfo = new BankDetailsView();
+            Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
+            Customer.BankInfo.BankDetailInfo = this.BankData;
+            var Cusotmer = new CustomerOnboardingView1();
+            Cusotmer.Status = "AccountsApproved";
+            Cusotmer.TranID = this.transID;
+            Cusotmer.UserID = this.authenticationDetails.UserID.toString();
+            Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
+            Cusotmer.RoleName = this.authenticationDetails.UserRole;
+            this.isProgressBarVisibile = true;
+            this._dashboardService
+                .updateCustomerOnboardingStatus(Customer)
+                .subscribe(
+                    (data) => {
+                        // console.log(data);
                         this.isProgressBarVisibile = false;
                         this.notificationSnackBarComponent.openSnackBar(
                             "Approved successfully",
@@ -1542,7 +1590,7 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo = new BankDetailsView();
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
-            console.log("Approve", Customer);
+            // console.log("Approve", Customer);
             var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "ZHApproved";
             Cusotmer.TranID = this.transID;
@@ -1556,7 +1604,7 @@ export class ReportsviewComponent implements OnInit {
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
                     (data) => {
-                        console.log(data);
+                        // console.log(data);
                         this.isProgressBarVisibile = false;
                         this.notificationSnackBarComponent.openSnackBar(
                             "Approved successfully",
@@ -1593,7 +1641,7 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo = new BankDetailsView();
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
-            console.log("Approve", Customer);
+            // console.log("Approve", Customer);
             var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "SHApproved";
             Cusotmer.TranID = this.transID;
@@ -1607,7 +1655,7 @@ export class ReportsviewComponent implements OnInit {
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
                     (data) => {
-                        console.log(data);
+                        // console.log(data);
                         this.isProgressBarVisibile = false;
                         this.notificationSnackBarComponent.openSnackBar(
                             "Approved successfully",
@@ -1644,7 +1692,7 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo = new BankDetailsView();
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
-            console.log("Approve", Customer);
+            // console.log("Approve", Customer);
             var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "RACApproved";
             Cusotmer.TranID = this.transID;
@@ -1658,7 +1706,7 @@ export class ReportsviewComponent implements OnInit {
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
                     (data) => {
-                        console.log(data);
+                        // console.log(data);
                         this.isProgressBarVisibile = false;
                         this.notificationSnackBarComponent.openSnackBar(
                             "Approved successfully",
@@ -1691,7 +1739,7 @@ export class ReportsviewComponent implements OnInit {
             .updateCustomerOnboardingRejectedStatus(Cusotmer)
             .subscribe(
                 (data) => {
-                    console.log(data);
+                    // console.log(data);
                     this.isProgressBarVisibile = false;
                     this.notificationSnackBarComponent.openSnackBar(
                         "Rejected successfully",
@@ -1719,7 +1767,7 @@ export class ReportsviewComponent implements OnInit {
         //     .updateCustomerOnboardingRejectedStatus(Cusotmer)
         //     .subscribe(
         //         (data) => {
-        //             console.log(data);
+        //             // console.log(data);
         //             this.isProgressBarVisibile = false;
         //             this.notificationSnackBarComponent.openSnackBar(
         //                 "Rejected successfully",
@@ -1748,7 +1796,7 @@ export class ReportsviewComponent implements OnInit {
         //         .updateCustomerOnboardingRejectedStatus(Cusotmer)
         //         .subscribe(
         //             (data) => {
-        //                 console.log(data);
+        //                 // console.log(data);
         //                 this.isProgressBarVisibile = false;
         //                 this.notificationSnackBarComponent.openSnackBar(
         //                     "Rejected successfully",
@@ -1777,7 +1825,7 @@ export class ReportsviewComponent implements OnInit {
         //             .updateCustomerOnboardingRejectedStatus(Cusotmer)
         //             .subscribe(
         //                 (data) => {
-        //                     console.log(data);
+        //                     // console.log(data);
         //                     this.isProgressBarVisibile = false;
         //                     this.notificationSnackBarComponent.openSnackBar(
         //                         "Rejected successfully",
@@ -1806,7 +1854,7 @@ export class ReportsviewComponent implements OnInit {
         //                 .updateCustomerOnboardingRejectedStatus(Cusotmer)
         //                 .subscribe(
         //                     (data) => {
-        //                         console.log(data);
+        //                         // console.log(data);
         //                         this.isProgressBarVisibile = false;
         //                         this.notificationSnackBarComponent.openSnackBar(
         //                             "Rejected successfully",
@@ -1835,7 +1883,7 @@ export class ReportsviewComponent implements OnInit {
         //                     .updateCustomerOnboardingRejectedStatus(Cusotmer)
         //                     .subscribe(
         //                         (data) => {
-        //                             console.log(data);
+        //                             // console.log(data);
         //                             this.isProgressBarVisibile = false;
         //                             this.notificationSnackBarComponent.openSnackBar(
         //                                 "Rejected successfully",
@@ -1864,7 +1912,7 @@ export class ReportsviewComponent implements OnInit {
         //                         .updateCustomerOnboardingRejectedStatus(Cusotmer)
         //                         .subscribe(
         //                             (data) => {
-        //                                 console.log(data);
+        //                                 // console.log(data);
         //                                 this.isProgressBarVisibile = false;
         //                                 this.notificationSnackBarComponent.openSnackBar(
         //                                     "Rejected successfully",

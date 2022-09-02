@@ -200,14 +200,14 @@ export class ToolbarComponent implements OnInit, OnDestroy, OnChanges {
      */
     search(value): void {
         // Do your search here...
-        console.log(value);
+        // console.log(value);
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         const retrievedObject = localStorage.getItem('authorizationData');
         this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
         this.CurrentLoggedInUser = this.authenticationDetails.DisplayName;
-        console.log(this.authenticationDetails);
+        // console.log(this.authenticationDetails);
     }
 
     /**
@@ -228,7 +228,7 @@ export class ToolbarComponent implements OnInit, OnDestroy, OnChanges {
             SelectedNotification.HasSeen = true;
             this._masterService.UpdateNotification(SelectedNotification).subscribe(
                 (data) => {
-                    // console.log('success');
+                    // // console.log('success');
                     this.GetAllNotificationByUserID();
                 },
                 (err) => {
@@ -271,7 +271,7 @@ export class ToolbarComponent implements OnInit, OnDestroy, OnChanges {
                     changePassword.UserName = this.authenticationDetails.UserName;
                     this._authService.ChangePassword(changePassword).subscribe(
                         (res) => {
-                            console.log(res);
+                            // console.log(res);
                             this.notificationSnackBarComponent.openSnackBar('Password updated successfully, please log with new password', SnackBarStatus.success);
                             localStorage.removeItem('authorizationData');
                             localStorage.removeItem('menuItemsData');

@@ -156,14 +156,14 @@ export class DashboardComponent implements OnInit {
             // if (this.transID != null) {
             this.isProgressBarVisibile = true;
             this._dashboardService.GetCustomerOnboardingView(this.transID).subscribe(res => {
-                //console.log("view", res);
+                //// console.log("view", res);
                 this.CustomerObdView = res;
                 this.SetPersonalInfoValues();
                 localStorage.setItem('TransID', null);
                 this.isProgressBarVisibile = false;
             },
                 err => {
-                    console.log(err);
+                    // console.log(err);
                     this.isProgressBarVisibile = false;
                 });
         }
@@ -177,7 +177,8 @@ export class DashboardComponent implements OnInit {
                     this.isProgressBarVisibile = false;
                 }
             },
-            (err) => console.log(err)
+            (err) => {// console.log(err)
+            }
         );
     }
     InitializeFormGroup() {
@@ -233,7 +234,7 @@ export class DashboardComponent implements OnInit {
             this.AllAccountGroupMasters = res as AccountGroupMaster[];
         },
             err => {
-                console.log(err);
+                // console.log(err);
             });
     }
 
@@ -242,7 +243,7 @@ export class DashboardComponent implements OnInit {
             this.AllDistributionChannelMasters = res as DistributionChannelMaster[];
         },
             err => {
-                console.log(err);
+                // console.log(err);
             });
     }
 
@@ -251,7 +252,7 @@ export class DashboardComponent implements OnInit {
             this.AllDivisionMasters = res as DivisionMaster[];
         },
             err => {
-                console.log(err);
+                // console.log(err);
             });
     }
 
@@ -260,7 +261,7 @@ export class DashboardComponent implements OnInit {
             this.AllSalesOrgMasters = res as SalesOrgMaster[];
         },
             err => {
-                console.log(err);
+                // console.log(err);
             });
     }
 
@@ -269,21 +270,21 @@ export class DashboardComponent implements OnInit {
             this.AllRegionMasters = res as RegionMaster[];
         },
             err => {
-                console.log(err);
+                // console.log(err);
             });
     }
 
     GetTransactionDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService.GetCustomerOnboardingView(this.currentTransaction).subscribe(res => {
-            //console.log("view", res);
+            //// console.log("view", res);
             this.transID=this.currentTransaction;
             this.CustomerObdView = res;
             this.SetPersonalInfoValues();
             this.isProgressBarVisibile = false;
         },
             err => {
-                console.log(err);
+                // console.log(err);
             });
     }
     SetPersonalInfoValues() {
@@ -375,10 +376,10 @@ export class DashboardComponent implements OnInit {
                 }
                 cobView.PositionCode = this.authenticationDetails.PositionCode;
                 cobView.UserID = this.authenticationDetails.UserID.toString();
-                //console.log("cobView", cobView);
+                //// console.log("cobView", cobView);
                 this.isProgressBarVisibile = true;
                 this._dashboardService.SaveCustomerPersonalDetails(cobView).subscribe(res => {
-                    //console.log("From save api", res);
+                    //// console.log("From save api", res);
                     this.isProgressBarVisibile = false;
                     if (res.Status == 1) {
                         this.notificationSnackBarComponent.openSnackBar(isDraft ? "Draft saved successfully" : "Details submitted successfully", SnackBarStatus.success);
@@ -420,12 +421,12 @@ export class DashboardComponent implements OnInit {
                 }
                 cobView.PositionCode = this.authenticationDetails.PositionCode;
                 cobView.UserID = this.authenticationDetails.UserID;
-                //console.log("cobView", cobView);
+                //// console.log("cobView", cobView);
                 localStorage.setItem("category", this.PIform.get('category').value);
                 localStorage.setItem('TransID', this.transID);
                 this.isProgressBarVisibile = true;
                 this._dashboardService.SaveCustomerPersonalDetails(cobView).subscribe(res => {
-                    //console.log("From save api", res);
+                    //// console.log("From save api", res);
                     this.isProgressBarVisibile = false;
                     if (res.Status == 1) {
                         this.notificationSnackBarComponent.openSnackBar(isDraft ? "Draft saved successfully" : "Details saved successfully", SnackBarStatus.success);
@@ -524,9 +525,9 @@ export class DashboardComponent implements OnInit {
     //         data: { Firmname: this.PIform.get("Name").value }
     //     });
     //     dialogRef.afterClosed().subscribe((result) => {
-    //         console.log(`Dialog result: ${result}`);
+    //         // console.log(`Dialog result: ${result}`);
     //         const retrievedObject = localStorage.getItem('authorizationData');
-    //         console.log(retrievedObject);
+    //         // console.log(retrievedObject);
     //         if (retrievedObject == "ok") {
     //             this.PIform.reset();
     //             this.listData = [];
@@ -570,7 +571,7 @@ export class DashboardComponent implements OnInit {
     //                 "Saved Successfully",
     //                 SnackBarStatus.success
     //             );
-    //             console.log(data);
+    //             // console.log(data);
     //         },
     //         (err) => {
     //             console.error(err);
@@ -587,7 +588,7 @@ export class DashboardComponent implements OnInit {
     //             "Saved Successfully",
     //             SnackBarStatus.success
     //         );
-    //         console.log(data);
+    //         // console.log(data);
     //     },
     //         (err) => {
     //             console.error(err);
@@ -599,7 +600,7 @@ export class DashboardComponent implements OnInit {
         this._dashboardService.GetCityByState(event.ID).subscribe(
             (data) => {
                 this.City = data;
-                console.log(this.City);
+                // console.log(this.City);
                 this.isProgressBarVisibile = false;
             }
         );
@@ -637,7 +638,7 @@ export class DashboardComponent implements OnInit {
     //         height: "40%",
     //     });
     //     dialogRef.afterClosed().subscribe((result) => {
-    //         console.log(`Dialog result: ${result}`);
+    //         // console.log(`Dialog result: ${result}`);
     //     });
 
     //     // if (this.PIform.valid) {
@@ -659,7 +660,7 @@ export class DashboardComponent implements OnInit {
     //     personalinformation.EmailId2 = this.PIform.get("email2").value;
     //     // this._dashboardService.AddEmployee(personalinformation).subscribe(
     //     //     (data) => {
-    //     //         console.log(data);
+    //     //         // console.log(data);
     //     //     },
     //     //     (err) => {
     //     //         console.error(err);

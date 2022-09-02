@@ -48,16 +48,16 @@ export class MenuAppComponent implements OnInit {
       (data) => {
         this.AllMenuApps = <MenuApp[]>data;
         this.IsProgressBarVisibile = false;
-        // console.log(this.AllMenuApps);
+        // // console.log(this.AllMenuApps);
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
         this.IsProgressBarVisibile = false;
         this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);      }
     );
   }
   OnMenuAppSelectionChanged(selectedMenuApp: MenuApp): void {
-    // console.log(selectedMenuApp);
+    // // console.log(selectedMenuApp);
     this.SelectedMenuApp = selectedMenuApp;
   }
   OnShowProgressBarEvent(status: string): void {
@@ -70,7 +70,7 @@ export class MenuAppComponent implements OnInit {
   }
 
   RefreshAllMenuApps(msg: string): void {
-    // console.log(msg);
+    // // console.log(msg);
     this.GetAllMenuApps();
   }
 

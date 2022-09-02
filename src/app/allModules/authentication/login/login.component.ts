@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit {
         (err) => {
           this.IsProgressBarVisibile = false;
           console.error(err);
-          // console.log(err instanceof Object);
+          // // console.log(err instanceof Object);
           this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);
         }
       );
@@ -138,7 +138,7 @@ export class LoginComponent implements OnInit {
           changePassword.UserName = data.UserName;
           this._authService.ChangePassword(changePassword).subscribe(
             (res) => {
-              // console.log(res);
+              // // console.log(res);
               // this.notificationSnackBarComponent.openSnackBar('Password updated successfully', SnackBarStatus.success);
               this.notificationSnackBarComponent.openSnackBar('Password updated successfully, please log with new password', SnackBarStatus.success);
               this._router.navigate(['/auth/login']);
@@ -187,7 +187,7 @@ export class LoginComponent implements OnInit {
     if (retrievedObject) {
       this.authenticationDetails = JSON.parse(retrievedObject) as AuthenticationDetails;
       this.MenuItems = this.authenticationDetails.MenuItemNames.split(',');
-      // console.log(this.MenuItems);
+      // // console.log(this.MenuItems);
     } else {
     }
     if (this.MenuItems.indexOf('Dashboard') >= 0) {

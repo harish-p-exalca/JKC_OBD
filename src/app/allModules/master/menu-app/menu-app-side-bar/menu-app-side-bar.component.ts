@@ -32,7 +32,7 @@ export class MenuAppSideBarComponent implements OnInit, OnChanges {
 
   }
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log(this.currentSelectedMenuApp);
+    // // console.log(this.currentSelectedMenuApp);
     if (this.AllMenuApps.length > 0) {
       this.selectID = this.AllMenuApps[0].AppID;
       this.loadSelectedMenuApp(this.AllMenuApps[0]);
@@ -42,7 +42,7 @@ export class MenuAppSideBarComponent implements OnInit, OnChanges {
   loadSelectedMenuApp(SelectedMenuApp: MenuApp): void {
     this.selectID = SelectedMenuApp.AppID;
     this.MenuAppSelectionChanged.emit(SelectedMenuApp);
-    // console.log(SelectedMenuApp);
+    // // console.log(SelectedMenuApp);
   }
 
   clearMenuApp(): void {

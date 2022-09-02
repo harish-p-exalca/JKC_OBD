@@ -36,11 +36,11 @@ export class MenuAppMainContentComponent implements OnInit, OnChanges {
     // this.currentSelectedMenuApp = new MenuApp();
     // this.currentSelectedMenuApp.AppID = 0;
     // if(this.currentSelectedMenuApp)
-    // console.log(this.currentSelectedMenuApp);
+    // // console.log(this.currentSelectedMenuApp);
   }
 
   ngOnInit(): void {
-    // console.log(this.currentSelectedMenuApp);
+    // // console.log(this.currentSelectedMenuApp);
     // Retrive authorizationData
     const retrievedObject = localStorage.getItem('authorizationData');
     if (retrievedObject) {
@@ -79,7 +79,7 @@ export class MenuAppMainContentComponent implements OnInit, OnChanges {
               this.menuApp.ModifiedBy = this.authenticationDetails.UserID.toString();
               this._masterService.UpdateMenuApp(this.menuApp).subscribe(
                 (data) => {
-                  // console.log(data);
+                  // // console.log(data);
                   this.ResetControl();
                   this.notificationSnackBarComponent.openSnackBar('App updated successfully', SnackBarStatus.success);
                   this.SaveSucceed.emit('success');
@@ -112,7 +112,7 @@ export class MenuAppMainContentComponent implements OnInit, OnChanges {
               this.menuApp.CreatedBy = this.authenticationDetails.UserID.toString();
               this._masterService.CreateMenuApp(this.menuApp).subscribe(
                 (data) => {
-                  // console.log(data);
+                  // // console.log(data);
                   this.ResetControl();
                   this.notificationSnackBarComponent.openSnackBar('App created successfully', SnackBarStatus.success);
                   this.SaveSucceed.emit('success');
@@ -154,7 +154,7 @@ export class MenuAppMainContentComponent implements OnInit, OnChanges {
               this.menuApp.ModifiedBy = this.authenticationDetails.UserID.toString();
               this._masterService.DeleteMenuApp(this.menuApp).subscribe(
                 (data) => {
-                  // console.log(data);
+                  // // console.log(data);
                   this.ResetControl();
                   this.notificationSnackBarComponent.openSnackBar('App deleted successfully', SnackBarStatus.success);
                   this.SaveSucceed.emit('success');

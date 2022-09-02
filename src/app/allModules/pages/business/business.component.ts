@@ -141,11 +141,11 @@ export class BusinessComponent implements OnInit {
             },
             (err) => {
                 this.isProgressBarVisibile = false;
-                console.log(err)
+                // console.log(err)
             }
         );
         this.salesTargetArr = this.Create2DModel(8, 12, '');
-        console.log("2dmatrix", this.salesTargetArr);
+        // console.log("2dmatrix", this.salesTargetArr);
     }
     GetBusinessDetails() {
         this.isProgressBarVisibile = true;
@@ -153,13 +153,13 @@ export class BusinessComponent implements OnInit {
             .GetBusinessInformationView(this.TransID)
             .subscribe(
                 (res) => {
-                    console.log("view", res);
+                    // console.log("view", res);
                     this.businessInfoView = res;
                     this.SetBusinessInfoDetails(this.businessInfoView);
                     this.isProgressBarVisibile = false;
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                 }
             );
     }
@@ -186,8 +186,8 @@ export class BusinessComponent implements OnInit {
     }
     SetSalesTargets(sales:SalesAndTarget[]){
         var months=sales.length/8;
-        console.log("sales",sales);
-        console.log("displayed columns",this.displayedColumns);
+        // console.log("sales",sales);
+        // console.log("displayed columns",this.displayedColumns);
         var records;
         if(sales.length>0){
             records=sales.filter(x=>x.Product==sales[0].Product);
@@ -216,16 +216,16 @@ export class BusinessComponent implements OnInit {
                 }
             }
         }
-        //console.log("saleTargets", sts);
+        //// console.log("saleTargets", sts);
         if (this.BIform.valid) {
             var cobView = new BusinessInformationView();
             cobView.Businessinfo = this.GetBusinessInfoFromForm();
             cobView.SalesandTargets = sts;
-            //console.log("cobView", cobView);
+            //// console.log("cobView", cobView);
             this.isProgressBarVisibile = true;
             this._dashboardService.SaveBusinessInfoView(cobView).subscribe(
                 (res) => {
-                    //console.log("From save api", res);
+                    //// console.log("From save api", res);
                     this.isProgressBarVisibile = false;
                     this._router.navigate(["pages/bankinformation"]);
                     this.ClearAll();
@@ -323,7 +323,7 @@ export class BusinessComponent implements OnInit {
         //         .AddBusinessInfo(businessformvalues)
         //         .subscribe(
         //             (data) => {
-        //                 console.log(data);
+        //                 // console.log(data);
         //                 this.notificationSnackBarComponent.openSnackBar(
         //                     "Saved successfully",
         //                     SnackBarStatus.success
@@ -357,12 +357,12 @@ export class BusinessComponent implements OnInit {
             }
             this.count++;
         }
-        console.log(this.salesTargetArr);
-        // console.log("2dmatrix",this.salesTargetArr);
+        // console.log(this.salesTargetArr);
+        // // console.log("2dmatrix",this.salesTargetArr);
         // for (var i = 0; i < 11; i++) {
         //     d.setMonth(d.getMonth() + 1);
         //     this.data.push(this.displayColumns[d.getMonth()]);
-        //     console.log(this.displayColumns[d.getMonth()], d.getFullYear());
+        //     // console.log(this.displayColumns[d.getMonth()], d.getFullYear());
         // }
         // if (this.count < 12) {
         //     this.count++;

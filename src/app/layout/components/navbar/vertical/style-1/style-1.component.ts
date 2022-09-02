@@ -173,7 +173,7 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
      * Toggle sidebar opened status
      */
     toggleSidebarOpened(): void {
-        // // console.log('Called')
+        // // // console.log('Called')
         this.isShowIcon = true;
         this._fuseSidebarService.getSidebar('navbar').unfold();
     }
@@ -185,7 +185,7 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
         this.isShowIcon = !this.isShowIcon;
         this._fuseSidebarService.getSidebar('navbar').fold();
         // this._fuseSidebarService.getSidebar('navbar').toggleFold();
-        // // console.log(test.folded());
+        // // // console.log(test.folded());
         // }
         // else{
         //     this.isShowIcon=false;
@@ -235,7 +235,7 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy {
                     changePassword.UserName = this.authenticationDetails.UserName;
                     this._authService.ChangePassword(changePassword).subscribe(
                         (res) => {
-                            // console.log(res);
+                            // // console.log(res);
                             this.notificationSnackBarComponent.openSnackBar('Password updated successfully, please log with new password', SnackBarStatus.success);
                             localStorage.removeAll();
                             this._compiler.clearCache();

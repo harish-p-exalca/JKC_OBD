@@ -69,7 +69,7 @@ export class LinkForForgetPasswordComponent implements OnInit {
       // control.setErrors(null);
       // this.menuAppMainFormGroup.get(key).markAsUntouched();
       // this.menuAppMainFormGroup.get(key).updateValueAndValidity();
-      // console.log(this.menuAppMainFormGroup.get(key).setErrors(Validators.required)
+      // // console.log(this.menuAppMainFormGroup.get(key).setErrors(Validators.required)
     });
 
   }
@@ -94,7 +94,7 @@ export class LinkForForgetPasswordComponent implements OnInit {
           this.notificationSnackBarComponent.openSnackBar(err instanceof Object ? 'Something went wrong' : err, SnackBarStatus.danger);          console.error(err);
         }
       );
-      // console.log(this.emailModel.siteURL);
+      // // console.log(this.emailModel.siteURL);
 
 
     }

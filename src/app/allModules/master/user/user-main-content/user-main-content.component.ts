@@ -60,10 +60,10 @@ export class UserMainContentComponent implements OnInit, OnChanges {
     this._masterService.GetAllRoles().subscribe(
       (data) => {
         this.AllRoles = <RoleWithApp[]>data;
-        // console.log(this.AllMenuApps);
+        // // console.log(this.AllMenuApps);
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }
@@ -121,7 +121,7 @@ export class UserMainContentComponent implements OnInit, OnChanges {
               this.user.ModifiedBy = this.authenticationDetails.UserID.toString();
               this._masterService.UpdateUser(this.user).subscribe(
                 (data) => {
-                  // console.log(data);
+                  // // console.log(data);
                   this.ResetControl();
                   this.notificationSnackBarComponent.openSnackBar('User updated successfully', SnackBarStatus.success);
                   this.SaveSucceed.emit('success');
@@ -164,7 +164,7 @@ export class UserMainContentComponent implements OnInit, OnChanges {
               // this.user.Profile = this.slectedProfile;
               this._masterService.CreateUser(this.user).subscribe(
                 (data) => {
-                  // console.log(data);
+                  // // console.log(data);
                   this.ResetControl();
                   this.notificationSnackBarComponent.openSnackBar('User created successfully', SnackBarStatus.success);
                   this.SaveSucceed.emit('success');
@@ -214,7 +214,7 @@ export class UserMainContentComponent implements OnInit, OnChanges {
               this.user.ModifiedBy = this.authenticationDetails.UserID.toString();
               this._masterService.DeleteUser(this.user).subscribe(
                 (data) => {
-                  // console.log(data);
+                  // // console.log(data);
                   this.ResetControl();
                   this.notificationSnackBarComponent.openSnackBar('User deleted successfully', SnackBarStatus.success);
                   this.SaveSucceed.emit('success');
