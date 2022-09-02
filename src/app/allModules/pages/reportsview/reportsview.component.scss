@@ -418,8 +418,7 @@
 
   .mat-button,
   .mat-flat-button,
-  .mat-icon-button,
-  .mat-stroked-button {
+  .mat-icon-button {
     box-sizing: border-box;
     position: relative;
     -webkit-user-select: none;
@@ -588,16 +587,51 @@
     // background-color: #00061C !important;
   }
 
-  .card_css {
-    margin-left: 30px;
-    margin-top: 18px;
-    height: 2px;
-    border: 1px solid #E4E0F3;
-    border-radius: 4px;
-    opacity: 1;
-    box-shadow: none !important;
-    width: 80% !important;
+  // .card_css {
+  //   margin-left: 30px;
+  //   margin-top: 18px;
+  //   height: 2px;
+  //   border: 1px solid #E4E0F3;
+  //   border-radius: 4px;
+  //   opacity: 1;
+  //   box-shadow: none !important;
+  //   width: 80% !important;
+  // }
+  .default-btn {
+    border: 1px solid #c5c6cb;
+    min-width: 49px !important;
+    line-height: 33px !important;
+    padding: 0 40px !important;
   }
+
+  .change-btn {
+    color: #1434AA !important;
+    border: 1px solid white !important;
+    min-width: 49px !important;
+    line-height: 33px !important;
+    padding: 0 40px !important;
+  }
+
+  // #1434AA
+  //   .mat-stroked-button {
+  //     box-sizing: border-box;
+  //     position: relative;
+
+  //     cursor: pointer;
+  //     outline: 0;
+  //     border: none;
+  //     display: inline-block;
+  //     white-space: nowrap;
+  //     text-decoration: none;
+  //     vertical-align: baseline;
+  //     text-align: center;
+  //     margin: 0;
+  //     min-width: 49px !important;
+  //     line-height: 33px !important;
+  //     padding: 0 40px !important;
+  //     border-radius: 2px;
+  //     overflow: visible;
+  // }
 
   .total_div {
     width: 100%;
@@ -648,7 +682,15 @@
                   font-size: 10px !important;
                   color: #acacac !important;
                 }
+
               }
+            }
+
+            .sublabel {
+              font-size: 12px;
+              position: relative;
+              top: 10px;
+              color: #a6a7ad;
             }
           }
 
@@ -662,11 +704,11 @@
               margin-top: 20px;
               width: 100%;
 
-              .marketsp {
-                font-size: 12px;
-                font-weight: 500 !important;
-                color: #00061C !important;
-              }
+              // .marketsp {
+              //   font-size: 12px;
+              //   font-weight: 500 !important;
+              //   color: #00061C !important;
+              // }
 
               .inp_div {
                 width: 100%;
@@ -674,6 +716,19 @@
 
                 .inner-inp_div {
                   width: 70%;
+                }
+
+                .marketsp {
+                  font-size: 12px;
+                  font-weight: 500 !important;
+                  color: #00061C !important;
+                }
+
+                .sublabel {
+                  font-size: 12px;
+                  position: relative;
+                  top: 10px;
+                  color: #a6a7ad;
                 }
 
                 .inputform2 {
@@ -695,6 +750,15 @@
                   font-size: 10px !important;
                   color: #acacac !important;
                 }
+
+                .mat-select-value {
+                  display: table-cell;
+                  max-width: 0;
+                  width: 93% !important;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                }
               }
             }
           }
@@ -715,7 +779,7 @@
               }
 
               .inputform1::placeholder {
-                font-size: 10px !important;
+                font-size: 11px !important;
                 color: #acacac !important;
               }
 
@@ -842,178 +906,272 @@
   }
 
   .contact-div {
-    margin-top: 20px;
-    padding: 20px 20px 20px 40px;
-    width: 100%;
+    width: 96%;
+    position: relative;
+    top: 32px;
+    left: 16px;
+    // .mat-card:not([class*=mat-elevation-z]) {
+    //   box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 20%), 0px 0px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    // }
 
-    .contact_heading {
-      font-size: 12px !important;
-      font-weight: 500;
-      color: #00061C !important;
+    // .mat-card {
+    //   transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+    //   display: block;
+    //   position: relative;
+    //   padding: 24px;
+    //   border-radius: 2px;
+    // }
+    .mat-card {
+      transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+      display: block;
+      position: relative;
+      padding: 5px;
+      border-radius: 2px;
     }
 
-    .table_div {
-      font-size: 12px;
-      font-weight: 500;
-      height: 100%;
-      overflow: auto;
+    .sub_div1 {
+      padding-left: 20px;
+      width: 100%;
+    }
 
-      .table-css {
+    .form_div {
+      width: 100%;
+      padding-left: 20px;
+    }
+
+    .populationclass {
+      padding: 0%;
+      font-size: 14px;
+      margin-top: 20px;
+      width: 100%;
+
+      .inp_div {
         width: 100%;
-        height: 100%;
-        border: #acacac 0.4px solid;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
+        background-color: transparent !important;
 
-        .header-row-css {
-          background-color: white !important;
+        // .inner-inp_div {
+        //   width: 70%;
+        // }
+        .inner-inp_div {
+          width: 70%;
         }
 
-        .row-table {
-          overflow: scroll;
-          font-size: 10px;
-          color: #C9C9C966;
+        .marketsp {
+          font-size: 12px;
+          font-weight: 500 !important;
+          color: #00061C !important;
+          position: relative;
+          bottom: 25px;
+          right: 18px;
         }
 
-        .header_table-class {
-          color: black;
+        .inputform2 {
+          color: #00061C !important;
           font-size: 12px !important;
-          font-weight: 500;
-          border: #acacac 0.4px solid;
+          position: relative;
+          bottom: 19px;
+          left: 11px;
+          // top: 5px;
         }
 
-        .table_data {
-          border: #acacac 0.4px solid;
-          font-size: 10px;
-          color: #ACACAC;
-          font-weight: 500;
-          background-color: white !important;
+        .inputform {
+          color: #00061C !important;
+          font-size: 12px !important;
+          position: relative;
+          bottom: 19px;
+          left: 19px;
         }
 
-        .tble_btn {
-          color: #1055A0;
-          background: transparent;
-          font-size: 10px;
-          font-weight: 500;
+        .inputform2::placeholder {
+          font-size: 10px !important;
+          color: #acacac !important;
         }
+
+        .inputform::placeholder {
+          font-size: 10px !important;
+          color: #acacac !important;
+        }
+
+        .mat-select-value {
+          display: table-cell;
+          max-width: 0;
+          width: 93% !important;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
       }
     }
   }
 
-  .Bank-div {
-    margin-top: 20px;
-    //padding: 20px 20px 20px 40px;
-    width: 100%;
+  // .contact_heading {
+  //   font-size: 12px !important;
+  //   font-weight: 500;
+  //   color: #00061C !important;
+  // }
 
-    .contact_heading {
-      font-size: 12px !important;
-      font-weight: 500;
-      color: #00061C !important;
-    }
+  // .table_div {
+  //   font-size: 12px;
+  //   font-weight: 500;
+  //   height: 100%;
+  //   overflow: auto;
 
-    .table_div {
-      font-size: 12px;
-      font-weight: 500;
+  //   .table-css {
+  //     width: 100%;
+  //     height: 100%;
+  //     border: #acacac 0.4px solid;
+  //     border-top-left-radius: 4px;
+  //     border-top-right-radius: 4px;
+
+  //     .header-row-css {
+  //       background-color: white !important;
+  //     }
+
+  //     .row-table {
+  //       overflow: scroll;
+  //       font-size: 10px;
+  //       color: #C9C9C966;
+  //     }
+
+  //     .header_table-class {
+  //       color: black;
+  //       font-size: 12px !important;
+  //       font-weight: 500;
+  //       border: #acacac 0.4px solid;
+  //     }
+
+  //     .table_data {
+  //       border: #acacac 0.4px solid;
+  //       font-size: 10px;
+  //       color: #ACACAC;
+  //       font-weight: 500;
+  //       background-color: white !important;
+  //     }
+
+  //     .tble_btn {
+  //       color: #1055A0;
+  //       background: transparent;
+  //       font-size: 10px;
+  //       font-weight: 500;
+  //     }
+  //   }
+  // }
+}
+
+.Bank-div {
+  margin-top: 20px;
+  //padding: 20px 20px 20px 40px;
+  width: 100%;
+
+  .contact_heading {
+    font-size: 12px !important;
+    font-weight: 500;
+    color: #00061C !important;
+  }
+
+  .table_div {
+    font-size: 12px;
+    font-weight: 500;
+    height: 100%;
+    overflow: auto;
+
+    .table-css {
+      width: 100%;
       height: 100%;
-      overflow: auto;
+      border: #acacac 0.4px solid;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
 
-      .table-css {
-        width: 100%;
-        height: 100%;
+      .header-row-css {
+        background-color: white !important;
+      }
+
+      .row-table {
+        overflow: scroll;
+        font-size: 10px;
+        color: #C9C9C966;
+      }
+
+      .header_table-class {
+        color: black;
+        font-size: 12px !important;
+        font-weight: 500;
         border: #acacac 0.4px solid;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
+      }
 
-        .header-row-css {
-          background-color: white !important;
-        }
+      .table_data {
+        border: #acacac 0.4px solid;
+        font-size: 10px;
+        color: #ACACAC;
+        font-weight: 500;
+        background-color: white !important;
+      }
 
-        .row-table {
-          overflow: scroll;
-          font-size: 10px;
-          color: #C9C9C966;
-        }
-
-        .header_table-class {
-          color: black;
-          font-size: 12px !important;
-          font-weight: 500;
-          border: #acacac 0.4px solid;
-        }
-
-        .table_data {
-          border: #acacac 0.4px solid;
-          font-size: 10px;
-          color: #ACACAC;
-          font-weight: 500;
-          background-color: white !important;
-        }
-
-        .tble_btn {
-          color: #1055A0;
-          background: transparent;
-          font-size: 10px;
-          font-weight: 500;
-        }
+      .tble_btn {
+        color: #1055A0;
+        background: transparent;
+        font-size: 10px;
+        font-weight: 500;
       }
     }
   }
+}
 
-  .average_sales {
-    margin-top: 20px;
-    padding: 20px 20px 20px 40px;
-    width: 100%;
+.average_sales {
+  margin-top: 20px;
+  padding: 20px 20px 20px 40px;
+  width: 100%;
 
-    .contact_heading {
-      font-size: 12px !important;
-      font-weight: 500;
-      color: #00061C !important;
-    }
+  .contact_heading {
+    font-size: 12px !important;
+    font-weight: 500;
+    color: #00061C !important;
+  }
 
-    .table_div {
-      font-size: 12px;
-      font-weight: 500;
+  .table_div {
+    font-size: 12px;
+    font-weight: 500;
+    height: 100%;
+    overflow: auto;
+
+    .table-css {
+      width: 100%;
       height: 100%;
-      overflow: auto;
+      border: #acacac 0.4px solid;
+      border-top-left-radius: 4px !important;
+      border-top-right-radius: 4px !important;
 
-      .table-css {
-        width: 100%;
-        height: 100%;
+      .header-row-css {
+        background-color: white !important;
+      }
+
+      .row-table {
+        overflow: scroll;
+        font-size: 10px;
+        color: #C9C9C966;
+      }
+
+      .header_table-class {
+        color: black;
+        font-size: 12px !important;
+        font-weight: 500;
         border: #acacac 0.4px solid;
-        border-top-left-radius: 4px !important;
-        border-top-right-radius: 4px !important;
+      }
 
-        .header-row-css {
-          background-color: white !important;
-        }
+      .table_data {
+        border: #acacac 0.4px solid;
+        font-size: 10px;
+        color: #ACACAC;
+        font-weight: 500;
+        background-color: white !important;
+      }
 
-        .row-table {
-          overflow: scroll;
-          font-size: 10px;
-          color: #C9C9C966;
-        }
-
-        .header_table-class {
-          color: black;
-          font-size: 12px !important;
-          font-weight: 500;
-          border: #acacac 0.4px solid;
-        }
-
-        .table_data {
-          border: #acacac 0.4px solid;
-          font-size: 10px;
-          color: #ACACAC;
-          font-weight: 500;
-          background-color: white !important;
-        }
-
-        .tble_btn {
-          color: #1055A0;
-          background: transparent;
-          font-size: 10px;
-          font-weight: 500;
-        }
+      .tble_btn {
+        color: #1055A0;
+        background: transparent;
+        font-size: 10px;
+        font-weight: 500;
       }
     }
   }
