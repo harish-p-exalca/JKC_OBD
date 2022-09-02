@@ -153,6 +153,7 @@ const sales: SaleSource[] = [
     encapsulation: ViewEncapsulation.None,
 })
 export class ReportsviewComponent implements OnInit {
+    btnStyle = 'default-btn';
     PIform: FormGroup;
     MIform!: FormGroup;
     BrandForm!: FormGroup;
@@ -542,6 +543,13 @@ export class ReportsviewComponent implements OnInit {
             ],
             bankacno: ["", Validators.required],
         });
+    }
+    btnclicked(){
+        if(this.btnStyle == 'change-btn') {
+            this.btnStyle = 'default-btn';
+          } else {
+            this.btnStyle = 'change-btn';
+          }
     }
     InitializeFormGroup() {
         this.PIform = this.fb.group({
