@@ -126,7 +126,7 @@ export class MarketinformationComponent implements OnInit {
             Stockist: [""],
             Distance: [""],
             NameOfNearest: [""],
-            YearOfEstablished: ["", Validators.required],
+            YearOfEstablished: ["", Validators.required,Validators.maxLength(4),Validators.minLength(4)],
             AreasStockist: [""],
             TotalPotential: ["", Validators.required],
             JKAvg: ["", Validators.required],

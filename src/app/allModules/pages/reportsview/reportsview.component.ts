@@ -154,6 +154,10 @@ const sales: SaleSource[] = [
 })
 export class ReportsviewComponent implements OnInit {
     btnStyle = 'default-btn';
+    personalbtn: boolean = true;
+    marketbtn: boolean = false;
+    bankbtn: boolean = false;
+    businessbtn: boolean = false;
     PIform: FormGroup;
     MIform!: FormGroup;
     BrandForm!: FormGroup;
@@ -544,13 +548,37 @@ export class ReportsviewComponent implements OnInit {
             bankacno: ["", Validators.required],
         });
     }
-    btnclicked(){
-        if(this.btnStyle == 'change-btn') {
-            this.btnStyle = 'default-btn';
-          } else {
-            this.btnStyle = 'change-btn';
-          }
+    btnclicked(value) {
+        this.personalbtn = false;
+        this.marketbtn = false;
+        this.bankbtn = false;
+        this.businessbtn = false;
+        switch (value) {
+
+            case 1: {
+                this.personalbtn = !this.personalbtn;
+                break;
+            }
+            case 2: {
+
+                this.marketbtn = !this.marketbtn;
+                break;
+            }
+            case 3: {
+
+                this.bankbtn = !this.bankbtn;
+                break;
+            }
+            case 4: {
+                this.businessbtn = !this.businessbtn;
+                break;
+            }
+
+        }
     }
+    scroll(el: HTMLElement) {
+        el.scrollIntoView();
+      }
     InitializeFormGroup() {
         this.PIform = this.fb.group({
             category: ["", Validators.required],
@@ -825,14 +853,14 @@ export class ReportsviewComponent implements OnInit {
                 Status: this.CustomerObdView.PersonalInfo.PersonalInformation
                     .Status,
             });
-            if(this.CustomerObdView.organisationInput){
+            if (this.CustomerObdView.organisationInput) {
                 this.PIform.patchValue({
-                    AccountGroup:this.CustomerObdView.organisationInput.AccountGroup,
-                    DistributionChannel:this.CustomerObdView.organisationInput.DistributionChannel,
-                    Division:this.CustomerObdView.organisationInput.Division,
-                    SalesOrg:this.CustomerObdView.organisationInput.SalesOrg,
-                    Region:this.CustomerObdView.organisationInput.Region
-                }); 
+                    AccountGroup: this.CustomerObdView.organisationInput.AccountGroup,
+                    DistributionChannel: this.CustomerObdView.organisationInput.DistributionChannel,
+                    Division: this.CustomerObdView.organisationInput.Division,
+                    SalesOrg: this.CustomerObdView.organisationInput.SalesOrg,
+                    Region: this.CustomerObdView.organisationInput.Region
+                });
             }
             this.selected =
                 this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
@@ -881,14 +909,14 @@ export class ReportsviewComponent implements OnInit {
                 Status: this.CustomerObdView.PersonalInfo.PersonalInformation
                     .Status,
             });
-            if(this.CustomerObdView.organisationInput){
+            if (this.CustomerObdView.organisationInput) {
                 this.PIform.patchValue({
-                    AccountGroup:this.CustomerObdView.organisationInput.AccountGroup,
-                    DistributionChannel:this.CustomerObdView.organisationInput.DistributionChannel,
-                    Division:this.CustomerObdView.organisationInput.Division,
-                    SalesOrg:this.CustomerObdView.organisationInput.SalesOrg,
-                    Region:this.CustomerObdView.organisationInput.Region
-                }); 
+                    AccountGroup: this.CustomerObdView.organisationInput.AccountGroup,
+                    DistributionChannel: this.CustomerObdView.organisationInput.DistributionChannel,
+                    Division: this.CustomerObdView.organisationInput.Division,
+                    SalesOrg: this.CustomerObdView.organisationInput.SalesOrg,
+                    Region: this.CustomerObdView.organisationInput.Region
+                });
             }
             this.selected =
                 this.CustomerObdView.PersonalInfo.PersonalInformation.Status;
@@ -939,14 +967,14 @@ export class ReportsviewComponent implements OnInit {
                 Status: this.CustomerObdView.PersonalInfo.PersonalInformation
                     .Status,
             });
-            if(this.CustomerObdView.organisationInput){
+            if (this.CustomerObdView.organisationInput) {
                 this.PIform.patchValue({
-                    AccountGroup:this.CustomerObdView.organisationInput.AccountGroup,
-                    DistributionChannel:this.CustomerObdView.organisationInput.DistributionChannel,
-                    Division:this.CustomerObdView.organisationInput.Division,
-                    SalesOrg:this.CustomerObdView.organisationInput.SalesOrg,
-                    Region:this.CustomerObdView.organisationInput.Region
-                }); 
+                    AccountGroup: this.CustomerObdView.organisationInput.AccountGroup,
+                    DistributionChannel: this.CustomerObdView.organisationInput.DistributionChannel,
+                    Division: this.CustomerObdView.organisationInput.Division,
+                    SalesOrg: this.CustomerObdView.organisationInput.SalesOrg,
+                    Region: this.CustomerObdView.organisationInput.Region
+                });
             }
             this.selected =
                 this.CustomerObdView.PersonalInfo.PersonalInformation.Status;

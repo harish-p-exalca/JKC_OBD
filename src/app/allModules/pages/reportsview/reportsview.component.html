@@ -7,36 +7,39 @@
       </div>
     </div>
   </mat-card>
-  <!-- <mat-card class="headerbackgrnd">
-    <div fxLayout>
-      <div fxFlex fxLayoutAlign="start center" style="height: 2px">
-        <img src="../../assets/images/exalca_white_logo.png" style="width: 5%;height:15px;">
-        <p class="title">Customer Portal</p>
-      </div>
-    </div>
-  </mat-card> -->
-  <div fxFlex="100" class="total_div">
+  <!-- style="padding-left: 52px !important;"
+  style="padding-left: 40px !important;"
+  style="padding-left: 65px !important;" -->
+  <div fxLayout="row" fxLayoutAlign="center start" fxFlex="100" class="total_div">
     <div fxLayout="column" fxFlex="20" fxLayoutAlign="start start" style="padding: 40px;" fxLayoutGap="20px">
-      <!-- <mat-card fxLayout="row" fxLayoutAlign="center center" class="card_css">
-        <p style="font-size:13px;">Personal Information</p>
-      </mat-card> 
 
-      <mat-card fxLayout="row" fxLayoutAlign="center center" class="card_css">
-        <p style="font-size:13px;">Market Information</p>
-      </mat-card>
-      <mat-card fxLayout="row" fxLayoutAlign="center center" class="card_css">
-        <p style="font-size:13px;">Business Information</p>
-      </mat-card>
-      <mat-card fxLayout="row" fxLayoutAlign="center center" class="card_css">
-        <p style="font-size:13px;">Bank Information</p>
-      </mat-card>-->
-      <button mat-stroked-button [ngClass]="[btnStyle]" (click)="btnclicked()">Personal Information</button>
-      <button mat-stroked-button [ngClass]="[btnStyle]" (click)="btnclicked()" style="padding-left: 52px !important;">Market
-        Information</button>
-      <button mat-stroked-button [ngClass]="[btnStyle]" (click)="btnclicked()" style="padding-left: 40px !important;">Business
-        Information</button>
-      <button mat-stroked-button [ngClass]="[btnStyle]" (click)="btnclicked()" style="padding-left: 65px !important;">Bank
-        Information</button>
+      <button mat-stroked-button [ngClass]="personalbtn?'change-btn':'default-btn'" (click)="btnclicked(1)"
+        style="width: 100%;">
+        <div style="width: 100%;">
+          Personal Information
+        </div>
+      </button>
+      <button mat-stroked-button [ngClass]="marketbtn?'change-btn':'default-btn'" (click)="btnclicked(2)"
+        style="width: 100%;">
+
+        <div style="width: 100%;" (click)="scroll(target1)">
+          Market Information
+        </div>
+      </button>
+      <button mat-stroked-button [ngClass]="bankbtn?'change-btn':'default-btn'" (click)="btnclicked(3)"
+        style="width: 100%;">
+        <div style="width: 100%;" (click)="scroll(target2)">
+          Business Information
+        </div>
+      </button>
+      <button mat-stroked-button [ngClass]="businessbtn?'change-btn':'default-btn'" (click)="btnclicked(4)"
+        style="width: 100%;">
+        <div style="width: 100%;" (click)="scroll(target3)">
+          Bank Information
+        </div>
+      </button>
+
+
     </div>
     <mat-divider [vertical]="true"></mat-divider>
     <div fxLayout="column" fxFlex="80" fxLayoutAlign="center start" class="inner_total_div">
@@ -53,15 +56,7 @@
               </div>
             </div>
             <div class="sublabel">(Option to select only one)</div>
-            <!-- <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Type of Product</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Select the type of Product" formControlName="product"
-                    class="inputform2">
-                </div>
-              </div>
-            </div> -->
+
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp">Name of the Firm</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
@@ -87,70 +82,10 @@
               </div>
             </div>
 
-            <!-- <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Account Group</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Account Group" formControlName="AccountGroup"
-                    class="inputform2">
-                </div>
-              </div>
-            </div>
 
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Distribution Channel</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Distribution Channel" formControlName="DistributionChannel"
-                    class="inputform2">
-                </div>
-              </div>
-            </div>
-
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Division</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Division" formControlName="Division" class="inputform2">
-                </div>
-              </div>
-            </div>
-
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Status of the Firm</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected"
-                    (selectionChange)="FirmStatusChange()" formControlName="Status">
-                    <mat-option value="Proprietor">Proprietor</mat-option>
-                    <mat-option value="Partnership">Partnership</mat-option>
-                    <mat-option value="Huf">Huf</mat-option>
-                    <mat-option value="Pvt Ltd">Pvt Ltd</mat-option>
-                    <mat-option value="Limited">Limited</mat-option>
-                  </mat-select>
-                </div>
-              </div>
-            </div>-->
-            <!-- <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center"
-              >
-              <span fxFlex="40" class="marketsp">Status of the Firm</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100"  class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Select one Firm" formControlName="Status" class="inputform2">
-                </div>
-              </div>
-            </div> -->
           </div>
           <div fxLayout="column" class="form_div_II">
-            <!-- <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Geo-Location</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" fxLayoutGap="20px">
-                  <input fxFlex matInput placeholder="Latitude" formControlName="latitude" class="inputform">
-                  <input fxFlex matInput placeholder="Longitude" formControlName="longitude" class="inputform">
-                </div>
-              </div>
-            </div> -->
+
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <span fxFlex="50" class="marketsp">Type of Product</span>
@@ -198,46 +133,7 @@
                 </div>
               </div>
             </div>
-            <!-- <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">City</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Select the City" formControlName="City" class="inputform2">
-                </div>
-              </div>
-            </div> -->
-            <!-- <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Taluka</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Taluka" formControlName="Taluka" class="inputform2">
-                </div>
-              </div>
-            </div> -->
-            <!-- <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Tehsil</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Tehsil" formControlName="Tehsil" class="inputform2">
-                </div>
-              </div>
-            </div> -->
-            <!-- <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Sales Org</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Sales Org" formControlName="SalesOrg" class="inputform2">
-                </div>
-              </div>
-            </div> -->
-            <!-- <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="40" class="marketsp">Region</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Region" formControlName="Region" class="inputform2">
-                </div>
-              </div>
-            </div> -->
+
           </div>
         </form>
       </div>
@@ -301,42 +197,12 @@
                 <button mat-flat-button style="margin-top: 34px;" (click)="IdentityAddClicked()">+</button>
               </div>
             </div>
-            <!-- <div class="cement">
-              <div fxLayout="row">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Role</th>
-                      <th>Name</th>
-                      <th>Mobile Number</th>
-                      <th>Email Id</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of IdentityData even as isEven"
-                      [ngStyle]="{ background: isEven ? 'white' : '#f1f1f5'}">
-                      <td><span>{{item?.FirmName}}</span></td>
-                      <td><span>{{item?.Name}}</span></td>
-                      <td><span>{{item?.MobileNo}}</span></td>
-                      <td><span>{{item?.EmailId}}</span></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div> -->
+
           </div>
         </form>
       </div>
-
-
-      <!-- <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
-        <form [formGroup]="MIform" fxLayoutAlign="space-around start" class="form_div">
-          <div fxLayout="column" class="form_div_III" fxLayoutGap="20px"> -->
-
-      <!-- <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="20px" style="padding-left: 40px;"> -->
-
-      <mat-card class="contact-div" fxFlex="100">
-        <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1" fxLayoutGap="70px">
+      <div class="contact-div" fxFlex="100">
+        <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1" fxLayoutGap="40px">
           <div fxLayout="column" fxLayoutAlign="space-around start" class="form_div">
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
@@ -354,6 +220,9 @@
                   </mat-select>
                 </div>
               </div>
+
+
+
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <div class="inp_div">
@@ -389,44 +258,44 @@
             </div>
           </div>
           <div fxLayout="column" fxLayoutAlign="space-around start" class="form_div">
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center" >
+            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <div class="inp_div">
-                <span fxFlex="50" class="marketsp">Name</span>
+                <span fxFlex="50" class="marketsp1">Name</span>
                 <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                   <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                     <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform">
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <div class="inp_div">
-                <span fxFlex="50" class="marketsp">Mobile Number 1</span>
+                <span fxFlex="50" class="marketsp1">Mobile Number 1</span>
                 <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                   <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                     <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform">
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <div class="inp_div"> 
-                <span fxFlex="50" class="marketsp">Email Id 1</span>
+              <div class="inp_div">
+                <span fxFlex="50" class="marketsp1">Email Id 1</span>
                 <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                  <div fxLayout="row" fxFlex="100" class="inner-inp_div">
+                  <div #target1 fxLayout="row" fxFlex="100" class="inner-inp_div">
                     <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform">
                   </div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
 
 
-      </mat-card>
+      </div>
       <!-- <div class="contact_heading">
           Contact Details
         </div>
@@ -493,7 +362,6 @@
       </div> -->
 
       <mat-divider style="width:100%;margin-top: 5%;"></mat-divider>
-
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="MIform" fxLayoutAlign="space-around start" class="form_div">
           <div fxLayout="column" class="form_div_III">
@@ -713,7 +581,7 @@
         <div class="contact_heading">
           Average Sales
         </div>
-        <div class="table_div" style="width: 100%;">
+        <div #target2 class="table_div" style="width: 100%;">
           <table>
             <thead>
               <tr>
@@ -763,8 +631,8 @@
         </div>
       </div>
 
-      <mat-divider style="width:100%;margin-left: 5%;margin-top: 2%;"></mat-divider>
-
+      <mat-divider style="width:100%;margin-top: 2%;"></mat-divider>
+      <div ></div>
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="BIform" fxLayoutAlign="space-around start" class="form_div">
           <div fxLayout="column" class="form_div_III">
@@ -948,6 +816,7 @@
           </table>
         </div>
       </div>
+      <div #target3></div>
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <mat-vertical-stepper style="margin-top:5%;width: 100%;" #stepper>
           <mat-step [stepControl]="DepositForm" class="temp">
@@ -1016,8 +885,8 @@
 
                         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                           <mat-form-field appearance="" class="formleaf">
-                            <input matInput placeholder="Enter Bank Name" (keypress)="AlphabetsonlyOnly($event)"
-                              formControlName="bankname" style="width: 100%;" class="inputformm">
+                            <input matInput (keypress)="AlphabetsonlyOnly($event)" formControlName="bankname"
+                              style="width: 100%;" class="inputformm">
                             <mat-error class="errorn"
                               *ngIf="BankForm?.get('bankname')?.touched && BankForm?.get('bankname')?.hasError('required')">
                               Bank Name
@@ -1032,8 +901,7 @@
 
                         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                           <mat-form-field appearance="" class="formleaf">
-                            <input matInput placeholder="Enter Bank Address" class="inputformm"
-                              formControlName="bankaddress" style="width: 100%;">
+                            <input matInput class="inputformm" formControlName="bankaddress" style="width: 100%;">
                             <mat-error class="errorn"
                               *ngIf="BankForm?.get('bankaddress')?.touched && BankForm?.get('bankaddress')?.hasError('required')">
                               Bank Address
@@ -1048,8 +916,7 @@
 
                         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                           <mat-form-field appearance="" class="formleaf">
-                            <input matInput placeholder=" Enter IFSC Code" formControlName="ifsccode"
-                              style="width: 100%;" class="inputformm">
+                            <input matInput formControlName="ifsccode" style="width: 100%;" class="inputformm">
                             <mat-error class="errorn"
                               *ngIf="BankForm?.get('ifsccode')?.touched && BankForm?.get('ifsccode')?.hasError('required')">
                               IFSC Code
@@ -1069,9 +936,8 @@
 
                         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                           <mat-form-field appearance="" class="formleaf">
-                            <input matInput placeholder="Enter Bank A/c Numberter" formControlName="bankacno"
-                              (keypress)="keyPressNumbers($event)" style="width: 100%;" class="inputformm"
-                              minLength="14" maxLength="16">
+                            <input matInput formControlName="bankacno" (keypress)="keyPressNumbers($event)"
+                              style="width: 100%;" class="inputformm" minLength="14" maxLength="16">
                             <mat-error class="errorn"
                               *ngIf="BankForm?.get('bankacno')?.touched && BankForm?.get('bankacno')?.hasError('required')">
                               Bank A/c Number
@@ -1475,15 +1341,17 @@
     </div>
   </div>
   <div *ngIf="!ApprovalButton" class="footer_div" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
-    <div class="reject_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" (click)="Reject()">
-      <span class="reject_span">
+    <div class="reject_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+      <button mat-stroked-button (click)="Reject()" style="width: 100%;">Reject</button>
+      <!-- <span class="reject_span">
         Reject
-      </span>
+      </span> -->
     </div>
-    <div class="approve_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" (click)="Approve()">
-      <span class="approve_span">
+    <div class="approve_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+      <button mat-flat-button (click)="Approve()" style="width: 100%;">Approve</button>
+      <!-- <span class="approve_span">
         Approve
-      </span>
+      </span> -->
     </div>
   </div>
   <mat-progress-spinner *ngIf="isProgressBarVisibile" class="progressBarPostion" color="accent" mode="indeterminate">

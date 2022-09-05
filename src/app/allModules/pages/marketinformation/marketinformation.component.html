@@ -101,12 +101,16 @@
 
               <input autocomplete="off" matInput mode="YEAR" placeholder="Year of Establishment"
                 formControlName="YearOfEstablished" class="inputform " (keypress)="keyPressNumbers($event)" required>
-
+              <mat-error class="errorn"
+                *ngIf=" MIform?.get('YearOfEstablished')?.touched && MIform?.get('YearOfEstablished')?.hasError('maxLength') && MIform?.get('YearOfEstablished')?.hasError('minLength')">
+                Invalid Year
+              </mat-error>
               <mat-error class="errorn"
                 *ngIf=" MIform?.get('YearOfEstablished')?.touched && MIform?.get('YearOfEstablished')?.hasError('required')">
                 Year of Establishment is
                 required
               </mat-error>
+
 
             </div>
           </div>
@@ -167,7 +171,8 @@
               <mat-error class="errorn" *ngIf=" MIform?.get('Pan')?.touched && MIform?.get('Pan')?.hasError('pattern')">
                 Invalid Pan
               </mat-error>
-              <mat-error class="errorn" *ngIf=" MIform?.get('Pan')?.touched && MIform?.get('Pan')?.hasError('required')">
+              <mat-error class="errorn"
+                *ngIf=" MIform?.get('Pan')?.touched && MIform?.get('Pan')?.hasError('required')">
                 Pan No.of Business
                 is
                 required
@@ -189,7 +194,8 @@
               <mat-error class="errorn" *ngIf=" MIform?.get('Gst')?.touched && MIform?.get('Gst')?.hasError('pattern')">
                 Invalid Gst
               </mat-error>
-              <mat-error class="errorn" *ngIf=" MIform?.get('Gst')?.touched && MIform?.get('Gst')?.hasError('required')">
+              <mat-error class="errorn"
+                *ngIf=" MIform?.get('Gst')?.touched && MIform?.get('Gst')?.hasError('required')">
                 Gst No.of Business
                 is
                 required
