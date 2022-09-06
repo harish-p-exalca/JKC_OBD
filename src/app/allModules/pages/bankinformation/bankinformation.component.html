@@ -1,4 +1,4 @@
-<div id="dashboard" class="page-layout carded">
+<div id="bank" class="page-layout carded">
 
   <mat-card class="headerbackgrnd">
     <div fxLayout>
@@ -127,7 +127,7 @@
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                   <mat-form-field appearance="" class="formleaf" style="margin-top:25px;">
-                    <input matInput placeholder="Enter Bank Name" (keypress)="AlphabetsonlyOnly($event)" formControlName="bankname" style="width: 100%;"
+                    <input matInput (keypress)="AlphabetsonlyOnly($event)" formControlName="bankname" style="width: 100%;"
                       class="inputformm">
                     <mat-error class="errorn"
                       *ngIf="BankForm?.get('bankname')?.touched && BankForm?.get('bankname')?.hasError('required')">
@@ -143,7 +143,7 @@
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                   <mat-form-field appearance="" class="formleaf">
-                    <input matInput placeholder="Enter Bank Address" class="inputformm" formControlName="bankaddress"
+                    <input matInput class="inputformm" formControlName="bankaddress"
                       style="width: 100%;">
                     <mat-error class="errorn"
                       *ngIf="BankForm?.get('bankaddress')?.touched && BankForm?.get('bankaddress')?.hasError('required')">
@@ -159,7 +159,7 @@
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                   <mat-form-field appearance="" class="formleaf">
-                    <input matInput placeholder=" Enter IFSC Code" formControlName="ifsccode" style="width: 100%;"
+                    <input matInput formControlName="ifsccode" style="width: 100%;"
                       class="inputformm">
                     <mat-error class="errorn"
                       *ngIf="BankForm?.get('ifsccode')?.touched && BankForm?.get('ifsccode')?.hasError('required')">
@@ -180,7 +180,7 @@
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                   <mat-form-field appearance="" class="formleaf">
-                    <input matInput placeholder="Enter Bank A/c Numberter" formControlName="bankacno" (keypress)="keyPressNumbers($event)"
+                    <input matInput formControlName="bankacno" (keypress)="keyPressNumbers($event)"
                       style="width: 100%;" class="inputformm"  minLength="14" maxLength="16">
                     <mat-error class="errorn"
                       *ngIf="BankForm?.get('bankacno')?.touched && BankForm?.get('bankacno')?.hasError('required')">
