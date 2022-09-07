@@ -126,7 +126,7 @@ export class MarketinformationComponent implements OnInit {
             Stockist: [""],
             Distance: [""],
             NameOfNearest: [""],
-            YearOfEstablished: ["", Validators.required,Validators.maxLength(4),Validators.minLength(4)],
+            YearOfEstablished: ["", Validators.required],
             AreasStockist: [""],
             TotalPotential: ["", Validators.required],
             JKAvg: ["", Validators.required],
@@ -237,7 +237,7 @@ export class MarketinformationComponent implements OnInit {
             // });
         }
     }
-    SubmitButtonClick(isDraft: boolean = false) {
+    SubmitButtonClick() {
         // console.log(this.MIform.disabled);
         if (this.MIform.valid) {
             var cobView = new MarketInformationView();

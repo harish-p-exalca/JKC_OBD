@@ -165,6 +165,7 @@ export class ReportsviewComponent implements OnInit {
     BrandForm1!: FormGroup;
     BIform1!: FormGroup;
     firmForm!: FormGroup;
+    ContactForm!: FormGroup;
     contactDetailsColumns: string[] = ["Role", "Name", "MobileNo", "Emailid"];
     contactdataSource: MatTableDataSource<PersonIdentity>;
     //contactdataSource = MatTableDataSource<any>;
@@ -243,6 +244,7 @@ export class ReportsviewComponent implements OnInit {
     fileUrl;
     AttachmentData: any;
     Noview: boolean = false;
+    bankedit: boolean = false;
     public listData: any;
     public BankData: BankDetails[] = [];
     public AttachmentView: boolean = false;
@@ -578,7 +580,7 @@ export class ReportsviewComponent implements OnInit {
     }
     scroll(el: HTMLElement) {
         el.scrollIntoView();
-      }
+    }
     InitializeFormGroup() {
         this.PIform = this.fb.group({
             category: ["", Validators.required],
@@ -606,6 +608,15 @@ export class ReportsviewComponent implements OnInit {
             Region: ["", Validators.required],
             Status: ["", Validators.required],
         });
+        this.ContactForm = this.fb.group({
+            Firm: [""],
+            DOB: [""],
+            mobilenumber1: [""],
+            mobilenumber2: [""],
+            mail2: [""],
+            mail1: [""],
+            name: [""]
+        })
         // this.firmForm = this.fb.group({
 
         //     Status: [""],
@@ -675,6 +686,7 @@ export class ReportsviewComponent implements OnInit {
             this.bankdetails = bankInfoView.BankDetailInfo;
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
             this.BankData = bankInfoView.BankDetailInfo;
+            this.bankedit = true;
         }
         if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts") {
             if (bankInfoView.SecurityDeposit.TransID != null) {
@@ -692,6 +704,7 @@ export class ReportsviewComponent implements OnInit {
             this.BankData = bankInfoView.BankDetailInfo;
             this.DepositForm.disable();
             this.BankForm.disable();
+            this.bankedit = false;
         }
         if (this.Role == "RAC") {
             if (bankInfoView.SecurityDeposit.TransID != null) {
@@ -708,7 +721,10 @@ export class ReportsviewComponent implements OnInit {
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
             this.BankData = bankInfoView.BankDetailInfo;
             this.DepositForm.disable();
+            this.bankedit = true;
         }
+
+
     }
     GetTransactionDetails() {
         this.isProgressBarVisibile = true;
@@ -868,6 +884,8 @@ export class ReportsviewComponent implements OnInit {
             this.contactdataSource = new MatTableDataSource(this.Contactdetails);
             this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
         }
+
+
         if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts" || this.Role == "RAC") {
             var products = null;
             if (
@@ -981,12 +999,13 @@ export class ReportsviewComponent implements OnInit {
             this.Contactdetails = this.CustomerObdView.PersonalInfo.Identities;
             this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
             this.contactdataSource = new MatTableDataSource(this.Contactdetails);
+            // this.PIform.enable();
             this.PIform.get('category').disable();
             this.PIform.get('product').disable();
             this.PIform.get('Address').disable();
             this.PIform.get('Name').disable();
-            this.PIform.get('latitude').disable();
-            this.PIform.get('longitude').disable();
+            // this.PIform.get('latitude').disable();
+            // this.PIform.get('longitude').disable();
             this.PIform.get('District').disable();
             this.PIform.get('City').disable();
             this.PIform.get('Taluka').disable();
@@ -1077,7 +1096,8 @@ export class ReportsviewComponent implements OnInit {
                 this.MIform.get('PartyBackground').disable();
             }
         }
-        if (this.Role == "ZH" || this.Role == "DH"|| this.Role == "Accounts") {
+
+        if (this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts") {
             if (MarketInfoView.MarketInformation.TransID != null) {
                 this.MIform.patchValue({
                     market: MarketInfoView.MarketInformation.MarketName,
@@ -1182,7 +1202,7 @@ export class ReportsviewComponent implements OnInit {
                 });
             }
         }
-        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH"|| this.Role == "Accounts" || this.Role == "RAC") {
+        if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts" || this.Role == "RAC") {
             if (businessInfoView.Businessinfo.TransID != null) {
                 // businessinformation = businessInfoView.Businessinfo;
                 this.BIform.patchValue({
@@ -1963,6 +1983,8 @@ export class ReportsviewComponent implements OnInit {
         //     const blob = new Blob([file], { type: file.type });
         //     this.OpenAttachmentDialog(fileName, blob);
         // } else {
+        console.log("FileName :", this.FileName);
+
         this.isProgressBarVisibile = true;
         this._dashboardService
             .DowloandAttachment(fileName, this.transID)

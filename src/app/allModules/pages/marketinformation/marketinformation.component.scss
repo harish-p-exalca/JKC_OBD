@@ -9,7 +9,13 @@
     z-index: 1;
     left: 55%;
   }
-
+  .mat-select-trigger {
+    display: inline-table;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+    margin-top: 8px ;
+  }
   .center {
     padding: 5px !important;
     background: white;
@@ -163,6 +169,7 @@
     background-color: #efb577 !important;
     color: white;
   }
+
 }
 
 .background {
@@ -267,7 +274,7 @@ input:focus {
   // width: 70%;
   height: 36px;
   padding-left: 23px;
-  line-height: 2;
+  line-height: 3;
   border: none;
   text-align: left;
   background: #f1f1f5 !important;

@@ -445,14 +445,17 @@ export class BankinformationComponent implements OnInit {
   //   this.files.push(Attachment);
   //   return Attachment;
   // }
-  onAdd(): void {
+  onAdd() {
     // if(this.BIform.valid)
     // {
 
     //this.listData.push(this.BIform.value);
 
 
-    this.IdentityAddClicked();
+  
+  this.IdentityAddClicked();
+
+   
     // this.BIform.reset();
     //this.listData[this.listData.length - 1].id = this.listData.length.toString();
     // const personalinformation: BankDetails = new BankDetails();

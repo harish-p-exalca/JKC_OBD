@@ -202,98 +202,102 @@
         </form>
       </div>
       <div class="contact-div" fxFlex="100">
-        <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1" fxLayoutGap="40px">
-          <div fxLayout="column" fxLayoutAlign="space-around start" class="form_div">
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <span fxFlex="50" class="marketsp">Identify Person</span>
-              </div>
-              <div class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected"
-                    (selectionChange)="FirmStatusChange()" formControlName="Status">
-                    <mat-option value="Proprietor">Proprietor</mat-option>
-                    <mat-option value="Partnership">Partnership</mat-option>
-                    <mat-option value="Huf">Huf</mat-option>
-                    <mat-option value="Pvt Ltd">Pvt Ltd</mat-option>
-                    <mat-option value="Limited">Limited</mat-option>
-                  </mat-select>
-                </div>
-              </div>
-
-
-
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <div class="inp_div">
-                <span fxFlex="50" class="marketsp">DOB</span>
+        <form [formGroup]="ContactForm">
+          <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1" fxLayoutGap="40px">
+            <div fxLayout="column" fxLayoutAlign="space-around start" class="form_div">
+              <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
                 <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                  <div class="inner-inp_div">
-                    <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform2">
-                  </div>
+                  <span fxFlex="50" class="marketsp">Identify Person</span>
                 </div>
-              </div>
-            </div>
-
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <div class="inp_div">
-                <span fxFlex="50" class="marketsp">Mobile Number 2</span>
-                <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                <div class="inp_div">
                   <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                    <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform2">
+                    <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected"
+                      (selectionChange)="FirmStatusChange()" formControlName="Firm">
+                      <mat-option value="Proprietor">Proprietor</mat-option>
+                      <mat-option value="Partnership">Partnership</mat-option>
+                      <mat-option value="Huf">Huf</mat-option>
+                      <mat-option value="Pvt Ltd">Pvt Ltd</mat-option>
+                      <mat-option value="Limited">Limited</mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+
+
+
+              </div>
+              <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                <div class="inp_div">
+                  <span fxFlex="50" class="marketsp">DOB</span>
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                    <div class="inner-inp_div">
+                      <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="inputform2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                <div class="inp_div">
+                  <span fxFlex="50" class="marketsp">Mobile Number 2</span>
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                    <div fxLayout="row" fxFlex="100" class="inner-inp_div">
+                      <input fxFlex matInput placeholder="Select the State" formControlName="mobilenumber1"
+                        class="inputform2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                <div class="inp_div">
+                  <span fxFlex="50" class="marketsp">Email Id 2</span>
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                    <div class="inner-inp_div">
+                      <input fxFlex matInput placeholder="Select the State" formControlName="mail2" class="inputform2">
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <div class="inp_div">
-                <span fxFlex="50" class="marketsp">Email Id 2</span>
-                <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                  <div class="inner-inp_div">
-                    <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform2">
+            <div fxLayout="column" fxLayoutAlign="space-around start" class="form_div">
+              <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                <div class="inp_div">
+                  <span fxFlex="50" class="marketsp1">Name</span>
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                    <div fxLayout="row" fxFlex="100" class="inner-inp_div">
+                      <input fxFlex matInput placeholder="Select the State" formControlName="name" class="inputform">
+                    </div>
                   </div>
                 </div>
+
+              </div>
+              <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                <div class="inp_div">
+                  <span fxFlex="50" class="marketsp1">Mobile Number 1</span>
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                    <div fxLayout="row" fxFlex="100" class="inner-inp_div">
+                      <input fxFlex matInput placeholder="Select the State" formControlName="mobilenumber1"
+                        class="inputform">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+                <div class="inp_div">
+                  <span fxFlex="50" class="marketsp1">Email Id 1</span>
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                    <div #target1 fxLayout="row" class="inner-inp_div" fxFlex="100">
+                      <div></div>
+                      <input fxFlex matInput placeholder="Select the State" formControlName="mail1" class="inputform">
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
-          <div fxLayout="column" fxLayoutAlign="space-around start" class="form_div">
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <div class="inp_div">
-                <span fxFlex="50" class="marketsp1">Name</span>
-                <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                  <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                    <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform">
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <div class="inp_div">
-                <span fxFlex="50" class="marketsp1">Mobile Number 1</span>
-                <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                  <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                    <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform">
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <div class="inp_div">
-                <span fxFlex="50" class="marketsp1">Email Id 1</span>
-                <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                  <div #target1 fxLayout="row" fxFlex="100" class="inner-inp_div">
-                    <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform">
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
+        </form>
 
       </div>
       <!-- <div class="contact_heading">
@@ -632,7 +636,7 @@
       </div>
 
       <mat-divider style="width:100%;margin-top: 2%;"></mat-divider>
-      <div ></div>
+      <div></div>
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="BIform" fxLayoutAlign="space-around start" class="form_div">
           <div fxLayout="column" class="form_div_III">
@@ -972,10 +976,10 @@
                             <tr *ngFor="let item of BankData even as isEven;let i = index"
                               [ngStyle]="{ background: isEven ? 'white' : '#f1f1f5'}">
                               <td><span>{{i+1}}</span></td>
-                              <td><span>{{item?.BankName}}</span></td>
-                              <td><span>{{item?.BankAddress}}</span></td>
-                              <td><span>{{item?.IFSC}}</span></td>
-                              <td><span>{{item?.AccountNum}}</span></td>
+                              <td [attr.contenteditable]="bankedit"><span>{{item?.BankName}}</span></td>
+                              <td [attr.contenteditable]="bankedit"><span>{{item?.BankAddress}}</span></td>
+                              <td [attr.contenteditable]="bankedit"><span>{{item?.IFSC}}</span></td>
+                              <td [attr.contenteditable]="bankedit"><span>{{item?.AccountNum}}</span></td>
                             </tr>
                           </tbody>
                         </table>
