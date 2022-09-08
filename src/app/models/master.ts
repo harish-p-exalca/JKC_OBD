@@ -235,6 +235,11 @@ export class SecurityDepositDetail {
     Amount: number;
     BankName: string;
     AdvBillingParty: boolean;
+    bankno:number;
+    bankname:string;
+    bankaddress:string;
+    ifsccode:string;
+    bankacno:number
 }
 export class States {
     ID: number;

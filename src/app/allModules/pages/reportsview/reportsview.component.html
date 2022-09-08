@@ -10,38 +10,43 @@
   <!-- style="padding-left: 52px !important;"
   style="padding-left: 40px !important;"
   style="padding-left: 65px !important;" -->
+
+
+
+
   <div fxLayout="row" fxLayoutAlign="center start" fxFlex="100" class="total_div">
     <div fxLayout="column" fxFlex="20" fxLayoutAlign="start start" style="padding: 40px;" fxLayoutGap="20px">
-
       <button mat-stroked-button [ngClass]="personalbtn?'change-btn':'default-btn'" (click)="btnclicked(1)"
-        style="width: 100%;">
-        <div style="width: 100%;">
+        style="width: 14%;position:fixed;">
+        <div>
           Personal Information
         </div>
       </button>
       <button mat-stroked-button [ngClass]="marketbtn?'change-btn':'default-btn'" (click)="btnclicked(2)"
-        style="width: 100%;">
+       class="marketbutton">
 
-        <div style="width: 100%;" (click)="scroll(target1)">
+        <div (click)="scroll(target1)">
           Market Information
         </div>
       </button>
-      <button mat-stroked-button [ngClass]="bankbtn?'change-btn':'default-btn'" (click)="btnclicked(3)"
-        style="width: 100%;">
-        <div style="width: 100%;" (click)="scroll(target2)">
+       <button mat-stroked-button [ngClass]="bankbtn?'change-btn':'default-btn'" (click)="btnclicked(3)"
+       class="businessbutton">
+        <div (click)="scroll(target2)">
           Business Information
         </div>
       </button>
       <button mat-stroked-button [ngClass]="businessbtn?'change-btn':'default-btn'" (click)="btnclicked(4)"
-        style="width: 100%;">
-        <div style="width: 100%;" (click)="scroll(target3)">
+      class="bankbutton">
+        <div (click)="scroll(target3)">
           Bank Information
         </div>
       </button>
 
-
     </div>
+
+
     <mat-divider [vertical]="true"></mat-divider>
+
     <div fxLayout="column" fxFlex="80" fxLayoutAlign="center start" class="inner_total_div">
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1" fxFlex="40">
         <form [formGroup]="PIform" fxLayoutAlign="space-around start" class="form_div">
@@ -165,7 +170,8 @@
                   <input matInput placeholder="Enter Mobile number" formControlName="Mobile1" style="width: 200px;"
                     (keypress)="keyPressNumbers($event)" class="inputform" minLength="10" maxLength="10">
                   <mat-error class="errorn"
-                    *ngIf="firmForm?.get('Mobile1')?.touched && firmForm?.get('Mobile1')?.hasError('required')">Mobile
+                    *ngIf="firmForm?.get('Mobile1')?.touched && firmForm?.get('Mobile1')?.hasError('required')">
+                    Mobile
                     number is required
                   </mat-error>
                   <mat-error class="errorn"
@@ -184,7 +190,8 @@
                   <input matInput placeholder="example@gmail.com" formControlName="email1" style="width: 200px;"
                     class="inputform">
                   <mat-error class="errorn"
-                    *ngIf="firmForm?.get('email1')?.touched && firmForm?.get('email1')?.hasError('required')">Email is
+                    *ngIf="firmForm?.get('email1')?.touched && firmForm?.get('email1')?.hasError('required')">Email
+                    is
                     required
                   </mat-error>
                   <mat-error class="errorn"
@@ -952,7 +959,7 @@
                         </div>
                       </div>
                       <div fxLayout="column">
-                        <button mat-flat-button style="margin-top: 34px;" (click)="bankAddClicked()">+</button>
+                        <button mat-flat-button style="margin-top: 34px;" [disabled]="bankaddbtn" (click)="bankAddClicked()">+</button>
                       </div>
                       <!-- <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
                     <button mat-flat-button class="add1" (click)="onAdd()">+</button>
@@ -975,11 +982,14 @@
                           <tbody>
                             <tr *ngFor="let item of BankData even as isEven;let i = index"
                               [ngStyle]="{ background: isEven ? 'white' : '#f1f1f5'}">
-                              <td><span>{{i+1}}</span></td>
-                              <td [attr.contenteditable]="bankedit"><span>{{item?.BankName}}</span></td>
-                              <td [attr.contenteditable]="bankedit"><span>{{item?.BankAddress}}</span></td>
-                              <td [attr.contenteditable]="bankedit"><span>{{item?.IFSC}}</span></td>
-                              <td [attr.contenteditable]="bankedit"><span>{{item?.AccountNum}}</span></td>
+                            
+                                <td (click)="rowSelected(i)"><span>{{i+1}}</span></td>
+                                <td (click)="rowSelected(i)"><span>{{item?.BankName}}</span></td>
+                                <td (click)="rowSelected(i)"><span>{{item?.BankAddress}}</span></td>
+                                <td (click)="rowSelected(i)"><span>{{item?.IFSC}}</span></td>
+                                <td (click)="rowSelected(i)"><span>{{item?.AccountNum}}</span></td>
+                             
+                             
                             </tr>
                           </tbody>
                         </table>
@@ -1343,7 +1353,10 @@
         </mat-vertical-stepper>
       </div>
     </div>
+
+
   </div>
+
   <div *ngIf="!ApprovalButton" class="footer_div" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
     <div class="reject_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
       <button mat-stroked-button (click)="Reject()" style="width: 100%;">Reject</button>

@@ -10,13 +10,13 @@ import {
     MarketInformation,
     BusinessInformation,
     SecurityDepositDetail,
-} from "./../../../models/master";
-
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { CustomerOnboardingView1 } from "./../../../models/master";
-// import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {
+  } from "./../../../models/master";
+  
+  import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+  import { CustomerOnboardingView1 } from "./../../../models/master";
+  // import { Component, OnInit } from "@angular/core";
+  import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+  import {
     AuthenticationDetails,
     BusinessInformationView,
     Cities,
@@ -24,43 +24,43 @@ import {
     MarketInformationView,
     PersonIdentity,
     States,
-} from "app/models/master";
-import { DashboardService } from "app/services/dashboard.service";
-import { Monthlysales } from "../business/business.component";
-import { NotificationSnackBarComponent } from "app/notifications/notification-snack-bar/notification-snack-bar.component";
-import {
+  } from "app/models/master";
+  import { DashboardService } from "app/services/dashboard.service";
+  import { Monthlysales } from "../business/business.component";
+  import { NotificationSnackBarComponent } from "app/notifications/notification-snack-bar/notification-snack-bar.component";
+  import {
     MatDialog,
     MatDialogConfig,
     MatSnackBar,
     MatTableDataSource,
-} from "@angular/material";
-import { SnackBarStatus } from "app/notifications/snackbar-status-enum";
-import { Router } from "@angular/router";
-import { DomSanitizer } from "@angular/platform-browser";
-import { saveAs } from "file-saver";
-import { of } from "rxjs";
-import { id } from "@swimlane/ngx-charts/release/utils";
-import { CommonService } from "app/services/common.service";
-
-export interface Element {
+  } from "@angular/material";
+  import { SnackBarStatus } from "app/notifications/snackbar-status-enum";
+  import { Router } from "@angular/router";
+  import { DomSanitizer } from "@angular/platform-browser";
+  import { saveAs } from "file-saver";
+  import { of } from "rxjs";
+  import { id } from "@swimlane/ngx-charts/release/utils";
+  import { CommonService } from "app/services/common.service";
+  
+  export interface Element {
     Role: string;
     Name: string;
     MobileNo: string;
     Emailid: string;
-}
-export interface BElement {
+  }
+  export interface BElement {
     BankDetailNo: string;
     BankName: string;
     BankAddress: string;
     IFSCCode: string;
     BankAcNumber: string;
-}
-export interface AverageSource {
+  }
+  export interface AverageSource {
     White_Cement_Wall_Putty: string;
     WP_Avg_Month_Sales: string;
     WC_Avg_Month_sales: string;
-}
-export interface SaleSource {
+  }
+  export interface SaleSource {
     Sale: string;
     Jan: string;
     Feb: string;
@@ -74,16 +74,16 @@ export interface SaleSource {
     Oct: string;
     Nov: string;
     Dec: string;
-}
-const datas: Element[] = [
+  }
+  const datas: Element[] = [
     {
         Role: "1",
         Name: "prasath",
         MobileNo: "9486740455",
         Emailid: "prasath@exalca.com",
     },
-];
-const bdatas: BElement[] = [
+  ];
+  const bdatas: BElement[] = [
     {
         BankDetailNo: "1",
         BankName: "SBI",
@@ -91,15 +91,16 @@ const bdatas: BElement[] = [
         IFSCCode: "SBIN0005943",
         BankAcNumber: "1230456987456321",
     },
-];
-const avgdatasource: AverageSource[] = [
+  ];
+  const avgdatasource: AverageSource[] = [
     {
         White_Cement_Wall_Putty: "prasath",
         WP_Avg_Month_Sales: "prasath",
         WC_Avg_Month_sales: "prasath",
     },
-];
-const sales: SaleSource[] = [
+  ];
+  
+  const sales: SaleSource[] = [
     {
         Sale: "WallmaxX",
         Jan: "jan",
@@ -145,14 +146,17 @@ const sales: SaleSource[] = [
         Nov: "",
         Dec: "",
     },
-];
-@Component({
+  ];
+  @Component({
     selector: "app-reportsview",
     templateUrl: "./reportsview.component.html",
     styleUrls: ["./reportsview.component.scss"],
     encapsulation: ViewEncapsulation.None,
-})
-export class ReportsviewComponent implements OnInit {
+  })
+  export class ReportsviewComponent implements OnInit {
+    bank: any;
+    bankaddbtn: boolean = false;
+    SelectedDeselectRow: number;
     btnStyle = 'default-btn';
     personalbtn: boolean = true;
     marketbtn: boolean = false;
@@ -185,7 +189,7 @@ export class ReportsviewComponent implements OnInit {
         "WC_Avg_Month_sales",
     ];
     averageSalesDetails: any[] = [];
-
+  
     averageSalesDataSource: MatTableDataSource<AverageSale>;
     saleColumns: string[] = [
         "Sale",
@@ -244,9 +248,10 @@ export class ReportsviewComponent implements OnInit {
     fileUrl;
     AttachmentData: any;
     Noview: boolean = false;
-    bankedit: boolean = false;
+    // bankedit: boolean = false;
     public listData: any;
     public BankData: BankDetails[] = [];
+    bankupate: any;
     public AttachmentView: boolean = false;
     constructor(
         private fb: FormBuilder,
@@ -262,7 +267,7 @@ export class ReportsviewComponent implements OnInit {
         );
         //this.listData = [];
     }
-
+  
     ngOnInit() {
         const retrievedObject = localStorage.getItem("authorizationData");
         if (retrievedObject) {
@@ -276,12 +281,12 @@ export class ReportsviewComponent implements OnInit {
         }
         this.InitializeFormGroup();
         this.transID = localStorage.getItem("TransID");
-        if (
-            localStorage.getItem("ActionStatus") == "Approved" ||
-            localStorage.getItem("ActionStatus") == "Rejected"
-        ) {
-            this.ApprovalButton = true;
-        }
+        // if (
+        //     localStorage.getItem("ActionStatus") == "Approved" ||
+        //     localStorage.getItem("ActionStatus") == "Rejected"
+        // ) {
+        //     this.ApprovalButton = true;
+        // }
         if (this.transID != null) {
             this.isProgressBarVisibile = true;
             this._dashboardService
@@ -334,7 +339,7 @@ export class ReportsviewComponent implements OnInit {
                     // console.log(err);
                 }
             );
-
+  
             this._dashboardService
                 .GetAttachment(this.transID, "PanCard")
                 .subscribe(
@@ -417,7 +422,7 @@ export class ReportsviewComponent implements OnInit {
                 }
             );
         this.firmForm = this.fb.group({
-
+  
             Status: [""],
             Name1: ["", Validators.required],
             Mobile1: [
@@ -433,7 +438,7 @@ export class ReportsviewComponent implements OnInit {
                     ),
                 ],
             ],
-
+  
         });
         this.MIform = this.fb.group({
             market: [""],
@@ -556,18 +561,18 @@ export class ReportsviewComponent implements OnInit {
         this.bankbtn = false;
         this.businessbtn = false;
         switch (value) {
-
+  
             case 1: {
                 this.personalbtn = !this.personalbtn;
                 break;
             }
             case 2: {
-
+  
                 this.marketbtn = !this.marketbtn;
                 break;
             }
             case 3: {
-
+  
                 this.bankbtn = !this.bankbtn;
                 break;
             }
@@ -575,7 +580,7 @@ export class ReportsviewComponent implements OnInit {
                 this.businessbtn = !this.businessbtn;
                 break;
             }
-
+  
         }
     }
     scroll(el: HTMLElement) {
@@ -618,7 +623,7 @@ export class ReportsviewComponent implements OnInit {
             name: [""]
         })
         // this.firmForm = this.fb.group({
-
+  
         //     Status: [""],
         //     Name1: ["", Validators.required],
         //     Mobile1: [
@@ -634,8 +639,28 @@ export class ReportsviewComponent implements OnInit {
         //             ),
         //         ],
         //     ],
-
+  
         // });
+    }
+    rowSelected(index) {
+        this.SelectedDeselectRow = index;
+        console.log("Index : ", index);
+        console.log("Data : ", this.BankData);
+        for (let bank of this.BankData) {
+            var bankdetails = new BankDetails();
+            this.BankForm.get('bankacno').patchValue(bank.AccountNum)
+            this.BankForm.get('bankaddress').patchValue(bank.BankAddress)
+            this.BankForm.get('bankname').patchValue(bank.BankName)
+            this.BankForm.get('ifsccode').patchValue(bank.IFSC)
+            console.log("Bank : ", this.BankForm);
+            bankdetails.AccountNum = bank.AccountNum
+            bankdetails.BankAddress = bank.BankAddress
+            bankdetails.BankName = bank.BankName
+            bankdetails.IFSC = bank.IFSC
+            console.log("Bank details : ", this.bankdetails);
+  
+        }
+  
     }
     bankAddClicked() {
         if (this.BankForm.valid) {
@@ -646,13 +671,40 @@ export class ReportsviewComponent implements OnInit {
             identity.IFSC = this.BankForm.get("ifsccode").value;
             identity.TransID = this.transID;
             this.BankData.push(identity);
-            // this.listData[this.listData.length - 1].id = this.listData.length.toString();
-            // this.BIform.reset();
         }
+        if (this.bankdetails != null) {
+            var identity = new BankDetails();
+            identity.AccountNum = this.BankForm.get("bankacno").value;
+            identity.BankAddress = this.BankForm.get("bankaddress").value;
+            identity.BankName = this.BankForm.get("bankname").value;
+            identity.IFSC = this.BankForm.get("ifsccode").value;
+            if (this.BankData.length != null) {
+                this.bankaddbtn = true;
+                this.BankData.push(identity);
+                console.log("Identity", identity);
+                this.ClearAll();
+            }
+        }
+        if (this.SelectedDeselectRow > -1) {
+            this.bankdetails.splice(this.SelectedDeselectRow, 1);
+            this.SelectedDeselectRow = -1
+            this.ClearAll();
+        }
+  
+        //    console.log("patchvalue: ",this.BankForm.get("bankacno").value);
+        //    console.log("patchvalue: ",this.BankForm.get("bankaddress").value);
+        //    console.log("patchvalue: ",this.BankForm.get("bankname").value);
+        //    console.log("patchvalue: ",this.BankForm.get("ifsccode").value);
+  
+  
         //else {
         //     this._commonService.ShowValidationErrors(this.BIform);
         // }
     }
+    ClearAll(): void {
+        this.BankForm.reset();
+    }
+  
     GetBankDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService
@@ -682,11 +734,18 @@ export class ReportsviewComponent implements OnInit {
                     Amount: bankInfoView.SecurityDeposit.Amount,
                     nameofbank: bankInfoView.SecurityDeposit.BankName,
                 });
+                // this.BankForm.patchValue({
+                //     bankno : bankInfoView.SecurityDeposit.bankno,
+                //     bankname :bankInfoView.SecurityDeposit.bankname,
+                //     bankaddress : bankInfoView.SecurityDeposit.bankaddress,
+                //     ifsccode : bankInfoView.SecurityDeposit.ifsccode,
+                //     bankacno : bankInfoView.SecurityDeposit.bankacno
+                // })
             }
             this.bankdetails = bankInfoView.BankDetailInfo;
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
             this.BankData = bankInfoView.BankDetailInfo;
-            this.bankedit = true;
+            // this.bankedit = true;
         }
         if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts") {
             if (bankInfoView.SecurityDeposit.TransID != null) {
@@ -698,13 +757,20 @@ export class ReportsviewComponent implements OnInit {
                     Amount: bankInfoView.SecurityDeposit.Amount,
                     nameofbank: bankInfoView.SecurityDeposit.BankName,
                 });
+                this.BankForm.patchValue({
+                    bankno: bankInfoView.SecurityDeposit.bankno,
+                    bankname: bankInfoView.SecurityDeposit.bankname,
+                    bankaddress: bankInfoView.SecurityDeposit.bankaddress,
+                    ifsccode: bankInfoView.SecurityDeposit.ifsccode,
+                    bankacno: bankInfoView.SecurityDeposit.bankacno
+                })
             }
             this.bankdetails = bankInfoView.BankDetailInfo;
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
             this.BankData = bankInfoView.BankDetailInfo;
             this.DepositForm.disable();
             this.BankForm.disable();
-            this.bankedit = false;
+            // this.bankedit = false;
         }
         if (this.Role == "RAC") {
             if (bankInfoView.SecurityDeposit.TransID != null) {
@@ -716,16 +782,24 @@ export class ReportsviewComponent implements OnInit {
                     Amount: bankInfoView.SecurityDeposit.Amount,
                     nameofbank: bankInfoView.SecurityDeposit.BankName,
                 });
+                this.BankForm.patchValue({
+                    bankno: bankInfoView.SecurityDeposit.bankno,
+                    bankname: bankInfoView.SecurityDeposit.bankname,
+                    bankaddress: bankInfoView.SecurityDeposit.bankaddress,
+                    ifsccode: bankInfoView.SecurityDeposit.ifsccode,
+                    bankacno: bankInfoView.SecurityDeposit.bankacno
+                })
             }
             this.bankdetails = bankInfoView.BankDetailInfo;
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
             this.BankData = bankInfoView.BankDetailInfo;
             this.DepositForm.disable();
-            this.bankedit = true;
+            // this.bankedit = true;
         }
-
-
+  
+  
     }
+  
     GetTransactionDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService
@@ -824,10 +898,16 @@ export class ReportsviewComponent implements OnInit {
         personalinformation.Amount = this.DepositForm.get('Amount').value;
         personalinformation.BankName = this.DepositForm.get('nameofbank').value;
         personalinformation.TransID = this.transID;
+        personalinformation.bankno = this.BankForm.get('bankno').value;
+        personalinformation.bankname = this.BankForm.get('bankname').value;
+        personalinformation.bankaddress = this.BankForm.get('bankaddress').value;
+        personalinformation.ifsccode = this.BankForm.get('ifsccode').value;
+        personalinformation.bankacno = this.BankForm.get('bankacno').value
+  
         return personalinformation;
     }
     SetPersonalInfoValues() {
-
+  
         if (this.Role == "ASM") {
             var products = null;
             if (
@@ -884,8 +964,8 @@ export class ReportsviewComponent implements OnInit {
             this.contactdataSource = new MatTableDataSource(this.Contactdetails);
             this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
         }
-
-
+  
+  
         if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts" || this.Role == "RAC") {
             var products = null;
             if (
@@ -1012,7 +1092,7 @@ export class ReportsviewComponent implements OnInit {
             this.PIform.get('Tehsil').disable();
             this.PIform.get('State').disable();
             this.PIform.get('Pincode').disable();
-
+  
         }
     }
     AvgData: AverageSale[] = [];
@@ -1028,11 +1108,11 @@ export class ReportsviewComponent implements OnInit {
             this._commonService.ShowValidationErrors(this.BrandForm);
         }
     }
-
+  
     onAdd(): void {
         this.AvgAddClicked();
     }
-
+  
     FirmStatusChange() {
         this.IdentityData = [];
     }
@@ -1057,7 +1137,7 @@ export class ReportsviewComponent implements OnInit {
                     PartyBackground: MarketInfoView.MarketInformation.Background,
                 });
                 this.averageSalesDetails = MarketInfoView.AverageSale;
-
+  
                 this.averageSalesDataSource = new MatTableDataSource(
                     this.averageSalesDetails
                 );
@@ -1086,7 +1166,7 @@ export class ReportsviewComponent implements OnInit {
                 this.averageSalesDetails = MarketInfoView.AverageSale;
                 this.averageSalesDataSource = new MatTableDataSource(
                     this.averageSalesDetails
-
+  
                 );
                 this.MIform.get('YearOfEstablished').disable();
                 this.MIform.get('TotalPotential').disable();
@@ -1096,7 +1176,7 @@ export class ReportsviewComponent implements OnInit {
                 this.MIform.get('PartyBackground').disable();
             }
         }
-
+  
         if (this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts") {
             if (MarketInfoView.MarketInformation.TransID != null) {
                 this.MIform.patchValue({
@@ -1218,7 +1298,7 @@ export class ReportsviewComponent implements OnInit {
                 this.BIform.disable();
             }
         }
-
+  
     }
     AlphabetsonlyOnly(event): boolean {
         const charCode = (event.which) ? event.which : event.keyCode;
@@ -1353,7 +1433,7 @@ export class ReportsviewComponent implements OnInit {
         // this.File  Error=false;
     }
     csv1InputChange(event) {
-
+  
         this.FileName1 = event.target.files[0].name;
         // // console.log(fileInputEvent.target.files[0]);
         this.handleFileInput(event, "GSTCertificate");
@@ -1435,7 +1515,7 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo = new BankDetailsView();
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
-            // console.log("Approve", Customer);
+            console.log("Approve", Customer.BankInfo.BankDetailInfo);
             var Cusotmer = new CustomerOnboardingView1();
             Cusotmer.Status = "ASMApproved";
             Cusotmer.TranID = this.transID;
@@ -1443,8 +1523,8 @@ export class ReportsviewComponent implements OnInit {
             Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-
-
+  
+  
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
@@ -1492,10 +1572,10 @@ export class ReportsviewComponent implements OnInit {
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
             // console.log("Approve", Customer);
-
+  
             this.isProgressBarVisibile = true;
-
-
+  
+  
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
@@ -1646,8 +1726,8 @@ export class ReportsviewComponent implements OnInit {
             Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-
-
+  
+  
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
@@ -1697,8 +1777,8 @@ export class ReportsviewComponent implements OnInit {
             Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-
-
+  
+  
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
@@ -1748,8 +1828,8 @@ export class ReportsviewComponent implements OnInit {
             Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-
-
+  
+  
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
@@ -1773,7 +1853,7 @@ export class ReportsviewComponent implements OnInit {
                     }
                 );
         }
-
+  
     }
     Reject(): void {
         var Cusotmer = new CustomerOnboardingView1();
@@ -1984,7 +2064,7 @@ export class ReportsviewComponent implements OnInit {
         //     this.OpenAttachmentDialog(fileName, blob);
         // } else {
         console.log("FileName :", this.FileName);
-
+  
         this.isProgressBarVisibile = true;
         this._dashboardService
             .DowloandAttachment(fileName, this.transID)
@@ -2043,4 +2123,5 @@ export class ReportsviewComponent implements OnInit {
         localStorage.removeItem("Approved");
         localStorage.removeItem("Rejected");
     }
-}
+  }
+  
