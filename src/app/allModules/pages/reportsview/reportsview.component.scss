@@ -641,6 +641,21 @@
     width: 100%;
     margin-top: 30px !important;
 
+    .marketbutton {
+      width: 14%;
+      margin-top: 40px;
+      position: fixed;
+    }
+.businessbutton{
+  width: 14%;
+  margin-top: 80px;
+  position: fixed;
+}
+.bankbutton{
+  width: 14%;
+  margin-top: 120px;
+  position: fixed;
+}
     .inner_total_div {
       padding-top: 30px;
       width: 100%;
@@ -909,9 +924,14 @@
       cursor: pointer;
     }
   }
-  .mat-flat-button.mat-primary, body.theme-default .mat-raised-button.mat-primary, body.theme-default .mat-fab.mat-primary, body.theme-default .mat-mini-fab.mat-primary {
+
+  .mat-flat-button.mat-primary,
+  body.theme-default .mat-raised-button.mat-primary,
+  body.theme-default .mat-fab.mat-primary,
+  body.theme-default .mat-mini-fab.mat-primary {
     background-color: #90b645 !important;
-}
+  }
+
   .contact-div {
     width: 96%;
     position: relative;
