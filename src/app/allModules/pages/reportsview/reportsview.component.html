@@ -959,8 +959,9 @@
                         </div>
                       </div>
                       <div fxLayout="column">
-                        <button mat-flat-button style="margin-top: 34px;" [disabled]="bankaddbtn" (click)="bankAddClicked()">+</button>
+                        <button mat-flat-button style="margin-top: 34px;" (click)="bankAddClicked()">+</button>
                       </div>
+                      <!-- [disabled]="bankaddbtn"  -->
                       <!-- <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
                     <button mat-flat-button class="add1" (click)="onAdd()">+</button>
                   </div> -->
@@ -983,11 +984,11 @@
                             <tr *ngFor="let item of BankData even as isEven;let i = index"
                               [ngStyle]="{ background: isEven ? 'white' : '#f1f1f5'}">
                             
-                                <td (click)="rowSelected(i)"><span>{{i+1}}</span></td>
-                                <td (click)="rowSelected(i)"><span>{{item?.BankName}}</span></td>
-                                <td (click)="rowSelected(i)"><span>{{item?.BankAddress}}</span></td>
-                                <td (click)="rowSelected(i)"><span>{{item?.IFSC}}</span></td>
-                                <td (click)="rowSelected(i)"><span>{{item?.AccountNum}}</span></td>
+                                <td (click)="rowSelected(item,i)"><span>{{i+1}}</span></td>
+                                <td (click)="rowSelected(item,i)"><span>{{item?.BankName}}</span></td>
+                                <td (click)="rowSelected(item,i)"><span>{{item?.BankAddress}}</span></td>
+                                <td (click)="rowSelected(item,i)"><span>{{item?.IFSC}}</span></td>
+                                <td (click)="rowSelected(item,i)"><span>{{item?.AccountNum}}</span></td>
                              
                              
                             </tr>

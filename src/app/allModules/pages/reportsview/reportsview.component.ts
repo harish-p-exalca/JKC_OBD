@@ -642,25 +642,14 @@ import {
   
         // });
     }
-    rowSelected(index) {
+    rowSelected(item,index) {
         this.SelectedDeselectRow = index;
-        console.log("Index : ", index);
-        console.log("Data : ", this.BankData);
-        for (let bank of this.BankData) {
-            var bankdetails = new BankDetails();
-            this.BankForm.get('bankacno').patchValue(bank.AccountNum)
-            this.BankForm.get('bankaddress').patchValue(bank.BankAddress)
-            this.BankForm.get('bankname').patchValue(bank.BankName)
-            this.BankForm.get('ifsccode').patchValue(bank.IFSC)
-            console.log("Bank : ", this.BankForm);
-            bankdetails.AccountNum = bank.AccountNum
-            bankdetails.BankAddress = bank.BankAddress
-            bankdetails.BankName = bank.BankName
-            bankdetails.IFSC = bank.IFSC
-            console.log("Bank details : ", this.bankdetails);
-  
-        }
-  
+        console.log("Item : ",item);
+        this.BankForm.get('bankacno').patchValue(item.AccountNum)
+        this.BankForm.get('bankaddress').patchValue(item.BankAddress)
+        this.BankForm.get('bankname').patchValue(item.BankName)
+        this.BankForm.get('ifsccode').patchValue(item.IFSC)
+
     }
     bankAddClicked() {
         if (this.BankForm.valid) {
@@ -671,6 +660,7 @@ import {
             identity.IFSC = this.BankForm.get("ifsccode").value;
             identity.TransID = this.transID;
             this.BankData.push(identity);
+            this.BankForm.reset();
         }
         if (this.bankdetails != null) {
             var identity = new BankDetails();
@@ -679,16 +669,16 @@ import {
             identity.BankName = this.BankForm.get("bankname").value;
             identity.IFSC = this.BankForm.get("ifsccode").value;
             if (this.BankData.length != null) {
-                this.bankaddbtn = true;
+                // this.bankaddbtn = true;
                 this.BankData.push(identity);
                 console.log("Identity", identity);
-                this.ClearAll();
+                this.BankForm.reset();
             }
         }
         if (this.SelectedDeselectRow > -1) {
             this.bankdetails.splice(this.SelectedDeselectRow, 1);
             this.SelectedDeselectRow = -1
-            this.ClearAll();
+            this.BankForm.reset();
         }
   
         //    console.log("patchvalue: ",this.BankForm.get("bankacno").value);
@@ -701,9 +691,9 @@ import {
         //     this._commonService.ShowValidationErrors(this.BIform);
         // }
     }
-    ClearAll(): void {
-        this.BankForm.reset();
-    }
+    // ClearAll(): void {
+    //     this.BankForm.reset();
+    // }
   
     GetBankDetails() {
         this.isProgressBarVisibile = true;
