@@ -159,6 +159,8 @@ export class BankDetails {
     IFSC: string;
     AccountNum: string;
     TransID: number;
+    // filter: any;
+    // includes: any;
 }
 export class AttachmentDetails {
     FileName: string;

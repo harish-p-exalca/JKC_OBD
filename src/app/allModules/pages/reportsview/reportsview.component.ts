@@ -10,13 +10,13 @@ import {
     MarketInformation,
     BusinessInformation,
     SecurityDepositDetail,
-  } from "./../../../models/master";
-  
-  import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-  import { CustomerOnboardingView1 } from "./../../../models/master";
-  // import { Component, OnInit } from "@angular/core";
-  import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-  import {
+} from "./../../../models/master";
+
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { CustomerOnboardingView1 } from "./../../../models/master";
+// import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
     AuthenticationDetails,
     BusinessInformationView,
     Cities,
@@ -24,43 +24,43 @@ import {
     MarketInformationView,
     PersonIdentity,
     States,
-  } from "app/models/master";
-  import { DashboardService } from "app/services/dashboard.service";
-  import { Monthlysales } from "../business/business.component";
-  import { NotificationSnackBarComponent } from "app/notifications/notification-snack-bar/notification-snack-bar.component";
-  import {
+} from "app/models/master";
+import { DashboardService } from "app/services/dashboard.service";
+import { Monthlysales } from "../business/business.component";
+import { NotificationSnackBarComponent } from "app/notifications/notification-snack-bar/notification-snack-bar.component";
+import {
     MatDialog,
     MatDialogConfig,
     MatSnackBar,
     MatTableDataSource,
-  } from "@angular/material";
-  import { SnackBarStatus } from "app/notifications/snackbar-status-enum";
-  import { Router } from "@angular/router";
-  import { DomSanitizer } from "@angular/platform-browser";
-  import { saveAs } from "file-saver";
-  import { of } from "rxjs";
-  import { id } from "@swimlane/ngx-charts/release/utils";
-  import { CommonService } from "app/services/common.service";
-  
-  export interface Element {
+} from "@angular/material";
+import { SnackBarStatus } from "app/notifications/snackbar-status-enum";
+import { Router } from "@angular/router";
+import { DomSanitizer } from "@angular/platform-browser";
+import { saveAs } from "file-saver";
+import { of } from "rxjs";
+import { id } from "@swimlane/ngx-charts/release/utils";
+import { CommonService } from "app/services/common.service";
+
+export interface Element {
     Role: string;
     Name: string;
     MobileNo: string;
     Emailid: string;
-  }
-  export interface BElement {
+}
+export interface BElement {
     BankDetailNo: string;
     BankName: string;
     BankAddress: string;
     IFSCCode: string;
     BankAcNumber: string;
-  }
-  export interface AverageSource {
+}
+export interface AverageSource {
     White_Cement_Wall_Putty: string;
     WP_Avg_Month_Sales: string;
     WC_Avg_Month_sales: string;
-  }
-  export interface SaleSource {
+}
+export interface SaleSource {
     Sale: string;
     Jan: string;
     Feb: string;
@@ -74,16 +74,16 @@ import {
     Oct: string;
     Nov: string;
     Dec: string;
-  }
-  const datas: Element[] = [
+}
+const datas: Element[] = [
     {
         Role: "1",
         Name: "prasath",
         MobileNo: "9486740455",
         Emailid: "prasath@exalca.com",
     },
-  ];
-  const bdatas: BElement[] = [
+];
+const bdatas: BElement[] = [
     {
         BankDetailNo: "1",
         BankName: "SBI",
@@ -91,16 +91,16 @@ import {
         IFSCCode: "SBIN0005943",
         BankAcNumber: "1230456987456321",
     },
-  ];
-  const avgdatasource: AverageSource[] = [
+];
+const avgdatasource: AverageSource[] = [
     {
         White_Cement_Wall_Putty: "prasath",
         WP_Avg_Month_Sales: "prasath",
         WC_Avg_Month_sales: "prasath",
     },
-  ];
-  
-  const sales: SaleSource[] = [
+];
+
+const sales: SaleSource[] = [
     {
         Sale: "WallmaxX",
         Jan: "jan",
@@ -146,15 +146,16 @@ import {
         Nov: "",
         Dec: "",
     },
-  ];
-  @Component({
+];
+@Component({
     selector: "app-reportsview",
     templateUrl: "./reportsview.component.html",
     styleUrls: ["./reportsview.component.scss"],
     encapsulation: ViewEncapsulation.None,
-  })
-  export class ReportsviewComponent implements OnInit {
+})
+export class ReportsviewComponent implements OnInit {
     bank: any;
+    selectedrowdata: any[] = [];
     bankaddbtn: boolean = false;
     SelectedDeselectRow: number;
     btnStyle = 'default-btn';
@@ -189,7 +190,7 @@ import {
         "WC_Avg_Month_sales",
     ];
     averageSalesDetails: any[] = [];
-  
+
     averageSalesDataSource: MatTableDataSource<AverageSale>;
     saleColumns: string[] = [
         "Sale",
@@ -267,7 +268,7 @@ import {
         );
         //this.listData = [];
     }
-  
+
     ngOnInit() {
         const retrievedObject = localStorage.getItem("authorizationData");
         if (retrievedObject) {
@@ -339,7 +340,7 @@ import {
                     // console.log(err);
                 }
             );
-  
+
             this._dashboardService
                 .GetAttachment(this.transID, "PanCard")
                 .subscribe(
@@ -421,8 +422,9 @@ import {
                     console.error(err);
                 }
             );
+
         this.firmForm = this.fb.group({
-  
+
             Status: [""],
             Name1: ["", Validators.required],
             Mobile1: [
@@ -438,7 +440,7 @@ import {
                     ),
                 ],
             ],
-  
+
         });
         this.MIform = this.fb.group({
             market: [""],
@@ -542,7 +544,7 @@ import {
             nameofbank: ["", Validators.required],
         });
         this.BankForm = this.fb.group({
-            bankno: ["", Validators.required],
+            // bankno: ["", Validators.required],
             bankname: ["", Validators.required],
             bankaddress: ["", Validators.required],
             ifsccode: [
@@ -561,18 +563,18 @@ import {
         this.bankbtn = false;
         this.businessbtn = false;
         switch (value) {
-  
+
             case 1: {
                 this.personalbtn = !this.personalbtn;
                 break;
             }
             case 2: {
-  
+
                 this.marketbtn = !this.marketbtn;
                 break;
             }
             case 3: {
-  
+
                 this.bankbtn = !this.bankbtn;
                 break;
             }
@@ -580,7 +582,7 @@ import {
                 this.businessbtn = !this.businessbtn;
                 break;
             }
-  
+
         }
     }
     scroll(el: HTMLElement) {
@@ -623,7 +625,7 @@ import {
             name: [""]
         })
         // this.firmForm = this.fb.group({
-  
+
         //     Status: [""],
         //     Name1: ["", Validators.required],
         //     Mobile1: [
@@ -639,38 +641,76 @@ import {
         //             ),
         //         ],
         //     ],
-  
+
         // });
     }
-    rowSelected(item,index) {
+    rowSelected(item, index) {
         this.SelectedDeselectRow = index;
-        console.log("Item : ",item);
+        this.selectedrowdata.push(item);
         this.BankForm.get('bankacno').patchValue(item.AccountNum)
         this.BankForm.get('bankaddress').patchValue(item.BankAddress)
         this.BankForm.get('bankname').patchValue(item.BankName)
         this.BankForm.get('ifsccode').patchValue(item.IFSC)
 
+
+        // this.BankData = this.BankData.filter(
+        //     (item,index) => index === this.BankData.indexOf(item)
+        // );
+        // console.log(this.BankData);
+        // this.BankForm.reset();
+
     }
     bankAddClicked() {
+        // console.log("this )
         if (this.BankForm.valid) {
-            var identity = new BankDetails();
-            identity.AccountNum = this.BankForm.get("bankacno").value;
-            identity.BankAddress = this.BankForm.get("bankaddress").value;
-            identity.BankName = this.BankForm.get("bankname").value;
-            identity.IFSC = this.BankForm.get("ifsccode").value;
-            identity.TransID = this.transID;
-            this.BankData.push(identity);
-            this.BankForm.reset();
-        }
-        if (this.bankdetails != null) {
-            var identity = new BankDetails();
-            identity.AccountNum = this.BankForm.get("bankacno").value;
-            identity.BankAddress = this.BankForm.get("bankaddress").value;
-            identity.BankName = this.BankForm.get("bankname").value;
-            identity.IFSC = this.BankForm.get("ifsccode").value;
-            if (this.BankData.length != null) {
-                // this.bankaddbtn = true;
+            console.log("Inside");
+            if(this.BankData.every(x => x.AccountNum != this.BankForm.get('bankacno').value)){
+                var identity = new BankDetails();
+                identity.AccountNum = this.BankForm.get("bankacno").value;
+                identity.BankAddress = this.BankForm.get("bankaddress").value;
+                identity.BankName = this.BankForm.get("bankname").value;
+                identity.IFSC = this.BankForm.get("ifsccode").value;
+                identity.TransID = this.transID;
+                // let uniquedata = this.BankData.filter(function(word)
+                // {
+                //  return !this.selectedrowdata.includes(word);
+                // });
+                // console.log("uniquedata : ",uniquedata);
+                console.log("Selectedrowdatta : ", this.selectedrowdata);
                 this.BankData.push(identity);
+                this.BankForm.reset();
+            }
+            else{
+                console.log("Duplicate");
+            }
+
+        }
+
+        if (this.selectedrowdata[0] && this.selectedrowdata != null) {
+            var identity = new BankDetails();
+            identity.AccountNum = this.BankForm.get("bankacno").value;
+            identity.BankAddress = this.BankForm.get("bankaddress").value;
+            identity.BankName = this.BankForm.get("bankname").value;
+            identity.IFSC = this.BankForm.get("ifsccode").value;
+
+            if (this.BankData.length != null) {
+                // let uniquedata = [];
+                // for(let i = 0 ; i < this.BankData.length ; i++){
+                //     if(uniquedata.indexOf(this.BankData[i]) === -1){
+                //         uniquedata.push(this.BankData[i]);
+                //         // this.BankData.push();
+                //     }
+                // }
+                // console.log("uniquedata : ",uniquedata);
+
+                // this.BankData = this.BankData.filter(function(val){
+                //     return this.selectedrowdata.indexOf(val) == -1;
+                // }); 
+
+                // this.BankData = this.BankData.filter(val => ! this.selectedrowdata.includes(val));
+                // console.log("Bankdata : ",this.BankData);
+                this.BankData.push(identity);
+                // this.BankData.push(identity);
                 console.log("Identity", identity);
                 this.BankForm.reset();
             }
@@ -680,13 +720,13 @@ import {
             this.SelectedDeselectRow = -1
             this.BankForm.reset();
         }
-  
+
         //    console.log("patchvalue: ",this.BankForm.get("bankacno").value);
         //    console.log("patchvalue: ",this.BankForm.get("bankaddress").value);
         //    console.log("patchvalue: ",this.BankForm.get("bankname").value);
         //    console.log("patchvalue: ",this.BankForm.get("ifsccode").value);
-  
-  
+
+
         //else {
         //     this._commonService.ShowValidationErrors(this.BIform);
         // }
@@ -694,7 +734,7 @@ import {
     // ClearAll(): void {
     //     this.BankForm.reset();
     // }
-  
+
     GetBankDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService
@@ -786,10 +826,10 @@ import {
             this.DepositForm.disable();
             // this.bankedit = true;
         }
-  
-  
+
+
     }
-  
+
     GetTransactionDetails() {
         this.isProgressBarVisibile = true;
         this._dashboardService
@@ -893,11 +933,11 @@ import {
         personalinformation.bankaddress = this.BankForm.get('bankaddress').value;
         personalinformation.ifsccode = this.BankForm.get('ifsccode').value;
         personalinformation.bankacno = this.BankForm.get('bankacno').value
-  
+
         return personalinformation;
     }
     SetPersonalInfoValues() {
-  
+
         if (this.Role == "ASM") {
             var products = null;
             if (
@@ -954,8 +994,8 @@ import {
             this.contactdataSource = new MatTableDataSource(this.Contactdetails);
             this.IdentityData = this.CustomerObdView.PersonalInfo.Identities;
         }
-  
-  
+
+
         if (this.Role == "SH" || this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts" || this.Role == "RAC") {
             var products = null;
             if (
@@ -1082,7 +1122,7 @@ import {
             this.PIform.get('Tehsil').disable();
             this.PIform.get('State').disable();
             this.PIform.get('Pincode').disable();
-  
+
         }
     }
     AvgData: AverageSale[] = [];
@@ -1098,11 +1138,11 @@ import {
             this._commonService.ShowValidationErrors(this.BrandForm);
         }
     }
-  
+
     onAdd(): void {
         this.AvgAddClicked();
     }
-  
+
     FirmStatusChange() {
         this.IdentityData = [];
     }
@@ -1127,7 +1167,7 @@ import {
                     PartyBackground: MarketInfoView.MarketInformation.Background,
                 });
                 this.averageSalesDetails = MarketInfoView.AverageSale;
-  
+
                 this.averageSalesDataSource = new MatTableDataSource(
                     this.averageSalesDetails
                 );
@@ -1156,7 +1196,7 @@ import {
                 this.averageSalesDetails = MarketInfoView.AverageSale;
                 this.averageSalesDataSource = new MatTableDataSource(
                     this.averageSalesDetails
-  
+
                 );
                 this.MIform.get('YearOfEstablished').disable();
                 this.MIform.get('TotalPotential').disable();
@@ -1166,7 +1206,7 @@ import {
                 this.MIform.get('PartyBackground').disable();
             }
         }
-  
+
         if (this.Role == "ZH" || this.Role == "DH" || this.Role == "Accounts") {
             if (MarketInfoView.MarketInformation.TransID != null) {
                 this.MIform.patchValue({
@@ -1288,7 +1328,7 @@ import {
                 this.BIform.disable();
             }
         }
-  
+
     }
     AlphabetsonlyOnly(event): boolean {
         const charCode = (event.which) ? event.which : event.keyCode;
@@ -1423,7 +1463,7 @@ import {
         // this.File  Error=false;
     }
     csv1InputChange(event) {
-  
+
         this.FileName1 = event.target.files[0].name;
         // // console.log(fileInputEvent.target.files[0]);
         this.handleFileInput(event, "GSTCertificate");
@@ -1513,8 +1553,8 @@ import {
             Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-  
-  
+
+
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
@@ -1562,10 +1602,10 @@ import {
             Customer.BankInfo.SecurityDeposit = this.GetSecurityInfoFromForm();
             Customer.BankInfo.BankDetailInfo = this.BankData;
             // console.log("Approve", Customer);
-  
+
             this.isProgressBarVisibile = true;
-  
-  
+
+
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
@@ -1716,8 +1756,8 @@ import {
             Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-  
-  
+
+
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
@@ -1767,8 +1807,8 @@ import {
             Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-  
-  
+
+
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
@@ -1818,8 +1858,8 @@ import {
             Cusotmer.PositionCode = this.authenticationDetails.PositionCode;
             Cusotmer.RoleName = this.authenticationDetails.UserRole;
             this.isProgressBarVisibile = true;
-  
-  
+
+
             this._dashboardService
                 .updateCustomerOnboardingStatus(Customer)
                 .subscribe(
@@ -1843,7 +1883,7 @@ import {
                     }
                 );
         }
-  
+
     }
     Reject(): void {
         var Cusotmer = new CustomerOnboardingView1();
@@ -2054,7 +2094,7 @@ import {
         //     this.OpenAttachmentDialog(fileName, blob);
         // } else {
         console.log("FileName :", this.FileName);
-  
+
         this.isProgressBarVisibile = true;
         this._dashboardService
             .DowloandAttachment(fileName, this.transID)
@@ -2113,5 +2153,4 @@ import {
         localStorage.removeItem("Approved");
         localStorage.removeItem("Rejected");
     }
-  }
-  
+}
