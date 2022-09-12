@@ -23,20 +23,20 @@
         </div>
       </button>
       <button mat-stroked-button [ngClass]="marketbtn?'change-btn':'default-btn'" (click)="btnclicked(2)"
-       class="marketbutton">
+        class="marketbutton">
 
         <div (click)="scroll(target1)">
           Market Information
         </div>
       </button>
-       <button mat-stroked-button [ngClass]="bankbtn?'change-btn':'default-btn'" (click)="btnclicked(3)"
-       class="businessbutton">
+      <button mat-stroked-button [ngClass]="bankbtn?'change-btn':'default-btn'" (click)="btnclicked(3)"
+        class="businessbutton">
         <div (click)="scroll(target2)">
           Business Information
         </div>
       </button>
       <button mat-stroked-button [ngClass]="businessbtn?'change-btn':'default-btn'" (click)="btnclicked(4)"
-      class="bankbutton">
+        class="bankbutton">
         <div (click)="scroll(target3)">
           Bank Information
         </div>
@@ -943,8 +943,6 @@
                       </div>
                       <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
                         <span class="leafnospan">Bank A/c Number*</span>
-
-
                         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                           <mat-form-field appearance="" class="formleaf">
                             <input matInput formControlName="bankacno" (keypress)="keyPressNumbers($event)"
@@ -959,14 +957,13 @@
                         </div>
                       </div>
                       <div fxLayout="column">
-                        <button mat-flat-button style="margin-top: 34px;" (click)="bankAddClicked()">+</button>
+                        <button mat-flat-button type="button" style="margin-top: 34px;"
+                          (click)="bankAddClicked()">+</button>
                       </div>
                       <!-- [disabled]="bankaddbtn"  -->
                       <!-- <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
                     <button mat-flat-button class="add1" (click)="onAdd()">+</button>
                   </div> -->
-
-
                     </div>
                     <div class="cement1">
                       <div fxLayout="row">
@@ -983,14 +980,14 @@
                           <tbody>
                             <tr *ngFor="let item of BankData even as isEven;let i = index"
                               [ngStyle]="{ background: isEven ? 'white' : '#f1f1f5'}">
-                            
-                                <td (click)="rowSelected(item,i)"><span>{{i+1}}</span></td>
-                                <td (click)="rowSelected(item,i)"><span>{{item?.BankName}}</span></td>
-                                <td (click)="rowSelected(item,i)"><span>{{item?.BankAddress}}</span></td>
-                                <td (click)="rowSelected(item,i)"><span>{{item?.IFSC}}</span></td>
-                                <td (click)="rowSelected(item,i)"><span>{{item?.AccountNum}}</span></td>
-                             
-                             
+
+                              <td (click)="rowSelected(item,i)"><span>{{i+1}}</span></td>
+                              <td (click)="rowSelected(item,i)"><span>{{item?.BankName}}</span></td>
+                              <td (click)="rowSelected(item,i)"><span>{{item?.BankAddress}}</span></td>
+                              <td (click)="rowSelected(item,i)"><span>{{item?.IFSC}}</span></td>
+                              <td (click)="rowSelected(item,i)"><span>{{item?.AccountNum}}</span></td>
+
+
                             </tr>
                           </tbody>
                         </table>
