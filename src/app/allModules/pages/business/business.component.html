@@ -81,7 +81,7 @@
             <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
               <div fxLayout="column" fxFlex="100" class="inner-inp_div">
                 <input autocomplete="off" placeholder=" Enter the working captial" formControlName="capitalinvest"
-                  class="inputform" required>
+                  class="inputform" (keypress)="keyPressNumbers($event)" required>
                 <mat-error class="errorn"
                   *ngIf="BIform?.get('capitalinvest')?.touched && BIform?.get('capitalinvest')?.hasError('required')">
                   Working Capital
@@ -98,7 +98,7 @@
             <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
               <div fxLayout="column" fxFlex="100" class="inner-inp_div">
                 <input autocomplete="off" placeholder=" Enter No.of.Vehicle owned" formControlName="vehicle"
-                  class="inputform" (keypress)="keyPressAlphaNumeric($event)" required>
+                  class="inputform" (keypress)="keyPressNumbers($event)"  required>
                 <mat-error class="errorn"
                   *ngIf="BIform?.get('vehicle')?.touched && BIform?.get('vehicle')?.hasError('required')">
                   No of Vehicle Owned

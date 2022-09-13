@@ -609,8 +609,9 @@
   }
 
   .change-btn {
+    background-color: #e9e9e9 !important;
     color: #1434AA !important;
-    border: 1px solid white !important;
+    border: 1px solid #e9e9e9 !important;
     min-width: 49px !important;
     line-height: 33px !important;
     padding: 0 40px !important;
@@ -646,16 +647,19 @@
       margin-top: 40px;
       position: fixed;
     }
-.businessbutton{
-  width: 14%;
-  margin-top: 80px;
-  position: fixed;
-}
-.bankbutton{
-  width: 14%;
-  margin-top: 120px;
-  position: fixed;
-}
+
+    .businessbutton {
+      width: 14%;
+      margin-top: 80px;
+      position: fixed;
+    }
+
+    .bankbutton {
+      width: 14%;
+      margin-top: 120px;
+      position: fixed;
+    }
+
     .inner_total_div {
       padding-top: 30px;
       width: 100%;
@@ -902,7 +906,7 @@
     margin-top: 10px;
 
     .reject_btn {
-      width: 14%;
+      width: 15%;
       height: 100%;
       // border: #EF2929 1px solid;
       border-radius: 4px;
@@ -910,19 +914,23 @@
       font-size: 12px !important;
       font-weight: 500;
       cursor: pointer;
+      position: relative;
+      right: 20px;
     }
 
     .approve_btn {
-      width: 14%;
+      width: 15%;
       height: 100%;
-      // border: #90b645 1px solid;
       border-radius: 4px;
       color: #e3ecd0;
       background-color: #90b645;
       font-size: 12px !important;
       font-weight: 500;
       cursor: pointer;
+      position: relative;
+      right: 20px;
     }
+
   }
 
   .mat-flat-button.mat-primary,
