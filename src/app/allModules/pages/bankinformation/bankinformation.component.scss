@@ -1,5 +1,19 @@
 #bank {
 
+  table {
+    width: 100% !important;
+    padding: 8px;
+    background-color: #cdccdc !important;
+    border: 1px solid #CCC;
+    border-collapse: collapse;
+  }
+  table th {
+    font-size: 13px;
+    text-align: center !important;
+    color: #00061C;
+    font-weight: 500;
+    height: 35px;
+}
 
   .formleaf {
     margin-top: 8px;
@@ -29,6 +43,11 @@
     border-radius: 5px;
     // margin-top: 40px;
     margin-left: 55px;
+  }
+  .attachmentfiles{
+    position: relative;
+    bottom: 17px;
+    right: 91px;
   }
 
   .Connection {
@@ -201,17 +220,17 @@
   }
 
 
-  
 
 
-  
+
+
 
   .image {
 
     width: 12%;
     position: fixed;
     padding-top: 7%;
-    padding-left: 1%;
+    margin-left: 14px;
   }
 
   .mins {
@@ -333,10 +352,9 @@
 
   .jkc {
 
-    //height: 48px;
     width: 10%;
     position: fixed;
-    /* margin-left: 1%; */
+    margin-left: 15px;
     padding-top: 20%;
   }
 

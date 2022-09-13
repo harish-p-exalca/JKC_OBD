@@ -10,6 +10,7 @@ import {
     MarketInformation,
     BusinessInformation,
     SecurityDepositDetail,
+    BankAccountResult,
 } from "./../../../models/master";
 
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
@@ -41,6 +42,7 @@ import { saveAs } from "file-saver";
 import { of } from "rxjs";
 import { id } from "@swimlane/ngx-charts/release/utils";
 import { CommonService } from "app/services/common.service";
+import { runInThisContext } from "vm";
 
 export interface Element {
     Role: string;
@@ -664,26 +666,64 @@ export class ReportsviewComponent implements OnInit {
         // console.log("this )
         if (this.BankForm.valid) {
             console.log("Inside");
-            if(this.BankData.every(x => x.AccountNum != this.BankForm.get('bankacno').value)){
+            if (this.BankData.every(x => x.AccountNum != this.BankForm.get('bankacno').value) && this.selectedrowdata[0]) {
                 var identity = new BankDetails();
                 identity.AccountNum = this.BankForm.get("bankacno").value;
                 identity.BankAddress = this.BankForm.get("bankaddress").value;
                 identity.BankName = this.BankForm.get("bankname").value;
                 identity.IFSC = this.BankForm.get("ifsccode").value;
                 identity.TransID = this.transID;
+                this._dashboardService.ValidateBankAccount(identity.AccountNum, identity.IFSC).subscribe(data => {
+                   
+                    let res = data as BankAccountResult;
+                    if (res) {
+                        this.BankForm.reset();
+                        if (res.valid) {
+                            this.listData.push(identity);
+                        } else {
+                            this.notificationSnackBarComponent.openSnackBar(`${res.message}`, SnackBarStatus.danger);
+
+                        }
+                    } else {
+                    }
+                }, (err) => {
+                    console.error(err);
+                    this.BankForm.reset();
+                    this.notificationSnackBarComponent.openSnackBar(`Invalid Account Number or IFSC Code`, SnackBarStatus.danger);
+                });
                 // let uniquedata = this.BankData.filter(function(word)
                 // {
                 //  return !this.selectedrowdata.includes(word);
                 // });
                 // console.log("uniquedata : ",uniquedata);
-                console.log("Selectedrowdatta : ", this.selectedrowdata);
-                this.BankData.push(identity);
+                // console.log("Selectedrowdatta : ", this.selectedrowdata);
+                // this.BankData.push(identity);
                 this.BankForm.reset();
             }
-            else{
-                console.log("Duplicate");
-            }
+            // else if(this.selectedrowdata[1] && this.selectedrowdata!=null)  {
+            //     console.log("Duplicate");
+            //     this.notificationSnackBarComponent.openSnackBar(
+            //         "Updated Successfully",
+            //         SnackBarStatus.success
+            //     );
+            // }
 
+
+            // else{
+            //     this.notificationSnackBarComponent.openSnackBar(
+            //         "Account number already exist",
+            //         SnackBarStatus.danger
+            //     );
+            // }
+
+
+        }
+        else {
+            console.log("Duplicate");
+            this.notificationSnackBarComponent.openSnackBar(
+                "Invalid values",
+                SnackBarStatus.danger
+            );
         }
 
         if (this.selectedrowdata[0] && this.selectedrowdata != null) {
@@ -692,28 +732,52 @@ export class ReportsviewComponent implements OnInit {
             identity.BankAddress = this.BankForm.get("bankaddress").value;
             identity.BankName = this.BankForm.get("bankname").value;
             identity.IFSC = this.BankForm.get("ifsccode").value;
+            // this._dashboardService.ValidateBankAccount().subscribe(data => {
+            //     let res = data as BankAccountResult;
+            //     if (res) {
+            //       if (res.valid) {
+            //         this.listData.push(identity);
+            //       } else {
+            //         this.notificationSnackBarComponent.openSnackBar(`${res.message}`, SnackBarStatus.danger);
+            //       }
+            //     } else {
+            //     }
+            //   }, (err) => {
+            //     console.error(err);
+            //     this.notificationSnackBarComponent.openSnackBar(`Invalid Account Number or IFSC Code`, SnackBarStatus.danger);
+            //   });
 
-            if (this.BankData.length != null) {
-                // let uniquedata = [];
-                // for(let i = 0 ; i < this.BankData.length ; i++){
-                //     if(uniquedata.indexOf(this.BankData[i]) === -1){
-                //         uniquedata.push(this.BankData[i]);
-                //         // this.BankData.push();
-                //     }
-                // }
-                // console.log("uniquedata : ",uniquedata);
+            // if (this.BankData.length != null) {
+            // let uniquedata = [];
+            // for(let i = 0 ; i < this.BankData.length ; i++){
+            //     if(uniquedata.indexOf(this.BankData[i]) === -1){
+            //         uniquedata.push(this.BankData[i]);
+            //         // this.BankData.push();
+            //     }
+            // }
+            // console.log("uniquedata : ",uniquedata);
 
-                // this.BankData = this.BankData.filter(function(val){
-                //     return this.selectedrowdata.indexOf(val) == -1;
-                // }); 
+            // this.BankData = this.BankData.filter(function(val){
+            //     return this.selectedrowdata.indexOf(val) == -1;
+            // }); 
 
-                // this.BankData = this.BankData.filter(val => ! this.selectedrowdata.includes(val));
-                // console.log("Bankdata : ",this.BankData);
-                this.BankData.push(identity);
-                // this.BankData.push(identity);
-                console.log("Identity", identity);
-                this.BankForm.reset();
-            }
+            // this.BankData = this.BankData.filter(val => ! this.selectedrowdata.includes(val));
+            // console.log("Bankdata : ",this.BankData);
+
+
+
+            this.notificationSnackBarComponent.openSnackBar(
+                "Updated Successfully",
+                SnackBarStatus.success
+            );
+            // this.BankData.push(identity);
+            this.BankData.push(identity);
+            console.log("Identity", identity);
+
+            this.selectedrowdata = null;
+            console.log("Selectedrowdatta : ", this.selectedrowdata);
+            this.BankForm.reset();
+            // }
         }
         if (this.SelectedDeselectRow > -1) {
             this.bankdetails.splice(this.SelectedDeselectRow, 1);
@@ -764,13 +828,6 @@ export class ReportsviewComponent implements OnInit {
                     Amount: bankInfoView.SecurityDeposit.Amount,
                     nameofbank: bankInfoView.SecurityDeposit.BankName,
                 });
-                // this.BankForm.patchValue({
-                //     bankno : bankInfoView.SecurityDeposit.bankno,
-                //     bankname :bankInfoView.SecurityDeposit.bankname,
-                //     bankaddress : bankInfoView.SecurityDeposit.bankaddress,
-                //     ifsccode : bankInfoView.SecurityDeposit.ifsccode,
-                //     bankacno : bankInfoView.SecurityDeposit.bankacno
-                // })
             }
             this.bankdetails = bankInfoView.BankDetailInfo;
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
@@ -787,13 +844,7 @@ export class ReportsviewComponent implements OnInit {
                     Amount: bankInfoView.SecurityDeposit.Amount,
                     nameofbank: bankInfoView.SecurityDeposit.BankName,
                 });
-                this.BankForm.patchValue({
-                    bankno: bankInfoView.SecurityDeposit.bankno,
-                    bankname: bankInfoView.SecurityDeposit.bankname,
-                    bankaddress: bankInfoView.SecurityDeposit.bankaddress,
-                    ifsccode: bankInfoView.SecurityDeposit.ifsccode,
-                    bankacno: bankInfoView.SecurityDeposit.bankacno
-                })
+             
             }
             this.bankdetails = bankInfoView.BankDetailInfo;
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
@@ -812,19 +863,12 @@ export class ReportsviewComponent implements OnInit {
                     Amount: bankInfoView.SecurityDeposit.Amount,
                     nameofbank: bankInfoView.SecurityDeposit.BankName,
                 });
-                this.BankForm.patchValue({
-                    bankno: bankInfoView.SecurityDeposit.bankno,
-                    bankname: bankInfoView.SecurityDeposit.bankname,
-                    bankaddress: bankInfoView.SecurityDeposit.bankaddress,
-                    ifsccode: bankInfoView.SecurityDeposit.ifsccode,
-                    bankacno: bankInfoView.SecurityDeposit.bankacno
-                })
             }
             this.bankdetails = bankInfoView.BankDetailInfo;
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
             this.BankData = bankInfoView.BankDetailInfo;
             this.DepositForm.disable();
-            // this.bankedit = true;
+            
         }
 
 
@@ -928,11 +972,11 @@ export class ReportsviewComponent implements OnInit {
         personalinformation.Amount = this.DepositForm.get('Amount').value;
         personalinformation.BankName = this.DepositForm.get('nameofbank').value;
         personalinformation.TransID = this.transID;
-        personalinformation.bankno = this.BankForm.get('bankno').value;
-        personalinformation.bankname = this.BankForm.get('bankname').value;
-        personalinformation.bankaddress = this.BankForm.get('bankaddress').value;
-        personalinformation.ifsccode = this.BankForm.get('ifsccode').value;
-        personalinformation.bankacno = this.BankForm.get('bankacno').value
+        // personalinformation.bankno = this.BankForm.get('bankno').value;
+        // personalinformation.bankname = this.BankForm.get('bankname').value;
+        // personalinformation.bankaddress = this.BankForm.get('bankaddress').value;
+        // personalinformation.ifsccode = this.BankForm.get('ifsccode').value;
+        // personalinformation.bankacno = this.BankForm.get('bankacno').value
 
         return personalinformation;
     }
@@ -1454,8 +1498,7 @@ export class ReportsviewComponent implements OnInit {
         if (this.Attach1.AttachmentName != null) {
             this.Attach1 = null;
         }
-        // // console.log(fileInputEvent.target.files[0]);
-        // this.GetAttachment(fileInputEvent.target.files[0],"PAN");
+      
     }
     onSelect(event) {
         this.files[0] = event.addedFiles[0];

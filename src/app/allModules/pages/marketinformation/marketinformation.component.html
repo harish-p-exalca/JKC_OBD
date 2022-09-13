@@ -102,8 +102,8 @@
               <input autocomplete="off" matInput mode="YEAR" placeholder="Year of Establishment"
                 formControlName="YearOfEstablished" class="inputform " (keypress)="keyPressNumbers($event)" required>
               <mat-error class="errorn"
-                *ngIf=" MIform?.get('YearOfEstablished')?.touched && MIform?.get('YearOfEstablished')?.hasError('maxLength') && MIform?.get('YearOfEstablished')?.hasError('minLength')">
-                Invalid Year
+                *ngIf=" MIform?.get('YearOfEstablished')?.touched && MIform?.get('YearOfEstablished')?.hasError('pattern')">
+                Invalid year
               </mat-error>
               <mat-error class="errorn"
                 *ngIf=" MIform?.get('YearOfEstablished')?.touched && MIform?.get('YearOfEstablished')?.hasError('required')">
