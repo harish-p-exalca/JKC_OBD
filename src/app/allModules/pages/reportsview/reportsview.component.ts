@@ -11,6 +11,9 @@ import {
     BusinessInformation,
     SecurityDepositDetail,
     BankAccountResult,
+    ImageResult,
+    PANOCRResult,
+    GSTOCRResult,
 } from "./../../../models/master";
 
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
@@ -157,6 +160,11 @@ const sales: SaleSource[] = [
 })
 export class ReportsviewComponent implements OnInit {
     bank: any;
+    PannumberOCR: any;
+    PanNameOCR: string;
+    GSTinOCR: any;
+    GSTnameOCR: any;
+    FileError: boolean = true;
     selectedrowdata: any[] = [];
     bankaddbtn: boolean = false;
     SelectedDeselectRow: number;
@@ -674,7 +682,7 @@ export class ReportsviewComponent implements OnInit {
                 identity.IFSC = this.BankForm.get("ifsccode").value;
                 identity.TransID = this.transID;
                 this._dashboardService.ValidateBankAccount(identity.AccountNum, identity.IFSC).subscribe(data => {
-                   
+
                     let res = data as BankAccountResult;
                     if (res) {
                         this.BankForm.reset();
@@ -844,7 +852,7 @@ export class ReportsviewComponent implements OnInit {
                     Amount: bankInfoView.SecurityDeposit.Amount,
                     nameofbank: bankInfoView.SecurityDeposit.BankName,
                 });
-             
+
             }
             this.bankdetails = bankInfoView.BankDetailInfo;
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
@@ -868,7 +876,7 @@ export class ReportsviewComponent implements OnInit {
             this.bankdetailsdataSource = new MatTableDataSource(this.bankdetails);
             this.BankData = bankInfoView.BankDetailInfo;
             this.DepositForm.disable();
-            
+
         }
 
 
@@ -1494,11 +1502,51 @@ export class ReportsviewComponent implements OnInit {
     FileName7: any;
     csvInputChange(event) {
         this.handleFileInput(event, "PanCard");
-        this.FileName = event.target.files[0].name;
-        if (this.Attach1.AttachmentName != null) {
-            this.Attach1 = null;
+        // this.FileName = event.target.files[0].name;
+        // if (this.Attach1.AttachmentName != null) {
+        //     this.Attach1 = null;
+        // }
+
+        if (event.target && event.target.files && event.target.files.length) {
+            // const reader = new FileReader();
+            // reader.readAsDataURL(event.target.files[0]);
+            // reader.onload = () => {
+            //    // console.log(reader.result);
+
+            this._dashboardService.UploadImage(event.target.files[0]).subscribe(
+                data => {
+                    let res = data as ImageResult;
+                    if (res) {
+                        this._dashboardService.ExtractPANDetails(res._id).subscribe(
+                            data1 => {
+                                let res1 = data1 as PANOCRResult;
+                                this.PannumberOCR = res1.data.pan;
+                                this.PanNameOCR = res1.data.name
+                                if (res1.valid) {
+                                    this.handleFileInput(event, "PanCard");
+                                    this.FileName = event.target.files[0].name;
+                                    this.FileError = false;
+                                } else {
+                                    this.notificationSnackBarComponent.openSnackBar(`${res1.message}`, SnackBarStatus.danger);
+                                }
+                            },
+                            err1 => {
+                                console.error(err1);
+                            }
+                        )
+                    }
+                },
+                err => {
+                    console.error(err);
+                }
+            )
+
+            // };
+            // this.handleFileInput(event, "PanCard");
+            // this.FileName = event.target.files[0].name;
+            // this.FileError = false;
         }
-      
+
     }
     onSelect(event) {
         this.files[0] = event.addedFiles[0];
@@ -1509,11 +1557,44 @@ export class ReportsviewComponent implements OnInit {
 
         this.FileName1 = event.target.files[0].name;
         // // console.log(fileInputEvent.target.files[0]);
-        this.handleFileInput(event, "GSTCertificate");
-        if (this.Attach2.AttachmentName != null) {
-            this.Attach2 = null;
-        }
+        // this.handleFileInput(event, "GSTCertificate");
+        // if (this.Attach2.AttachmentName != null) {
+        //     this.Attach2 = null;
+        // }
         // this.GetAttachment(fileInputEvent.target.files[0],"GST");
+        if (event.target && event.target.files && event.target.files.length) {
+            this._dashboardService.UploadImage(event.target.files[0]).subscribe(
+              data => {
+                let res = data as ImageResult;
+                if (res) {
+                  this._dashboardService.ExtractGSTDetails(res._id).subscribe(
+                    data1 => {
+                      let res1 = data1 as GSTOCRResult;
+                      console.log("GST : ",res1);
+                      this.GSTinOCR = res1.data.gstin;
+                      this.GSTnameOCR = res1.data.legalName;
+                      if (res1.valid) {
+                        this.FileName1 = event.target.files[0].name;
+                        // // console.log(fileInputEvent.target.files[0]);
+                        this.handleFileInput(event, "GSTCertificate");
+                      } else {
+                        this.notificationSnackBarComponent.openSnackBar(`${res1.message}`, SnackBarStatus.danger);
+                      }
+                    },
+                    err1 => {
+                      console.error(err1);
+                    }
+                  )
+                }
+              },
+              err => {
+                console.error(err);
+              }
+            )
+            // this.FileName1 = event.target.files[0].name;
+            // // // console.log(fileInputEvent.target.files[0]);
+            // this.handleFileInput(event, "GSTCertificate");
+          }
     }
     csv2InputChange(event) {
         this.FileName2 = event.target.files[0].name;
