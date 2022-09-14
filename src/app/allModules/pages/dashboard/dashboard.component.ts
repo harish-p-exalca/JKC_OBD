@@ -192,7 +192,7 @@ export class DashboardComponent implements OnInit {
             District: ["", Validators.required],
             City: ["", Validators.required],
             Taluka: ["", Validators.required],
-            Tehsil: ["", Validators.required],
+            Tehsil: [""],
             State: ["", Validators.required],
             Pincode: [
                 "",
@@ -606,6 +606,8 @@ export class DashboardComponent implements OnInit {
         );
         this._dashboardService.GetGeoLocationMasters("district", event.StateName).subscribe(res => {
             this.Districts = res;
+            console.log("district : ",this.Districts);
+            
         });
     }
     districtSelected($event) {

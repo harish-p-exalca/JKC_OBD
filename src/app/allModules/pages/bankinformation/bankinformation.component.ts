@@ -36,6 +36,10 @@ import { saveAs } from "file-saver";
   animations: fuseAnimations
 })
 export class BankinformationComponent implements OnInit {
+  PannumberOCR:any;
+  PanNameOCR: string;
+  GSTinOCR:any;
+  GSTnameOCR: any;
   links = ['Bank Details 1', 'Bank Details 2'];
   activeLink = this.links[0];
   leaflist: string[] = ['DD', 'RTGS UTR', 'NEFT', 'IMPS', 'Cheque']
@@ -566,6 +570,8 @@ export class BankinformationComponent implements OnInit {
               this._dashboardService.ExtractPANDetails(res._id).subscribe(
                 data1 => {
                   let res1 = data1 as PANOCRResult;
+                  this.PannumberOCR = res1.data.pan;
+                  this.PanNameOCR = res1.data.name
                   if (res1.valid) {
                     this.handleFileInput(event, "PanCard");
                     this.FileName = event.target.files[0].name;
@@ -608,6 +614,9 @@ export class BankinformationComponent implements OnInit {
             this._dashboardService.ExtractGSTDetails(res._id).subscribe(
               data1 => {
                 let res1 = data1 as GSTOCRResult;
+                console.log("GST : ",res1);
+                this.GSTinOCR = res1.data.gstin;
+                this.GSTnameOCR = res1.data.legalName;
                 if (res1.valid) {
                   this.FileName1 = event.target.files[0].name;
                   // // console.log(fileInputEvent.target.files[0]);
