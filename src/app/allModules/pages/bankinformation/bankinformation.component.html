@@ -122,11 +122,11 @@
           <form [formGroup]="BankForm">
             <ng-template matStepLabel>Bank Details of Firm/Party</ng-template>
             <div fxLayout="row" fxLayoutGap="10px">
-              <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
-                <span class="leafspan">Bank Name*</span>
+              <!-- <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                <span class="">Bank Name*</span>
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
-                  <mat-form-field appearance="" class="formleaf" style="margin-top:25px;">
+                  <mat-form-field appearance="" class="formleaf">
                     <input matInput (keypress)="AlphabetsonlyOnly($event)" formControlName="bankname" style="width: 100%;"
                       class="inputformm">
                     <mat-error class="errorn"
@@ -137,9 +137,25 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+              </div> -->
+              <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
+                <span class="">Bank Name*</span>
+
+                <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+                  <mat-form-field appearance="" class="formleaf">
+                    <input matInput (keypress)="AlphabetsonlyOnly($event)" class="inputformm" formControlName="bankname"
+                      style="width: 100%;">
+                    <mat-error class="errorn"
+                      *ngIf="BankForm?.get('bankname')?.touched && BankForm?.get('bankname')?.hasError('required')">
+                      Bank Name
+                      is
+                      required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
               </div>
               <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
-                <span class="leafnospan">Bank Address*</span>
+                <span class="">Bank Address*</span>
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                   <mat-form-field appearance="" class="formleaf">
@@ -155,7 +171,7 @@
                 </div>
               </div>
               <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
-                <span class="leafnospan">IFSC Code*</span>
+                <span class="">IFSC Code*</span>
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
                   <mat-form-field appearance="" class="formleaf">
@@ -175,7 +191,7 @@
                 </div>
               </div>
               <div fxLayout="column" fxLayoutAlign="start start" FxFlex="100">
-                <span class="leafnospan">Bank A/c Number*</span>
+                <span class="">Bank A/c Number*</span>
 
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
@@ -450,7 +466,7 @@
                 </div>
                 <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
                   <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
-                    accept="application/pdf,image/png, image/jpg" (change)="csvInputChange($event)" />
+                    accept="application/pdf,image/png, image/jpg, image/jpeg" (change)="csvInputChange($event)" />
                   <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled"
                     (click)="csvInput.click()" style="color: green;">Upload</button>
                 </div>
@@ -466,7 +482,7 @@
                 </div>
                 <div fxLayout="column" fxFlex="30" fxLayoutAlign="start start">
                   <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
-                    accept="application/pdf,image/png, image/jpg" (change)="csv1InputChange($event)" />
+                    accept="application/pdf,image/png, image/jpg, image/jpeg" (change)="csv1InputChange($event)" />
                   <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled"
                     (click)="csvInput1.click()" style="color: green;">Upload</button>
                 </div>
