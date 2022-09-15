@@ -191,7 +191,7 @@ const routes = [
         dialogComponent,
         BankdialogComponent,
         ForgetPasswordLinkDialogComponent,
-        AttachmentDialogComponent,
+        AttachmentDialogComponent
     ]
 })
 export class PagesModule { }

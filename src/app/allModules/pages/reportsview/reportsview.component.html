@@ -49,14 +49,24 @@
 
     <div fxLayout="column" fxFlex="80" fxLayoutAlign="center start" class="inner_total_div">
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1" fxFlex="40">
-        <form [formGroup]="PIform" fxLayoutAlign="space-around start" class="form_div">
-          <div fxLayout="column" class="form_div_I">
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+        <form [formGroup]="PIform" fxLayoutAlign="start start" class="form_div">
+          <div fxLayout="column" fxLayoutAlign="start start"  class="form_div_I">
+            <div fxLayout="row" class="populationclass" fxFlex="100">
               <span fxFlex="50" class="marketsp">Type of Category</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Select the type of Catagory" formControlName="category"
-                    class="inputform2">
+              <div class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name">
+                    <!-- <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" style="margin-top: 4px;"> -->
+                      <!-- <img src="../../assets/images/user_id.svg" width="12px" style="margin: 2px 0 0 8px;"> -->
+                      <input fxFlex matInput placeholder="Select the type of Catagory" formControlName="category" class="nameinput">
+                    <!-- </div> -->
+                    <!-- <mat-error
+                      *ngIf="signinForm?.get('userName')?.touched && signinForm?.get('userName')?.hasError('required')">
+                      User name is required
+                    </mat-error> -->
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Select the type of Catagory" formControlName="category"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -66,7 +76,10 @@
               <span fxFlex="50" class="marketsp">Name of the Firm</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Firm Name" formControlName="Name" class="inputform2">
+                  <mat-form-field appearance="outline" class="name">
+                    <input fxFlex matInput placeholder="Enter Firm Name" formControlName="Name" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Enter Firm Name" formControlName="Name" class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -74,7 +87,10 @@
               <span fxFlex="50" class="marketsp">City/Taluk/Tehell/District</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Address" formControlName="Address" class="inputform2">
+                  <mat-form-field appearance="outline" class="name">
+                    <input fxFlex matInput placeholder="Enter Address" formControlName="Address" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Enter Address" formControlName="Address" class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -82,7 +98,10 @@
               <span fxFlex="50" class="marketsp">Pincode</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter Pincode" formControlName="Pincode" class="inputform2">
+                  <mat-form-field appearance="outline" class="name">
+                    <input fxFlex matInput placeholder="Enter Pincode" formControlName="Pincode" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Enter Pincode" formControlName="Pincode" class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -1094,7 +1113,7 @@
 
                     </div>
                     <div fxLayout="column"  fxLayoutAlign="start start" class="pan" fxLayoutGap="0">
-                      <p>{{FileName2}}</p>
+                      <p class="imagenamedisplay">{{FileName2}}</p>
                       <p *ngIf="Attach3?.AttachmentName"> {{Attach3?.AttachmentName}}</p>
                     </div>
 
@@ -1114,7 +1133,7 @@
                     </div>
 
                     <div fxLayout="column" fxLayoutAlign="start start" class="pan" fxLayoutGap="0">
-                      <p>{{FileName3}}</p>
+                      <p class="imagenamedisplay">{{FileName3}}</p>
                       <p *ngIf="Attach4?.AttachmentName"> {{Attach4?.AttachmentName}}</p>
                     </div>
                   </div>
@@ -1132,7 +1151,7 @@
 
                     </div>
                     <div fxLayout="column" fxLayoutAlign="start start" class="pan" fxLayoutGap="0">
-                      <p>{{FileName4}}</p>
+                      <p class="imagenamedisplay">{{FileName4}}</p>
                       <p *ngIf="Attach5?.AttachmentName"> {{Attach5?.AttachmentName}}</p>
                     </div>
 
@@ -1151,7 +1170,7 @@
 
                     </div>
                     <div fxLayout="column" fxLayoutAlign="start start" class="pan" fxLayoutGap="0">
-                      <p>{{FileName5}}</p>
+                      <p class="imagenamedisplay">{{FileName5}}</p>
                       <p *ngIf="Attach6?.AttachmentName"> {{Attach6?.AttachmentName}}</p>
                     </div>
 
@@ -1161,7 +1180,7 @@
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
 
-                    <div fxLayout="column" fxFlex="50">
+                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start start">
 
                       <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
                         accept="application/pdf,image/png, image/jpg" (change)="csv6InputChange($event)" />
@@ -1169,8 +1188,8 @@
                         (click)="csvInput6.click()" style="color: green;">Upload</button>
 
                     </div>
-                    <div fxLayout="column" fxFlex="50">
-                      <p>{{FileName6}}</p>
+                    <div fxLayout="column" fxLayoutAlign="start start" class="pan" fxLayoutGap="0">
+                      <p class="imagenamedisplay">{{FileName6}}</p>
                       <p *ngIf="Attach7?.AttachmentName"> {{Attach7?.AttachmentName}}</p>
                     </div>
 
@@ -1179,15 +1198,15 @@
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
 
-                    <div fxLayout="column" fxFlex="50">
+                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start start">
 
                       <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
                         accept="application/pdf,image/png, image/jpg" (change)="csv7InputChange($event)" />
                       <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled"
                         (click)="csvInput7.click()" style="color: green;">Upload</button>
                     </div>
-                    <div fxLayout="column" fxFlex="50">
-                      <p>{{FileName7}}</p>
+                    <div fxLayout="column" fxLayoutAlign="start start" class="pan" fxLayoutGap="0">
+                      <p class="imagenamedisplay">{{FileName7}}</p>
                       <p *ngIf="Attach8?.AttachmentName"> {{Attach8?.AttachmentName}}</p>
                     </div>
 
