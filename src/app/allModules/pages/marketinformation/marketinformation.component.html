@@ -177,7 +177,7 @@
                 is
                 required
               </mat-error>
-
+              <div *ngIf="PanName" class="OCR">{{PanName}}</div>
             </div>
           </div>
 
@@ -200,7 +200,7 @@
                 is
                 required
               </mat-error>
-
+              <div *ngIf="GSTName" class="OCR">{{GSTName}}</div>
             </div>
 
             <!-- <div fxLayout="column">

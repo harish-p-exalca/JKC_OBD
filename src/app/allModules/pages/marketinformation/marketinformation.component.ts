@@ -77,6 +77,8 @@ export class MarketinformationComponent implements OnInit {
     MarketInfoView: MarketInformationView = new MarketInformationView();
     TransID: number;
     CustmerView: boolean = true;
+    PanName = "";
+    GSTName = "";
     constructor(
         private fb: FormBuilder,
         private _router: Router,
@@ -126,7 +128,7 @@ export class MarketinformationComponent implements OnInit {
             Stockist: [""],
             Distance: [""],
             NameOfNearest: [""],
-            YearOfEstablished: ["",[ Validators.required,Validators.pattern(/^[0-9]{4}$/)]],
+            YearOfEstablished: ["", [Validators.required, Validators.pattern(/^[0-9]{4}$/)]],
             AreasStockist: [""],
             TotalPotential: ["", Validators.required],
             JKAvg: ["", Validators.required],
@@ -310,6 +312,7 @@ export class MarketinformationComponent implements OnInit {
             if (res) {
                 if (res.valid) {
                     this.isgst = true;
+                    this.GSTName = res.legalName;
                 } else {
                     this.isgst = false;
                     this.notificationSnackBarComponent.openSnackBar(`${res.message}`, SnackBarStatus.danger);
@@ -341,6 +344,7 @@ export class MarketinformationComponent implements OnInit {
             if (res) {
                 if (res.valid) {
                     this.ispan = true;
+                    this.PanName = res.name;
                 } else {
                     this.ispan = false;
                     this.notificationSnackBarComponent.openSnackBar(`${res.message}`, SnackBarStatus.danger);
