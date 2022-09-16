@@ -1,5 +1,4 @@
-
-.background{
+.background {
     background-image: url('^/assets/images/login_bg.png');
     background-repeat: no-repeat;
     height: 100vh;
@@ -9,15 +8,18 @@
     background-position: right;
     background-color: white;
 }
-.picture{
+
+.picture {
     padding-left: 18%;
 }
-.bp{
+
+.bp {
     padding-top: 3%;
     font-size: 42px;
     //font-family: Arial, Helvetica, sans-serif;
 }
-.content1{
+
+.content1 {
     //font-family: Arial, Helvetica, sans-serif;
     color: #ACACAC;
     opacity: 1;
@@ -25,21 +27,25 @@
     letter-spacing: 0.3px;
     // padding-top: 1%;
 }
-.exalcaimg{
+
+.exalcaimg {
     padding-top: 5%;
 }
-.login{
+
+.login {
     background-color: white;
-    box-shadow: 0px 0px 1px  0 grey;
+    box-shadow: 0px 0px 1px 0 grey;
     height: 578px;
     width: 66%;
     margin-top: 0px;
     margin-left: 10px;
 }
+
 .remember-forgot-password {
     font-size: 13px;
     margin-top: 8px;
 }
+
 .forgot-password {
     font-size: 13px;
     font-weight: 500;
@@ -53,61 +59,71 @@
     padding-left: 43%;
     cursor: pointer;
 }
-.titleCP{
+
+.titleCP {
     font-size: 45px;
     opacity: 1;
 }
-.welcome{
- //font-family: Arial, Helvetica, sans-serif;
-   padding-top:25px ;
-   font-size: 16px;
+
+.welcome {
+    //font-family: Arial, Helvetica, sans-serif;
+    padding-top: 25px;
+    font-size: 16px;
 }
-.signin{
- //font-family: Arial, Helvetica, sans-serif;
- font-size: 16px;
- padding-top: 3%;
- padding-left: 12%;
- opacity: 0.67;
- letter-spacing: 0.5px;
+
+.signin {
+    //font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding-top: 3%;
+    padding-left: 12%;
+    opacity: 0.67;
+    letter-spacing: 0.5px;
 }
-.user{
- //font-family: Arial, Helvetica, sans-serif;
- font-size: 13px;
- padding-top: 3%;
- padding-left: 12%;
+
+.user {
+    //font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    padding-top: 3%;
+    padding-left: 12%;
 }
-.name{
+
+.name {
     //font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     padding-top: 2%;
     padding-left: 12%;
     padding-right: 12%;
     border: none !important;
-    
+
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
     color: white !important;
-    background-color:   rgb(243, 243, 246);
+    background-color: rgb(243, 243, 246);
     // background-color: #c9c3d8;
-  }
-  input.mat-input-element {
+}
+
+input.mat-input-element {
     color: black;
     // background-color: #c9c3d8;
-  }
-.userid{
+}
+
+.userid {
     width: 5%;
 }
-.nameinput{
+
+.nameinput {
     // height: 25px;
     border: none !important;
 }
-.pass{
+
+.pass {
     //font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     padding-left: 12%;
 }
-.password{
+
+.password {
     //font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     padding-top: 2%;
@@ -115,14 +131,16 @@
     padding-right: 12%;
     // height: 111px;
 }
-.forgot{
- //font-family: Arial, Helvetica, sans-serif;
- font-size: 14px;
- color: #1a1a83;
- padding-right: 16%;
- cursor: pointer;
+
+.forgot {
+    //font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #1a1a83;
+    padding-right: 16%;
+    cursor: pointer;
 }
-.btn{
+
+.btn {
     //font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     width: 76%;
@@ -130,7 +148,8 @@
     background-color: #1055A0 !important;
     color: white !important;
 }
-.or{
+
+.or {
     opacity: 0.6;
     //font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
@@ -138,18 +157,21 @@
     padding-left: 22%;
     padding-bottom: 5%;
 }
-.googleimg{
+
+.googleimg {
     width: 6%;
     padding-left: 7px;
     padding-bottom: 4%;
 }
-.google{
- //font-family: Arial, Helvetica, sans-serif;
- font-size: 16px;
- padding-top: 2px;
- font-weight: 600;
+
+.google {
+    //font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding-top: 2px;
+    font-weight: 600;
 }
-.account{
+
+.account {
     opacity: 0.6;
     //font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
@@ -157,22 +179,26 @@
     padding-left: 22%;
     // padding-bottom: 5%;
 }
-.signup{
- //font-family: Arial, Helvetica, sans-serif;
- font-size: 14px;
- color: #1a1a83;
- padding-top: 6%;
- cursor: pointer;
+
+.signup {
+    //font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #1a1a83;
+    padding-top: 6%;
+    cursor: pointer;
 }
-.mat-form-field{
+
+.mat-form-field {
     border: none;
 }
+
 input.mat-input-element {
     margin-top: 0px !important;
 }
+
 .ProgressBarPostion {
     position: absolute !important;
     top: 43%;
     z-index: 1;
     left: 62%;
-  }
+}

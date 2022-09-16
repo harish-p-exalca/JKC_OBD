@@ -45,38 +45,45 @@
     </div>
 
 
-    <mat-divider [vertical]="true"></mat-divider>
+    <!-- <mat-divider [vertical]="true"></mat-divider> -->
 
-    <div fxLayout="column" fxFlex="80" fxLayoutAlign="center start" class="inner_total_div">
-      <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1" fxFlex="40">
+    <div fxLayout="column" fxFlex="80" fxLayoutAlign="start start" class="inner_total_div">
+      <div class="subheading">Personal Information</div>
+      <div fxLayout="row" fxLayoutAlign="start start" class="sub_div1" fxFlex="40">
         <form [formGroup]="PIform" fxLayoutAlign="start start" class="form_div">
           <div fxLayout="column" fxLayoutAlign="start start"  class="form_div_I">
             <div fxLayout="row" class="populationclass" fxFlex="100">
-              <span fxFlex="50" class="marketsp">Type of Category</span>
+              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                <span fxFlex="50" class="marketsp" style="margin-top: 20px;">Type of Category</span>
+                <!-- <div class="sublabel">(Option to select only one)</div> -->
+              </div>
               <div class="inp_div">
                 <div class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name">
+                  <mat-form-field appearance="outline" class="name" >
+                    <input fxFlex matInput placeholder="Select the type of Catagory" formControlName="category" class="nameinput">
+                  </mat-form-field>
                     <!-- <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" style="margin-top: 4px;"> -->
                       <!-- <img src="../../assets/images/user_id.svg" width="12px" style="margin: 2px 0 0 8px;"> -->
-                      <input fxFlex matInput placeholder="Select the type of Catagory" formControlName="category" class="nameinput">
+                     
                     <!-- </div> -->
                     <!-- <mat-error
                       *ngIf="signinForm?.get('userName')?.touched && signinForm?.get('userName')?.hasError('required')">
                       User name is required
                     </mat-error> -->
-                  </mat-form-field>
+                 
                   <!-- <input fxFlex matInput placeholder="Select the type of Catagory" formControlName="category"
                     class="inputform2"> -->
                 </div>
               </div>
             </div>
-            <div class="sublabel">(Option to select only one)</div>
+            
+            <!-- <div class="sublabel">(Option to select only one)</div> -->
 
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Name of the Firm</span>
+              <span fxFlex="50" class="marketsp1" >Name of the Firm</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;bottom:20px;">
                     <input fxFlex matInput placeholder="Enter Firm Name" formControlName="Name" class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Enter Firm Name" formControlName="Name" class="inputform2"> -->
@@ -84,10 +91,10 @@
               </div>
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">City/Taluk/Tehell/District</span>
+              <span fxFlex="50" class="marketsp2">City/Taluk/Tehell/District</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;bottom:40px;">
                     <input fxFlex matInput placeholder="Enter Address" formControlName="Address" class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Enter Address" formControlName="Address" class="inputform2"> -->
@@ -95,10 +102,10 @@
               </div>
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Pincode</span>
+              <span fxFlex="50" class="marketsp3" >Pincode</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;bottom:60px;">
                     <input fxFlex matInput placeholder="Enter Pincode" formControlName="Pincode" class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Enter Pincode" formControlName="Pincode" class="inputform2"> -->
@@ -113,41 +120,54 @@
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <span fxFlex="50" class="marketsp">Type of Product</span>
-                <div class="sublabel">(Option to select only one)</div>
+                <!-- <div class="sublabel">(Option to select only one)</div> -->
               </div>
               <div class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Select the type of Product" formControlName="product"
-                    class="inputform2">
+                  <mat-form-field appearance="outline" class="name" >
+                    <input fxFlex matInput placeholder="Select the type of Product" formControlName="product" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Select the type of Product" formControlName="product"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Address (Shop/Road No. etc)</span>
+              <div class="inp_div">
+              <span fxFlex="50" class="marketsp1">Address (Shop/Road No. etc)</span>
+            </div>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform2">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;">
+                    <input fxFlex matInput placeholder="Select the State" formControlName="State" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Select the State" formControlName="State" class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">State</span>
+              <div class="inp_div">
+              <span fxFlex="50" class="marketsp2">State</span>
+            </div>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="District" formControlName="District" class="inputform2">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;">
+                    <input fxFlex matInput placeholder="District" formControlName="District" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="District" formControlName="District" class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <span fxFlex="50" class="marketsp">Status of the Firm</span>
+                <span fxFlex="50" class="marketsp3">Status of the Firm</span>
                 <div class="sublabel">i.e., Proprietor / Partnership / HUF /</div>
                 <div class="sublabel">Pvt Ltd / Limited</div>
               </div>
               <div class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected"
-                    (selectionChange)="FirmStatusChange()" formControlName="Status">
+                  <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected" appearance="outline"
+                    (selectionChange)="FirmStatusChange()" formControlName="Status" style="position: relative;right: 2px;">
                     <mat-option value="Proprietor">Proprietor</mat-option>
                     <mat-option value="Partnership">Partnership</mat-option>
                     <mat-option value="HUF">HUF</mat-option>
@@ -161,7 +181,12 @@
           </div>
         </form>
       </div>
-      <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
+
+
+
+
+
+      <!-- <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="firmForm" class="firmForm" *ngIf="selected">
 
           <div fxLayout="column" style="width:86%;margin-left: 5.5%;">
@@ -226,14 +251,20 @@
 
           </div>
         </form>
-      </div>
+      </div> -->
+
+
+
+
+
+
       <div class="contact-div" fxFlex="100">
         <form [formGroup]="ContactForm">
-          <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1" fxLayoutGap="40px">
+          <div fxLayout="row" fxLayoutAlign="start start" class="sub_div1" fxLayoutGap="40px">
             <div fxLayout="column" fxLayoutAlign="space-around start" class="form_div">
               <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
                 <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                  <span fxFlex="50" class="marketsp">Identify Person</span>
+                  <span fxFlex="50" class="marketspc">Identify Person</span>
                 </div>
                 <div class="inp_div">
                   <div fxLayout="row" fxFlex="100" class="inner-inp_div">
@@ -253,10 +284,13 @@
               </div>
               <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
                 <div class="inp_div">
-                  <span fxFlex="50" class="marketsp">DOB</span>
+                  <span fxFlex="50" class="marketspc1">DOB</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div class="inner-inp_div">
-                      <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="inputform2">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;left: 19px;width: 113%;">
+                        <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="inputform2"> -->
                     </div>
                   </div>
                 </div>
@@ -264,11 +298,14 @@
 
               <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
                 <div class="inp_div">
-                  <span fxFlex="50" class="marketsp">Mobile Number 2</span>
+                  <span fxFlex="50" class="marketspc2">Mobile Number 2</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <input fxFlex matInput placeholder="Select the State" formControlName="mobilenumber1"
-                        class="inputform2">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;bottom:10px; left: 19px;width: 113%;">
+                        <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder="Select the State" formControlName="mobilenumber1"
+                        class="inputform2"> -->
                     </div>
                   </div>
                 </div>
@@ -276,10 +313,13 @@
 
               <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
                 <div class="inp_div">
-                  <span fxFlex="50" class="marketsp">Email Id 2</span>
+                  <span fxFlex="50" class="marketspc3">Email Id 2</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div class="inner-inp_div">
-                      <input fxFlex matInput placeholder="Select the State" formControlName="mail2" class="inputform2">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;bottom:22px; left: 18px;width: 113%;">
+                        <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder="Select the State" formControlName="mail2" class="inputform2"> -->
                     </div>
                   </div>
                 </div>
@@ -291,7 +331,10 @@
                   <span fxFlex="50" class="marketsp1">Name</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <input fxFlex matInput placeholder="Select the State" formControlName="name" class="inputform">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;top: 12px;width: 113%;left: 6%;">
+                        <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder="Select the State" formControlName="name" class="inputform"> -->
                     </div>
                   </div>
                 </div>
@@ -299,11 +342,14 @@
               </div>
               <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
                 <div class="inp_div">
-                  <span fxFlex="50" class="marketsp1">Mobile Number 1</span>
+                  <span fxFlex="50" class="marketsp2">Mobile Number 1</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <input fxFlex matInput placeholder="Select the State" formControlName="mobilenumber1"
-                        class="inputform">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;width: 113%;left: 6%;">
+                        <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder="Select the State" formControlName="mobilenumber1"
+                        class="inputform"> -->
                     </div>
                   </div>
                 </div>
@@ -311,11 +357,13 @@
               </div>
               <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
                 <div class="inp_div">
-                  <span fxFlex="50" class="marketsp1">Email Id 1</span>
+                  <span fxFlex="50" class="marketsp3">Email Id 1</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div #target1 fxLayout="row" class="inner-inp_div" fxFlex="100">
-                      <div></div>
-                      <input fxFlex matInput placeholder="Select the State" formControlName="mail1" class="inputform">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;width: 113%;left:6%;">
+                        <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder="Select the State" formControlName="mail1" class="inputform"> -->
                     </div>
                   </div>
                 </div>
@@ -391,51 +439,67 @@
         </form>
       </div> -->
 
-      <mat-divider style="width:100%;margin-top: 5%;"></mat-divider>
-      <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
+      <mat-divider style="width:100%;margin-top: 3%;"></mat-divider>
+      <div class="subheading">Market Information</div>
+      <div fxLayout="row" fxLayoutAlign="start start" class="sub_div1">
         <form [formGroup]="MIform" fxLayoutAlign="space-around start" class="form_div">
-          <div fxLayout="column" class="form_div_III">
+          <div fxLayout="column"  fxLayoutAlign="start start" class="form_div_III">
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Name of Market</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Name of Market" formControlName="market" class="inputform2">
+              <span fxFlex="50" class="marketsp" style="margin-top: 10px;">Name of Market</span>
+              <div class="inp_div">
+                <div  class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;margin-top: 10%;">
+                    <input fxFlex matInput placeholder="Name of Market" formControlName="market" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Name of Market" formControlName="market" class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Population of Market</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Population of  Market" formControlName="Population"
-                    class="inputform2">
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">Population of Market</span>
+              <div class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;">
+                    <input fxFlex matInput placeholder="Population of  Market" formControlName="Population" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Population of  Market" formControlName="Population"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Market Potential of the area (in MT) *</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Market Potential of the area (in MT)" formControlName="Potential"
-                    class="inputform2">
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">Market Potential of the area (in MT) *</span>
+              <div class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;">
+                    <input fxFlex matInput placeholder="Market Potential of the area (in MT)" formControlName="Potential" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Market Potential of the area (in MT)" formControlName="Potential"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">No of Existing Stockist in the Market</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="No of Existing Stockist in the Market" formControlName="Stockist"
-                    class="inputform2">
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">No of Existing Stockist in the Market</span>
+              <div class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;">
+                    <input fxFlex matInput placeholder="No of Existing Stockist in the Market" formControlName="Stockist" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="No of Existing Stockist in the Market" formControlName="Stockist"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Distance of Nearest JK Stockist</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Distance of Nearest JK Stockist" formControlName="Distance"
-                    class="inputform2">
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">Distance of Nearest JK Stockist</span>
+              <div  class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;">
+                    <input fxFlex matInput placeholder="Distance of Nearest JK Stockist" formControlName="Distance" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Distance of Nearest JK Stockist" formControlName="Distance"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -449,16 +513,19 @@
               </div>
             </div> -->
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Name of Nearest JK Stockist</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Name of Nearest JK Stockist" formControlName="NameOfNearest"
-                    class="inputform2">
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">Name of Nearest JK Stockist</span>
+              <div class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;">
+                    <input fxFlex matInput placeholder="Name of Nearest JK Stockist" formControlName="NameOfNearest" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Name of Nearest JK Stockist" formControlName="NameOfNearest"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Select the Party Background</span>
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">Select the Party Background</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                   <mat-select [(value)]="selected" placeholder="Select the Party Background"
@@ -477,55 +544,73 @@
             </div>
           </div>
           <div fxLayout="column" class="form_div_IV">
-            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center" style="margin-top: 19px;">
               <span fxFlex="50" class="marketsp">Year of Establishment *</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Year of Establishment" formControlName="YearOfEstablished"
-                    class="inputform">
+              <div class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;top: 5px;">
+                    <input fxFlex matInput placeholder="Year of Establishment" formControlName="YearOfEstablished" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Year of Establishment" formControlName="YearOfEstablished"
+                    class="inputform"> -->
                 </div>
               </div>
             </div>
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Areas that Stockist will serve</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Areas that Stockist will serve" formControlName="AreasStockist"
-                    class="inputform2">
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">Areas that Stockist will serve</span>
+              <div class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;top: 2px;">
+                    <input fxFlex matInput placeholder="Areas that Stockist will serve" formControlName="AreasStockist" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Areas that Stockist will serve" formControlName="AreasStockist"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Total Potential of the Party (In MT) *</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Total Potential of the Party (In MT)"
-                    formControlName="TotalPotential" class="inputform2">
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">Total Potential of the Party (In MT) *</span>
+              <div class="inp_div">
+                <div fxFlex="100" class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 74%;top: 2px;">
+                    <input fxFlex matInput placeholder="Total Potential of the Party (In MT)" formControlName="TotalPotential" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Total Potential of the Party (In MT)"
+                    formControlName="TotalPotential" class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Expected JK Avg.Monthly Sale (In MT) *</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Expected JK Avg.Monthly Sale (In MT)" formControlName="JKAvg"
-                    class="inputform2">
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">Expected JK Avg.Monthly Sale (In MT) *</span>
+              <div class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;top: 2px;">
+                    <input fxFlex matInput placeholder="Expected JK Avg.Monthly Sale (In MT)" formControlName="JKAvg" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Expected JK Avg.Monthly Sale (In MT)" formControlName="JKAvg"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Pan No.of Business *</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Pan No.of Business" formControlName="Pan" class="inputform2">
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">Pan No.of Business *</span>
+              <div class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;top: 2px;">
+                    <input fxFlex matInput placeholder="Pan No.of Business" formControlName="Pan" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Pan No.of Business" formControlName="Pan" class="inputform2"> -->
                 </div>
               </div>
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp">Gst No.of Business *</span>
-              <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Gst No.of Business" formControlName="Gst" class="inputform2">
+              <span fxFlex="50" class="marketsp" style="bottom: 5px;">Gst No.of Business *</span>
+              <div class="inp_div">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;top: 2px;">
+                    <input fxFlex matInput placeholder="Gst No.of Business" formControlName="Gst" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Gst No.of Business" formControlName="Gst" class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -661,23 +746,32 @@
       </div>
 
       <mat-divider style="width:100%;margin-top: 2%;"></mat-divider>
-      <div></div>
+      <div class="subheading">Business Information</div>
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="BIform" fxLayoutAlign="space-around start" class="form_div">
           <div fxLayout="column" class="form_div_III">
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
+            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center" style="margin-top: 20px;">
               <span fxFlex="35" class="marketsp">Total Turn Over of 3 years*</span>
               <div fxLayout="row" fxLayoutAlign="start start" class="inp_div" fxLayoutGap="10px">
-                <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="FY 21-22" formControlName="NoOfYears" class="inputform2">
+                <div  fxLayout="column" fxFlex="100" fxLayout="column" fxFlex="100" class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 45%;top: 2px;">
+                    <input fxFlex matInput placeholder="FY 21-22" formControlName="NoOfYears" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="FY 21-22" formControlName="NoOfYears" class="inputform2"> -->
+                </div>
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;right: 76px;">
+                    <input fxFlex matInput placeholder="FY 20-21" formControlName="NoOfYears1" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input autocomplete="off" placeholder="FY 20-21" formControlName="NoOfYears1" class="inputform1 "
+                    required> -->
                 </div>
                 <div fxLayout="column" fxFlex="100" class="inner-inp_div">
-                  <input autocomplete="off" placeholder="FY 20-21" formControlName="NoOfYears1" class="inputform1 "
-                    required>
-                </div>
-                <div fxLayout="column" fxFlex="100" class="inner-inp_div">
-                  <input autocomplete="off" placeholder="FY 19-20" formControlName="NoOfYears2" class="inputform1 "
-                    required>
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 50%;top: 2px;right: 76px;">
+                    <input fxFlex matInput placeholder="FY 19-20" formControlName="NoOfYears2" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input autocomplete="off" placeholder="FY 19-20" formControlName="NoOfYears2" class="inputform1 "
+                    required> -->
                 </div>
               </div>
             </div>
@@ -685,8 +779,11 @@
               <span fxFlex="35" class="marketsp">Total Storage Capacity*</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter the capacity" formControlName="storagecapacity"
-                    class="inputform2">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
+                    <input fxFlex matInput placeholder="Enter the capacity" formControlName="storagecapacity" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Enter the capacity" formControlName="storagecapacity"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -694,8 +791,11 @@
               <span fxFlex="35" class="marketsp">Working Capital to be Invested*</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter the working captial" formControlName="capitalinvest"
-                    class="inputform2">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
+                    <input fxFlex matInput placeholder="Enter the working captial" formControlName="capitalinvest" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Enter the working captial" formControlName="capitalinvest"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -703,8 +803,11 @@
               <span fxFlex="35" class="marketsp">No of Vehicle Owned with Capacity*</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter No.of.Vehicle owned" formControlName="vehicle"
-                    class="inputform2">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
+                    <input fxFlex matInput placeholder="Enter No.of.Vehicle owned" formControlName="vehicle" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Enter No.of.Vehicle owned" formControlName="vehicle"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -712,8 +815,11 @@
               <span fxFlex="35" class="marketsp">% Sales in Wholesale</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter sales in wholesale" formControlName="Wholesale"
-                    class="inputform2">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
+                    <input fxFlex matInput placeholder="Enter sales in wholesale" formControlName="Wholesale" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Enter sales in wholesale" formControlName="Wholesale"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -721,8 +827,11 @@
               <span fxFlex="35" class="marketsp">% Sales in Retail</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <input fxFlex matInput placeholder="Enter sales in retail" formControlName="retail"
-                    class="inputform2">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
+                    <input fxFlex matInput placeholder="Enter sales in retail" formControlName="retail" class="nameinput">
+                  </mat-form-field>
+                  <!-- <input fxFlex matInput placeholder="Enter sales in retail" formControlName="retail"
+                    class="inputform2"> -->
                 </div>
               </div>
             </div>
@@ -845,9 +954,11 @@
           </table>
         </div>
       </div>
+      <mat-divider style="width:100%;margin-top: 2%;"></mat-divider>
+      <div class="subheading">Bank Information</div>
       <div #target3></div>
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
-        <mat-vertical-stepper style="margin-top:5%;width: 100%;" #stepper>
+        <mat-vertical-stepper style="width: 100%;" #stepper>
           <mat-step [stepControl]="DepositForm" class="temp">
 
             <form [formGroup]="DepositForm" fxLayoutAlign="space-around start" class="form_div">
@@ -855,10 +966,13 @@
               <div fxLayout="column" class="form_div_III">
                 <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
                   <span fxFlex="35" class="marketsp">Select Deposit Type*</span>
-                  <div fxLayout="row" fxLayoutAlign="start start" class="inp_div" fxLayoutGap="10px">
-                    <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <input fxFlex matInput placeholder="Select Deposit Type" formControlName="Type"
-                        class="inputform2">
+                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div" fxLayoutGap="10px">
+                    <div  fxLayout="row" fxFlex="100" class="inner-inp_div">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
+                        <input fxFlex matInput placeholder="Select Deposit Type" formControlName="Type" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder="Select Deposit Type" formControlName="Type"
+                        class="inputform2"> -->
                     </div>
                   </div>
                 </div>
@@ -866,7 +980,10 @@
                   <span fxFlex="35" class="marketsp">Number</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <input fxFlex matInput placeholder=" Enter Number" formControlName="leaf" class="inputform2">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
+                        <input fxFlex matInput placeholder=" Enter Number" formControlName="leaf" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder=" Enter Number" formControlName="leaf" class="inputform2"> -->
                     </div>
                   </div>
                 </div>
@@ -874,7 +991,10 @@
                   <span fxFlex="35" class="marketsp">Date*</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <input fxFlex matInput placeholder="Enter the Date" formControlName="Date" class="inputform2">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
+                        <input fxFlex matInput placeholder="Enter the Date" formControlName="Date" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder="Enter the Date" formControlName="Date" class="inputform2"> -->
                     </div>
                   </div>
                 </div>
@@ -882,7 +1002,10 @@
                   <span fxFlex="35" class="marketsp">Amount(In lakhs)*</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <input fxFlex matInput placeholder="Enter the Amount" formControlName="Amount" class="inputform2">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
+                        <input fxFlex matInput placeholder="Enter the Amount" formControlName="Amount" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder="Enter the Amount" formControlName="Amount" class="inputform2"> -->
                     </div>
                   </div>
                 </div>
@@ -890,8 +1013,11 @@
                   <span fxFlex="35" class="marketsp">Enter Name of Bank</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <input fxFlex matInput placeholder="Enter Name of Bank" formControlName="nameofbank"
-                        class="inputform2">
+                      <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
+                        <input fxFlex matInput placeholder="Enter Name of Bank" formControlName="nameofbank" class="nameinput">
+                      </mat-form-field>
+                      <!-- <input fxFlex matInput placeholder="Enter Name of Bank" formControlName="nameofbank"
+                        class="inputform2"> -->
                     </div>
                   </div>
                 </div>
@@ -1102,7 +1228,7 @@
                       <p *ngIf="Attach2?.AttachmentName"> {{Attach2?.AttachmentName}}</p>
                     </div>
                   </div>
-                  <div fxLayout="row" class="populationclass" fxFlex="100">
+                  <div fxLayout="row" fxLayoutAlign="start start"  class="populationclass" fxFlex="100">
                     <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
                     <div fxLayout="column" fxFlex="40" fxLayoutAlign="start start">
 
@@ -1119,7 +1245,7 @@
 
                   </div>
 
-                  <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
 
@@ -1138,7 +1264,7 @@
                     </div>
                   </div>
 
-                  <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
 
@@ -1157,7 +1283,7 @@
 
                   </div>
 
-                  <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
 
@@ -1176,7 +1302,7 @@
 
                   </div>
 
-                  <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
 
@@ -1194,7 +1320,7 @@
                     </div>
 
                   </div>
-                  <div fxLayout="row" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100" style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
 
