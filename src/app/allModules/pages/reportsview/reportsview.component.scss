@@ -8,15 +8,41 @@
     background-color: #fcfcfe !important;
 
   }
+
   .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: white !important;
-    background-color:   rgb(243, 243, 246);
+    color: rgb(215, 215, 215) !important;
+    background-color: white !important;
     // background-color: #c9c3d8;
   }
+
+  input.mat-input-element {
+    margin-top: 4px !important;
+    font-size: 12px !important;
+  }
+
+  .mat-select {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 6px;
+    outline: 0;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px
+  }
+
+  .mat-select-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid;
+    margin: 0 6px;
+  }
+
   input.mat-input-element {
     color: black;
     // background-color: #c9c3d8;
   }
+
   .headerbackgrnd {
     background-image: url('^/assets/images/header_img.png') !important;
     background-repeat: no-repeat;
@@ -178,8 +204,8 @@
   // }
   .aa {
     border-width: 0px !important;
-    border: none !important;
-    outline: none !important;
+    // border: none !important;
+    // outline: none !important;
   }
 
   .inputdivision {
@@ -360,8 +386,26 @@
   .populationclass {
     padding: 0%;
     font-size: 14px;
-    margin-top: 20px;
+    // margin-top: 28px;
     width: 100%;
+  }
+
+  .populationclass1 {
+    padding: 0%;
+    font-size: 14px;
+    // margin-top: 28px;
+    width: 100%;
+    position: relative;
+    top: 21px;
+  }
+
+  .populationclass2 {
+    padding: 0%;
+    font-size: 14px;
+    // margin-top: 28px;
+    width: 100%;
+    position: relative;
+    top: 21px;
   }
 
   .gstclass {
@@ -461,6 +505,10 @@
     font-size: 33px;
     font-weight: normal;
     color: #00499c;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0em 0 !important;
   }
 
   .mat-button,
@@ -707,6 +755,13 @@
       padding-top: 30px;
       width: 100%;
 
+      .subheading {
+        font-size: 20px;
+        position: relative;
+        left: 30px;
+        top: 10px;
+      }
+
       .sub_div1 {
         padding-left: 20px;
         width: 100%;
@@ -725,52 +780,76 @@
             //   margin-top: 20px;
             //   width: 100%;
 
-              .marketsp {
-                font-size: 12px;
-                font-weight: 500 !important;
+            .marketsp {
+              font-size: 12px;
+              font-weight: 500 !important;
+              color: #00061C !important;
+            }
+
+            .marketsp1 {
+              font-size: 12px;
+              font-weight: 500 !important;
+              position: relative;
+              padding-bottom: 42px;
+              color: #00061C !important;
+            }
+
+            .marketsp2 {
+              font-size: 12px;
+              font-weight: 500 !important;
+              position: relative;
+              bottom: 35px;
+              color: #00061C !important;
+            }
+
+            .marketsp3 {
+              font-size: 12px;
+              font-weight: 500 !important;
+              position: relative;
+              bottom: 54px;
+              color: #00061C !important;
+            }
+
+            .inp_div {
+              width: 100%;
+              background-color: transparent !important;
+
+              .inner-inp_div {
+                width: 70%;
+              }
+
+              .name {
+                font-size: 13px;
+                margin-top: 20px;
+                /* padding-top: 2%; */
+                /* padding-left: 12%; */
+                /* padding-right: 12%; */
+                // border: none !important;
+              }
+
+              // .nameinput {
+              //   // height: 25px;
+              //   // border: none !important;
+              // }
+
+              .inputform2 {
                 color: #00061C !important;
+                font-size: 12px !important;
               }
 
-              .inp_div {
-                width: 100%;
-                background-color: transparent !important;
-
-                .inner-inp_div {
-                  width: 70%;
-                }
-
-                .name {
-                  //font-family: Arial, Helvetica, sans-serif;
-                  font-size: 13px;
-                  padding-top: 2%;
-                  padding-left: 12%;
-                  padding-right: 12%;
-                  border: none !important;
-
-                }
-                .nameinput{
-                  // height: 25px;
-                  border: none !important;
+              .inputform2::placeholder {
+                font-size: 10px !important;
+                color: #acacac !important;
               }
 
-                .inputform2 {
-                  color: #00061C !important;
-                  font-size: 12px !important;
-                }
+            }
 
-                .inputform2::placeholder {
-                  font-size: 10px !important;
-                  color: #acacac !important;
-                }
-
-              }
             // }
 
             .sublabel {
               font-size: 12px;
               position: relative;
-              bottom: 22px;
-              // top: 10px;
+              bottom: 10px;
               color: #a6a7ad;
             }
           }
@@ -782,7 +861,7 @@
             .populationclass {
               padding: 0%;
               font-size: 14px;
-              margin-top: 20px;
+              margin-top: 0px;
               width: 100%;
 
               // .marketsp {
@@ -799,22 +878,67 @@
                   width: 70%;
                 }
 
+                .name {
+                  //font-family: Arial, Helvetica, sans-serif;
+                  font-size: 13px;
+                  padding-top: 2%;
+                  padding-left: 0%;
+                  // padding-right: 12%;
+                  // border: none !important;
+                  // margin-top: 20%;
+
+                }
+
+                // .nameinput {
+                //   // height: 25px;
+                //   // border: none !important;
+                // }
+
                 .marketsp {
                   font-size: 12px;
                   font-weight: 500 !important;
                   color: #00061C !important;
                 }
 
+                .marketsp1 {
+                  font-size: 12px;
+                  font-weight: 500 !important;
+                  position: relative !important;
+                  // bottom: 15px !important;
+                  color: #00061C !important;
+                }
+
+                .marketsp2 {
+                  font-size: 12px;
+                  font-weight: 500 !important;
+                  position: relative !important;
+                  // bottom: 35px !important;
+                  color: #00061C !important;
+                }
+
+                .marketsp3 {
+                  font-size: 12px;
+                  font-weight: 500 !important;
+                  position: relative !important;
+                  // bottom: 31px !important;
+                  color: #00061C !important;
+                }
+
                 .sublabel {
                   font-size: 12px;
                   position: relative;
-                  top: 10px;
+                  // top: 10px;
                   color: #a6a7ad;
+                  // bottom: 30px;
                 }
 
                 .inputform2 {
                   color: #00061C !important;
                   font-size: 12px !important;
+                  background-color: white;
+                  border: 1px solid #cfcfcf;
+                  border-radius: 5px;
+                  width: 75%;
                 }
 
                 .inputform {
@@ -851,7 +975,7 @@
             .populationclass {
               padding: 0%;
               font-size: 14px;
-              margin-top: 20px;
+              // margin-top: 20px;
               width: 100%;
 
               .inputform1 {
@@ -869,6 +993,7 @@
                 font-size: 12px;
                 font-weight: 500 !important;
                 color: #00061C !important;
+                position: relative;
               }
 
               .inp_div {
@@ -877,6 +1002,15 @@
 
                 .inner-inp_div {
                   width: 70%;
+                }
+
+                .name {
+                  font-size: 13px;
+                  // margin-top: 28px;
+                  /* padding-top: 2%; */
+                  /* padding-left: 12%; */
+                  /* padding-right: 12%; */
+                  // border: none !important;
                 }
 
                 .inputform2 {
@@ -899,13 +1033,15 @@
             .populationclass {
               padding: 0%;
               font-size: 14px;
-              margin-top: 20px;
+              // margin-top: 20px;
               width: 100%;
+
 
               .marketsp {
                 font-size: 12px;
                 font-weight: 500 !important;
                 color: #00061C !important;
+                position: relative;
               }
 
               .inp_div {
@@ -1001,7 +1137,7 @@
   .contact-div {
     width: 96%;
     position: relative;
-    top: 32px;
+    // top: 32px;
     left: 16px;
     border: 1px solid #E4E0F3;
     border-radius: 8px;
@@ -1051,7 +1187,36 @@
           width: 70%;
         }
 
-        .marketsp {
+        .marketspc {
+          font-size: 12px;
+          font-weight: 500 !important;
+          color: #00061C !important;
+          position: relative;
+          top: 8px;
+          // bottom: 13px;
+          // right: 18px;
+        }
+
+        .marketspc1 {
+          font-size: 12px;
+          font-weight: 500 !important;
+          color: #00061C !important;
+          position: relative;
+          top: 15px;
+          // bottom: 13px;
+          // right: 18px;
+        }
+
+        .marketspc2 {
+          font-size: 12px;
+          font-weight: 500 !important;
+          color: #00061C !important;
+          position: relative;
+          // bottom: 13px;
+          // right: 18px;
+        }
+
+        .marketspc3 {
           font-size: 12px;
           font-weight: 500 !important;
           color: #00061C !important;
@@ -1063,20 +1228,43 @@
         .marketsp1 {
           font-size: 12px;
           font-weight: 500 !important;
+          position: relative;
+          // bottom: 15px;
           color: #00061C !important;
           position: relative;
-          bottom: 35px;
-          margin-top: 10px;
-          // right: 18px;
+          top: 22px;
         }
+
+        .marketsp2 {
+          font-size: 12px;
+          font-weight: 500 !important;
+          position: relative;
+          // bottom: 15px;
+          color: #00061C !important;
+          position: relative;
+          top: 9px;
+        }
+
+        .marketsp3 {
+          font-size: 12px;
+          font-weight: 500 !important;
+          position: relative;
+          // bottom: 15px;
+          color: #00061C !important;
+          position: relative;
+          // top: 9px;
+        }
+
 
         .inputform2 {
           color: #00061C !important;
           font-size: 12px !important;
           position: relative;
-          bottom: 13px;
+          // bottom: 13px;
           left: 19px;
-          margin-top: 10px // top: 5px;
+          margin-top: 10px; // top: 5px;
+          width: 79%;
+
         }
 
         .inputform {
