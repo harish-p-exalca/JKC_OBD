@@ -30,6 +30,8 @@ import { map, startWith } from "rxjs/operators";
 import { forEach } from 'lodash';
 import { CommonService } from "app/services/common.service";
 import { MasterService } from "app/services/master.service";
+import { id } from "@swimlane/ngx-charts/release/utils";
+import { element } from "@angular/core/src/render3/instructions";
 export interface DialogData {
     Firmname: string;
 }
@@ -85,6 +87,8 @@ export class DashboardComponent implements OnInit {
     States: string[] = [];
     City: Cities[] = [];
     arr: any;
+    uniquestate: any;
+    // duplicatestate:[] = [];
     Role: boolean = false;
     filteropt: Observable<string[]>;
     firmForm!: FormGroup;
@@ -172,15 +176,36 @@ export class DashboardComponent implements OnInit {
         this._dashboardService.GetAllStates().subscribe(
             (data) => {
                 this.SOption = data;
+                // this.SOption = this.SOption.filter(
+                //     (element,i) =>i === this.SOption.indexOf(element)
+                // );
+                // console.log("SOption : ",this.SOption[1]);
+                
+                // this.DuplicateState();
+                // console.log("this.Duplicate : ",this.DuplicateState);
+                
                 if (this.currentTransaction != NaN) {
                     this.GetTransactionDetails();
-                    this.isProgressBarVisibile = false;
+                    // this.isProgressBarVisibile = false;
                 }
             },
             (err) => {// console.log(err)
             }
         );
     }
+    // DuplicateState() {
+    //     let duplicate = [];
+    //     for (let i = 0; i < this.uniquestate.length; i++) {
+    //         // console.log();
+            
+    //         if (duplicate.indexOf(this.uniquestate[i]) >= -1) {
+    //             console.log("Index : ",duplicate.indexOf(this.uniquestate[i]));
+    //             return this.SOption.push(this.uniquestate[i]);
+               
+                
+    //         }
+    //     }
+    // }
     InitializeFormGroup() {
         this.PIform = this.fb.group({
             category: ["", Validators.required],
@@ -278,7 +303,7 @@ export class DashboardComponent implements OnInit {
         this.isProgressBarVisibile = true;
         this._dashboardService.GetCustomerOnboardingView(this.currentTransaction).subscribe(res => {
             //// console.log("view", res);
-            this.transID=this.currentTransaction;
+            this.transID = this.currentTransaction;
             this.CustomerObdView = res;
             this.SetPersonalInfoValues();
             this.isProgressBarVisibile = false;
@@ -606,8 +631,8 @@ export class DashboardComponent implements OnInit {
         );
         this._dashboardService.GetGeoLocationMasters("district", event.StateName).subscribe(res => {
             this.Districts = res;
-            console.log("district : ",this.Districts);
-            
+            console.log("district : ", this.Districts);
+
         });
     }
     districtSelected($event) {
