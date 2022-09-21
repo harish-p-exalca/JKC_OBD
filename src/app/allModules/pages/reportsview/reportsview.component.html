@@ -17,8 +17,8 @@
   <div fxLayout="row" fxLayoutAlign="center start" fxFlex="100" class="total_div">
     <div fxLayout="column" fxFlex="20" fxLayoutAlign="start start" style="padding: 40px;" fxLayoutGap="20px">
       <button mat-stroked-button [ngClass]="personalbtn?'change-btn':'default-btn'" (click)="btnclicked(1)"
-        style="width: 14%;position:fixed;">
-        <div>
+        style="width: 15%;position:fixed;">
+        <div (click)="scroll(target)">
           Personal Information
         </div>
       </button>
@@ -45,13 +45,13 @@
     </div>
 
 
-    <!-- <mat-divider [vertical]="true"></mat-divider> -->
-
+    <mat-divider [vertical]="true"></mat-divider>
+    <div #target></div>
     <div fxLayout="column" fxFlex="80" fxLayoutAlign="start start" class="inner_total_div">
       <div class="subheading">Personal Information</div>
       <div fxLayout="row" fxLayoutAlign="start start" class="sub_div1" fxFlex="40">
         <form [formGroup]="PIform" fxLayoutAlign="start start" class="form_div">
-          <div fxLayout="column" fxLayoutAlign="start start"  class="form_div_I">
+          <div fxLayout="column" fxLayoutAlign="start start" class="form_div_I">
             <div fxLayout="row" class="populationclass" fxFlex="100">
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <span fxFlex="50" class="marketsp" style="margin-top: 20px;">Type of Category</span>
@@ -59,28 +59,29 @@
               </div>
               <div class="inp_div">
                 <div class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" >
-                    <input fxFlex matInput placeholder="Select the type of Catagory" formControlName="category" class="nameinput">
+                  <mat-form-field appearance="outline" class="name">
+                    <input fxFlex matInput placeholder="Select the type of Catagory" formControlName="category"
+                      class="nameinput">
                   </mat-form-field>
-                    <!-- <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" style="margin-top: 4px;"> -->
-                      <!-- <img src="../../assets/images/user_id.svg" width="12px" style="margin: 2px 0 0 8px;"> -->
-                     
-                    <!-- </div> -->
-                    <!-- <mat-error
+                  <!-- <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" style="margin-top: 4px;"> -->
+                  <!-- <img src="../../assets/images/user_id.svg" width="12px" style="margin: 2px 0 0 8px;"> -->
+
+                  <!-- </div> -->
+                  <!-- <mat-error
                       *ngIf="signinForm?.get('userName')?.touched && signinForm?.get('userName')?.hasError('required')">
                       User name is required
                     </mat-error> -->
-                 
+
                   <!-- <input fxFlex matInput placeholder="Select the type of Catagory" formControlName="category"
                     class="inputform2"> -->
                 </div>
               </div>
             </div>
-            
+
             <!-- <div class="sublabel">(Option to select only one)</div> -->
 
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp1" >Name of the Firm</span>
+              <span fxFlex="50" class="marketsp1">Name of the Firm</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;bottom:20px;">
@@ -102,7 +103,7 @@
               </div>
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-              <span fxFlex="50" class="marketsp3" >Pincode</span>
+              <span fxFlex="50" class="marketsp3">Pincode</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;bottom:60px;">
@@ -124,8 +125,9 @@
               </div>
               <div class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" >
-                    <input fxFlex matInput placeholder="Select the type of Product" formControlName="product" class="nameinput">
+                  <mat-form-field appearance="outline" class="name">
+                    <input fxFlex matInput placeholder="Select the type of Product" formControlName="product"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Select the type of Product" formControlName="product"
                     class="inputform2"> -->
@@ -134,8 +136,8 @@
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <div class="inp_div">
-              <span fxFlex="50" class="marketsp1">Address (Shop/Road No. etc)</span>
-            </div>
+                <span fxFlex="50" class="marketsp1">Address (Shop/Road No. etc)</span>
+              </div>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;">
@@ -147,8 +149,8 @@
             </div>
             <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <div class="inp_div">
-              <span fxFlex="50" class="marketsp2">State</span>
-            </div>
+                <span fxFlex="50" class="marketsp2">State</span>
+              </div>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;">
@@ -167,7 +169,8 @@
               <div class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                   <mat-select placeholder="Select one Firm" class="inputform2" [(value)]="selected" appearance="outline"
-                    (selectionChange)="FirmStatusChange()" formControlName="Status" style="position: relative;right: 2px;">
+                    (selectionChange)="FirmStatusChange()" formControlName="Status"
+                    style="position: relative;right: 2px;">
                     <mat-option value="Proprietor">Proprietor</mat-option>
                     <mat-option value="Partnership">Partnership</mat-option>
                     <mat-option value="HUF">HUF</mat-option>
@@ -283,17 +286,19 @@
 
               </div>
               <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
-                <div class="inp_div">
+                <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                   <span fxFlex="50" class="marketspc1">DOB</span>
-                  <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                    <div class="inner-inp_div">
-                      <mat-form-field appearance="outline" class="name" style="position: relative;left: 19px;width: 113%;">
-                        <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
-                      </mat-form-field>
-                      <!-- <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="inputform2"> -->
-                    </div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
+                  <div class="inner-inp_div">
+                    <mat-form-field appearance="outline" class="name"
+                      style="position: relative;left: 19px;width: 113%;">
+                      <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
+                    </mat-form-field>
+                    <!-- <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="inputform2"> -->
                   </div>
                 </div>
+                <!-- </div> -->
               </div>
 
               <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
@@ -301,7 +306,8 @@
                   <span fxFlex="50" class="marketspc2">Mobile Number 2</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <mat-form-field appearance="outline" class="name" style="position: relative;bottom:10px; left: 19px;width: 113%;">
+                      <mat-form-field appearance="outline" class="name"
+                        style="position: relative;bottom:10px; left: 19px;width: 113%;">
                         <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
                       </mat-form-field>
                       <!-- <input fxFlex matInput placeholder="Select the State" formControlName="mobilenumber1"
@@ -316,7 +322,8 @@
                   <span fxFlex="50" class="marketspc3">Email Id 2</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div class="inner-inp_div">
-                      <mat-form-field appearance="outline" class="name" style="position: relative;bottom:22px; left: 18px;width: 113%;">
+                      <mat-form-field appearance="outline" class="name"
+                        style="position: relative;bottom:22px; left: 18px;width: 113%;">
                         <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
                       </mat-form-field>
                       <!-- <input fxFlex matInput placeholder="Select the State" formControlName="mail2" class="inputform2"> -->
@@ -331,7 +338,8 @@
                   <span fxFlex="50" class="marketsp1">Name</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <mat-form-field appearance="outline" class="name" style="position: relative;top: 12px;width: 113%;left: 6%;">
+                      <mat-form-field appearance="outline" class="name"
+                        style="position: relative;top: 12px;width: 113%;left: 6%;">
                         <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
                       </mat-form-field>
                       <!-- <input fxFlex matInput placeholder="Select the State" formControlName="name" class="inputform"> -->
@@ -345,7 +353,8 @@
                   <span fxFlex="50" class="marketsp2">Mobile Number 1</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                      <mat-form-field appearance="outline" class="name" style="position: relative;width: 113%;left: 6%;">
+                      <mat-form-field appearance="outline" class="name"
+                        style="position: relative;width: 113%;left: 6%;">
                         <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
                       </mat-form-field>
                       <!-- <input fxFlex matInput placeholder="Select the State" formControlName="mobilenumber1"
@@ -359,7 +368,7 @@
                 <div class="inp_div">
                   <span fxFlex="50" class="marketsp3">Email Id 1</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
-                    <div #target1 fxLayout="row" class="inner-inp_div" fxFlex="100">
+                    <div fxLayout="row" class="inner-inp_div" fxFlex="100">
                       <mat-form-field appearance="outline" class="name" style="position: relative;width: 113%;left:6%;">
                         <input fxFlex matInput placeholder="Select the State" formControlName="DOB" class="nameinput">
                       </mat-form-field>
@@ -372,7 +381,7 @@
             </div>
           </div>
         </form>
-
+        <div #target1></div>
       </div>
       <!-- <div class="contact_heading">
           Contact Details
@@ -443,12 +452,13 @@
       <div class="subheading">Market Information</div>
       <div fxLayout="row" fxLayoutAlign="start start" class="sub_div1">
         <form [formGroup]="MIform" fxLayoutAlign="space-around start" class="form_div">
-          <div fxLayout="column"  fxLayoutAlign="start start" class="form_div_III">
+          <div fxLayout="column" fxLayoutAlign="start start" class="form_div_III">
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp" style="margin-top: 10px;">Name of Market</span>
               <div class="inp_div">
-                <div  class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;margin-top: 10%;">
+                <div class="inner-inp_div">
+                  <mat-form-field appearance="outline" class="name"
+                    style="position: relative;width: 106%;margin-top: 10%;">
                     <input fxFlex matInput placeholder="Name of Market" formControlName="market" class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Name of Market" formControlName="market" class="inputform2"> -->
@@ -460,7 +470,8 @@
               <div class="inp_div">
                 <div class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;">
-                    <input fxFlex matInput placeholder="Population of  Market" formControlName="Population" class="nameinput">
+                    <input fxFlex matInput placeholder="Population of  Market" formControlName="Population"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Population of  Market" formControlName="Population"
                     class="inputform2"> -->
@@ -472,7 +483,8 @@
               <div class="inp_div">
                 <div class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;">
-                    <input fxFlex matInput placeholder="Market Potential of the area (in MT)" formControlName="Potential" class="nameinput">
+                    <input fxFlex matInput placeholder="Market Potential of the area (in MT)"
+                      formControlName="Potential" class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Market Potential of the area (in MT)" formControlName="Potential"
                     class="inputform2"> -->
@@ -484,7 +496,8 @@
               <div class="inp_div">
                 <div class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;">
-                    <input fxFlex matInput placeholder="No of Existing Stockist in the Market" formControlName="Stockist" class="nameinput">
+                    <input fxFlex matInput placeholder="No of Existing Stockist in the Market"
+                      formControlName="Stockist" class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="No of Existing Stockist in the Market" formControlName="Stockist"
                     class="inputform2"> -->
@@ -493,10 +506,11 @@
             </div>
             <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
               <span fxFlex="50" class="marketsp" style="bottom: 5px;">Distance of Nearest JK Stockist</span>
-              <div  class="inp_div">
+              <div class="inp_div">
                 <div class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;">
-                    <input fxFlex matInput placeholder="Distance of Nearest JK Stockist" formControlName="Distance" class="nameinput">
+                    <input fxFlex matInput placeholder="Distance of Nearest JK Stockist" formControlName="Distance"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Distance of Nearest JK Stockist" formControlName="Distance"
                     class="inputform2"> -->
@@ -517,7 +531,8 @@
               <div class="inp_div">
                 <div class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;">
-                    <input fxFlex matInput placeholder="Name of Nearest JK Stockist" formControlName="NameOfNearest" class="nameinput">
+                    <input fxFlex matInput placeholder="Name of Nearest JK Stockist" formControlName="NameOfNearest"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Name of Nearest JK Stockist" formControlName="NameOfNearest"
                     class="inputform2"> -->
@@ -544,12 +559,14 @@
             </div>
           </div>
           <div fxLayout="column" class="form_div_IV">
-            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center" style="margin-top: 19px;">
+            <div *ngIf="!this.Noview" fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center"
+              style="margin-top: 19px;">
               <span fxFlex="50" class="marketsp">Year of Establishment *</span>
               <div class="inp_div">
                 <div class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;top: 5px;">
-                    <input fxFlex matInput placeholder="Year of Establishment" formControlName="YearOfEstablished" class="nameinput">
+                    <input fxFlex matInput placeholder="Year of Establishment" formControlName="YearOfEstablished"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Year of Establishment" formControlName="YearOfEstablished"
                     class="inputform"> -->
@@ -561,7 +578,8 @@
               <div class="inp_div">
                 <div class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;top: 2px;">
-                    <input fxFlex matInput placeholder="Areas that Stockist will serve" formControlName="AreasStockist" class="nameinput">
+                    <input fxFlex matInput placeholder="Areas that Stockist will serve" formControlName="AreasStockist"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Areas that Stockist will serve" formControlName="AreasStockist"
                     class="inputform2"> -->
@@ -572,8 +590,9 @@
               <span fxFlex="50" class="marketsp" style="bottom: 5px;">Total Potential of the Party (In MT) *</span>
               <div class="inp_div">
                 <div fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 74%;top: 2px;">
-                    <input fxFlex matInput placeholder="Total Potential of the Party (In MT)" formControlName="TotalPotential" class="nameinput">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 82%;top: 2px;">
+                    <input fxFlex matInput placeholder="Total Potential of the Party (In MT)"
+                      formControlName="TotalPotential" class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Total Potential of the Party (In MT)"
                     formControlName="TotalPotential" class="inputform2"> -->
@@ -585,7 +604,8 @@
               <div class="inp_div">
                 <div class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;width: 106%;top: 2px;">
-                    <input fxFlex matInput placeholder="Expected JK Avg.Monthly Sale (In MT)" formControlName="JKAvg" class="nameinput">
+                    <input fxFlex matInput placeholder="Expected JK Avg.Monthly Sale (In MT)" formControlName="JKAvg"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Expected JK Avg.Monthly Sale (In MT)" formControlName="JKAvg"
                     class="inputform2"> -->
@@ -695,7 +715,7 @@
         <div class="contact_heading">
           Average Sales
         </div>
-        <div #target2 class="table_div" style="width: 100%;">
+        <div class="table_div" style="width: 100%;">
           <table>
             <thead>
               <tr>
@@ -743,6 +763,7 @@
             <tr mat-row *matRowDef="let row; columns: averageSalesColumns" class="row-table"></tr>
           </table> -->
         </div>
+        <div #target2></div>
       </div>
 
       <mat-divider style="width:100%;margin-top: 2%;"></mat-divider>
@@ -750,24 +771,27 @@
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="BIform" fxLayoutAlign="space-around start" class="form_div">
           <div fxLayout="column" class="form_div_III">
-            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center" style="margin-top: 20px;">
+            <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center"
+              style="margin-top: 20px;">
               <span fxFlex="35" class="marketsp">Total Turn Over of 3 years*</span>
               <div fxLayout="row" fxLayoutAlign="start start" class="inp_div" fxLayoutGap="10px">
-                <div  fxLayout="column" fxFlex="100" fxLayout="column" fxFlex="100" class="inner-inp_div">
+                <div fxLayout="column" fxFlex="100" fxLayout="column" fxFlex="100" class="inner-inp_div">
                   <mat-form-field appearance="outline" class="name" style="position: relative;width: 45%;top: 2px;">
                     <input fxFlex matInput placeholder="FY 21-22" formControlName="NoOfYears" class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="FY 21-22" formControlName="NoOfYears" class="inputform2"> -->
                 </div>
                 <div class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;right: 76px;">
+                  <mat-form-field appearance="outline" class="name"
+                    style="position: relative;width: 60%;top: 2px;right: 76px;">
                     <input fxFlex matInput placeholder="FY 20-21" formControlName="NoOfYears1" class="nameinput">
                   </mat-form-field>
                   <!-- <input autocomplete="off" placeholder="FY 20-21" formControlName="NoOfYears1" class="inputform1 "
                     required> -->
                 </div>
                 <div fxLayout="column" fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 50%;top: 2px;right: 76px;">
+                  <mat-form-field appearance="outline" class="name"
+                    style="position: relative;width: 50%;top: 2px;right: 76px;">
                     <input fxFlex matInput placeholder="FY 19-20" formControlName="NoOfYears2" class="nameinput">
                   </mat-form-field>
                   <!-- <input autocomplete="off" placeholder="FY 19-20" formControlName="NoOfYears2" class="inputform1 "
@@ -779,8 +803,9 @@
               <span fxFlex="35" class="marketsp">Total Storage Capacity*</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
-                    <input fxFlex matInput placeholder="Enter the capacity" formControlName="storagecapacity" class="nameinput">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 53%;top: 2px;">
+                    <input fxFlex matInput placeholder="Enter the capacity" formControlName="storagecapacity"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Enter the capacity" formControlName="storagecapacity"
                     class="inputform2"> -->
@@ -791,8 +816,9 @@
               <span fxFlex="35" class="marketsp">Working Capital to be Invested*</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
-                    <input fxFlex matInput placeholder="Enter the working captial" formControlName="capitalinvest" class="nameinput">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 53%;top: 2px;">
+                    <input fxFlex matInput placeholder="Enter the working captial" formControlName="capitalinvest"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Enter the working captial" formControlName="capitalinvest"
                     class="inputform2"> -->
@@ -803,8 +829,9 @@
               <span fxFlex="35" class="marketsp">No of Vehicle Owned with Capacity*</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
-                    <input fxFlex matInput placeholder="Enter No.of.Vehicle owned" formControlName="vehicle" class="nameinput">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 53%;top: 2px;">
+                    <input fxFlex matInput placeholder="Enter No.of.Vehicle owned" formControlName="vehicle"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Enter No.of.Vehicle owned" formControlName="vehicle"
                     class="inputform2"> -->
@@ -815,8 +842,9 @@
               <span fxFlex="35" class="marketsp">% Sales in Wholesale</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
-                    <input fxFlex matInput placeholder="Enter sales in wholesale" formControlName="Wholesale" class="nameinput">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 53%;top: 2px;">
+                    <input fxFlex matInput placeholder="Enter sales in wholesale" formControlName="Wholesale"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Enter sales in wholesale" formControlName="Wholesale"
                     class="inputform2"> -->
@@ -827,8 +855,9 @@
               <span fxFlex="35" class="marketsp">% Sales in Retail</span>
               <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                 <div fxLayout="row" fxFlex="100" class="inner-inp_div">
-                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
-                    <input fxFlex matInput placeholder="Enter sales in retail" formControlName="retail" class="nameinput">
+                  <mat-form-field appearance="outline" class="name" style="position: relative;width: 53%;top: 2px;">
+                    <input fxFlex matInput placeholder="Enter sales in retail" formControlName="retail"
+                      class="nameinput">
                   </mat-form-field>
                   <!-- <input fxFlex matInput placeholder="Enter sales in retail" formControlName="retail"
                     class="inputform2"> -->
@@ -953,10 +982,12 @@
             <tr mat-row *matRowDef="let row; columns: saleColumns" class="row-table"></tr>
           </table>
         </div>
+        <div #target3></div>
       </div>
+      <!-- <div ></div> -->
       <mat-divider style="width:100%;margin-top: 2%;"></mat-divider>
       <div class="subheading">Bank Information</div>
-      <div #target3></div>
+      <div></div>
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <mat-vertical-stepper style="width: 100%;" #stepper>
           <mat-step [stepControl]="DepositForm" class="temp">
@@ -967,9 +998,10 @@
                 <div fxLayout="row" class="populationclass" fxFlex="100" fxLayoutAlign="start center">
                   <span fxFlex="35" class="marketsp">Select Deposit Type*</span>
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div" fxLayoutGap="10px">
-                    <div  fxLayout="row" fxFlex="100" class="inner-inp_div">
+                    <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                       <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
-                        <input fxFlex matInput placeholder="Select Deposit Type" formControlName="Type" class="nameinput">
+                        <input fxFlex matInput placeholder="Select Deposit Type" formControlName="Type"
+                          class="nameinput">
                       </mat-form-field>
                       <!-- <input fxFlex matInput placeholder="Select Deposit Type" formControlName="Type"
                         class="inputform2"> -->
@@ -1003,7 +1035,8 @@
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                       <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
-                        <input fxFlex matInput placeholder="Enter the Amount" formControlName="Amount" class="nameinput">
+                        <input fxFlex matInput placeholder="Enter the Amount" formControlName="Amount"
+                          class="nameinput">
                       </mat-form-field>
                       <!-- <input fxFlex matInput placeholder="Enter the Amount" formControlName="Amount" class="inputform2"> -->
                     </div>
@@ -1014,7 +1047,8 @@
                   <div fxLayout="column" fxLayoutAlign="start start" class="inp_div">
                     <div fxLayout="row" fxFlex="100" class="inner-inp_div">
                       <mat-form-field appearance="outline" class="name" style="position: relative;width: 60%;top: 2px;">
-                        <input fxFlex matInput placeholder="Enter Name of Bank" formControlName="nameofbank" class="nameinput">
+                        <input fxFlex matInput placeholder="Enter Name of Bank" formControlName="nameofbank"
+                          class="nameinput">
                       </mat-form-field>
                       <!-- <input fxFlex matInput placeholder="Enter Name of Bank" formControlName="nameofbank"
                         class="inputform2"> -->
@@ -1194,13 +1228,14 @@
             <form [formGroup]="BIform">
               <ng-template matStepLabel>Documents Required (Attachments)</ng-template>
               <div *ngIf="AttachmentView">
-                <div fxLayout="column" fxLayoutAlign="start start">
-                  <div fxLayout="row" fxLayoutAlign="start start"  class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+                  <div fxLayout="row" fxLayoutAlign="start center" class="populationclass" fxFlex="100"
+                    style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
                       <span class="marketsp">Copy of Pan Card*</span>
                     </div>
-                    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
+                    <div fxLayout="column" fxLayoutAlign="start center" fxFlex="40">
                       <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
                         accept="application/pdf,image/png, image/jpg" (change)="csvInputChange($event)" />
                       <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled"
@@ -1212,11 +1247,11 @@
                       <p *ngIf="Attach1?.AttachmentName"> {{Attach1?.AttachmentName}}</p>
                     </div>
                   </div>
-                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100">
+                  <div fxLayout="row" fxLayoutAlign="start center" class="populationclass" fxFlex="100">
                     <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
                       <span class="marketsp">Copy of Gst Certificate</span>
                     </div>
-                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start start">
+                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start center">
                       <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
                         accept="application/pdf,image/png, image/jpg" (change)="csv1InputChange($event)" />
                       <button mat-raised-button class="uploadbtn" [disabled]="BIform.disabled"
@@ -1228,9 +1263,9 @@
                       <p *ngIf="Attach2?.AttachmentName"> {{Attach2?.AttachmentName}}</p>
                     </div>
                   </div>
-                  <div fxLayout="row" fxLayoutAlign="start start"  class="populationclass" fxFlex="100">
+                  <div fxLayout="row" fxLayoutAlign="start center" class="populationclass" fxFlex="100">
                     <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
-                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start start">
+                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start center">
 
                       <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
                         accept="application/pdf,image/png, image/jpg" (change)="csv2InputChange($event)" />
@@ -1238,18 +1273,19 @@
                         (click)="csvInput2.click()" style="color: green;">Upload</button>
 
                     </div>
-                    <div fxLayout="column"  fxLayoutAlign="start start" class="pan" fxLayoutGap="0">
+                    <div fxLayout="column" fxLayoutAlign="start start" class="pan" fxLayoutGap="0">
                       <p class="imagenamedisplay">{{FileName2}}</p>
                       <p *ngIf="Attach3?.AttachmentName"> {{Attach3?.AttachmentName}}</p>
                     </div>
 
                   </div>
 
-                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <div fxLayout="row" fxLayoutAlign="start center" class="populationclass" fxFlex="100"
+                    style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
 
-                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start start">
+                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start center">
 
                       <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
                         accept="application/pdf,image/png, image/jpg" (change)="csv3InputChange($event)" />
@@ -1264,11 +1300,12 @@
                     </div>
                   </div>
 
-                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <div fxLayout="row" fxLayoutAlign="start center" class="populationclass" fxFlex="100"
+                    style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
 
-                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start start">
+                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start center">
 
                       <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
                         accept="application/pdf,image/png, image/jpg" (change)="csv4InputChange($event)" />
@@ -1283,11 +1320,12 @@
 
                   </div>
 
-                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <div fxLayout="row" fxLayoutAlign="start center" class="populationclass" fxFlex="100"
+                    style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
 
-                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start start">
+                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start center">
 
                       <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
                         accept="application/pdf,image/png, image/jpg" (change)="csv5InputChange($event)" />
@@ -1302,11 +1340,12 @@
 
                   </div>
 
-                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <div fxLayout="row" fxLayoutAlign="start center" class="populationclass" fxFlex="100"
+                    style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
 
-                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start start">
+                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start center">
 
                       <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
                         accept="application/pdf,image/png, image/jpg" (change)="csv6InputChange($event)" />
@@ -1320,11 +1359,12 @@
                     </div>
 
                   </div>
-                  <div fxLayout="row" fxLayoutAlign="start start" class="populationclass" fxFlex="100" style="margin-top: 2%;">
+                  <div fxLayout="row" fxLayoutAlign="start center" class="populationclass" fxFlex="100"
+                    style="margin-top: 2%;">
                     <!-- <div fxFlex="2"></div> -->
                     <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
 
-                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start start">
+                    <div fxLayout="column" fxFlex="40" fxLayoutAlign="start center">
 
                       <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn"
                         accept="application/pdf,image/png, image/jpg" (change)="csv7InputChange($event)" />
@@ -1340,145 +1380,145 @@
 
                   <!-- <mat-checkbox formControlName="declare" style="
                           margin-top: 4%;margin-right: 10%;">
-              <div fxLayout="column">
-                <p style="margin-left: 13px;">I / We declare that above information is true and correct to the best of
+                  <div fxLayout="column">
+                 <p style="margin-left: 13px;">I / We declare that above information is true and correct to the best of
                   my/our knowledge & belief</p>
 
-              </div>
+                  </div>
 
-            </mat-checkbox> -->
+                   </mat-checkbox> -->
                 </div>
               </div>
-              <div *ngIf="!AttachmentView" fxLayout="column" fxLayoutAlign="space-evenly center">
+              <div *ngIf="!AttachmentView" fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="30px">
 
-                <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxLayout="row" fxLayoutAlign="start center" class="populationclass" fxFlex="100">
                   <div fxFlex="10"></div>
-                  <span fxFlex="30" class="marketsp">Copy of Pan Card*</span>
+                  <span fxFlex="40" class="marketsp">Copy of Pan Card*</span>
 
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column" >
                     <p style="margin-left:14%;" *ngIf="Attach1?.AttachmentName"> {{Attach1?.AttachmentName}}</p>
                     <!-- <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csvInputChange($event)"/>
-                <button mat-raised-button class="uploadbtn" (click)="csvInput.click()" style="color: green;">Upload</button> -->
+                   <button mat-raised-button class="uploadbtn" (click)="csvInput.click()" style="color: green;">Upload</button> -->
 
                   </div>
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column"  >
                     <button mat-raised-button download="file.txt" (click)="GetAttachment(Attach1?.AttachmentName)"
                       class="uploadbtn">Download</button>
                   </div>
 
 
                 </div>
-                <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxLayout="row" class="populationclass" fxLayoutAlign="start center" fxFlex="100">
                   <div fxFlex="10"></div>
-                  <span fxFlex="30" class="marketsp">Copy of Gst Certificate</span>
+                  <span fxFlex="40" class="marketsp">Copy of Gst Certificate</span>
 
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column" >
                     <p style="margin-left:14%;" *ngIf="Attach2?.AttachmentName"> {{Attach2?.AttachmentName}}</p>
                     <!-- <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv1InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput1.click()" style="color: green;">Upload</button> -->
 
                   </div>
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column" >
                     <button mat-raised-button class="uploadbtn"
                       (click)="GetAttachment(Attach2?.AttachmentName)">Download</button>
                   </div>
 
                 </div>
-                <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxLayout="row" class="populationclass" fxLayoutAlign="start center" fxFlex="100">
                   <div fxFlex="10"></div>
-                  <span fxFlex="30" class="marketsp">Copy of Aadhar Card</span>
+                  <span fxFlex="40" class="marketsp">Copy of Aadhar Card</span>
 
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column" >
                     <p style="margin-left:14%;" *ngIf="Attach3?.AttachmentName"> {{Attach3?.AttachmentName}}</p>
                     <!-- <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv2InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput2.click()" style="color: green;">Upload</button> -->
 
                   </div>
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column">
                     <button mat-raised-button (click)="GetAttachment(Attach3?.AttachmentName)"
                       class="uploadbtn">Download</button>
                   </div>
 
                 </div>
 
-                <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxLayout="row" class="populationclass" fxLayoutAlign="start center" fxFlex="100">
                   <div fxFlex="10"></div>
-                  <span fxFlex="30" class="marketsp">Copy of Cancelled Cheque</span>
+                  <span fxFlex="40" class="marketsp">Copy of Cancelled Cheque</span>
 
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column" >
                     <p style="margin-left:14%;" *ngIf="Attach4?.AttachmentName"> {{Attach4?.AttachmentName}}</p>
                     <!-- <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv3InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput3.click()" style="color: green;">Upload</button> -->
 
                   </div>
 
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column">
                     <button mat-raised-button (click)="GetAttachment(Attach4?.AttachmentName)"
                       class="uploadbtn">Download</button>
                   </div>
                 </div>
 
-                <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxLayout="row" class="populationclass" fxLayoutAlign="start center" fxFlex="100">
                   <div fxFlex="10"></div>
-                  <span fxFlex="30" class="marketsp">Photograph of Proprietor/Partner</span>
+                  <span fxFlex="40" class="marketsp">Photograph of Proprietor/Partner</span>
 
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column">
                     <p style="margin-left:14%;" *ngIf="Attach5?.AttachmentName"> {{Attach5?.AttachmentName}}</p>
                     <!-- <input #csvInput4 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv4InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput4.click()" style="color: green;">Upload</button> -->
 
                   </div>
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column">
                     <button mat-raised-button (click)="GetAttachment(Attach5?.AttachmentName)"
                       class="uploadbtn">Download</button>
                   </div>
 
                 </div>
 
-                <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxLayout="row" class="populationclass" fxLayoutAlign="start center" fxFlex="100">
                   <div fxFlex="10"></div>
-                  <span fxFlex="30" class="marketsp">TDS declaration on Stockist letter head</span>
+                  <span fxFlex="40" class="marketsp">TDS declaration on Stockist letter head</span>
 
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column">
                     <p style="margin-left:14%;" *ngIf="Attach6?.AttachmentName"> {{Attach6?.AttachmentName}}</p>
                     <!-- <input #csvInput5 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv5InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput5.click()" style="color: green;">Upload</button> -->
 
                   </div>
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column">
                     <button mat-raised-button (click)="GetAttachment(Attach6?.AttachmentName)"
                       class="uploadbtn">Download</button>
                   </div>
 
                 </div>
 
-                <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxLayout="row" class="populationclass" fxLayoutAlign="start center" fxFlex="100">
                   <div fxFlex="10"></div>
-                  <span fxFlex="30" class="marketsp">Address Proof of stockist premises</span>
+                  <span fxFlex="40" class="marketsp">Address Proof of stockist premises</span>
 
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column" >
                     <p style="margin-left:14%;" *ngIf="Attach7?.AttachmentName"> {{Attach7?.AttachmentName}}</p>
                     <!-- <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv6InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput6.click()" style="color: green;">Upload</button> -->
 
                   </div>
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column">
                     <button mat-raised-button (click)="GetAttachment(Attach7?.AttachmentName)"
                       class="uploadbtn">Download</button>
                   </div>
 
                 </div>
-                <div fxLayout="row" class="populationclass" fxFlex="100">
+                <div fxLayout="row" class="populationclass" fxLayoutAlign="start center" fxFlex="100">
                   <div fxFlex="10"></div>
-                  <span fxFlex="30" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
+                  <span fxFlex="40" class="marketsp">Signed Digital Agreement on Non-Judicial paper</span>
 
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column">
                     <p style="margin-left:14%;" *ngIf="Attach8?.AttachmentName"> {{Attach8?.AttachmentName}}</p>
                     <!-- <input #csvInput7 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv7InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput7.click()" style="color: green;">Upload</button> -->
                   </div>
 
-                  <div fxLayout="column" fxFlex="50">
+                  <div fxLayout="column">
                     <button mat-raised-button (click)="GetAttachment(Attach8?.AttachmentName)"
                       class="uploadbtn">Download</button>
                   </div>
