@@ -10,11 +10,7 @@
   <!-- style="padding-left: 52px !important;"
   style="padding-left: 40px !important;"
   style="padding-left: 65px !important;" -->
-
-
-
-
-  <div fxLayout="row" fxLayoutAlign="center start" fxFlex="100" class="total_div">
+  <div fxLayout="row" fxLayoutAlign="start start" class="total_div">
     <div fxLayout="column" fxFlex="20" fxLayoutAlign="start start" style="padding: 40px;" fxLayoutGap="20px">
       <button mat-stroked-button [ngClass]="personalbtn?'change-btn':'default-btn'" (click)="btnclicked(1)"
         style="width: 15%;position:fixed;">
@@ -381,7 +377,7 @@
             </div>
           </div>
         </form>
-        <div #target1></div>
+       
       </div>
       <!-- <div class="contact_heading">
           Contact Details
@@ -448,8 +444,9 @@
         </form>
       </div> -->
 
-      <mat-divider style="width:100%;margin-top: 3%;"></mat-divider>
-      <div class="subheading">Market Information</div>
+      <mat-divider class="matdivider1"></mat-divider>
+      <div #target1></div>
+      <div class="subheading1">Market Information</div>
       <div fxLayout="row" fxLayoutAlign="start start" class="sub_div1">
         <form [formGroup]="MIform" fxLayoutAlign="space-around start" class="form_div">
           <div fxLayout="column" fxLayoutAlign="start start" class="form_div_III">
@@ -763,11 +760,12 @@
             <tr mat-row *matRowDef="let row; columns: averageSalesColumns" class="row-table"></tr>
           </table> -->
         </div>
-        <div #target2></div>
+       
       </div>
 
-      <mat-divider style="width:100%;margin-top: 2%;"></mat-divider>
-      <div class="subheading">Business Information</div>
+      <mat-divider class="matdivider"></mat-divider>
+      <div #target2></div>
+      <div class="subheading1">Business Information</div>
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <form [formGroup]="BIform" fxLayoutAlign="space-around start" class="form_div">
           <div fxLayout="column" class="form_div_III">
@@ -982,11 +980,12 @@
             <tr mat-row *matRowDef="let row; columns: saleColumns" class="row-table"></tr>
           </table>
         </div>
-        <div #target3></div>
+      
       </div>
       <!-- <div ></div> -->
-      <mat-divider style="width:100%;margin-top: 2%;"></mat-divider>
-      <div class="subheading">Bank Information</div>
+      <mat-divider class="matdivider"></mat-divider>
+      <div #target3></div>
+      <div class="subheading1">Bank Information</div>
       <div></div>
       <div fxLayout="row" fxLayoutAlign="start center" class="sub_div1">
         <mat-vertical-stepper style="width: 100%;" #stepper>
@@ -1389,19 +1388,19 @@
                    </mat-checkbox> -->
                 </div>
               </div>
-              <div *ngIf="!AttachmentView" fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="30px">
+              <div *ngIf="!AttachmentView" fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
 
                 <div fxLayout="row" fxLayoutAlign="start center" class="populationclass" fxFlex="100">
                   <div fxFlex="10"></div>
                   <span fxFlex="40" class="marketsp">Copy of Pan Card*</span>
 
-                  <div fxLayout="column" >
+                  <div fxLayout="column">
                     <p style="margin-left:14%;" *ngIf="Attach1?.AttachmentName"> {{Attach1?.AttachmentName}}</p>
                     <!-- <input #csvInput hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csvInputChange($event)"/>
                    <button mat-raised-button class="uploadbtn" (click)="csvInput.click()" style="color: green;">Upload</button> -->
 
                   </div>
-                  <div fxLayout="column"  >
+                  <div fxLayout="column">
                     <button mat-raised-button download="file.txt" (click)="GetAttachment(Attach1?.AttachmentName)"
                       class="uploadbtn">Download</button>
                   </div>
@@ -1412,13 +1411,13 @@
                   <div fxFlex="10"></div>
                   <span fxFlex="40" class="marketsp">Copy of Gst Certificate</span>
 
-                  <div fxLayout="column" >
+                  <div fxLayout="column">
                     <p style="margin-left:14%;" *ngIf="Attach2?.AttachmentName"> {{Attach2?.AttachmentName}}</p>
                     <!-- <input #csvInput1 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv1InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput1.click()" style="color: green;">Upload</button> -->
 
                   </div>
-                  <div fxLayout="column" >
+                  <div fxLayout="column">
                     <button mat-raised-button class="uploadbtn"
                       (click)="GetAttachment(Attach2?.AttachmentName)">Download</button>
                   </div>
@@ -1428,7 +1427,7 @@
                   <div fxFlex="10"></div>
                   <span fxFlex="40" class="marketsp">Copy of Aadhar Card</span>
 
-                  <div fxLayout="column" >
+                  <div fxLayout="column">
                     <p style="margin-left:14%;" *ngIf="Attach3?.AttachmentName"> {{Attach3?.AttachmentName}}</p>
                     <!-- <input #csvInput2 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv2InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput2.click()" style="color: green;">Upload</button> -->
@@ -1445,7 +1444,7 @@
                   <div fxFlex="10"></div>
                   <span fxFlex="40" class="marketsp">Copy of Cancelled Cheque</span>
 
-                  <div fxLayout="column" >
+                  <div fxLayout="column">
                     <p style="margin-left:14%;" *ngIf="Attach4?.AttachmentName"> {{Attach4?.AttachmentName}}</p>
                     <!-- <input #csvInput3 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv3InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput3.click()" style="color: green;">Upload</button> -->
@@ -1496,7 +1495,7 @@
                   <div fxFlex="10"></div>
                   <span fxFlex="40" class="marketsp">Address Proof of stockist premises</span>
 
-                  <div fxLayout="column" >
+                  <div fxLayout="column">
                     <p style="margin-left:14%;" *ngIf="Attach7?.AttachmentName"> {{Attach7?.AttachmentName}}</p>
                     <!-- <input #csvInput6 hidden="true" type="file" onclick="this.value=null" class="uploadbtn" (change)="csv6InputChange($event)"/>
                 <button mat-raised-button class="uploadbtn" (click)="csvInput6.click()" style="color: green;">Upload</button> -->
@@ -1536,20 +1535,35 @@
 
   </div>
 
-  <div *ngIf="!ApprovalButton" class="footer_div" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
-    <div class="reject_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-      <button mat-stroked-button (click)="Reject()" style="width: 100%;">Reject</button>
-      <!-- <span class="reject_span">
-        Reject
-      </span> -->
+  <mat-card class="footerbackgrnd">
+    <div *ngIf="!ApprovalButton" class="footer_div" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+      <div class="reject_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" style="height: 2px">
+        <button mat-stroked-button (click)="Reject()" style="width: 100%;">Reject</button>
+        <!-- <span class="reject_span">
+          Reject
+        </span> -->
+      </div>
+      <div class="approve_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" style="height: 2px">
+        <button mat-flat-button (click)="Approve()" style="width: 100%;padding: 5px 10px !important;">Approve</button>
+        <!-- <span class="approve_span">
+          Approve
+        </span> -->
+      </div>
     </div>
-    <div class="approve_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-      <button mat-flat-button (click)="Approve()" style="width: 100%;">Approve</button>
-      <!-- <span class="approve_span">
-        Approve
-      </span> -->
-    </div>
-  </div>
+  </mat-card>
+
+    <!-- <div *ngIf="!ApprovalButton" class="footer_div" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+      <div class="reject_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" style="height: 2px">
+        <button mat-stroked-button (click)="Reject()" style="width: 100%;">Reject</button>
+        
+      </div>
+      <div class="approve_btn" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" style="height: 2px">
+        <button mat-flat-button (click)="Approve()" style="width: 100%;">Approve</button>
+      
+      </div>
+    </div> -->
+ 
+
   <mat-progress-spinner *ngIf="isProgressBarVisibile" class="progressBarPostion" color="accent" mode="indeterminate">
   </mat-progress-spinner>
   <div id="overlay" *ngIf="isProgressBarVisibile"></div>
