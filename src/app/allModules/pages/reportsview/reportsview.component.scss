@@ -1,8 +1,9 @@
 @import "src/@fuse/scss/fuse";
 
 .reportsview {
+  height: 100%;
+  padding: 0 !important;
 
-  //font-family: Poppins;
   .input {
 
     background-color: #fcfcfe !important;
@@ -47,9 +48,19 @@
     background-image: url('^/assets/images/header_img.png') !important;
     background-repeat: no-repeat;
     overflow: hidden;
-    margin-bottom: 0px;
-    height: 0px;
-    position: fixed !important;
+    // margin-bottom: 0px;
+    position: relative !important;
+    z-index: 100;
+    width: 100%;
+    top: 0 !important;
+    height: 50px;
+  }
+
+  .footerbackgrnd {
+    // margin-top: 43%;
+    height: 65px !important;
+    position: relative !important;
+    bottom: 0 !important;
     z-index: 100;
     width: 100%;
   }
@@ -166,7 +177,7 @@
 
   .personal {
     color: #1055A0;
-    padding-top: 3%;
+    // padding-top: 3%;
     // padding-left: 17%;
     font-size: 23px;
     position: fixed;
@@ -626,16 +637,16 @@
     margin-bottom: 2px;
   }
 
-  .headerbackgrnd {
-    background-image: url('^/assets/images/header_img.png') !important;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    margin-bottom: 0px;
-    height: 0px;
-    position: fixed !important;
-    z-index: 100;
-    width: 100%;
-  }
+  // .headerbackgrnd {
+  //   background-image: url('^/assets/images/header_img.png') !important;
+  //   background-repeat: no-repeat;
+  //   overflow: hidden;
+  //   margin-bottom: 0px;
+  //   height: 0px;
+  //   position: fixed !important;
+  //   z-index: 100;
+  //   width: 100%;
+  // }
 
   .header-div {
     height: 2px;
@@ -732,7 +743,9 @@
 
   .total_div {
     width: 100%;
-    margin-top: 40px !important;
+    // height: calc(100vh - 115px) !important;
+    // margin-top: 40px !important;
+    overflow: auto !important;
 
     .marketbutton {
       width: 15%;
@@ -755,13 +768,41 @@
     .inner_total_div {
       padding-top: 30px;
       width: 100%;
+      height: calc(100vh - 115px);
+
+      .matdivider {
+        width: 80%;
+        position: relative;
+        margin-top: 2%;
+        left: 15px;
+      }
+      .matdivider1 {
+        width: 98%;
+        position: relative;
+        left: 12px;
+        margin-top: 8%;
+      }
 
       .subheading {
         font-size: 20px;
         position: relative;
         left: 30px;
-        top: 10px;
+        // top: 10px;
       }
+
+      .subheading1 {
+        font-size: 20px;
+        position: relative;
+        left: 30px;
+        top: 15px;
+      }
+
+      // .subheading2 {
+      //   font-size: 20px;
+      //   position: relative;
+      //   left: 30px;
+      //   // top: 15px;
+      // }
 
       .sub_div1 {
         padding-left: 20px;
@@ -1124,38 +1165,39 @@
   //   height: 60px;
   //   position: fixed;
 
-    .footer_div {
-      width: 100% !important;
-      height: 60px;
-      padding: 10px;
-      margin-top: 10px;
+  .footer_div {
+    width: 100% !important;
+    height: 60px;
+    padding: 10px;
+    margin-top: 10px;
 
-      .reject_btn {
-        width: 15%;
-        height: 100%;
-        // border: #EF2929 1px solid;
-        border-radius: 4px;
-        color: #EF2929;
-        font-size: 12px !important;
-        font-weight: 500;
-        cursor: pointer;
-        position: relative;
-        right: 20px;
-      }
-
-      .approve_btn {
-        width: 15%;
-        height: 100%;
-        border-radius: 4px;
-        // color: #e3ecd0;
-        background-color: #00499c;
-        font-size: 12px !important;
-        font-weight: 500;
-        cursor: pointer;
-        position: relative;
-        right: 20px;
-      }
+    .reject_btn {
+      width: 15%;
+      height: 100%;
+      // border: #EF2929 1px solid;
+      border-radius: 4px;
+      color: #EF2929;
+      font-size: 12px !important;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      right: 20px;
     }
+
+    .approve_btn {
+      width: 15%;
+      height: 100%;
+      border-radius: 4px;
+      // color: #e3ecd0;
+      background-color: #00499c;
+      font-size: 12px !important;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      right: 20px;
+    }
+  }
+
   // }
 
   .mat-flat-button.mat-primary,
@@ -1168,7 +1210,7 @@
   .contact-div {
     width: 96%;
     position: relative;
-    // top: 32px;
+    top: 50px;
     left: 16px;
     border: 1px solid #E4E0F3;
     border-radius: 8px;

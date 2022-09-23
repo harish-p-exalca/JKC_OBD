@@ -85,7 +85,7 @@
               <mat-error class="errorn"
                 *ngIf="PIform?.get('Name')?.touched && !PIform?.get('Name')?.hasError('required') && PIform?.get('Name')?.hasError('pattern')">
                 Please enter a valid Name
-              </mat-error> 
+              </mat-error>
             </div>
 
           </div>
@@ -121,8 +121,8 @@
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <mat-select placeholder="Select the State" formControlName="State" required class="inputform2">
                 <!-- (selectionChange)="SelectCity($event.value)" -->
-                <mat-option *ngFor="let state of SOption" (click)="SelectCity(state)" [value]="state.StateName">
-                  {{state.StateName}}</mat-option>
+                <mat-option *ngFor="let state of SOption" (click)="SelectDistrict(state)" [value]="state">
+                  {{state}}</mat-option>
               </mat-select>
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('State')?.touched && PIform?.get('State')?.hasError('required')">State is
@@ -138,8 +138,8 @@
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <input matInput placeholder="Enter District" [matAutocomplete]="autoDistrict" formControlName="District"
                 class="inputform">
-              <mat-autocomplete #autoDistrict="matAutocomplete" (optionSelected)="districtSelected($event)">
-                <mat-option *ngFor="let d of Districts" [value]="d" style="font-size: 12px;">
+              <mat-autocomplete #autoDistrict="matAutocomplete">
+                <mat-option *ngFor="let d of Districts" (click)="SelectTaluka(d)" [value]="d" style="font-size: 12px;">
                   {{d}}
                 </mat-option>
               </mat-autocomplete>
@@ -153,10 +153,29 @@
 
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
+            <span fxFlex="30" class="marketsp">Taluka*</span>
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
+              <input matInput [matAutocomplete]="autoTaluka" placeholder="Enter Taluka" formControlName="Taluka"
+                class="inputform">
+              <mat-autocomplete #autoTaluka="matAutocomplete" (optionSelected)="talukaSelected($event)">
+                <mat-option *ngFor="let d of Talukas" (click)="SelectCity(d)" [value]="d" style="font-size: 12px;">
+                  {{d}}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error class="errorn"
+                *ngIf=" PIform?.get('Taluka')?.touched && PIform?.get('Taluka')?.hasError('required')">Taluka
+                is required
+              </mat-error>
+            </div>
+          </div>
+
+
+          <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+            <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">City*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
               <mat-select placeholder="Select the City" class="inputform2" formControlName="City" required>
-                <mat-option *ngFor="let city of City" [value]="city.City">{{city.City}}</mat-option>
+                <mat-option *ngFor="let city of City" (click)="SelectPincode(city)" [value]="city">{{city}}</mat-option>
               </mat-select>
 
               <mat-error class="errorn"
@@ -167,7 +186,7 @@
             </div>
           </div>
 
-          <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
+          <!-- <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Taluka*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
@@ -185,7 +204,7 @@
 
 
             </div>
-          </div>
+          </div> -->
 
           <div fxLayout="row" fxLayoutAlign="" class="populationclass" fxFlex="100">
             <div fxFlex="10"></div>
@@ -215,6 +234,12 @@
                 <mat-option *ngFor="let d of PinCodes" [value]="d" style="font-size: 12px;">
                   {{d}}
                 </mat-option>
+
+                <!-- <div *ngIf="!PinCodes">
+                <mat-option >
+                 Enter Pincode
+                </mat-option>
+              </div> -->
               </mat-autocomplete>
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('Pincode')?.touched && PIform?.get('Pincode')?.hasError('required')">Pincode is
@@ -231,13 +256,15 @@
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Account Group*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <mat-select placeholder="Select the Account Group" formControlName="AccountGroup" required class="inputform2">
+              <mat-select placeholder="Select the Account Group" formControlName="AccountGroup" required
+                class="inputform2">
                 <!-- (selectionChange)="SelectCity($event.value)" -->
                 <mat-option *ngFor="let state of AllAccountGroupMasters" [value]="state.AccountGroup">
                   {{state.AccountGroup}} - {{state.Description}}</mat-option>
               </mat-select>
               <mat-error class="errorn"
-                *ngIf=" PIform?.get('AccountGroup')?.touched && PIform?.get('AccountGroup')?.hasError('required')">Account Group is
+                *ngIf=" PIform?.get('AccountGroup')?.touched && PIform?.get('AccountGroup')?.hasError('required')">
+                Account Group is
                 required
               </mat-error>
 
@@ -249,13 +276,15 @@
             <div fxFlex="10"></div>
             <span fxFlex="30" class="marketsp">Distribution Channel*</span>
             <div fxLayout="column" fxLayoutAlign="start start" fxFlex="48" class="">
-              <mat-select placeholder="Select the Distribution Channel" formControlName="DistributionChannel" required class="inputform2">
+              <mat-select placeholder="Select the Distribution Channel" formControlName="DistributionChannel" required
+                class="inputform2">
                 <!-- (selectionChange)="SelectCity($event.value)" -->
                 <mat-option *ngFor="let state of AllDistributionChannelMasters" [value]="state.DistributionChannel">
-                  {{state.DistributionChannel}}  - {{state.Description}}</mat-option>
+                  {{state.DistributionChannel}} - {{state.Description}}</mat-option>
               </mat-select>
               <mat-error class="errorn"
-                *ngIf=" PIform?.get('DistributionChannel')?.touched && PIform?.get('DistributionChannel')?.hasError('required')">Distribution Channel is
+                *ngIf=" PIform?.get('DistributionChannel')?.touched && PIform?.get('DistributionChannel')?.hasError('required')">
+                Distribution Channel is
                 required
               </mat-error>
 
@@ -269,7 +298,7 @@
               <mat-select placeholder="Select the Division" formControlName="Division" required class="inputform2">
                 <!-- (selectionChange)="SelectCity($event.value)" -->
                 <mat-option *ngFor="let state of AllDivisionMasters" [value]="state.Division">
-                  {{state.Division}}  - {{state.Description}}</mat-option>
+                  {{state.Division}} - {{state.Description}}</mat-option>
               </mat-select>
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('Division')?.touched && PIform?.get('Division')?.hasError('required')">Division is
@@ -286,7 +315,7 @@
               <mat-select placeholder="Select the Sales Org" formControlName="SalesOrg" required class="inputform2">
                 <!-- (selectionChange)="SelectCity($event.value)" -->
                 <mat-option *ngFor="let state of AllSalesOrgMasters" [value]="state.SalesOrg">
-                  {{state.SalesOrg}}  - {{state.Description}}</mat-option>
+                  {{state.SalesOrg}} - {{state.Description}}</mat-option>
               </mat-select>
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('SalesOrg')?.touched && PIform?.get('SalesOrg')?.hasError('required')">Sales Org is
@@ -303,7 +332,7 @@
               <mat-select placeholder="Select the Region" formControlName="Region" required class="inputform2">
                 <!-- (selectionChange)="SelectCity($event.value)" -->
                 <mat-option *ngFor="let state of AllRegionMasters" [value]="state.Region">
-                  {{state.Region}}  - {{state.Description}}</mat-option>
+                  {{state.Region}} - {{state.Description}}</mat-option>
               </mat-select>
               <mat-error class="errorn"
                 *ngIf=" PIform?.get('Region')?.touched && PIform?.get('Region')?.hasError('required')">Region is
@@ -420,7 +449,7 @@
       </form>
     </div>
   </div>
-  <div  fxLayout="row" fxLayoutAlign="end center" fxFlex="100" fxLayoutGap="4px"
+  <div fxLayout="row" fxLayoutAlign="end center" fxFlex="100" fxLayoutGap="4px"
     style="margin-top: 23px;background: white;">
     <div fxFlex="48"></div>
 
@@ -436,10 +465,11 @@
       </button>
     </div>
     <!-- [disabled]="MIform.required.invalid" -->
-  
-      <button *ngIf="SubmitValue != true" mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Submit</button>
-      <button *ngIf="SubmitValue == true" mat-raised-button class="savebtn" (click)="NextButtonClick()">Save & Next</button>
-  
+
+    <button *ngIf="SubmitValue != true" mat-raised-button class="savebtn" (click)="SubmitButtonClick()">Submit</button>
+    <button *ngIf="SubmitValue == true" mat-raised-button class="savebtn" (click)="NextButtonClick()">Save &
+      Next</button>
+
 
   </div>
   <br>

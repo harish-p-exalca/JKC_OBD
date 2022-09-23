@@ -88,6 +88,8 @@ export class DashboardComponent implements OnInit {
     City: Cities[] = [];
     arr: any;
     uniquestate: any;
+    Onlystate: any = [];
+    statecode: any = [];
     // duplicatestate:[] = [];
     Role: boolean = false;
     filteropt: Observable<string[]>;
@@ -175,15 +177,66 @@ export class DashboardComponent implements OnInit {
         this.isProgressBarVisibile = true;
         this._dashboardService.GetAllStates().subscribe(
             (data) => {
-                this.SOption = data;
+
+                this.uniquestate = data;
+                // console.log(this.uniquestate);
+                
+                for (let i = 0; i < this.uniquestate.length; i++) {
+                    let state : any = [];
+                    state = this.uniquestate[i].StateName
+                    state = state.charAt(0) + state.substring(1).toLowerCase();
+                    // let state : any =[];
+                    this.Onlystate[i] = this.uniquestate[i].StateCode + ' - ' +state;
+                    // this.statecode[i] = this.uniquestate[i].StateCode;
+                    // console.log("Normal : ",state[i]);
+                  
+
+                }
+                console.log("CASE : ", this.Onlystate);
+                // console.log("statecode : ",this.statecode);
+                let removedvalue: any = [];
+                let removestatecode : any = [];
+                this.Onlystate.forEach((data) => {
+                    if (removedvalue.includes(data)) {
+                        removedvalue;
+                    }
+                    else {
+                        removedvalue.push(data);
+                    }
+                })
+                // this.statecode.forEach((data) => {
+                //     if (removedvalue.includes(data)) {
+                //         removestatecode;
+                //     }
+                //     else {
+                //         removestatecode.push(data);
+                //     }
+                // })
+                console.log("removedvalue : ", removedvalue);
+                console.log("removedvalue : ", removestatecode);
+                this.SOption = removedvalue;
+              
+                console.log("SOption : ", this.SOption);
+
+                // console.log("CASE : ",this.Onlystate);
+                // console.log("CASE : ",this.Onlystate.length);
+                // console.log(state);
+                // console.log(this.uniquestate[0].StateName);
+
+                // let removedvalue : any =[];
+                // this.uniquestate.forEach((data,index)=>{
+                //     if(this.uniquestate.indexOf(data.StateName) == index)
+                //     removedvalue.push(data.StateName)
+                // })
+                // this.SOption = data;
                 // this.SOption = this.SOption.filter(
                 //     (element,i) =>i === this.SOption.indexOf(element)
                 // );
                 // console.log("SOption : ",this.SOption[1]);
-                
+
                 // this.DuplicateState();
                 // console.log("this.Duplicate : ",this.DuplicateState);
-                
+
                 if (this.currentTransaction != NaN) {
                     this.GetTransactionDetails();
                     // this.isProgressBarVisibile = false;
@@ -197,12 +250,12 @@ export class DashboardComponent implements OnInit {
     //     let duplicate = [];
     //     for (let i = 0; i < this.uniquestate.length; i++) {
     //         // console.log();
-            
+
     //         if (duplicate.indexOf(this.uniquestate[i]) >= -1) {
     //             console.log("Index : ",duplicate.indexOf(this.uniquestate[i]));
     //             return this.SOption.push(this.uniquestate[i]);
-               
-                
+
+
     //         }
     //     }
     // }
@@ -620,26 +673,62 @@ export class DashboardComponent implements OnInit {
     //         }
     //     );
     // }
-    SelectCity(event): void {
+    SelectDistrict(event): void {
+        var splitted = event.split(" - ", 2);
+        event = splitted[1]
+        event = event.charAt(0) + event.substring(1).toLowerCase();
         this.isProgressBarVisibile = true;
-        this._dashboardService.GetCityByState(event.ID).subscribe(
+        this._dashboardService.GetGeoLocationMasters("district", event).subscribe(
+            (data) => {
+                this.Districts = data;
+                console.log(this.Districts);
+                this.isProgressBarVisibile = false;
+            }
+        );
+
+    }
+    SelectTaluka(event) {
+        var splitted = event.split(" - ", 2);
+        event = splitted[1]
+        event = event.charAt(0) + event.substring(1).toLowerCase();
+        this.isProgressBarVisibile = true;
+        this._dashboardService.GetGeoLocationMasters("taluka", event).subscribe(res => {
+            this.Talukas = res;
+            console.log("taluka : ", this.Talukas);
+            this.isProgressBarVisibile = false;
+
+        });
+    }
+    SelectCity(event): void {
+        var splitted = event.split(" - ", 2);
+        event = splitted[1]
+        event = event.charAt(0) + event.substring(1).toLowerCase();
+        this.isProgressBarVisibile = true;
+        this._dashboardService.GetGeoLocationMasters("city", event).subscribe(
             (data) => {
                 this.City = data;
                 // console.log(this.City);
                 this.isProgressBarVisibile = false;
             }
         );
-        this._dashboardService.GetGeoLocationMasters("district", event.StateName).subscribe(res => {
-            this.Districts = res;
-            console.log("district : ", this.Districts);
-
-        });
     }
-    districtSelected($event) {
-        this._dashboardService.GetGeoLocationMasters("taluka", $event.option.value).subscribe(res => {
-            this.Talukas = res;
-        });
+    SelectPincode(event): void {
+        var splitted = event.split(" - ", 2);
+        event = splitted[1]
+        this.isProgressBarVisibile = true;
+        this._dashboardService.GetGeoLocationMasters("pincode", event).subscribe(
+            (data) => {
+                this.PinCodes = data;
+                // console.log(this.City);
+                this.isProgressBarVisibile = false;
+            }
+        );
     }
+    // districtSelected($event) {
+    //     this._dashboardService.GetGeoLocationMasters("taluka", $event.option.value).subscribe(res => {
+    //         this.Talukas = res;
+    //     });
+    // }
     talukaSelected($event) {
         this._dashboardService.GetGeoLocationMasters("pincode", $event.option.value).subscribe(res => {
             this.PinCodes = res;
